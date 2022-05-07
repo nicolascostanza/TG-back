@@ -1,111 +1,594 @@
-[{
-    "projectId": 1,
-    "projectName": "Theodosia",
-    "description": "aliquam non mauris morbi non lectus aliquam sit amet diam in magna bibendum imperdiet nullam orci",
-    "clientName": "Theodosia Camerati",
-    "startDate": "25/01/2021",
-    "endDate": "08/12/2021",
-    "projectManager": "Theodosia Dulen",
-    "active": false,
-    "adminId": 1,
-    "teams": 1
-  }, {
-    "projectId": 2,
-    "projectName": "Briant",
-    "description": "tortor risus dapibus augue vel accumsan tellus nisi eu orci mauris lacinia sapien quis libero nullam sit amet turpis",
-    "clientName": "Briant Rosser",
-    "startDate": "21/03/2021",
-    "endDate": "25/03/2021",
-    "projectManager": "Briant Hallstone",
-    "active": false,
-    "adminId": 2,
-     "teams": 1
-  }, {
-    "projectId": 3,
-    "projectName": "Susanetta",
-    "description": "in magna bibendum imperdiet nullam orci pede venenatis non sodales sed tincidunt eu felis fusce posuere felis sed lacus morbi",
-    "clientName": "Susanetta Darkins",
-    "startDate": "19/11/2021",
-    "endDate": "24/02/2021",
-    "projectManager": "Susanetta Bohlje",
-    "active": false,
-    "adminId": 3,
-    "teams": 1
-  }, {
-    "projectId": 4,
-    "projectName": "Gratiana",
-    "description": "eget semper rutrum nulla nunc purus phasellus in felis donec semper sapien a libero nam",
-    "clientName": "Gratiana Heggison",
-    "startDate": "24/01/2021",
-    "endDate": "07/03/2022",
-    "projectManager": "Gratiana Santora",
-    "active": true,
-    "adminId": 4,
-    "teams": 1
-  }, {
-    "projectId": 5,
-    "projectName": "Egbert",
-    "description": "at turpis a pede posuere nonummy integer non velit donec diam",
-    "clientName": "Egbert Dupree",
-    "startDate": "24/02/2021",
-    "endDate": "18/01/2021",
-    "projectManager": "Egbert Lapslie",
-    "active": false,
-    "adminId": 5,
-    "teams": 1
-  }, {
-    "projectId": 6,
-    "projectName": "Sheffie",
-    "description": "varius integer ac leo pellentesque ultrices mattis odio donec vitae nisi nam ultrices libero non mattis pulvinar nulla pede ullamcorper",
-    "clientName": "Sheffie Bartul",
-    "startDate": "17/06/2021",
-    "endDate": "03/02/2022",
-    "projectManager": "Sheffie Leveridge",
-    "active": false,
-    "adminId": 6,
-    "teams": 1
-  }, {
-    "projectId": 7,
-    "projectName": "Eric",
-    "description": "sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis",
-    "clientName": "Eric Borless",
-    "startDate": "03/06/2021",
-    "endDate": "28/01/2021",
-    "projectManager": "Eric MacCostigan",
-    "active": true,
-    "adminId": 7,
-    "teams": 1
-  }, {
-    "projectId": 8,
-    "projectName": "Damiano",
-    "description": "at vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula condimentum curabitur in libero",
-    "clientName": "Damiano Hebblewhite",
-    "startDate": "01/12/2020",
-    "endDate": "08/05/2021",
-    "projectManager": "Damiano Magovern",
-    "active": false,
-    "adminId": 8,
-    "teams": 1
-  }, {
-    "projectId": 9,
-    "projectName": "Sherlocke",
-    "description": "turpis a pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante",
-    "clientName": "Sherlocke Andreas",
-    "startDate": "03/09/2021",
-    "endDate": "30/06/2021",
-    "projectManager": "Sherlocke Lodevick",
-    "active": true,
-    "adminId": 9,
-    "teams": 1
-  }, {
-    "projectId": 10,
-    "projectName": "Gaylor",
-    "description": "dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis",
-    "clientName": "Gaylor Geikie",
-    "startDate": "21/04/2021",
-    "endDate": "02/05/2021",
-    "projectManager": "Gaylor Renbold",
-    "active": false,
-    "adminId": 10,
-    "teams": 1
-  }]
+[
+    {
+        "projectId": 1,
+        "projectName": "Theodosia",
+        "description": "aliquam non mauris morbi non lectus aliquam sit amet diam in magna bibendum imperdiet nullam orci",
+        "clientName": "Theodosia Camerati",
+        "startDate": "25/01/2021",
+        "endDate": "08/12/2021",
+        "projectManager": "Theodosia Dulen",
+        "active": false,
+        "adminId": 1,
+        "teams": [
+            {
+                "employeeId": 1,
+                "employeeName": "Theodosia Dulen",
+                "role": "PM",
+                "hours": 52,
+                "rate": 32
+            },
+            {
+                "employeeId": 2,
+                "employeeName": "Betsy Fenney",
+                "role": "TL",
+                "hours": 35,
+                "rate": 33
+            },
+            {
+                "employeeId": 3,
+                "employeeName": "Doti Baalham",
+                "role": "DEV",
+                "hours": 32,
+                "rate": 37
+            },
+            {
+                "employeeId": 4,
+                "employeeName": "Von Blagden",
+                "role": "QA",
+                "hours": 73,
+                "rate": 32
+            },
+            {
+                "employeeId": 5,
+                "employeeName": "Caralie Scoffham",
+                "role": "QA",
+                "hours": 3,
+                "rate": 31
+            },
+            {
+                "employeeId": 6,
+                "employeeName": "Petey Cordingly",
+                "role": "QA",
+                "hours": 60,
+                "rate": 33
+            }
+        ]
+    },
+    {
+        "projectId": 2,
+        "projectName": "Briant",
+        "description": "tortor risus dapibus augue vel accumsan tellus nisi eu orci mauris lacinia sapien quis libero nullam sit amet turpis",
+        "clientName": "Briant Rosser",
+        "startDate": "21/03/2021",
+        "endDate": "25/03/2021",
+        "projectManager": "Briant Hallstone",
+        "active": true,
+        "adminId": 2,
+        "teams": [
+            {
+                "employeeId": 7,
+                "employeeName": "Briant Hallstone",
+                "role": "PM",
+                "hours": 13,
+                "rate": 10
+            },
+            {
+                "employeeId": 8,
+                "employeeName": "Ondrea Vondra",
+                "role": "QA",
+                "hours": 78,
+                "rate": 45
+            },
+            {
+                "employeeId": 9,
+                "employeeName": "Aubine Hidderley",
+                "role": "DEV",
+                "hours": 55,
+                "rate": 35
+            },
+            {
+                "employeeId": 10,
+                "employeeName": "Eryn Ambresin",
+                "role": "TL",
+                "hours": 40,
+                "rate": 16
+            },
+            {
+                "employeeId": 11,
+                "employeeName": "Chandra Fenlon",
+                "role": "DEV",
+                "hours": 2,
+                "rate": 28
+            },
+            {
+                "employeeId": 12,
+                "employeeName": "Gerrie Gummie",
+                "role": "DEV",
+                "hours": 95,
+                "rate": 15
+            },
+            {
+                "employeeId": 13,
+                "employeeName": "Corabella Francescotti",
+                "role": "DEV",
+                "hours": 33,
+                "rate": 30
+            }
+        ]
+    },
+    {
+        "projectId": 3,
+        "projectName": "Susanetta",
+        "description": "in magna bibendum imperdiet nullam orci pede venenatis non sodales sed tincidunt eu felis fusce posuere felis sed lacus morbi",
+        "clientName": "Susanetta Darkins",
+        "startDate": "19/11/2021",
+        "endDate": "24/02/2021",
+        "projectManager": "Susanetta Bohlje",
+        "active": true,
+        "adminId": 1,
+        "teams": [
+            {
+                "employeeId": 14,
+                "employeeName": "Susanetta Bohlje",
+                "role": "PM",
+                "hours": 84,
+                "rate": 7
+            },
+            {
+                "employeeId": 15,
+                "employeeName": "Gerome Vere",
+                "role": "TL",
+                "hours": 16,
+                "rate": 17
+            },
+            {
+                "employeeId": 16,
+                "employeeName": "Roanna Playfoot",
+                "role": "QA",
+                "hours": 1,
+                "rate": 13
+            },
+            {
+                "employeeId": 17,
+                "employeeName": "Loralyn Novichenko",
+                "role": "QA",
+                "hours": 89,
+                "rate": 25
+            },
+            {
+                "employeeId": 18,
+                "employeeName": "Kameko Waring",
+                "role": "DEV",
+                "hours": 7,
+                "rate": 50
+            },
+            {
+                "employeeId": 19,
+                "employeeName": "Gabbie Caughan",
+                "role": "QA",
+                "hours": 45,
+                "rate": 12
+            },
+            {
+                "employeeId": 20,
+                "employeeName": "Anne-marie Crichley",
+                "role": "QA",
+                "hours": 25,
+                "rate": 9
+            },
+            {
+                "employeeId": 21,
+                "employeeName": "Calvin Pietruschka",
+                "role": "DEV",
+                "hours": 41,
+                "rate": 10
+            }
+        ]
+    },
+    {
+        "projectId": 4,
+        "projectName": "Gratiana",
+        "description": "eget semper rutrum nulla nunc purus phasellus in felis donec semper sapien a libero nam",
+        "clientName": "Gratiana Heggison",
+        "startDate": "24/01/2021",
+        "endDate": "07/03/2022",
+        "projectManager": "Gratiana Santora",
+        "active": true,
+        "adminId": 2,
+        "teams": [
+            {
+                "employeeId": 22,
+                "employeeName": "Gratiana Santora",
+                "role": "PM",
+                "hours": 98,
+                "rate": 17
+            },
+            {
+                "employeeId": 23,
+                "employeeName": "Raven Figliovanni",
+                "role": "TL",
+                "hours": 70,
+                "rate": 36
+            },
+            {
+                "employeeId": 24,
+                "employeeName": "Fenelia Vlasenko",
+                "role": "DEV",
+                "hours": 83,
+                "rate": 23
+            },
+            {
+                "employeeId": 25,
+                "employeeName": "Emelyne Clewarth",
+                "role": "DEV",
+                "hours": 99,
+                "rate": 39
+            },
+            {
+                "employeeId": 26,
+                "employeeName": "Dre Chazelas",
+                "role": "QA",
+                "hours": 46,
+                "rate": 24
+            },
+            {
+                "employeeId": 27,
+                "employeeName": "Nataniel Thunnercliff",
+                "role": "QA",
+                "hours": 87,
+                "rate": 28
+            },
+            {
+                "employeeId": 28,
+                "employeeName": "Kingsly Dewan",
+                "role": "QA",
+                "hours": 10,
+                "rate": 41
+            }
+        ]
+    },
+    {
+        "projectId": 5,
+        "projectName": "Egbert",
+        "description": "at turpis a pede posuere nonummy integer non velit donec diam",
+        "clientName": "Egbert Dupree",
+        "startDate": "24/02/2021",
+        "endDate": "18/01/2021",
+        "projectManager": "Egbert Lapslie",
+        "active": false,
+        "adminId": 8,
+        "teams": [
+            {
+                "employeeId": 29,
+                "employeeName": "Egbert Lapslie",
+                "role": "PM",
+                "hours": 75,
+                "rate": 29
+            },
+            {
+                "employeeId": 30,
+                "employeeName": "Emory Preator",
+                "role": "TL",
+                "hours": 66,
+                "rate": 38
+            },
+            {
+                "employeeId": 31,
+                "employeeName": "Cornall Saines",
+                "role": "QA",
+                "hours": 7,
+                "rate": 35
+            },
+            {
+                "employeeId": 32,
+                "employeeName": "Leena Babidge",
+                "role": "DEV",
+                "hours": 48,
+                "rate": 25
+            },
+            {
+                "employeeId": 33,
+                "employeeName": "Katerine Bertome",
+                "role": "DEV",
+                "hours": 7,
+                "rate": 19
+            },
+            {
+                "employeeId": 34,
+                "employeeName": "Anita Woodhall",
+                "role": "QA",
+                "hours": 91,
+                "rate": 34
+            }
+        ]
+    },
+    {
+        "projectId": 6,
+        "projectName": "Sheffie",
+        "description": "varius integer ac leo pellentesque ultrices mattis odio donec vitae nisi nam ultrices libero non mattis pulvinar nulla pede ullamcorper",
+        "clientName": "Sheffie Bartul",
+        "startDate": "17/06/2021",
+        "endDate": "03/02/2022",
+        "projectManager": "Sheffie Leveridge",
+        "active": false,
+        "adminId": 6,
+        "teams": [
+            {
+                "employeeId": 35,
+                "employeeName": "Sheffie Leveridge",
+                "role": "PM",
+                "hours": 51,
+                "rate": 30
+            },
+            {
+                "employeeId": 36,
+                "employeeName": "Florida Dyzart",
+                "role": "TL",
+                "hours": 64,
+                "rate": 21
+            },
+            {
+                "employeeId": 37,
+                "employeeName": "Auberta Genney",
+                "role": "DEV",
+                "hours": 26,
+                "rate": 43
+            },
+            {
+                "employeeId": 38,
+                "employeeName": "Luther Hedge",
+                "role": "QA",
+                "hours": 43,
+                "rate": 14
+            },
+            {
+                "employeeId": 39,
+                "employeeName": "Irwin Realy",
+                "role": "QA",
+                "hours": 1,
+                "rate": 14
+            },
+            {
+                "employeeId": 40,
+                "employeeName": "Todd Messier",
+                "role": "QA",
+                "hours": 5,
+                "rate": 34
+            }
+        ]
+    },
+    {
+        "projectId": 7,
+        "projectName": "Eric",
+        "description": "sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis",
+        "clientName": "Eric Borless",
+        "startDate": "03/06/2021",
+        "endDate": "28/01/2021",
+        "projectManager": "Eric MacCostigan",
+        "active": true,
+        "adminId": 6,
+        "teams": [
+            {
+                "employeeId": 41,
+                "employeeName": "Eric MacCostigan",
+                "role": "PM",
+                "hours": 70,
+                "rate": 12
+            },
+            {
+                "employeeId": 42,
+                "employeeName": "Theresina Milland",
+                "role": "TL",
+                "hours": 58,
+                "rate": 22
+            },
+            {
+                "employeeId": 43,
+                "employeeName": "Brennen Abotson",
+                "role": "DEV",
+                "hours": 67,
+                "rate": 16
+            },
+            {
+                "employeeId": 44,
+                "employeeName": "Donielle Bumphrey",
+                "role": "DEV",
+                "hours": 64,
+                "rate": 22
+            },
+            {
+                "employeeId": 45,
+                "employeeName": "Sissie Cargo",
+                "role": "QA",
+                "hours": 41,
+                "rate": 42
+            },
+            {
+                "employeeId": 46,
+                "employeeName": "Chelsae Suggitt",
+                "role": "QA",
+                "hours": 48,
+                "rate": 18
+            },
+            {
+                "employeeId": 47,
+                "employeeName": "Marve Leemans",
+                "role": "DEV",
+                "hours": 87,
+                "rate": 33
+            }
+        ]
+    },
+    {
+        "projectId": 8,
+        "projectName": "Damiano",
+        "description": "at vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula condimentum curabitur in libero",
+        "clientName": "Damiano Hebblewhite",
+        "startDate": "01/12/2020",
+        "endDate": "08/05/2021",
+        "projectManager": "Damiano Magovern",
+        "active": false,
+        "adminId": 8,
+        "teams": [
+            {
+                "employeeId": 48,
+                "employeeName": "Damiano Magovern",
+                "role": "PM",
+                "hours": 79,
+                "rate": 32
+            },
+            {
+                "employeeId": 49,
+                "employeeName": "Ally Eastup",
+                "role": "TL",
+                "hours": 75,
+                "rate": 49
+            },
+            {
+                "employeeId": 50,
+                "employeeName": "Zaneta Hyndes",
+                "role": "DEV",
+                "hours": 27,
+                "rate": 29
+            },
+            {
+                "employeeId": 51,
+                "employeeName": "Gualterio Jaskiewicz",
+                "role": "QA",
+                "hours": 8,
+                "rate": 11
+            },
+            {
+                "employeeId": 52,
+                "employeeName": "Lothario Keeri",
+                "role": "QA",
+                "hours": 24,
+                "rate": 9
+            }
+        ]
+    },
+    {
+        "projectId": 9,
+        "projectName": "Sherlocke",
+        "description": "turpis a pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante",
+        "clientName": "Sherlocke Andreas",
+        "startDate": "03/09/2021",
+        "endDate": "30/06/2021",
+        "projectManager": "Sherlocke Lodevick",
+        "active": true,
+        "adminId": 3,
+        "teams": [
+            {
+                "employeeId": 53,
+                "employeeName": "Sherlocke Lodevick",
+                "role": "PM",
+                "hours": 72,
+                "rate": 33
+            },
+            {
+                "employeeId": 54,
+                "employeeName": "Regina Caulcutt",
+                "role": "TL",
+                "hours": 89,
+                "rate": 7
+            },
+            {
+                "employeeId": 55,
+                "employeeName": "Indira Ratnege",
+                "role": "DEV",
+                "hours": 25,
+                "rate": 18
+            },
+            {
+                "employeeId": 56,
+                "employeeName": "Kermie Poundford",
+                "role": "QA",
+                "hours": 11,
+                "rate": 22
+            },
+            {
+                "employeeId": 57,
+                "employeeName": "Ramonda Rickword",
+                "role": "DEV",
+                "hours": 26,
+                "rate": 18
+            },
+            {
+                "employeeId": 58,
+                "employeeName": "Rudd Corbie",
+                "role": "QA",
+                "hours": 70,
+                "rate": 14
+            },
+            {
+                "employeeId": 59,
+                "employeeName": "Ax Gervaise",
+                "role": "DEV",
+                "hours": 58,
+                "rate": 40
+            }
+        ]
+    },
+    {
+        "projectId": 10,
+        "projectName": "Gaylor",
+        "description": "dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis",
+        "clientName": "Gaylor Geikie",
+        "startDate": "21/04/2021",
+        "endDate": "02/05/2021",
+        "projectManager": "Gaylor Renbold",
+        "active": false,
+        "adminId": 4,
+        "teams": [
+            {
+                "employeeId": 60,
+                "employeeName": "Gaylor Renbold",
+                "role": "PM",
+                "hours": 34,
+                "rate": 49
+            },
+            {
+                "employeeId": 61,
+                "employeeName": "Clea Nolli",
+                "role": "DEV",
+                "hours": 89,
+                "rate": 42
+            },
+            {
+                "employeeId": 62,
+                "employeeName": "Mandie Ede",
+                "role": "TL",
+                "hours": 55,
+                "rate": 40
+            },
+            {
+                "employeeId": 63,
+                "employeeName": "Bordie Garratt",
+                "role": "QA",
+                "hours": 65,
+                "rate": 5
+            },
+            {
+                "employeeId": 64,
+                "employeeName": "Arlen Westrope",
+                "role": "QA",
+                "hours": 22,
+                "rate": 23
+            },
+            {
+                "employeeId": 65,
+                "employeeName": "Sukey Elen",
+                "role": "DEV",
+                "hours": 13,
+                "rate": 5
+            },
+            {
+                "employeeId": 66,
+                "employeeName": "Dilan Finci",
+                "role": "DEV",
+                "hours": 49,
+                "rate": 27
+            }
+        ]
+    }
+]
