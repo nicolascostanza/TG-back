@@ -9,7 +9,7 @@
         "projectManager": "Theodosia Dulen",
         "active": false,
         "adminId": 1,
-        "teams": [
+        "team": [
             {
                 "employeeId": 1,
                 "employeeName": "Theodosia Dulen",
@@ -64,7 +64,7 @@
         "projectManager": "Briant Hallstone",
         "active": true,
         "adminId": 2,
-        "teams": [
+        "team": [
             {
                 "employeeId": 7,
                 "employeeName": "Briant Hallstone",
@@ -126,7 +126,7 @@
         "projectManager": "Susanetta Bohlje",
         "active": true,
         "adminId": 1,
-        "teams": [
+        "team": [
             {
                 "employeeId": 14,
                 "employeeName": "Susanetta Bohlje",
@@ -195,7 +195,7 @@
         "projectManager": "Gratiana Santora",
         "active": true,
         "adminId": 2,
-        "teams": [
+        "team": [
             {
                 "employeeId": 22,
                 "employeeName": "Gratiana Santora",
@@ -257,7 +257,7 @@
         "projectManager": "Egbert Lapslie",
         "active": false,
         "adminId": 8,
-        "teams": [
+        "team": [
             {
                 "employeeId": 29,
                 "employeeName": "Egbert Lapslie",
@@ -312,7 +312,7 @@
         "projectManager": "Sheffie Leveridge",
         "active": false,
         "adminId": 6,
-        "teams": [
+        "team": [
             {
                 "employeeId": 35,
                 "employeeName": "Sheffie Leveridge",
@@ -367,7 +367,7 @@
         "projectManager": "Eric MacCostigan",
         "active": true,
         "adminId": 6,
-        "teams": [
+        "team": [
             {
                 "employeeId": 41,
                 "employeeName": "Eric MacCostigan",
@@ -429,7 +429,7 @@
         "projectManager": "Damiano Magovern",
         "active": false,
         "adminId": 8,
-        "teams": [
+        "team": [
             {
                 "employeeId": 48,
                 "employeeName": "Damiano Magovern",
@@ -477,7 +477,7 @@
         "projectManager": "Sherlocke Lodevick",
         "active": true,
         "adminId": 3,
-        "teams": [
+        "team": [
             {
                 "employeeId": 53,
                 "employeeName": "Sherlocke Lodevick",
@@ -539,7 +539,7 @@
         "projectManager": "Gaylor Renbold",
         "active": false,
         "adminId": 4,
-        "teams": [
+        "team": [
             {
                 "employeeId": 60,
                 "employeeName": "Gaylor Renbold",
