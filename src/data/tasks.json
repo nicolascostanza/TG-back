@@ -13,7 +13,7 @@
             }
         ],
         "startDate": "4/24/2022",
-        "status": true
+        "status": "Ready to deliver"
     },
     {
         "parentProject": "Stringtough",
@@ -29,7 +29,7 @@
             }
         ],
         "startDate": "9/6/2021",
-        "status": true
+        "status": "Paused"
     },
     {
         "parentProject": "Redhold",
@@ -45,7 +45,7 @@
             }
         ],
         "startDate": "9/5/2021",
-        "status": false
+        "status": "Unasigned"
     },
     {
         "parentProject": "Alphazap",
@@ -61,7 +61,7 @@
             }
         ],
         "startDate": "4/15/2022",
-        "status": false
+        "status": "Completed"
     },
     {
         "parentProject": "Redhold",
@@ -77,7 +77,7 @@
             }
         ],
         "startDate": "6/22/2021",
-        "status": true
+        "status": "In progress"
     },
     {
         "parentProject": "Y-find",
@@ -93,7 +93,7 @@
             }
         ],
         "startDate": "2/26/2022",
-        "status": true
+        "status": "Paused"
     },
     {
         "parentProject": "Lotstring",
@@ -109,7 +109,7 @@
             }
         ],
         "startDate": "7/5/2021",
-        "status": false
+        "status": "Ready to deliver"
     },
     {
         "parentProject": "Kanlam",
@@ -125,7 +125,7 @@
             }
         ],
         "startDate": "1/16/2022",
-        "status": true
+        "status": "Cancelled"
     },
     {
         "parentProject": "Greenlam",
@@ -141,7 +141,7 @@
             }
         ],
         "startDate": "8/15/2021",
-        "status": false
+        "status": "Completed"
     },
     {
         "parentProject": "Pannier",
@@ -157,7 +157,7 @@
             }
         ],
         "startDate": "7/27/2021",
-        "status": true
+        "status": "In progress"
     },
     {
         "parentProject": "Fintone",
@@ -173,7 +173,7 @@
             }
         ],
         "startDate": "10/11/2021",
-        "status": false
+        "status": "Ready to deliver"
     },
     {
         "parentProject": "Stronghold",
@@ -189,7 +189,7 @@
             }
         ],
         "startDate": "9/12/2021",
-        "status": true
+        "status": "Ready to deliver"
     },
     {
         "parentProject": "Prodder",
@@ -205,7 +205,7 @@
             }
         ],
         "startDate": "9/21/2021",
-        "status": true
+        "status": "Cancelled"
     },
     {
         "parentProject": "Job",
@@ -221,7 +221,7 @@
             }
         ],
         "startDate": "8/24/2021",
-        "status": true
+        "status": "Completed"
     },
     {
         "parentProject": "Daltfresh",
@@ -237,7 +237,7 @@
             }
         ],
         "startDate": "11/24/2021",
-        "status": false
+        "status": "Unasigned"
     },
     {
         "parentProject": "Konklab",
@@ -253,7 +253,7 @@
             }
         ],
         "startDate": "3/4/2022",
-        "status": false
+        "status": "In progress"
     },
     {
         "parentProject": "Redhold",
@@ -269,7 +269,7 @@
             }
         ],
         "startDate": "12/27/2021",
-        "status": false
+        "status": "In progress"
     },
     {
         "parentProject": "Domainer",
@@ -285,7 +285,7 @@
             }
         ],
         "startDate": "1/30/2022",
-        "status": true
+        "status": "Active"
     },
     {
         "parentProject": "Zoolab",
@@ -301,7 +301,7 @@
             }
         ],
         "startDate": "9/14/2021",
-        "status": true
+        "status": "Cancelled"
     },
     {
         "parentProject": "Sonsing",
@@ -317,7 +317,7 @@
             }
         ],
         "startDate": "9/9/2021",
-        "status": false
+        "status": "In progress"
     },
     {
         "parentProject": "Zoolab",
@@ -333,7 +333,7 @@
             }
         ],
         "startDate": "12/22/2021",
-        "status": false
+        "status": "Ready to deliver"
     },
     {
         "parentProject": "Temp",
@@ -349,7 +349,7 @@
             }
         ],
         "startDate": "10/24/2021",
-        "status": true
+        "status": "Ready to deliver"
     },
     {
         "parentProject": "Daltfresh",
@@ -365,7 +365,7 @@
             }
         ],
         "startDate": "4/11/2022",
-        "status": false
+        "status": "Paused"
     },
     {
         "parentProject": "Voyatouch",
@@ -381,7 +381,7 @@
             }
         ],
         "startDate": "10/21/2021",
-        "status": true
+        "status": "Unasigned"
     },
     {
         "parentProject": "Daltfresh",
@@ -397,7 +397,7 @@
             }
         ],
         "startDate": "10/24/2021",
-        "status": false
+        "status": "Paused"
     },
     {
         "parentProject": "Subin",
@@ -413,7 +413,7 @@
             }
         ],
         "startDate": "8/12/2021",
-        "status": false
+        "status": "Unasigned"
     },
     {
         "parentProject": "Daltfresh",
@@ -429,7 +429,7 @@
             }
         ],
         "startDate": "7/30/2021",
-        "status": false
+        "status": "Ready to deliver"
     },
     {
         "parentProject": "Stringtough",
@@ -445,7 +445,7 @@
             }
         ],
         "startDate": "2/6/2022",
-        "status": true
+        "status": "Pending review"
     },
     {
         "parentProject": "Aerified",
@@ -461,7 +461,7 @@
             }
         ],
         "startDate": "9/23/2021",
-        "status": true
+        "status": "Active"
     },
     {
         "parentProject": "Gembucket",
@@ -477,7 +477,7 @@
             }
         ],
         "startDate": "4/6/2022",
-        "status": true
+        "status": "In progress"
     },
     {
         "parentProject": "Pannier",
@@ -493,7 +493,7 @@
             }
         ],
         "startDate": "7/8/2021",
-        "status": false
+        "status": "Active"
     },
     {
         "parentProject": "Zoolab",
@@ -509,7 +509,7 @@
             }
         ],
         "startDate": "8/12/2021",
-        "status": false
+        "status": "In progress"
     },
     {
         "parentProject": "Domainer",
@@ -525,7 +525,7 @@
             }
         ],
         "startDate": "12/22/2021",
-        "status": true
+        "status": "Completed"
     },
     {
         "parentProject": "Greenlam",
@@ -541,7 +541,7 @@
             }
         ],
         "startDate": "3/5/2022",
-        "status": false
+        "status": "Cancelled"
     },
     {
         "parentProject": "Duobam",
@@ -557,7 +557,7 @@
             }
         ],
         "startDate": "10/22/2021",
-        "status": true
+        "status": "Completed"
     },
     {
         "parentProject": "Stronghold",
@@ -573,7 +573,7 @@
             }
         ],
         "startDate": "12/29/2021",
-        "status": true
+        "status": "Cancelled"
     },
     {
         "parentProject": "Pannier",
@@ -589,7 +589,7 @@
             }
         ],
         "startDate": "1/13/2022",
-        "status": false
+        "status": "Completed"
     },
     {
         "parentProject": "Transcof",
@@ -605,7 +605,7 @@
             }
         ],
         "startDate": "8/13/2021",
-        "status": false
+        "status": "Cancelled"
     },
     {
         "parentProject": "Bitwolf",
@@ -621,7 +621,7 @@
             }
         ],
         "startDate": "1/28/2022",
-        "status": true
+        "status": "Paused"
     },
     {
         "parentProject": "Konklux",
@@ -637,7 +637,7 @@
             }
         ],
         "startDate": "2/13/2022",
-        "status": true
+        "status": "Paused"
     },
     {
         "parentProject": "Ventosanzap",
@@ -653,7 +653,7 @@
             }
         ],
         "startDate": "1/27/2022",
-        "status": false
+        "status": "Pending review"
     },
     {
         "parentProject": "Flowdesk",
@@ -669,7 +669,7 @@
             }
         ],
         "startDate": "6/8/2021",
-        "status": false
+        "status": "Paused"
     },
     {
         "parentProject": "Viva",
@@ -685,7 +685,7 @@
             }
         ],
         "startDate": "12/21/2021",
-        "status": true
+        "status": "Pending review"
     },
     {
         "parentProject": "Stringtough",
@@ -701,7 +701,7 @@
             }
         ],
         "startDate": "1/23/2022",
-        "status": false
+        "status": "Ready to deliver"
     },
     {
         "parentProject": "Regrant",
@@ -717,7 +717,7 @@
             }
         ],
         "startDate": "4/16/2022",
-        "status": false
+        "status": "Unasigned"
     },
     {
         "parentProject": "Stringtough",
@@ -733,7 +733,7 @@
             }
         ],
         "startDate": "8/25/2021",
-        "status": true
+        "status": "Active"
     },
     {
         "parentProject": "Trippledex",
@@ -749,7 +749,7 @@
             }
         ],
         "startDate": "5/26/2021",
-        "status": false
+        "status": "Active"
     },
     {
         "parentProject": "Fintone",
@@ -765,7 +765,7 @@
             }
         ],
         "startDate": "1/2/2022",
-        "status": true
+        "status": "Unasigned"
     },
     {
         "parentProject": "Y-find",
@@ -781,7 +781,7 @@
             }
         ],
         "startDate": "12/29/2021",
-        "status": false
+        "status": "Ready to deliver"
     },
     {
         "parentProject": "Alpha",
@@ -797,7 +797,7 @@
             }
         ],
         "startDate": "9/26/2021",
-        "status": true
+        "status": "Paused"
     },
     {
         "parentProject": "Ronstring",
@@ -813,7 +813,7 @@
             }
         ],
         "startDate": "9/6/2021",
-        "status": false
+        "status": "Pending review"
     },
     {
         "parentProject": "Treeflex",
@@ -829,7 +829,7 @@
             }
         ],
         "startDate": "8/31/2021",
-        "status": true
+        "status": "Paused"
     },
     {
         "parentProject": "Duobam",
@@ -845,7 +845,7 @@
             }
         ],
         "startDate": "1/6/2022",
-        "status": false
+        "status": "Unasigned"
     },
     {
         "parentProject": "Latlux",
@@ -861,7 +861,7 @@
             }
         ],
         "startDate": "11/10/2021",
-        "status": false
+        "status": "Unasigned"
     },
     {
         "parentProject": "Holdlamis",
@@ -877,7 +877,7 @@
             }
         ],
         "startDate": "6/23/2021",
-        "status": true
+        "status": "Unasigned"
     },
     {
         "parentProject": "Fintone",
@@ -893,7 +893,7 @@
             }
         ],
         "startDate": "11/18/2021",
-        "status": false
+        "status": "Active"
     },
     {
         "parentProject": "Tresom",
@@ -909,7 +909,7 @@
             }
         ],
         "startDate": "10/11/2021",
-        "status": true
+        "status": "Ready to deliver"
     },
     {
         "parentProject": "Flowdesk",
@@ -925,7 +925,7 @@
             }
         ],
         "startDate": "4/11/2022",
-        "status": false
+        "status": "Cancelled"
     },
     {
         "parentProject": "Zoolab",
@@ -941,7 +941,7 @@
             }
         ],
         "startDate": "3/30/2022",
-        "status": true
+        "status": "Cancelled"
     },
     {
         "parentProject": "Bitwolf",
@@ -957,7 +957,7 @@
             }
         ],
         "startDate": "1/29/2022",
-        "status": false
+        "status": "In progress"
     },
     {
         "parentProject": "Sub-Ex",
@@ -973,7 +973,7 @@
             }
         ],
         "startDate": "9/19/2021",
-        "status": false
+        "status": "Cancelled"
     },
     {
         "parentProject": "Tin",
@@ -989,7 +989,7 @@
             }
         ],
         "startDate": "7/23/2021",
-        "status": true
+        "status": "Unasigned"
     },
     {
         "parentProject": "Y-find",
@@ -1005,7 +1005,7 @@
             }
         ],
         "startDate": "11/26/2021",
-        "status": false
+        "status": "Completed"
     },
     {
         "parentProject": "Bytecard",
@@ -1021,7 +1021,7 @@
             }
         ],
         "startDate": "12/18/2021",
-        "status": true
+        "status": "Completed"
     },
     {
         "parentProject": "Y-find",
@@ -1037,7 +1037,7 @@
             }
         ],
         "startDate": "11/1/2021",
-        "status": true
+        "status": "Active"
     },
     {
         "parentProject": "Wrapsafe",
@@ -1053,7 +1053,7 @@
             }
         ],
         "startDate": "9/16/2021",
-        "status": false
+        "status": "Paused"
     },
     {
         "parentProject": "Bitchip",
@@ -1069,7 +1069,7 @@
             }
         ],
         "startDate": "6/8/2021",
-        "status": false
+        "status": "Active"
     },
     {
         "parentProject": "Asoka",
@@ -1085,7 +1085,7 @@
             }
         ],
         "startDate": "4/1/2022",
-        "status": true
+        "status": "Cancelled"
     },
     {
         "parentProject": "Bytecard",
@@ -1101,7 +1101,7 @@
             }
         ],
         "startDate": "3/17/2022",
-        "status": false
+        "status": "Active"
     },
     {
         "parentProject": "Tempsoft",
@@ -1117,7 +1117,7 @@
             }
         ],
         "startDate": "5/16/2021",
-        "status": false
+        "status": "Ready to deliver"
     },
     {
         "parentProject": "Redhold",
@@ -1133,7 +1133,7 @@
             }
         ],
         "startDate": "2/21/2022",
-        "status": false
+        "status": "Paused"
     },
     {
         "parentProject": "Job",
@@ -1149,7 +1149,7 @@
             }
         ],
         "startDate": "6/5/2021",
-        "status": false
+        "status": "Ready to deliver"
     },
     {
         "parentProject": "Greenlam",
@@ -1165,7 +1165,7 @@
             }
         ],
         "startDate": "6/8/2021",
-        "status": false
+        "status": "Paused"
     },
     {
         "parentProject": "Span",
@@ -1181,7 +1181,7 @@
             }
         ],
         "startDate": "12/30/2021",
-        "status": false
+        "status": "Paused"
     },
     {
         "parentProject": "It",
@@ -1197,7 +1197,7 @@
             }
         ],
         "startDate": "10/29/2021",
-        "status": false
+        "status": "Ready to deliver"
     },
     {
         "parentProject": "Cardguard",
@@ -1213,7 +1213,7 @@
             }
         ],
         "startDate": "5/6/2021",
-        "status": true
+        "status": "Active"
     },
     {
         "parentProject": "Tresom",
@@ -1229,7 +1229,7 @@
             }
         ],
         "startDate": "8/18/2021",
-        "status": false
+        "status": "Paused"
     },
     {
         "parentProject": "Overhold",
@@ -1245,7 +1245,7 @@
             }
         ],
         "startDate": "9/4/2021",
-        "status": false
+        "status": "Completed"
     },
     {
         "parentProject": "Pannier",
@@ -1261,7 +1261,7 @@
             }
         ],
         "startDate": "11/22/2021",
-        "status": true
+        "status": "Active"
     },
     {
         "parentProject": "Transcof",
@@ -1277,7 +1277,7 @@
             }
         ],
         "startDate": "10/19/2021",
-        "status": false
+        "status": "Unasigned"
     },
     {
         "parentProject": "Toughjoyfax",
@@ -1293,7 +1293,7 @@
             }
         ],
         "startDate": "11/28/2021",
-        "status": false
+        "status": "Completed"
     },
     {
         "parentProject": "Bitwolf",
@@ -1309,7 +1309,7 @@
             }
         ],
         "startDate": "2/21/2022",
-        "status": false
+        "status": "Cancelled"
     },
     {
         "parentProject": "Fintone",
@@ -1325,7 +1325,7 @@
             }
         ],
         "startDate": "11/8/2021",
-        "status": true
+        "status": "Paused"
     },
     {
         "parentProject": "Subin",
@@ -1341,7 +1341,7 @@
             }
         ],
         "startDate": "4/8/2022",
-        "status": true
+        "status": "Completed"
     },
     {
         "parentProject": "Tin",
@@ -1357,7 +1357,7 @@
             }
         ],
         "startDate": "2/9/2022",
-        "status": true
+        "status": "Paused"
     },
     {
         "parentProject": "Tampflex",
@@ -1373,7 +1373,7 @@
             }
         ],
         "startDate": "11/10/2021",
-        "status": true
+        "status": "Paused"
     },
     {
         "parentProject": "Alpha",
@@ -1389,7 +1389,7 @@
             }
         ],
         "startDate": "3/16/2022",
-        "status": true
+        "status": "Paused"
     },
     {
         "parentProject": "Voyatouch",
@@ -1405,7 +1405,7 @@
             }
         ],
         "startDate": "8/17/2021",
-        "status": true
+        "status": "In progress"
     },
     {
         "parentProject": "Solarbreeze",
@@ -1421,7 +1421,7 @@
             }
         ],
         "startDate": "5/2/2022",
-        "status": true
+        "status": "Unasigned"
     },
     {
         "parentProject": "Stim",
@@ -1437,7 +1437,7 @@
             }
         ],
         "startDate": "3/10/2022",
-        "status": false
+        "status": "Ready to deliver"
     },
     {
         "parentProject": "Andalax",
@@ -1453,7 +1453,7 @@
             }
         ],
         "startDate": "6/19/2021",
-        "status": true
+        "status": "Pending review"
     },
     {
         "parentProject": "Solarbreeze",
@@ -1469,7 +1469,7 @@
             }
         ],
         "startDate": "9/16/2021",
-        "status": true
+        "status": "Completed"
     },
     {
         "parentProject": "Aerified",
@@ -1485,7 +1485,7 @@
             }
         ],
         "startDate": "11/29/2021",
-        "status": false
+        "status": "Completed"
     },
     {
         "parentProject": "Rank",
@@ -1501,7 +1501,7 @@
             }
         ],
         "startDate": "12/3/2021",
-        "status": false
+        "status": "In progress"
     },
     {
         "parentProject": "Y-Solowarm",
@@ -1517,7 +1517,7 @@
             }
         ],
         "startDate": "7/8/2021",
-        "status": true
+        "status": "Active"
     },
     {
         "parentProject": "Tres-Zap",
@@ -1533,7 +1533,7 @@
             }
         ],
         "startDate": "8/24/2021",
-        "status": false
+        "status": "Cancelled"
     },
     {
         "parentProject": "Ronstring",
@@ -1549,7 +1549,7 @@
             }
         ],
         "startDate": "3/1/2022",
-        "status": true
+        "status": "Unasigned"
     },
     {
         "parentProject": "Viva",
@@ -1565,7 +1565,7 @@
             }
         ],
         "startDate": "5/11/2021",
-        "status": false
+        "status": "In progress"
     },
     {
         "parentProject": "Bamity",
@@ -1581,7 +1581,7 @@
             }
         ],
         "startDate": "12/16/2021",
-        "status": true
+        "status": "Active"
     },
     {
         "parentProject": "Matsoft",
@@ -1597,6 +1597,6 @@
             }
         ],
         "startDate": "5/13/2021",
-        "status": true
+        "status": "Unasigned"
     }
 ]
