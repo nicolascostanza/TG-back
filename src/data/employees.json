@@ -1,0 +1,101 @@
+[{
+  "id": "1",
+  "full_name": "Muire Leer",
+  "email": "mleer0@netscape.com",
+  "gender": "Female",
+  "address": "09244 South Street",
+  "dob": "10/04/2022",
+  "password": "4HNIom",
+  "phone": "368 968 0627",
+  "active": false
+}, {
+  "id": "2",
+  "full_name": "Drusy Pawelke",
+  "email": "dpawelke1@intel.com",
+  "gender": "Female",
+  "address": "87734 Butterfield Circle",
+  "dob": "03/06/2021",
+  "password": "QWAM6FRYCqk",
+  "phone": "550 992 6065",
+  "active": false
+}, {
+  "id": "3",
+  "full_name": "Millie Hawtry",
+  "email": "mhawtry2@arizona.edu",
+  "gender": "Female",
+  "address": "0 Everett Crossing",
+  "dob": "29/07/2021",
+  "password": "6xUrqDRbt",
+  "phone": "937 949 4284",
+  "active": true
+}, {
+  "id": "4",
+  "full_name": "Tuesday Braganza",
+  "email": "tbraganza3@blogspot.com",
+  "gender": "Female",
+  "address": "20658 Hansons Junction",
+  "dob": "13/11/2021",
+  "password": "PJ7sXH5PrNl",
+  "phone": "476 309 6711",
+  "active": false
+}, {
+  "id": "5",
+  "full_name": "Thedrick Klimczak",
+  "email": "tklimczak4@salon.com",
+  "gender": "Male",
+  "address": "2107 Riverside Lane",
+  "dob": "29/08/2021",
+  "password": "pxR8KF",
+  "phone": "450 148 9580",
+  "active": false
+}, {
+  "id": "6",
+  "full_name": "Kellby Zisneros",
+  "email": "kzisneros5@ed.gov",
+  "gender": "Male",
+  "address": "486 Michigan Drive",
+  "dob": "21/10/2021",
+  "password": "9C2dfNEBnoQ",
+  "phone": "573 110 6838",
+  "active": true
+}, {
+  "id": "7",
+  "full_name": "Wally Kindread",
+  "email": "wkindread6@alexa.com",
+  "gender": "Polygender",
+  "address": "40 Memorial Way",
+  "dob": "22/10/2021",
+  "password": "s2p2F8",
+  "phone": "904 863 7614",
+  "active": true
+}, {
+  "id": "8",
+  "full_name": "Lelia Ixor",
+  "email": "lixor7@dmoz.org",
+  "gender": "Female",
+  "address": "5035 Meadow Valley Crossing",
+  "dob": "21/01/2022",
+  "password": "2xhNShqTSP",
+  "phone": "433 988 5690",
+  "active": false
+}, {
+  "id": "9",
+  "full_name": "Ginnifer Brandon",
+  "email": "gbrandon8@yandex.ru",
+  "gender": "Female",
+  "address": "9 Golf Course Way",
+  "dob": "31/05/2021",
+  "password": "EPswlhY5n0x",
+  "phone": "370 349 1469",
+  "active": true
+}, {
+  "id": "10",
+  "full_name": "Raquel Robertsson",
+  "email": "rrobertsson9@ucla.edu",
+  "gender": "Female",
+  "address": "5 Spohn Park",
+  "dob": "20/12/2021",
+  "password": "cI3VRTCkV",
+  "phone": "544 693 6938",
+  "active": true
+}]
