@@ -1,7 +1,7 @@
 [
     {
-        "projectId": 1,
-        "projectName": "Theodosia",
+        "id": 1,
+        "name": "Theodosia",
         "description": "aliquam non mauris morbi non lectus aliquam sit amet diam in magna bibendum imperdiet nullam orci",
         "clientName": "Theodosia Camerati",
         "startDate": "25/01/2021",
@@ -55,8 +55,8 @@
         ]
     },
     {
-        "projectId": 2,
-        "projectName": "Briant",
+        "id": 2,
+        "name": "Briant",
         "description": "tortor risus dapibus augue vel accumsan tellus nisi eu orci mauris lacinia sapien quis libero nullam sit amet turpis",
         "clientName": "Briant Rosser",
         "startDate": "21/03/2021",
@@ -117,8 +117,8 @@
         ]
     },
     {
-        "projectId": 3,
-        "projectName": "Susanetta",
+        "id": 3,
+        "name": "Susanetta",
         "description": "in magna bibendum imperdiet nullam orci pede venenatis non sodales sed tincidunt eu felis fusce posuere felis sed lacus morbi",
         "clientName": "Susanetta Darkins",
         "startDate": "19/11/2021",
@@ -186,8 +186,8 @@
         ]
     },
     {
-        "projectId": 4,
-        "projectName": "Gratiana",
+        "id": 4,
+        "name": "Gratiana",
         "description": "eget semper rutrum nulla nunc purus phasellus in felis donec semper sapien a libero nam",
         "clientName": "Gratiana Heggison",
         "startDate": "24/01/2021",
@@ -248,8 +248,8 @@
         ]
     },
     {
-        "projectId": 5,
-        "projectName": "Egbert",
+        "id": 5,
+        "name": "Egbert",
         "description": "at turpis a pede posuere nonummy integer non velit donec diam",
         "clientName": "Egbert Dupree",
         "startDate": "24/02/2021",
@@ -303,8 +303,8 @@
         ]
     },
     {
-        "projectId": 6,
-        "projectName": "Sheffie",
+        "id": 6,
+        "name": "Sheffie",
         "description": "varius integer ac leo pellentesque ultrices mattis odio donec vitae nisi nam ultrices libero non mattis pulvinar nulla pede ullamcorper",
         "clientName": "Sheffie Bartul",
         "startDate": "17/06/2021",
@@ -358,8 +358,8 @@
         ]
     },
     {
-        "projectId": 7,
-        "projectName": "Eric",
+        "id": 7,
+        "name": "Eric",
         "description": "sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis",
         "clientName": "Eric Borless",
         "startDate": "03/06/2021",
@@ -420,8 +420,8 @@
         ]
     },
     {
-        "projectId": 8,
-        "projectName": "Damiano",
+        "id": 8,
+        "name": "Damiano",
         "description": "at vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula condimentum curabitur in libero",
         "clientName": "Damiano Hebblewhite",
         "startDate": "01/12/2020",
@@ -468,8 +468,8 @@
         ]
     },
     {
-        "projectId": 9,
-        "projectName": "Sherlocke",
+        "id": 9,
+        "name": "Sherlocke",
         "description": "turpis a pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante",
         "clientName": "Sherlocke Andreas",
         "startDate": "03/09/2021",
@@ -530,8 +530,8 @@
         ]
     },
     {
-        "projectId": 10,
-        "projectName": "Gaylor",
+        "id": 10,
+        "name": "Gaylor",
         "description": "dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis",
         "clientName": "Gaylor Geikie",
         "startDate": "21/04/2021",
@@ -588,6 +588,61 @@
                 "role": "DEV",
                 "hours": 49,
                 "rate": 27
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Theodosia",
+        "description": "aliquam non mauris morbi non lectus aliquam sit amet diam in magna bibendum imperdiet nullam orci",
+        "clientName": "Theodosia Camerati",
+        "startDate": "25/01/2021",
+        "endDate": "08/12/2021",
+        "projectManager": "Theodosia Dulen",
+        "active": false,
+        "adminId": 1,
+        "team": [
+            {
+                "employeeId": 1,
+                "employeeName": "Theodosia Dulen",
+                "role": "PM",
+                "hours": 52,
+                "rate": 32
+            },
+            {
+                "employeeId": 2,
+                "employeeName": "Betsy Fenney",
+                "role": "TL",
+                "hours": 35,
+                "rate": 33
+            },
+            {
+                "employeeId": 3,
+                "employeeName": "Doti Baalham",
+                "role": "DEV",
+                "hours": 32,
+                "rate": 37
+            },
+            {
+                "employeeId": 4,
+                "employeeName": "Von Blagden",
+                "role": "QA",
+                "hours": 73,
+                "rate": 32
+            },
+            {
+                "employeeId": 5,
+                "employeeName": "Caralie Scoffham",
+                "role": "QA",
+                "hours": 3,
+                "rate": 31
+            },
+            {
+                "employeeId": 6,
+                "employeeName": "Petey Cordingly",
+                "role": "QA",
+                "hours": 60,
+                "rate": 33
             }
         ]
     }

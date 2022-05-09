@@ -9,7 +9,6 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-
 app.use('/projects', projects);
 
 app.get('/', async (req, res) => {
