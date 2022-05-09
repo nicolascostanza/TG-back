@@ -1,8 +1,41 @@
 const express = require('express');
+// const res = require('express/lib/response');
+const fs = require('fs');
 const superAdminsList = require('../data/super-admins.json');
 
 const router = express.Router();
 
+/// // Method Post
+router.post('/postSuperAdmin', (req, res) => {
+  const superAdminData = req.body;
+  if (
+    superAdminData.id
+    && superAdminData.first_name
+    && superAdminData.last_name
+    && superAdminData.email
+    && superAdminData.password
+    && superAdminData.active
+  ) {
+    superAdminsList.push(superAdminData);
+    fs.writeFile(
+      'src/data/super-admins.json',
+      JSON.stringify(superAdminsList),
+      (err) => {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send('Super Admin Created');
+        }
+      },
+    );
+  } else {
+    res.send('Hay un error en las validaciones');
+  }
+});
+
+/// // Method Edit
+
+/// // Method: Get a Super Admin by Id
 router.get('/getById/:id', (req, res) => {
   const superAdminId = req.params.id;
   const superAdmins = superAdminsList.find(
@@ -15,6 +48,11 @@ router.get('/getById/:id', (req, res) => {
   }
 });
 
+/// // Method Delete
+
+/// // Methods search by filter
+
+/// Filter by First name
 router.get('/getByFirstName', (req, res) => {
   const superAdminFirstName = req.query.firstName;
   const filterSuperAdmin = superAdminsList.filter(
@@ -27,6 +65,7 @@ router.get('/getByFirstName', (req, res) => {
   }
 });
 
+/// Filter by Last name
 router.get('/getByLastName', (req, res) => {
   const superAdminLastName = req.query.lastName;
   const filterSuperAdmin = superAdminsList.filter(
@@ -39,6 +78,7 @@ router.get('/getByLastName', (req, res) => {
   }
 });
 
+/// Filter by Email
 router.get('/getByEmail', (req, res) => {
   const superAdminEmail = req.query.email;
   const filterSuperAdmin = superAdminsList.filter(
@@ -50,4 +90,5 @@ router.get('/getByEmail', (req, res) => {
     res.send('Email not found');
   }
 });
+
 module.exports = router;

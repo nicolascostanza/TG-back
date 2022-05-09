@@ -5,6 +5,7 @@ import express from 'express';
 const superAdminsRouter = require('./resources/super-admins');
 
 const app = express();
+app.use(express.json());
 const port = 3000;
 
 app.use('/superAdmin', superAdminsRouter);
