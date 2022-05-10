@@ -121,7 +121,7 @@ router.delete('/delete/:id', (req, res) => {
   if (filteredTasks.length < tasks.length) {
     fileSystem.writeFile(jAdress, JSON.stringify(filteredTasks), (err) => {
       if (err) {
-        res.status(500).send(err, 'Holatrolo');
+        res.status(500).send(err);
       } else {
         res.status(200).send('Task has been successfully deleted');
       }
