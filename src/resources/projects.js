@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
+import fs from 'fs';
+import projects from '../data/projects.json';
 
 const router = express.Router();
-const fs = require('fs');
-const projects = require('../data/projects.json');
 
 router.get('/', (req, res) => {
   res.status(200).json({
@@ -88,4 +88,4 @@ router.post('/:projectId/addEmployee', (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
