@@ -40,26 +40,18 @@ router.put('/edit/:id', (req, res) => {
     (superAdmin) => superAdmin.id === superAdminId,
   );
   if (superAdmins) {
-    if (
-      // eslint-disable-next-line no-constant-condition
-      true
-    ) {
-      Object.assign(superAdmins, superAdminData);
-      fs.writeFile(
-        'src/data/super-admins.json',
-        JSON.stringify(superAdminsList),
-        (err) => {
-          if (err) {
-            res.send(err);
-          } else {
-            res.send('Super Admin Edited');
-          }
-        },
-      );
-    } else {
-      res.send('Theres a error in the validation');
-    }
-    res.send(superAdmins);
+    Object.assign(superAdmins, superAdminData);
+    fs.writeFile(
+      'src/data/super-admins.json',
+      JSON.stringify(superAdminsList),
+      (err) => {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send('Super Admin Edited');
+        }
+      },
+    );
   } else {
     res.send('Super Admin not found');
   }
