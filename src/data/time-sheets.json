@@ -108,16 +108,5 @@
     "task": "ante",
     "approved": false,
     "role": "Dev"
-  },
-  {
-    "id": "11",
-    "employeeId": "88",
-    "description": "Excision of shoulder NEC",
-    "project": "Buckridge and Sons",
-    "date": "6/21/2021",
-    "hours": "9",
-    "task": "velit",
-    "approved": false,
-    "role": "QA"
   }
 ]

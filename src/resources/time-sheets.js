@@ -1,45 +1,32 @@
-const express = require('express');
-const fs = require('fs');
-const timesheets = require('../data/time-sheets.json');
+import express from 'express';
+import fs from 'fs';
+import timesheets from '../data/time-sheets.json';
 
 const router = express.Router();
 
 router.get('/getAll', (req, res) => {
-  res.status(200).json({
-    data: timesheets,
-  });
-});
-
-// return one timesheet according to a specific id
-router.get('/getById/:id', (req, res) => {
-  const tsId = req.params.id;
-  const ts = timesheets.find((tSheet) => tSheet.id === tsId);
-  if (ts) {
-    res.send(ts);
-  } else {
-    res.send('Timesheet not found');
-  }
+  res.status(200).json({ data: timesheets });
 });
 
 // return all timesheets corresponding to a specific employee
-router.get('/getByEmployee', (req, res) => {
-  const tsEmp = req.query.employeeId;
+router.get('/getByEmployee/:employeeId', (req, res) => {
+  const tsEmp = req.params.employeeId;
   const ts = timesheets.filter((tSheet) => tSheet.employeeId === tsEmp);
   if (ts.length > 0) {
-    res.send(ts);
+    res.status(200).json({ data: ts });
   } else {
-    res.send(`No timesheets found for employee ${tsEmp}`);
+    res.status(404).json({ msg: `No timesheets found for employee ${tsEmp}` });
   }
 });
 
 // return all timesheets corresponding to a specific project
-router.get('/getByProject', (req, res) => {
-  const tsProj = req.query.project;
+router.get('/getByProject/:project', (req, res) => {
+  const tsProj = req.params.project;
   const ts = timesheets.filter((tSheet) => tSheet.project === tsProj);
   if (ts.length > 0) {
-    res.send(ts);
+    res.status(200).json({ data: ts });
   } else {
-    res.send(`No timesheets found for project ${tsProj}`);
+    res.status(404).json({ msg: `No timesheets found for project ${tsProj}` });
   }
 });
 
@@ -48,20 +35,20 @@ router.get('/getByDate', (req, res) => {
   const tsDate = req.query.date;
   const ts = timesheets.filter((tSheet) => tSheet.date === tsDate);
   if (ts.length > 0) {
-    res.send(ts);
+    res.status(200).json({ data: ts });
   } else {
-    res.send('No timesheets found for this date');
+    res.status(404).json({ msg: 'No timesheets found for this date' });
   }
 });
 
 // return all approved/disapproved timesheets
-router.get('/getByStatus', (req, res) => {
-  const tsAp = req.query.approved;
+router.get('/getByStatus/:approved', (req, res) => {
+  const tsAp = req.params.approved;
   const ts = timesheets.filter((tSheet) => tSheet.approved.toString() === tsAp);
   if (ts.length > 0) {
-    res.send(ts);
+    res.status(200).json({ data: ts });
   } else {
-    res.send('No timesheets found');
+    res.status(404).json({ msg: 'No timesheets found' });
   }
 });
 
@@ -80,20 +67,20 @@ const isRepeated = (array, data) => {
 router.post('/add', (req, res) => {
   const tsData = req.body;
   if (isRepeated(timesheets, tsData)) {
-    res.send('This timesheet id corresponds to an existing timesheet');
+    res.status(409).json({ msg: 'This timesheet id corresponds to an existing timesheet' });
   } else if (tsData.id && tsData.employeeId && tsData.description && tsData.project
     && tsData.date && tsData.hours && tsData.task && tsData.approved !== '' && tsData.role) {
     timesheets.push(tsData);
     fs.writeFile('src/data/time-sheets.json', JSON.stringify(timesheets), (err) => {
       if (err) {
-        res.send(err);
+        res.status(500).send(err);
       } else {
-        res.send('Timesheet created');
+        res.status(201).send('Timesheet created');
       }
     });
   } else {
-    res.send('Please complete all fields');
+    res.status().json({ msg: 'Please complete all fields' });
   }
 });
 
-module.exports = router;
+export default router;
