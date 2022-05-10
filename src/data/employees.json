@@ -1,32 +1,28 @@
 [
     {
-        "employee": {
-            "id": 1,
-            "full_name": "Baillie Hanner",
-            "email": "bhanner0@webnode.com",
-            "gender": "Male",
-            "address": "299 Leroy Parkway",
-            "dob": "30/06/2011",
-            "password": "biRQSK6k6d",
-            "phone": "837 876 4057",
-            "active": false
-        }
+        "id": "1",
+        "full_name": "Pedro Sanchez",
+        "email": "rrobertsson9@ucla.edu",
+        "gender": "Male",
+        "address": "5 Spohn Park",
+        "dob": "20/12/2021",
+        "password": "ch3VRTCkV",
+        "phone": "544 693 6938",
+        "active": true
     },
     {
-        "employee": {
-            "id": 2,
-            "full_name": "Renee Linacre",
-            "email": "rlinacre1@51.la",
-            "gender": "Female",
-            "address": "2 Loftsgordon Court",
-            "dob": "10/01/1969",
-            "password": "fjy7YPVNWc4",
-            "phone": "724 653 5605",
-            "active": true
-        }
+        "id": "2",
+        "full_name": "Renee Linacre",
+        "email": "rlinacre1@51.la",
+        "gender": "Female",
+        "address": "2 Loftsgordon Court",
+        "dob": "10/01/1969",
+        "password": "fjy7YPVNWc4",
+        "phone": "724 653 5605",
+        "active": true
     },
     {
-        "id": 3,
+        "id": "3",
         "full_name": "Sebastian Ambage",
         "email": "sambage2@google.com.br",
         "gender": "Male",
@@ -37,7 +33,7 @@
         "active": true
     },
     {
-        "id": 4,
+        "id": "4",
         "full_name": "Lesley Chin",
         "email": "lchin3@mysql.com",
         "gender": "Bigender",
@@ -48,7 +44,7 @@
         "active": false
     },
     {
-        "id": 5,
+        "id": "5",
         "full_name": "Putnem Feldstein",
         "email": "pfeldstein4@marriott.com",
         "gender": "Male",
@@ -59,7 +55,7 @@
         "active": false
     },
     {
-        "id": 6,
+        "id": "6",
         "full_name": "Tommie Lossman",
         "email": "tlossman5@yolasite.com",
         "gender": "Male",
@@ -70,7 +66,7 @@
         "active": false
     },
     {
-        "id": 7,
+        "id": "7",
         "full_name": "Randene Joire",
         "email": "rjoire6@fda.gov",
         "gender": "Female",
@@ -81,7 +77,7 @@
         "active": false
     },
     {
-        "id": 8,
+        "id": "8",
         "full_name": "Helaine Jayne",
         "email": "hjayne7@odnoklassniki.ru",
         "gender": "Female",
@@ -92,7 +88,7 @@
         "active": true
     },
     {
-        "id": 9,
+        "id": "9",
         "full_name": "Sindee Matusson",
         "email": "smatusson8@washingtonpost.com",
         "gender": "Female",
@@ -103,14 +99,14 @@
         "active": true
     },
     {
-        "id": 10,
-        "full_name": "Berkeley Pretsel",
-        "email": "bpretsel9@comcast.net",
-        "gender": "Genderqueer",
-        "address": "86346 La Follette Point",
-        "dob": "29/01/2022",
-        "password": "19om3MGQV",
-        "phone": "877 875 4560",
+        "id": "10",
+        "full_name": "Alvaro Patinson",
+        "email": "rrobertsson9@ucla.edu",
+        "gender": "Male",
+        "address": "5 Spohn Park",
+        "dob": "20/12/2021",
+        "password": "ch3VRTCkV",
+        "phone": "544 693 6938",
         "active": true
     }
 ]
