@@ -4,7 +4,7 @@ import express from 'express';
 
 // use "require" to import JSON files
 
-const employees = require('./resources/employees');
+import employees from './resources/employees';
 
 const app = express();
 const port = process.env.PORT || 3000;

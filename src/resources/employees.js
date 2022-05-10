@@ -1,9 +1,10 @@
-const express = require('express');
+import express from 'express';
 
-const fs = require('fs');
+import fs from 'fs';
+
+import employees from '../data/employees.json';
 
 const router = express.Router();
-const employees = require('../data/employees.json');
 
 router.get('/getAll', (req, res) => {
   res.status(200).json({
@@ -21,8 +22,8 @@ router.get('/getById/:id', (req, res) => {
   }
 });
 
-router.get('/getByFname/', (req, res) => {
-  const employeesFname = req.query.full_name;
+router.get('/getByFname/:full_name', (req, res) => {
+  const employeesFname = req.params.full_name;
   const Fname = employees.filter((name) => name.full_name === employeesFname);
   if (Fname.length > 0) {
     res.send(Fname);
@@ -52,4 +53,4 @@ router.post('/add', (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
