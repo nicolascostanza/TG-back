@@ -32,6 +32,39 @@ router.get('/getByEmployee', (req, res) => {
   }
 });
 
+// return all timesheets corresponding to a specific project
+router.get('/getByProject', (req, res) => {
+  const tsProj = req.query.project;
+  const ts = timesheets.filter((tSheet) => tSheet.project === tsProj);
+  if (ts.length > 0) {
+    res.send(ts);
+  } else {
+    res.send(`No timesheets found for project ${tsProj}`);
+  }
+});
+
+// return all timesheets corresponding to a specific date
+router.get('/getByDate', (req, res) => {
+  const tsDate = req.query.date;
+  const ts = timesheets.filter((tSheet) => tSheet.date === tsDate);
+  if (ts.length > 0) {
+    res.send(ts);
+  } else {
+    res.send('No timesheets found for this date');
+  }
+});
+
+// return all approved/disapproved timesheets
+router.get('/getByStatus', (req, res) => {
+  const tsAp = req.query.approved;
+  const ts = timesheets.filter((tSheet) => tSheet.approved.toString() === tsAp);
+  if (ts.length > 0) {
+    res.send(ts);
+  } else {
+    res.send('No timesheets found');
+  }
+});
+
 // this function check if a id key is repeated
 const isRepeated = (array, data) => {
   let repeated = false;
