@@ -1,5 +1,4 @@
 const express = require('express');
-// const res = require('express/lib/response');
 const fs = require('fs');
 const superAdminsList = require('../data/super-admins.json');
 
@@ -34,6 +33,36 @@ router.post('/postSuperAdmin', (req, res) => {
 });
 
 /// // Method Edit
+router.put('/edit/:id', (req, res) => {
+  const superAdminData = req.body;
+  const superAdminId = req.params.id;
+  const superAdmins = superAdminsList.find(
+    (superAdmin) => superAdmin.id === superAdminId,
+  );
+  if (superAdmins) {
+    if (
+      true
+    ) {
+      Object.assign(superAdmins, superAdminData);
+      fs.writeFile(
+        'src/data/super-admins.json',
+        JSON.stringify(superAdminsList),
+        (err) => {
+          if (err) {
+            res.send(err);
+          } else {
+            res.send('Super Admin Edited');
+          }
+        },
+      );
+    } else {
+      res.send('Theres a error in the validation');
+    }
+    res.send(superAdmins);
+  } else {
+    res.send('Super Admin not found');
+  }
+});
 
 /// // Method: Get a Super Admin by Id
 router.get('/getById/:id', (req, res) => {
@@ -70,6 +99,7 @@ router.delete('/delete/:id', (req, res) => {
     );
   }
 });
+
 /// // Methods search by filter
 
 /// Filter by First name
