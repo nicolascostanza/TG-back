@@ -48,7 +48,7 @@ router.put('/:id', (req, res) => {
       }
     });
 
-    fs.writeFile('src/data/projects.json', JSON.stringify(filteredProjects), (err) => {
+    fs.writeFile('src/data/projects.json', JSON.stringify(projects), (err) => {
       if (err) {
         res.send(err);
       } else {
@@ -63,8 +63,8 @@ router.put('/:id', (req, res) => {
 // Filter list
 // By name
 
-router.get('/getByName', (req, res) => {
-  const projectName = req.query.name;
+router.get('/getByName/:name', (req, res) => {
+  const projectName = req.params.name;
   const filteredProjects = projects.filter((project) => project.name.toString() === projectName);
   if (filteredProjects.length > 0) {
     res.send(filteredProjects);
@@ -75,8 +75,8 @@ router.get('/getByName', (req, res) => {
 
 // By client name
 
-router.get('/getByClientName', (req, res) => {
-  const projectClient = req.query.clientName;
+router.get('/getByClientName/:clientName', (req, res) => {
+  const projectClient = req.params.clientName;
   const filtProject = projects.filter((project) => project.clientName.toString() === projectClient);
   if (filtProject.length > 0) {
     res.send(filtProject);
@@ -99,8 +99,8 @@ router.get('/getByStartDate', (req, res) => {
 
 // By status
 
-router.get('/getByActive', (req, res) => {
-  const projectActive = req.query.active;
+router.get('/getByActive/:active', (req, res) => {
+  const projectActive = req.params.active;
   const filtProject = projects.filter((project) => project.active.toString() === projectActive);
   if (filtProject.length > 0) {
     res.send(filtProject);
