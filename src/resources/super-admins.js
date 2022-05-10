@@ -29,7 +29,7 @@ router.post('/postSuperAdmin', (req, res) => {
       },
     );
   } else {
-    res.send('Hay un error en las validaciones');
+    res.send('Theres a error in the validation');
   }
 });
 
@@ -49,7 +49,27 @@ router.get('/getById/:id', (req, res) => {
 });
 
 /// // Method Delete
-
+router.delete('/delete/:id', (req, res) => {
+  const superAdminID = req.params.id;
+  const filteredSuperAdmins = superAdminsList.filter(
+    (superAdmin) => superAdmin.id !== superAdminID,
+  );
+  if (superAdminsList.length === filteredSuperAdmins.length) {
+    res.send('Could not delete user because it was not found');
+  } else {
+    fs.writeFile(
+      'src/data/super-admins.json',
+      JSON.stringify(filteredSuperAdmins),
+      (err) => {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send('Super Admin Deleted');
+        }
+      },
+    );
+  }
+});
 /// // Methods search by filter
 
 /// Filter by First name
