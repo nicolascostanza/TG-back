@@ -41,6 +41,7 @@ router.put('/edit/:id', (req, res) => {
   );
   if (superAdmins) {
     if (
+      // eslint-disable-next-line no-constant-condition
       true
     ) {
       Object.assign(superAdmins, superAdminData);
