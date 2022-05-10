@@ -25,8 +25,30 @@ router.get('/findById/:id', (req, res) => {
 });
 
 router.get('/filterByStatus', (req, res) => {
-  const taskStatus = req.query.status;
-  const compliantTasks = tasks.filter((task) => task.status === taskStatus);
+  const taskFilter = req.query.status;
+  const compliantTasks = tasks.filter((task) => task.status === taskFilter);
+
+  if (compliantTasks.length > 0) {
+    res.status(200).json({ data: compliantTasks });
+  } else {
+    res.status(404).send('The specified task does not exist');
+  }
+});
+
+router.get('/filterByCreator', (req, res) => {
+  const taskFilter = req.query.taskCreator;
+  const compliantTasks = tasks.filter((task) => task.taskCreator === taskFilter);
+
+  if (compliantTasks.length > 0) {
+    res.status(200).json({ data: compliantTasks });
+  } else {
+    res.status(404).send('The specified task does not exist');
+  }
+});
+
+router.get('/filterByProject', (req, res) => {
+  const taskFilter = req.query.parentProject;
+  const compliantTasks = tasks.filter((task) => task.parentProject === taskFilter);
 
   if (compliantTasks.length > 0) {
     res.status(200).json({ data: compliantTasks });
