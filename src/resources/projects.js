@@ -18,23 +18,29 @@ router.get('/:id', (req, res) => {
       project,
     });
   } else {
-    res.status(200).json(
-      'Project not found',
-    );
+    res.status(404).send('Project not found');
   }
 });
 
 router.post('/add', (req, res) => {
   const projectData = req.body;
-  projects.push(projectData);
-  fs.writeFile('src/data/projects.json', JSON.stringify(projects), (err) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send('Project created');
-    }
-  });
-  res.send('ok');
+  const neededKeys = ['id', 'name', 'description', 'clientName', 'startDate', 'endDate', 'projectManager', 'active', 'adminId', 'team'];
+  if (neededKeys.every((key) => Object.keys(projectData).includes(key))
+   && Object.values(projectData).every((value) => value !== '')
+   && projects.every((repeatedId) => projectData.id !== repeatedId.id)) {
+    projects.push(projectData);
+    fs.writeFile('src/data/projects.json', JSON.stringify(projects), (err) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(201).send('Project created');
+      }
+    });
+  } else if (projects.some((repeatedId) => projectData.id === repeatedId.id)) {
+    res.status(400).send(`ID: ${projectData.id} already exists`);
+  } else {
+    res.status(400).send('Complete all fields with valid inputs');
+  }
 });
 
 module.exports = router;
