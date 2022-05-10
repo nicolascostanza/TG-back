@@ -13,16 +13,18 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const projectId = req.params.id;
   const project = projects.find((projectRequested) => projectId === projectRequested.id.toString());
+  const validIds = projects.map((pro) => pro.id);
   if (project) {
     res.status(200).json({ project });
   } else {
-    res.status(404).send('Project not found');
+    res.status(404).send(`Project with ID: ${projectId} not found. Valid IDs: ${validIds}`);
   }
 });
 
 router.post('/add', (req, res) => {
   const projectData = req.body;
-  const neededKeys = ['id', 'name', 'description', 'clientName', 'startDate', 'endDate', 'projectManager', 'active', 'adminId', 'team'];
+  const neededKeys = ['id', 'name', 'description', 'clientName', 'startDate', 'endDate', 'projectManager', 'active',
+    'adminId', 'team'];
   // Check every submitted key exists
   if (neededKeys.every((key) => Object.keys(projectData).includes(key))
   // Check every submitted key has a value
@@ -48,8 +50,13 @@ router.post('/:projectId/addEmployee', (req, res) => {
   const employeeData = req.body;
   const { projectId } = req.params;
   const projectToBoost = projects.find((project) => projectId === project.id.toString());
+  const validIds = projects.map((pro) => pro.id);
   const neededKeys = ['employeeId', 'employeeName', 'role', 'hours', 'rate'];
   const roles = ['QA', 'PM', 'DEV', 'TL'];
+  // Check if project exists
+  if (!projectToBoost) {
+    res.status(404).send(`Project with ID: ${projectId} not found. Valid IDs: ${validIds}`);
+  }
   // Check every submitted key exists
   if (neededKeys.every((key) => Object.keys(employeeData).includes(key))
   // Check every submitted key has a value
