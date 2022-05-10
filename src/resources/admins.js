@@ -13,11 +13,11 @@ router.post('/add', (req, res) => {
       if (err) {
         res.send(err);
       } else {
-        res.send('User created');
+        res.send('The admin has been created successfully');
       }
     });
   } else {
-    res.status(400).json({ msg: 'Member cannot be created' });
+    res.status(400).json({ msg: 'Admin cannot be created' });
   }
 });
 
@@ -37,13 +37,13 @@ router.put('/:id', (req, res) => {
           if (err) {
             res.send(err);
           } else {
-            res.send('User edited');
+            res.send(`Admin ${req.params.id} has been edited`);
           }
         });
       }
     });
   } else {
-    res.status(400).json({ msg: `No member with the id of ${req.params.id} was founded` });
+    res.status(400).json({ msg: `No admin with the id of ${req.params.id} was founded` });
   }
 });
 
