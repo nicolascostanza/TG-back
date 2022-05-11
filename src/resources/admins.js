@@ -22,28 +22,22 @@ router.post('/add', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  const found = admins.some((admin) => admin.id === parseInt(req.params.id, 10));
-  if (found) {
-    const uptadeAdmin = req.body;
-    admins.forEach((admin) => {
-      if (admin.id === parseInt(req.params.id, 10)) {
-        const newAdmin = admin;
-        newAdmin.firstName = uptadeAdmin.firstName ? uptadeAdmin.firstName : admin.firstName;
-        newAdmin.lastName = uptadeAdmin.lastName ? uptadeAdmin.lastName : admin.lastName;
-        newAdmin.email = uptadeAdmin.email ? uptadeAdmin.email : admin.email;
-        newAdmin.password = uptadeAdmin.password ? uptadeAdmin.password : admin.password;
-        newAdmin.active = uptadeAdmin.active ? uptadeAdmin.active : admin.active;
-        fs.writeFile('src/data/admins.json', JSON.stringify(admins), (err) => {
-          if (err) {
-            res.send(err);
-          } else {
-            res.send(`Admin ${req.params.id} has been edited`);
-          }
-        });
+  const adminId = req.params.id;
+  const admin = admins.find((item) => item.id === parseInt(adminId, 10));
+  if (!admin) {
+    res.json({ msg: `The admin with ID ${adminId} does not exist` });
+  } else {
+    const adminInfo = req.body;
+    Object.keys(admin).forEach((item) => {
+      admin[item] = adminInfo[item] ? adminInfo[item] : admin[item];
+    });
+    fs.writeFile('src/data/admins.json', JSON.stringify(admins), (error) => {
+      if (error) {
+        res.send(error);
+      } else {
+        res.json({ msg: `The admin with ID ${adminId} was updated` });
       }
     });
-  } else {
-    res.status(400).json({ msg: `No admin with the id of ${req.params.id} was founded` });
   }
 });
 
