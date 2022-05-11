@@ -91,7 +91,7 @@ router.get('/getByStartDate', (req, res) => {
   if (filtProject.length > 0) {
     res.send(filtProject);
   } else {
-    res.send(`No project with the start date of ${req.params.startDate}`);
+    res.send(`No project with the start date of ${req.query.startDate}`);
   }
 });
 
