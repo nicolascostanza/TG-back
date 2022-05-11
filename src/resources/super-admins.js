@@ -57,19 +57,6 @@ router.put('/edit/:id', (req, res) => {
   }
 });
 
-/// // Method: Get a Super Admin by Id
-router.get('/getById/:id', (req, res) => {
-  const superAdminId = req.params.id;
-  const superAdmins = superAdminsList.find(
-    (superAdmin) => superAdmin.id === superAdminId,
-  );
-  if (superAdmins) {
-    res.send(superAdmins);
-  } else {
-    res.send('Super Admin not found');
-  }
-});
-
 /// // Method Delete
 router.delete('/delete/:id', (req, res) => {
   const superAdminID = req.params.id;
@@ -95,6 +82,18 @@ router.delete('/delete/:id', (req, res) => {
 
 /// // Methods search by filter
 
+/// // Method: Get a Super Admin by Id
+router.get('/getById/:id', (req, res) => {
+  const superAdminId = req.params.id;
+  const superAdmins = superAdminsList.find(
+    (superAdmin) => superAdmin.id === superAdminId,
+  );
+  if (superAdmins) {
+    res.send(superAdmins);
+  } else {
+    res.send('Super Admin not found');
+  }
+});
 /// Filter by First name
 router.get('/getByFirstName', (req, res) => {
   const superAdminFirstName = req.query.firstName;
@@ -134,4 +133,4 @@ router.get('/getByEmail', (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

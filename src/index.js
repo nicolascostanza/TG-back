@@ -1,5 +1,5 @@
 // use "import" to import libraries
-import express from 'express';
+import express from './resources/projects';
 
 // use "require" to import JSON files
 const superAdminsRouter = require('./resources/super-admins');
