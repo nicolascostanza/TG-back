@@ -1,6 +1,6 @@
-const express = require('express');
-const fs = require('fs');
-const admins = require('../data/admins.json');
+import express from 'express';
+import fs from 'fs';
+import admins from '../data/admins.json';
 
 const router = express.Router();
 
@@ -23,7 +23,7 @@ router.post('/add', (req, res) => {
 
 router.put('/:id', (req, res) => {
   const adminId = req.params.id;
-  const admin = admins.find((item) => item.id === parseInt(adminId, 10));
+  const admin = admins.find((item) => item.id.toString() === adminId);
   if (!admin) {
     res.json({ msg: `The admin with ID ${adminId} does not exist` });
   } else {
@@ -41,4 +41,4 @@ router.put('/:id', (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
