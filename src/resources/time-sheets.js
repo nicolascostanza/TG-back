@@ -50,7 +50,7 @@ router.put('/:id', (req, res) => {
       }
     });
 
-    fs.writeFile('src/data/time-sheets.js', JSON.stringify(filteredTimesheets), (err) => {
+    fs.writeFile('src/data/time-sheets.json', JSON.stringify(timesheets), (err) => {
       if (err) {
         res.send(err);
       } else {
