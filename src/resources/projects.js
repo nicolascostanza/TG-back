@@ -67,7 +67,7 @@ router.get('/getByName/:name', (req, res) => {
   if (filteredProjects.length > 0) {
     res.send(filteredProjects);
   } else {
-    res.send(`No project with the id of ${req.params.id}`);
+    res.send(`No project with the name of ${req.params.name}`);
   }
 });
 
@@ -79,7 +79,7 @@ router.get('/getByClientName/:clientName', (req, res) => {
   if (filtProject.length > 0) {
     res.send(filtProject);
   } else {
-    res.send(`No project with the id of ${req.params.id}`);
+    res.send(`No project with the client name of ${req.params.clientName}`);
   }
 });
 
@@ -91,7 +91,7 @@ router.get('/getByStartDate', (req, res) => {
   if (filtProject.length > 0) {
     res.send(filtProject);
   } else {
-    res.send(`No project with the id of ${req.params.id}`);
+    res.send(`No project with the start date of ${req.params.startDate}`);
   }
 });
 
@@ -103,7 +103,7 @@ router.get('/getByActive/:active', (req, res) => {
   if (filtProject.length > 0) {
     res.send(filtProject);
   } else {
-    res.send(`No project with the id of ${req.params.id}`);
+    res.send(`No project with the status of ${req.params.active}`);
   }
 });
 
