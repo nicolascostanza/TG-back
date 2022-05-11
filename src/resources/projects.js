@@ -1,10 +1,8 @@
-const express = require('express');
-
-const fs = require('fs');
+import express from 'express';
+import fs from 'fs';
+import projects from '../data/projects.json';
 
 const router = express.Router();
-
-const projects = require('../data/projects.json');
 
 // Delete Project
 
@@ -109,4 +107,4 @@ router.get('/getByActive/:active', (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
