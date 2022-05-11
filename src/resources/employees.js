@@ -18,15 +18,15 @@ router.get('/getAll', (req, res) => {
 
 // Filter by Id
 
-// router.get('/getById/:id', (req, res) => {
-//   const employeesId = req.params.id;
-//   const users = employees.find((employee) => employee.id === employeesId);
-//   if (users) {
-//     res.send(users);
-//   } else {
-//     res.send('user not found');
-//   }
-// });
+router.get('/getById/:id', (req, res) => {
+  const employeesId = req.params.id;
+  const users = employees.find((employee) => employee.id === employeesId);
+  if (users) {
+    res.send(users);
+  } else {
+    res.send('user not found');
+  }
+});
 
 // Filter by Status
 
@@ -63,20 +63,6 @@ router.get('/getByGender/:gender', (req, res) => {
     res.send('Gender not found - Insert Female or Male by parameters');
   }
 });
-
-// Post Sentence
-
-// router.post('/add', (req, res) => {
-//   const userData = req.body;
-//   employees.push(userData);
-//   fs.writeFile('src/data/employees.json', JSON.stringify(employees), (err) => {
-//     if (err) {
-//       res.send(err);
-//     } else {
-//       res.send('User created');
-//     }
-//   });
-// });
 
 // Put Sentence
 
