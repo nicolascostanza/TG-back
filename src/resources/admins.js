@@ -1,42 +1,42 @@
-const express = require("express");
-const admins = require("../data/admins.json");
-const fs = require("fs");
+import express from 'express';
+import fs from 'fs';
+import admins from '../data/admins.json';
+
 const router = express.Router();
 
+// GET ADMINS
 
-// GET ADMINS 
-
-router.get("/", (req, res) => {
-    res.send(admins)
+router.get('/', (req, res) => {
+    res.send(admins);
 });
 
-router.get("/:id", (req, res) => {
+router.get('/:id', (req, res) => {
     const adminID = req.params.id;
-    const admin = admins.find((admin) => admin.id == adminID);
-    if (admin) {
-        res.send(admin);
+    const foundAdmin = admins.find((admin) => admin.id === adminID);
+    if (foundAdmin) {
+        res.send(foundAdmin);
     } else {
         res.send(`Admin with id ${adminID} does not exist`);
     }
 });
 
-router.get("/getByName/:firstName", (req, res) => {
+router.get('/getByName/:firstName', (req, res) => {
     const adminFirstName = req.params.firstName;
-    const admin = admins.filter((admin) => admin.firstName == adminFirstName);
-    if (admin) {
-        res.send(admin);
+    const foundAdmin = admins.filter((admin) => admin.firstName === adminFirstName);
+    if (foundAdmin) {
+        res.send(foundAdmin);
     } else {
-        res.send("Admin not found");
+        res.send('Admin not found');
     }
 });
 
-router.get("/getByLastName/:lastName", (req, res) => {
+router.get('/getByLastName/:lastName', (req, res) => {
     const adminLastName = req.params.lastName;
-    const admin = admins.find((admin) => admin.lastName == adminLastName);
-    if (admin) {
-        res.send(admin);
+    const foundAdmin = admins.find((admin) => admin.lastName === adminLastName);
+    if (foundAdmin) {
+        res.send(foundAdmin);
     } else {
-        res.send("Admin not found");
+        res.send('Admin not found');
     }
 });
 
@@ -52,14 +52,13 @@ router.get('/getByStatus/:active', (req, res) => {
 
 // DELETE ADMINS
 
-router.delete("/delete/:id", (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     const adminID = req.params.id;
     const deleteAdmin = admins.filter((admin) => admin.id !== adminID);
     if (admins.length === deleteAdmin.length) {
-        res.status(404);
         res.send(`Could not delete because admin with id ${adminID} was not found`);
     } else {
-        fs.writeFile("src/data/admins.json", JSON.stringify(deleteAdmin), (err) => {
+        fs.writeFile('src/data/admins.json', JSON.stringify(deleteAdmin), (err) => {
             if (err) {
                 res.send(err);
             } else {
@@ -67,6 +66,6 @@ router.delete("/delete/:id", (req, res) => {
             }
         });
     }
-})
+});
 
-module.exports = router;
+export default router;
