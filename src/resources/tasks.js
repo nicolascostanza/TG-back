@@ -23,7 +23,7 @@ router.get('/findById/:id', (req, res) => {
 
 router.get('/filterByStatus', (req, res) => {
   const taskFilter = req.query.status;
-  const compliantTasks = tasks.filter((task) => task.status.toString() === taskFilter);
+  const compliantTasks = tasks.filter((task) => task.status === taskFilter);
 
   if (compliantTasks.length > 0) {
     res.status(200).json({ data: compliantTasks });
