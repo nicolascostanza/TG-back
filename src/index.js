@@ -1,9 +1,8 @@
 import express from 'express';
 import tasks from './resources/tasks';
-import adminsRouter from './resources/admins';
+import admins from './resources/admins';
 import timesheets from './resources/time-sheets';
 import projects from './resources/projects';
-import timesheets from './resources/time-sheets';
 
 const app = express();
 
