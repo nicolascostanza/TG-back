@@ -1,4 +1,6 @@
 import express from 'express';
+
+// use "require" to import JSON files
 import admins from './resources/admins';
 import projects from './resources/projects';
 import timesheets from './resources/time-sheets';
