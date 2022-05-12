@@ -4,8 +4,6 @@ import timesheets from '../data/time-sheets.json';
 
 const router = express.Router();
 
-// Get Timesheet
-
 router.get('/', (req, res) => {
   res.status(200).json({
     data: timesheets,
@@ -23,8 +21,6 @@ router.get('/:id', (req, res) => {
     res.status(404).send(`Timesheet with ID: ${timesheetsId} were not found. Valid IDs: ${validIds}`);
   }
 });
-
-// Edit - Update Timesheet
 
 router.put('/:id', (req, res) => {
   const timesheetsId = req.params.id;
@@ -61,8 +57,6 @@ router.put('/:id', (req, res) => {
     res.send(`No timesheet with the id of ${req.params.id} were found.`);
   }
 });
-
-// Delete Timesheet
 
 router.delete('/delete/:id', (req, res) => {
   const timesheetsId = req.params.id;
