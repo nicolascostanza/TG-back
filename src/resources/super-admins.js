@@ -1,7 +1,5 @@
 import express from 'express';
-
 import fs from 'fs';
-
 import superAdminsList from '../data/super-admins.json';
 
 const router = express.Router();
@@ -14,7 +12,7 @@ router.post('/postSuperAdmin', (req, res) => {
     && superAdminData.last_name
     && superAdminData.email
     && superAdminData.password
-    && superAdminData.active
+    && superAdminData.active !== ''
   ) {
     superAdminsList.push(superAdminData);
     fs.writeFile(
