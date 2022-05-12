@@ -8,7 +8,6 @@ router.get('/getAll', (req, res) => {
   res.status(200).json({ data: timesheets });
 });
 
-// return all timesheets corresponding to a specific employee
 router.get('/getByEmployee/:employeeId', (req, res) => {
   const tsEmp = req.params.employeeId;
   const ts = timesheets.filter((tSheet) => tSheet.employeeId === tsEmp);
@@ -19,7 +18,6 @@ router.get('/getByEmployee/:employeeId', (req, res) => {
   }
 });
 
-// return all timesheets corresponding to a specific project
 router.get('/getByProject/:project', (req, res) => {
   const tsProj = req.params.project;
   const ts = timesheets.filter((tSheet) => tSheet.project === tsProj);
@@ -30,7 +28,6 @@ router.get('/getByProject/:project', (req, res) => {
   }
 });
 
-// return all timesheets corresponding to a specific date
 router.get('/getByDate', (req, res) => {
   const tsDate = req.query.date;
   const ts = timesheets.filter((tSheet) => tSheet.date === tsDate);
@@ -41,7 +38,6 @@ router.get('/getByDate', (req, res) => {
   }
 });
 
-// return all approved/disapproved timesheets
 router.get('/getByStatus/:approved', (req, res) => {
   const tsAp = req.params.approved;
   const ts = timesheets.filter((tSheet) => tSheet.approved.toString() === tsAp);
@@ -52,7 +48,6 @@ router.get('/getByStatus/:approved', (req, res) => {
   }
 });
 
-// this function check if a id key is repeated
 const isRepeated = (array, data) => {
   let repeated = false;
   for (let i = 0; i < array.length; i += 1) {
@@ -63,7 +58,6 @@ const isRepeated = (array, data) => {
   return repeated;
 };
 
-// create timesheet
 router.post('/add', (req, res) => {
   const tsData = req.body;
   if (isRepeated(timesheets, tsData)) {
