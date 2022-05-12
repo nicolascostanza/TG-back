@@ -1,13 +1,10 @@
-/* eslint-disable import/no-import-module-exports */
 import express, { json } from 'express';
 
-const fileSystem = require('fs');
+import fileSystem from 'fs';
+
+import tasks from '../data/tasks.json';
 
 const router = express.Router();
-const jAdress = 'src/data/tasks.json';
-
-// use "require" to import JSON files
-const tasks = require('../data/tasks.json');
 
 router.get('/taskList', (req, res) => {
   res.status(200).json({ data: tasks });
@@ -26,7 +23,7 @@ router.get('/findById/:id', (req, res) => {
 
 router.get('/filterByStatus', (req, res) => {
   const taskFilter = req.query.status;
-  const compliantTasks = tasks.filter((task) => task.status === taskFilter);
+  const compliantTasks = tasks.filter((task) => task.status.toString() === taskFilter);
 
   if (compliantTasks.length > 0) {
     res.status(200).json({ data: compliantTasks });
@@ -68,7 +65,7 @@ router.post('/add', (req, res) => {
   if (taskData.parentProject && taskData.id && taskData.taskCreator && taskData.taskName
             && taskData.startDate) {
     tasks.push(taskData);
-    fileSystem.writeFile(jAdress, JSON.stringify(tasks), (err) => {
+    fileSystem.writeFile(tasks, JSON.stringify(tasks), (err) => {
       if (err) {
         res.status(500).send(err);
       } else {
@@ -102,7 +99,7 @@ router.put('/:id', (req, res) => {
       }
     });
 
-    fileSystem.writeFile(jAdress, JSON.stringify(tasks), (err) => {
+    fileSystem.writeFile(tasks, JSON.stringify(tasks), (err) => {
       if (err) {
         res.status(500).send(err);
       } else {
@@ -119,7 +116,7 @@ router.delete('/delete/:id', (req, res) => {
   const filteredTasks = tasks.filter((task) => task.id !== taskId);
 
   if (filteredTasks.length < tasks.length) {
-    fileSystem.writeFile(jAdress, JSON.stringify(filteredTasks), (err) => {
+    fileSystem.writeFile(tasks, JSON.stringify(filteredTasks), (err) => {
       if (err) {
         res.status(500).send(err);
       } else {
