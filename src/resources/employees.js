@@ -1,22 +1,14 @@
-// Call to Server and File System
-
-const express = require('express');
-
-const fs = require('fs');
+import express from 'express';
+import fs from 'fs';
+import employees from '../data/employees.json';
 
 const router = express.Router();
 
-const employees = require('../data/employees.json');
-
-// Get all of the list/JSON
-
 router.get('/getAll', (req, res) => {
   res.status(200).json({
-    employees,
+    data: employees,
   });
 });
-
-// Filter by Id
 
 router.get('/getById/:id', (req, res) => {
   const employeesId = req.params.id;
@@ -28,8 +20,6 @@ router.get('/getById/:id', (req, res) => {
   }
 });
 
-// Filter by Status
-
 router.get('/getByStatus/:active', (req, res) => {
   const employeesStatus = req.params.active;
   const users = employees.filter((employee) => employee.active.toString() === employeesStatus);
@@ -39,8 +29,6 @@ router.get('/getByStatus/:active', (req, res) => {
     res.send('user status not found');
   }
 });
-
-// Filter by Full Name
 
 router.get('/getByFname/', (req, res) => {
   const employeesFname = req.query.full_name;
@@ -52,8 +40,6 @@ router.get('/getByFname/', (req, res) => {
   }
 });
 
-// Filter by Gender
-
 router.get('/getByGender/:gender', (req, res) => {
   const employeesGender = req.params.gender;
   const Gndr = employees.filter((employee) => employee.gender === employeesGender);
@@ -63,8 +49,6 @@ router.get('/getByGender/:gender', (req, res) => {
     res.send('Gender not found - Insert Female or Male by parameters');
   }
 });
-
-// Put Sentence
 
 router.put('/edit/:id', (req, res) => {
   const employeeId = req.params.id;
@@ -99,8 +83,6 @@ router.put('/edit/:id', (req, res) => {
     res.send('No Employee with the id selected');
   }
 });
-
-// Delete Sentence
 
 router.delete('/delete/:id', (req, res) => {
   const employeesId = req.params.id;

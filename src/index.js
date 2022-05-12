@@ -1,8 +1,6 @@
-// use "import" to import libraries
 import express from 'express';
 
 // use "require" to import JSON files
-
 import employees from './resources/employees';
 import timesheets from './resources/time-sheets';
 import projects from './resources/projects';
