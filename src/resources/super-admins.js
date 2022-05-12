@@ -1,10 +1,11 @@
-const express = require('express');
-const fs = require('fs');
-const superAdminsList = require('../data/super-admins.json');
+import express from 'express';
+
+import fs from 'fs';
+
+import superAdminsList from '../data/super-admins.json';
 
 const router = express.Router();
 
-/// // Method Post
 router.post('/postSuperAdmin', (req, res) => {
   const superAdminData = req.body;
   if (
@@ -32,7 +33,6 @@ router.post('/postSuperAdmin', (req, res) => {
   }
 });
 
-/// // Method Edit
 router.put('/edit/:id', (req, res) => {
   const superAdminData = req.body;
   const superAdminId = req.params.id;
@@ -57,7 +57,6 @@ router.put('/edit/:id', (req, res) => {
   }
 });
 
-/// // Method Delete
 router.delete('/delete/:id', (req, res) => {
   const superAdminID = req.params.id;
   const filteredSuperAdmins = superAdminsList.filter(
@@ -80,9 +79,6 @@ router.delete('/delete/:id', (req, res) => {
   }
 });
 
-/// // Methods search by filter
-
-/// // Method: Get a Super Admin by Id
 router.get('/getById/:id', (req, res) => {
   const superAdminId = req.params.id;
   const superAdmins = superAdminsList.find(
@@ -94,7 +90,7 @@ router.get('/getById/:id', (req, res) => {
     res.send('Super Admin not found');
   }
 });
-/// Filter by First name
+
 router.get('/getByFirstName', (req, res) => {
   const superAdminFirstName = req.query.firstName;
   const filterSuperAdmin = superAdminsList.filter(
@@ -107,7 +103,6 @@ router.get('/getByFirstName', (req, res) => {
   }
 });
 
-/// Filter by Last name
 router.get('/getByLastName', (req, res) => {
   const superAdminLastName = req.query.lastName;
   const filterSuperAdmin = superAdminsList.filter(
@@ -120,7 +115,6 @@ router.get('/getByLastName', (req, res) => {
   }
 });
 
-/// Filter by Email
 router.get('/getByEmail', (req, res) => {
   const superAdminEmail = req.query.email;
   const filterSuperAdmin = superAdminsList.filter(
