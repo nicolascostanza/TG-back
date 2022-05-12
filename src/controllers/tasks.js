@@ -2,7 +2,7 @@ import express, { json } from 'express';
 
 import fileSystem from 'fs';
 
-import tasks from '../data/tasks.json';
+import tasks from '../models/tasks.json';
 
 const router = express.Router();
 
