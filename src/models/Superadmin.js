@@ -4,6 +4,10 @@ const { Schema } = mongoose;
 
 const superAdminsSchema = new Schema(
   {
+    id: {
+      type: String,
+      required: true,
+    },
     firstName: {
       type: String,
       required: true,
@@ -20,10 +24,11 @@ const superAdminsSchema = new Schema(
     password: {
       type: String,
       required: true,
+      min: 8
     },
     active: {
       type: Boolean,
-      required: false,
+      required: true,
     },
   },
 );
