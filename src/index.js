@@ -4,7 +4,7 @@ import employees from './controllers/employees';
 import timesheets from './controllers/time-sheets';
 import admins from './controllers/admins';
 import projects from './controllers/projects';
-import tasks from './controllers/tasks';
+import tasksControllers from './controllers/tasksControllers';
 import superAdminsRouter from './controllers/super-admins';
 
 mongoose.connect('mongodb+srv://AlfonsoDalix:RadiumRocket@basp-tg.amp3e.mongodb.net/BaSP-TG?retryWrites=true&w=majority');
@@ -17,7 +17,7 @@ app.use('/employees', employees);
 app.use('/superAdmin', superAdminsRouter);
 app.use('/admins', admins);
 app.use('/projects', projects);
-app.use('/tasks', tasks);
+app.use('/tasks', tasksControllers);
 app.use('/time-sheets', timesheets);
 
 app.get('/', async (req, res) => {

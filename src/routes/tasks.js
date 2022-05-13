@@ -1,9 +1,9 @@
 import express from 'express';
-import tasks from '../controllers/tasks';
+import tasksControllers from '../controllers/tasksControllers';
 
 const router = express.Router();
 
-router.get('/', tasks.getAllTasks);
-router.get('/id', tasks.getTasksById);
+router.get('/', tasksControllers.getAllTasks);
+router.get('/id', tasksControllers.getTasksById);
 
 export default router;
