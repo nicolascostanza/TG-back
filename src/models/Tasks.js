@@ -4,12 +4,10 @@ const { Schema } = mongoose;
 
 const tasksSchema = new Schema(
   {
-    parentProject: { type: String, required: true },
-    // Could taskCreator be an ID?
+    parentProject: { type: mongoose.Types.ObjectId, required: true },
     taskCreator: { type: mongoose.Types.ObjectId, required: true },
     taskName: { type: String, required: true },
     taskDescription: { type: String, required: false },
-    // assignedEmployee redudant
     assignedEmployee: [
       {
         employeeId: { type: mongoose.Types.ObjectId, required: true },
@@ -17,11 +15,10 @@ const tasksSchema = new Schema(
         employeeName: { type: String, required: true },
       },
     ],
-    // timestamps replaces startDate?
-    // startDate: { type: Date, required: true },
+    startDate: { type: Date, required: true },
     status: {
-      type: Boolean,
-      required: false,
+      type: String,
+      required: true,
       enum: ['Ready to deliver', 'Paused', 'Unassigned', 'Completed', 'In progress', 'Cancelled'],
     },
   },
