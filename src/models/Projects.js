@@ -9,32 +9,26 @@ const projectSchema = new Schema(
       type: String,
       required: true,
     },
-
     description: {
       type: String,
       required: true,
     },
-
     clientName: {
       type: String,
       required: true,
     },
-
     startDate: {
       type: Date,
       required: true,
     },
-
     endDate: {
       type: Date,
       required: false,
     },
-
     projectManager: {
       type: String,
       required: true,
     },
-
     team: [
       {
         name: { type: String, required: true },
@@ -43,12 +37,10 @@ const projectSchema = new Schema(
         rate: { type: Number, required: true },
       },
     ],
-
     /* adminId: {
       type: Number,
       required: true,
     }, */
-
   },
   { timestamps: true },
 );
