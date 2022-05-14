@@ -27,7 +27,7 @@ const superAdminsSchema = new Schema(
       required: true,
     },
   },
-  {timestamps: true}
+  { timestamps: true },
 );
 
-export default mongoose.model('Super Admin', superAdminsSchema);
+export default mongoose.model('Super-admin', superAdminsSchema);
