@@ -1,4 +1,4 @@
-import { models } from '../models/tasks.json';
+import models from '../models/tasks.json';
 
 const getAllTasks = async (req, res) => {
   try {
