@@ -4,13 +4,13 @@ const { Schema } = mongoose;
 
 const tasksSchema = new Schema(
   {
-    parentProject: { type: mongoose.Types.ObjectId, required: true },
-    taskCreator: { type: mongoose.Types.ObjectId, required: true },
+    parentProject: { type: String, required: true },
+    taskCreator: { type: String, required: true },
     taskName: { type: String, required: true },
     taskDescription: { type: String, required: false },
     assignedEmployee: [
       {
-        employeeId: { type: mongoose.Types.ObjectId, required: true },
+        employeeId: { type: String, required: true },
         employeeRole: { type: String, required: true },
         employeeName: { type: String, required: true },
       },
