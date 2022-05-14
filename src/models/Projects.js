@@ -37,10 +37,10 @@ const projectSchema = new Schema(
         rate: { type: Number, required: true },
       },
     ],
-    /* adminId: {
-      type: Number,
+    adminId: {
+      type: String,
       required: true,
-    }, */
+    },
   },
   { timestamps: true },
 );
