@@ -4,18 +4,43 @@ const { Schema } = mongoose;
 
 const tasksSchema = new Schema(
   {
-    parentProject: { type: String, required: true },
-    taskCreator: { type: String, required: true },
-    taskName: { type: String, required: true },
-    taskDescription: { type: String, required: false },
+    parentProject: {
+      type: String,
+      required: true,
+    },
+    taskCreatorId: {
+      type: String,
+      required: true,
+    },
+    taskName: {
+      type: String,
+      required: true,
+    },
+    taskDescription: {
+      type: String,
+      required: false,
+    },
     assignedEmployee: [
       {
-        employeeId: { type: String, required: true },
-        employeeRole: { type: String, required: true },
-        employeeName: { type: String, required: true },
+        employeeId: {
+          type: String,
+          required: true,
+        },
+        employeeRole: {
+          type: String,
+          required: true,
+          enum: ['DEV', 'QA', 'PM', 'TL'],
+        },
+        employeeName: {
+          type: String,
+          required: true,
+        },
       },
     ],
-    startDate: { type: Date, required: true },
+    startDate: {
+      type: Date,
+      required: true,
+    },
     status: {
       type: String,
       required: true,
