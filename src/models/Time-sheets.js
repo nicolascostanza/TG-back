@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const timeSheetsSchema = new Schema({
   employeeId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     required: true,
   },
   description: {
@@ -32,7 +32,7 @@ const timeSheetsSchema = new Schema({
     required: true,
   },
   role: {
-    type: String,
+    enum: ['DEV', 'QA', 'PM', 'TL'],
     required: true,
   },
 });
