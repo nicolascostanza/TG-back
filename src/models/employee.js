@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
-const Schem = mongoose.Schema;
+const { Schema } = mongoose;
 
-const employeeSchema = new Schem(
+const employeeSchema = new Schema(
   {
     id: {
       type: String,
