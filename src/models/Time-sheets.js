@@ -3,12 +3,8 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const timeSheetsSchema = new Schema({
-  id: {
-    type: Number,
-    required: true,
-  },
   employeeId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
   description: {
@@ -24,7 +20,7 @@ const timeSheetsSchema = new Schema({
     required: true,
   },
   hours: {
-    type: String,
+    type: Number,
     required: true,
   },
   task: {
