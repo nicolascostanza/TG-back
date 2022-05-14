@@ -1,6 +1,5 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import employees from './controllers/employees';
 import timesheets from './controllers/time-sheets';
 import admins from './controllers/admins';
 import projects from './controllers/projects';
@@ -13,7 +12,6 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use('/employees', employees);
 app.use('/superAdmin', superAdminsRouter);
 app.use('/admins', admins);
 app.use('/projects', projects);

@@ -22,6 +22,7 @@ const employeeSchema = new Schema(
     gender: {
       type: String,
       required: false,
+      enum: ['male', 'female', 'other'],
     },
     adress: {
       type: String,
