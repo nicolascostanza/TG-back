@@ -4,10 +4,15 @@ const { Schema } = mongoose;
 
 const employeeSchema = new Schema(
   {
-    fullName: {
+    firstName: {
       type: String,
       required: true,
-      min: 3,
+      minlength: 3,
+    },
+    surname: {
+      type: String,
+      required: true,
+      minlength: 3,
     },
     email: {
       type: String,
@@ -17,6 +22,7 @@ const employeeSchema = new Schema(
     gender: {
       type: String,
       required: false,
+      enum: ['male', 'female', 'other'],
     },
     adress: {
       type: String,
