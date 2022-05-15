@@ -32,6 +32,7 @@ const timeSheetsSchema = new Schema({
     required: true,
   },
   role: {
+    type: String,
     enum: ['DEV', 'QA', 'PM', 'TL'],
     required: true,
   },
