@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import timesheets from './controllers/time-sheets';
 import admins from './controllers/admins';
-import projects from './controllers/projects';
+import projects from './routes/projects';
 import tasks from './controllers/tasks';
 import superAdminsRouter from './controllers/super-admins';
 

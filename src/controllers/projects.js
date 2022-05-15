@@ -10,6 +10,8 @@ const createProject = async (req, res) => {
       endDate: req.body.endDate,
       projectManager: req.boy.projectManager,
       team: req.body.team,
+      tasks: req.body.tasks,
+      adminId: req.body.adminId,
     });
 
     const result = await project.save();
@@ -21,7 +23,7 @@ const createProject = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: 'Internal server error',
-      // data: ,
+      // data: undefined,
       error: true,
     });
   }
@@ -39,15 +41,19 @@ const deleteProject = async (req, res) => {
     if (!result) {
       return res.status(404).json({
         message: 'Project not found',
+        // data: undefined,
         error: true,
       });
     }
     return res.status(200).json({
       message: 'Project succesfully deleted',
+      // data: ?,
+      error: false,
     });
   } catch (error) {
     return res.status(500).json({
       message: 'Internal sever error',
+      // data:undefined,
       error: true,
     });
   }
