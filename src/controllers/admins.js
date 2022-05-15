@@ -2,7 +2,7 @@ import model from '../models/Admins';
 
 const getAllAdmins = async (req, res) => {
   try {
-    const allAdmins = await model.Admins.find({});
+    const allAdmins = await model.find({});
     res.status(200).json({
       msg: 'All admins are:',
       data: allAdmins,
@@ -20,7 +20,7 @@ const getAllAdmins = async (req, res) => {
 const getAdminById = async (req, res) => {
   try {
     if (req.params.id) {
-      const admin = await model.Admins.findById(req.params.id);
+      const admin = await model.findById(req.params.id);
       res.status(200).json({
         msg: `The admin with id ${req.params.id} is:`,
         data: admin,
