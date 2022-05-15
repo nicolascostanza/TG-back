@@ -4,7 +4,7 @@ import taskValidation from '../validations/tasks';
 
 const router = express.Router();
 
-router.post('/', taskValidation.creation, taskController.createTask);
+router.post('/', taskValidation.validateCreation, taskController.createTask);
 router.delete('/:id', taskController.deleteTask);
 
 export default router;

@@ -25,7 +25,7 @@ const createTask = async (req, res) => {
     });
   } catch (error) {
     return res.status(400).json({
-      message: error,
+      message: error.details[0].message,
       data: undefined,
       error: true,
     });
@@ -44,7 +44,7 @@ const deleteTask = async (req, res) => {
     const result = await TaskModel.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
-        message: 'The task hasn\'t been found',
+        message: `The task with ID: ${req.params.id} hasn't been found`,
         data: undefined,
         error: true,
       });
@@ -56,7 +56,7 @@ const deleteTask = async (req, res) => {
     });
   } catch (error) {
     return res.status(400).json({
-      message: error,
+      message: error.details[0].message,
       data: undefined,
       error: true,
     });
