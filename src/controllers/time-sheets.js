@@ -2,7 +2,7 @@ import models from '../models/Time-sheets';
 
 const getAllTs = async (req, res) => {
   try {
-    const getAllT = await models.TimeSheets.find({});
+    const getAllT = await models.find({});
     res.status(200).json({
       message: ' Data for all Time-sheets sended',
       data: getAllT,
@@ -20,7 +20,7 @@ const getAllTs = async (req, res) => {
 const getTsById = async (req, res) => {
   try {
     if (req.params.employeeId) {
-      const empId = await models.TimeSheets.findById(req.params.employeeId);
+      const empId = await models.findById(req.params.employeeId);
       res.status(200).json({
         message: `The data fot the employee whit id ${req.params.employeeId} has been sent`,
         data: empId,
