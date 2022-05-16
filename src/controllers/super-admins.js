@@ -18,7 +18,7 @@ const createSuperAdmin = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: error.details[0].message,
+      message: error,
       data: undefined,
       error: true,
     });
@@ -41,14 +41,14 @@ const deleteSuperAdmin = async (req, res) => {
         data: undefined,
         error: true,
       });
-    } return res.status(204).json({
+    } return res.status(200).json({
       message: 'The Super Admin has been successfully deleted',
       data: result,
       error: false,
     });
   } catch (error) {
     return res.status(400).json({
-      message: error.details[0].message,
+      message: error,
       data: undefined,
       error: true,
     });
