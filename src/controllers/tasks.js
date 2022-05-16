@@ -1,8 +1,8 @@
-import models from '../models/tasks.json';
+import Task from '../models/tasks.json';
 
 const getAllTasks = async (req, res) => {
   try {
-    const allTasks = await models.Task.find({});
+    const allTasks = await Task.find({});
     res.status(200).json({
       message: 'Tasks data sended',
       data: allTasks,
@@ -20,7 +20,7 @@ const getAllTasks = async (req, res) => {
 const getTasksById = async (req, res) => {
   try {
     if (req.params.id) {
-      const task = await models.Task.findById(req.params.id);
+      const task = await Task.findById(req.params.id);
       res.status(200).json({
         message: 'Filtered tasks by id has been sent',
         data: task,
