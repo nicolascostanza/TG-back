@@ -4,7 +4,7 @@ const validateCreation = (req, res, next) => {
   const superAdminValidation = Joi.object({
     firstName: Joi.string().min(1).max(50).required(),
     lastName: Joi.string().min(1).max(50).required(),
-    email: Joi.string().lowercase().required(),
+    email: Joi.string().email().lowercase().required(),
     password: Joi.string().alphanum().required(),
     active: Joi.boolean().required(),
   });

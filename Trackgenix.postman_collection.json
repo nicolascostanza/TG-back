@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b3c0b092-bbc4-40cd-929f-49800dc0a01d",
+		"_postman_id": "47a4aa99-8e78-44c5-9312-437d6cac1f8b",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -19,7 +19,35 @@
 		},
 		{
 			"name": "Super-admin",
-			"item": []
+			"item": [
+				{
+					"name": "POST Super Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"firstName\": \"Jerry\",\r\n\"lastName\": \"Seinfield\",\r\n\"email\": \"1231320@yandex.ru\",\r\n\"password\": \"15shdjsh987\",\r\n\"active\": \"false\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/Superadmin",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Superadmin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Time-sheets",
