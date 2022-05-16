@@ -11,7 +11,6 @@ const getAllAdmins = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       msg: 'There was an error',
-      data: undefined,
       error: true,
     });
   }
@@ -35,7 +34,6 @@ const getAdminById = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       msg: 'There was an error',
-      data: undefined,
       error: true,
     });
   }
