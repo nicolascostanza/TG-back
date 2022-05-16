@@ -7,13 +7,7 @@ const createTask = async (req, res) => {
       taskCreatorId: req.body.taskCreatorId,
       taskName: req.body.taskName,
       taskDescription: req.body.taskDescription,
-      assignedEmployee: [
-        {
-          employeeId: req.body.assignedEmployee.employeeId,
-          employeeRole: req.body.assignedEmployee.employeeRole,
-          employeeName: req.body.assignedEmployee.employeeName,
-        },
-      ],
+      assignedEmployee: req.body.assignedEmployee,
       startDate: req.body.startDate,
       status: req.body.status,
     });
@@ -25,7 +19,7 @@ const createTask = async (req, res) => {
     });
   } catch (error) {
     return res.status(400).json({
-      message: error.details[0].message,
+      message: error,
       data: undefined,
       error: true,
     });
@@ -49,14 +43,14 @@ const deleteTask = async (req, res) => {
         error: true,
       });
     }
-    return res.status(204).json({
+    return res.status(200).json({
       message: 'The task has been successfully deleted',
       data: result,
       error: false,
     });
   } catch (error) {
     return res.status(400).json({
-      message: error.details[0].message,
+      message: error,
       data: undefined,
       error: true,
     });
