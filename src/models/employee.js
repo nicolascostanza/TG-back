@@ -17,12 +17,11 @@ const employeeSchema = new Schema(
     email: {
       type: String,
       required: true,
-      lowercase: true,
     },
     gender: {
       type: String,
       required: false,
-      enum: ['male', 'female', 'other'],
+      enum: ['Male', 'Female', 'Other'],
     },
     adress: {
       type: String,
@@ -35,12 +34,12 @@ const employeeSchema = new Schema(
     password: {
       type: String,
       required: true,
-      min: 8,
+      minlength: 8,
     },
     phone: {
-      type: Number,
+      type: String,
       required: false,
-      min: 10,
+      minlength: 9,
     },
     active: {
       type: Boolean,
