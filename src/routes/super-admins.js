@@ -1,6 +1,6 @@
 import express from 'express';
 import superAdminControllers from '../controllers/super-admins';
-import superAdminValidation from '../validations/super-admins'; 
+import superAdminValidation from '../validations/super-admins';
 
 const router = express.Router();
 

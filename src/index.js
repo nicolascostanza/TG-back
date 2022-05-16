@@ -5,7 +5,7 @@ import timesheets from './controllers/time-sheets';
 import admins from './controllers/admins';
 import projects from './controllers/projects';
 import tasks from './controllers/tasks';
-import superAdminsRouter from './controllers/super-admins';
+import superAdminsRouter from './routes/super-admins';
 
 mongoose.connect('mongodb+srv://AlfonsoDalix:RadiumRocket@basp-tg.amp3e.mongodb.net/BaSP-TG?retryWrites=true&w=majority');
 
