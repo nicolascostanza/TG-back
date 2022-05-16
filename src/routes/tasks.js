@@ -1,10 +1,10 @@
 import express from 'express';
-import taskController from '../controllers/tasks';
-import taskValidation from '../validations/tasks';
+import tasksControllers from '../controllers/tasks';
+import tasksValidations from '../validations/tasks';
 
 const router = express.Router();
 
-router.post('/', taskValidation.validateCreation, taskController.createTask);
-router.delete('/:id', taskController.deleteTask);
+router.post('/', tasksValidations.validateCreation, tasksControllers.createTask);
+router.delete('/:id', tasksControllers.deleteTask);
 
 export default router;
