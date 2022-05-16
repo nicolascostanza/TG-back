@@ -31,12 +31,6 @@ const createProject = async (req, res) => {
 
 const deleteProject = async (req, res) => {
   try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        message: 'Missing id parameter',
-        error: true,
-      });
-    }
     const result = await Project.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
