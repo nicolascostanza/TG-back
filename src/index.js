@@ -6,6 +6,7 @@ import admins from './controllers/admins';
 import projects from './controllers/projects';
 import tasksControllers from './controllers/tasks';
 import superAdminsRouter from './controllers/super-admins';
+import router from './routes';
 
 mongoose.connect('mongodb+srv://AlfonsoDalix:RadiumRocket@basp-tg.amp3e.mongodb.net/BaSP-TG?retryWrites=true&w=majority');
 
@@ -13,6 +14,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(router);
 app.use('/employees', employees);
 app.use('/superAdmin', superAdminsRouter);
 app.use('/admins', admins);
