@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a377f468-90f5-4427-ab0e-85b573d40c49",
+		"_postman_id": "93769384-5efa-47e5-81e9-5e0ebb6c1603",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -69,7 +69,58 @@
 		},
 		{
 			"name": "Super-admin",
-			"item": []
+			"item": [
+				{
+					"name": "POST Super Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Jake\",\r\n    \"lastName\": \"Bugg\",\r\n    \"email\": \"jakeb@yahoo.com\",\r\n    \"password\": \"893asd456\",\r\n    \"active\": \"false\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/super-admins",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"super-admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Super Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3000/super-admins/6282a38610827d437b9e685e",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"super-admins",
+								"6282a38610827d437b9e685e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Time-sheets",
