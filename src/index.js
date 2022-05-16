@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import timesheets from './controllers/time-sheets';
+import timesheets from './routes/time-sheets';
 import admins from './controllers/admins';
 import projects from './controllers/projects';
 import tasks from './controllers/tasks';

@@ -10,7 +10,7 @@ const getAllTs = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: error.details[0].message,
+      message: error,
       data: undefined,
       error: true,
     });
@@ -21,11 +21,13 @@ const getTsById = async (req, res) => {
   try {
     if (req.params.id) {
       const empId = await models.findById(req.params.id);
-      res.status(200).json({
-        message: `The data fot the employee whit id ${req.id} has been sent`,
-        data: empId,
-        error: false,
-      });
+      if (empId) {
+        res.status(200).json({
+          message: `The data fot the employee whit id ${req.params.id} has been sent`,
+          data: empId,
+          error: false,
+        });
+      }
     } else {
       res.status(400).json({
         message: `There are not employee whit id ${req.params.id}`,
@@ -34,8 +36,8 @@ const getTsById = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(500)({
-      message: error.details[0].message,
+    res.status(500).json({
+      message: error,
       data: undefined,
       error: true,
     });
