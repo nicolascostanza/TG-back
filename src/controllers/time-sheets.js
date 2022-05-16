@@ -5,7 +5,7 @@ const getAllTs = async (req, res) => {
     const getAllT = await models.find({});
     if (getAllT.length <= 0) {
       return res.status(400).json({
-        message: ' No Time-sheets f',
+        message: ' No Time-sheets found',
         data: null,
         error: true,
       });
@@ -55,7 +55,39 @@ const getTsById = async (req, res) => {
   }
 };
 
+const updateTimesheet = async (req, res) => {
+  try {
+    if (!req.params.id) {
+      return res.status(400).json({
+        success: false,
+        msg: 'Missing id',
+      });
+    }
+    const result = await models.IdUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
+    );
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        msg: 'The Timesheet has not been found',
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      msg: 'There was an error',
+    });
+  }
+};
+
 export default {
   getAllTs,
   getTsById,
+  updateTimesheet,
 };
