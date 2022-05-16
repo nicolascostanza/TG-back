@@ -1,8 +1,10 @@
 import express from 'express';
-import projectsRouter from './projects';
+import tasks from './tasks';
+import projects from './projects';
 
 const router = express.Router();
 
-router.use('/projects', projectsRouter);
+router.use('/tasks', tasks);
+router.use('/projects', projects);
 
 export default router;
