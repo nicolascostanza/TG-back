@@ -18,7 +18,7 @@ const createTask = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(400).json({
+    return res.status(500).json({
       message: error,
       data: undefined,
       error: true,
@@ -28,13 +28,6 @@ const createTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        message: 'Missing id parameter',
-        data: undefined,
-        error: true,
-      });
-    }
     const result = await Task.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
@@ -49,7 +42,7 @@ const deleteTask = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(400).json({
+    return res.status(500).json({
       message: error,
       data: undefined,
       error: true,
