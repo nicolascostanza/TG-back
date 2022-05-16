@@ -1,11 +1,11 @@
-import models from '../models/Time-sheets';
+import TimeSheets from '../models/Time-sheets';
 
 const getAllTs = async (req, res) => {
   try {
-    const getAllT = await models.find({});
+    const getAllT = await TimeSheets.find({});
     if (getAllT.length <= 0) {
       return res.status(400).json({
-        message: ' No Time-sheets f',
+        message: ' No Time-sheets found',
         data: null,
         error: true,
       });
@@ -33,7 +33,7 @@ const getTsById = async (req, res) => {
         error: false,
       });
     }
-    const empId = await models.findById(req.params.id);
+    const empId = await TimeSheets.findById(req.params.id);
     if (empId) {
       return res.status(200).json({
         message: `The data fot the employee whit id ${req.params.id} has been sent`,
