@@ -29,12 +29,6 @@ const createEmployee = async (req, res) => {
 
 const deleteEmployee = async (req, res) => {
   try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        msg: 'missing Id param',
-      });
-    }
-
     const result = await Employee.findByIdAndDelete(req.params.id);
 
     if (!result) {
