@@ -2,7 +2,6 @@ import Employee from '../models/employee';
 
 const createEmployee = async (req, res) => {
   try {
-    console.log(req.body);
     const employee = new Employee({
       firstName: req.body.firstName,
       surname: req.body.surname,
