@@ -30,7 +30,7 @@ const createEmployee = async (req, res) => {
 const deleteEmployee = async (req, res) => {
   try {
     if (!req.params.id) {
-      res.status(400).json({
+      return res.status(400).json({
         msg: 'missing Id param',
       });
     }
