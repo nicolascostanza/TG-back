@@ -6,6 +6,6 @@ const router = express.Router();
 
 router
   .post('/', employeeValidations.creationValidation, employeeControllers.createEmployee)
-  .delete('/', employeeControllers.deleteEmployee);
+  .delete('/:id', employeeControllers.deleteEmployee);
 
 export default router;
