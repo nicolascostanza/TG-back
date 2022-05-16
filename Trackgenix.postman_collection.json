@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ffc81c74-d8fb-4ac2-a7d9-fcbd56d1712d",
+		"_postman_id": "a377f468-90f5-4427-ab0e-85b573d40c49",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -77,7 +77,56 @@
 		},
 		{
 			"name": "Tasks",
-			"item": []
+			"item": [
+				{
+					"name": "POST tasks",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"parentProject\": \"752577979\",\r\n    \"taskCreatorId\": \"661268479\",\r\n    \"taskName\": \"In.mp3\",\r\n    \"taskDescription\": \"Other injury due to other accident to sailboat\",\r\n    \"assignedEmployee\": [\r\n        {\r\n            \"employeeId\": \"399128593\",\r\n            \"employeeRole\": \"PM\",\r\n            \"employeeName\": \"Petronia Duddan\"\r\n        }\r\n    ],\r\n    \"startDate\": \"4/24/2022\",\r\n    \"status\": \"Ready to deliver\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE tasks",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 import router from './routes';
 import timesheets from './controllers/time-sheets';
 import admins from './controllers/admins';
-import tasks from './controllers/tasks';
 import superAdminsRouter from './controllers/super-admins';
 
 const URL = 'mongodb+srv://AlfonsoDalix:RadiumRocket@basp-tg.amp3e.mongodb.net/BaSP-TG?retryWrites=true&w=majority';
@@ -14,7 +13,6 @@ app.use(express.json());
 app.use(router);
 app.use('/superAdmin', superAdminsRouter);
 app.use('/admins', admins);
-app.use('/tasks', tasks);
 app.use('/time-sheets', timesheets);
 
 app.get('/', async (req, res) => {
