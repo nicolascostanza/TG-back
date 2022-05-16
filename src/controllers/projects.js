@@ -59,7 +59,44 @@ const deleteProject = async (req, res) => {
   }
 };
 
+const updateProject = async (req, res) => {
+  try {
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing id parameter',
+        data: undefined,
+        error: true,
+      });
+    }
+    const result = await Project.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
+    );
+
+    if (!result) {
+      return res.status(404).json({
+        message: 'Project not found',
+        data: undefined,
+        error: true,
+      });
+    }
+    return res.status(202).json({
+      message: 'Project succesfully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
 export default {
   createProject,
   deleteProject,
+  updateProject,
 };
