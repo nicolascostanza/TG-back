@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const tasksSchema = new Schema(
+const taskSchema = new Schema(
   {
     parentProject: {
       type: String,
@@ -50,4 +50,4 @@ const tasksSchema = new Schema(
   { timestamps: true },
 );
 
-export default mongoose.model('Tasks', tasksSchema);
+export default mongoose.model('Task', taskSchema);
