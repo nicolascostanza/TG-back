@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9f083637-1647-4774-9383-4ef0846d383e",
+		"_postman_id": "c54fcc55-7cde-42b9-8c54-02d8b09af63b",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -558,41 +558,40 @@
 		{
 			"name": "Tasks",
 			"item": [
-        {
+				{
 					"name": "Get all",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/task/",
+							"raw": "localhost:3000/tasks/",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"task",
+								"tasks",
 								""
 							]
 						}
 					},
 					"response": []
 				},
-        {
+				{
 					"name": "Get by ID",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/task/getById/",
+							"raw": "http://localhost:3000/tasks/6281f3e9c46e43281c20d604",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"task",
-								"getById",
-								""
+								"tasks",
+								"6281f3e9c46e43281c20d604"
 							]
 						}
 					},
