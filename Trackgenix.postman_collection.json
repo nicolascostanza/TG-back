@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "054cd26d-c591-4dca-9696-3fa515459a76",
+		"_postman_id": "9f083637-1647-4774-9383-4ef0846d383e",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,7 +9,7 @@
 			"name": "Employees",
 			"item": [
 				{
-					"name": "Add Employee",
+					"name": "POST Employee",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -44,7 +44,7 @@
 					"response": []
 				},
 				{
-					"name": "delete employee",
+					"name": "DELETE employee",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -69,7 +69,7 @@
 			"name": "Projects",
 			"item": [
 				{
-					"name": "Get by ID",
+					"name": "GET by ID Projects",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -89,7 +89,7 @@
 					"response": []
 				},
 				{
-					"name": "Get all",
+					"name": "GET all Projects",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -155,12 +155,80 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "PUT  Projects",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"Juan Moreira\",\r\n        \"description\": \"dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis\",\r\n        \"clientName\": \"Gaylor Geikie\",\r\n        \"startDate\": \"03/18/2021\",\r\n        \"endDate\": \"05/02/2021\",\r\n        \"projectManager\": \"Gaylor Renbold\",\r\n        \"team\": [\r\n            {\r\n                \"id\": \"60\",\r\n                \"name\": \"Gaylor Renbold\",\r\n                \"role\": \"PM\",\r\n                \"hours\": 34,\r\n                \"rate\": 49\r\n            },\r\n            {\r\n                \"id\": \"61\",\r\n                \"name\": \"Clea Nolli\",\r\n                \"role\": \"DEV\",\r\n                \"hours\": 89,\r\n                \"rate\": 42\r\n            },\r\n            {\r\n                \"id\": \"62\",\r\n                \"name\": \"Mandie Ede\",\r\n                \"role\": \"TL\",\r\n                \"hours\": 55,\r\n                \"rate\": 40\r\n            },\r\n            {\r\n                \"id\": \"63\",\r\n                \"name\": \"Bordie Garratt\",\r\n                \"role\": \"QA\",\r\n                \"hours\": 65,\r\n                \"rate\": 5\r\n            },\r\n            {\r\n                \"id\": \"64\",\r\n                \"name\": \"Arlen Westrope\",\r\n                \"role\": \"QA\",\r\n                \"hours\": 22,\r\n                \"rate\": 23\r\n            },\r\n            {\r\n                \"id\": \"65\",\r\n                \"name\": \"Sukey Elen\",\r\n                \"role\": \"DEV\",\r\n                \"hours\": 13,\r\n                \"rate\": 5\r\n            },\r\n            {\r\n                \"id\": \"66\",\r\n                \"name\": \"Dilan Finci\",\r\n                \"role\": \"DEV\",\r\n                \"hours\": 49,\r\n                \"rate\": 27\r\n            }\r\n        ],\r\n        \"tasks\": [\r\n            {\r\n                \"id\": \"091\",\r\n                \"name\": \"InterdumMaurisNon.tiff\",\r\n                \"description\": \"Other specified rickettsioses\"\r\n            }\r\n        ],\r\n        \"adminId\": \"87653\"\r\n    }\r\n  ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/projects/62818c9c0377ea4cde34d788",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"projects",
+								"62818c9c0377ea4cde34d788"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "Admins",
 			"item": [
+				{
+					"name": "GET all Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/admins",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET by ID Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/admins/6282dd923cddb6f5aeb3908c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admins",
+								"6282dd923cddb6f5aeb3908c"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "POST-Admins",
 					"request": {
@@ -208,20 +276,15 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Super-admin",
-			"item": [
+				},
 				{
-					"name": "POST Super Admin",
+					"name": "PUT Admins",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Jake\",\r\n    \"lastName\": \"Bugg\",\r\n    \"email\": \"jakeb@yahoo.com\",\r\n    \"password\": \"893asd456\",\r\n    \"active\": \"false\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -229,13 +292,48 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/super-admins",
+							"raw": "http://localhost:3000/admins/",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"super-admins"
+								"admins",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Super-admin",
+			"item": [
+				{
+					"name": "PUT Super Admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"John\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/super-admins/6283b9ed3237406f270f9b38",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"super-admins",
+								"6283b9ed3237406f270f9b38"
 							]
 						}
 					},
@@ -265,21 +363,32 @@
 					"response": []
 				},
 				{
-					"name": "PUT Super Admin",
+					"name": "GET all Super Admin",
 					"request": {
-						"method": "PUT",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Jake\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:3000/super-admins/6283b9ed3237406f270f9b38",
+							"raw": "http://localhost:3000/super-admins",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"super-admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET by ID Super Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/super-admins/6283b9ed3237406f270f9b38",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -287,6 +396,35 @@
 							"path": [
 								"super-admins",
 								"6283b9ed3237406f270f9b38"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Super Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Luke\",\r\n    \"lastName\": \"Skywalker\",\r\n    \"email\": \"lukesky@yandex.com\",\r\n    \"password\": \"123asd456\",\r\n    \"active\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/super-admins/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"super-admins",
+								""
 							]
 						}
 					},
@@ -300,10 +438,28 @@
 				{
 					"name": "POST Timesheet",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employeeId\": \"6321\",\r\n    \"description\": \"some description\",\r\n    \"project\": \"sample\",\r\n    \"date\": \"2022-04-24T03:00:00.000Z\",\r\n    \"hours\": 12,\r\n    \"task\": \"Task\",\r\n    \"approved\": true,\r\n    \"role\": \"PM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:3000/time-sheets/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								""
+							]
 						}
 					},
 					"response": []
@@ -367,6 +523,35 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "PUT Timesheet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "        {\r\n            \"employeeId\": \"6321\",\r\n            \"description\": \"some description\",\r\n            \"project\": \"sample\",\r\n            \"date\": \"2022-04-24T03:00:00.000Z\",\r\n            \"hours\": 12,\r\n            \"task\": \"Task\",\r\n            \"approved\": true,\r\n            \"role\": \"PM\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/6282e2ee3baf4dcc03dbd4cd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								"6282e2ee3baf4dcc03dbd4cd"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -416,6 +601,35 @@
 							"path": [
 								"tasks",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT tasks",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"parentProject\": \"752577123\",\r\n    \"taskCreatorId\": \"661268479\",\r\n    \"taskName\": \"In.mp3\",\r\n    \"taskDescription\": \"Other injury due to other accident to sailboat\",\r\n    \"assignedEmployee\": [\r\n        {\r\n            \"employeeId\": \"399128593\",\r\n            \"employeeRole\": \"PM\",\r\n            \"employeeName\": \"Petronia Duddan\"\r\n        }\r\n    ],\r\n    \"startDate\": \"4/24/2022\",\r\n    \"status\": \"Ready to deliver\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/tasks/6282cfe9758ac117b80bbc26",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks",
+								"6282cfe9758ac117b80bbc26"
 							]
 						}
 					},
