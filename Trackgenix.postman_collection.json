@@ -5,10 +5,50 @@
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
+    {
 			"name": "Employees",
 			"item": [
+        {
+					"name": "GET employee by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/employees/6281bc1345af8e621810ea07",
+              "protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employees",
+								"6281bc1345af8e621810ea07"
+							]
+						}
+					},
+					"response": []
+				},
 				{
+          "name": "GET all employees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/employees/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employees",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+        {
 					"name": "POST Employee",
 					"request": {
 						"method": "POST",
@@ -30,7 +70,8 @@
 							],
 							"port": "3000",
 							"path": [
-								"employee"
+                "employee",
+								""
 							],
 							"query": [
 								{
