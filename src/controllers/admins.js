@@ -7,7 +7,7 @@ const createAdmin = async (req, res) => {
       lastName: req.body.lastName,
       email: req.body.email,
       password: req.body.password,
-
+      active: req.body.active,
     });
     const result = await admin.save();
     return res.status(201).json({
@@ -16,8 +16,39 @@ const createAdmin = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
       message: 'Internal server Error',
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
+const deleteAdmin = async (req, res) => {
+  try {
+    if (!req.params.id) {
+      return res.status(400).json({
+        message: 'Missing Id parameter',
+        data: undefined,
+        error: true,
+      });
+    }
+    const result = await Admins.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({
+        message: `The Admin with id ${req.params.id} has nor been found`,
+        data: undefined,
+        error: true,
+      });
+    } return res.status(204).json({
+      message: 'The Admin has been successfully deleted',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: 'Internal server Error',
+      data: undefined,
       error: true,
     });
   }
@@ -25,4 +56,5 @@ const createAdmin = async (req, res) => {
 
 export default {
   createAdmin,
+  deleteAdmin,
 };
