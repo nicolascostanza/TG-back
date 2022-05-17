@@ -12,7 +12,6 @@ const createTimeSheet = async (req, res) => {
       approved: req.body.approved,
       role: req.body.role,
     });
-
     const result = await timeSheet.save();
     return res.status(201).json({
       msg: 'Timesheet has been successfuly created',

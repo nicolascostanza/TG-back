@@ -293,6 +293,46 @@
 		{
 			"name": "Tasks",
 			"item": [
+        {
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/task/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"task",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+        {
+					"name": "Get by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/task/getById/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"task",
+								"getById",
+								""
+							]
+						}
+					},
+					"response": []
+				}, 
 				{
 					"name": "POST tasks",
 					"request": {
