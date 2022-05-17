@@ -5,17 +5,17 @@
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
+    {
 			"name": "Employees",
 			"item": [
-				{
+        {
 					"name": "GET employee by Id",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:3000/employee/6281bc1345af8e621810ea07",
-							"protocol": "http",
+              "protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -29,9 +29,64 @@
 					"response": []
 				},
 				{
-					"name": "GET all employees",
+          "name": "GET all employees",
 					"request": {
 						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/employee/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employee",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+        {
+          "name": "Add Employee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Bert\",\r\n    \"surname\": \"Sonson\",\r\n    \"email\": \"bso@trackgenix.com\",\r\n    \"gender\": \"Other\",\r\n    \"adress\": \"Potpurri 87\",\r\n    \"dob\": \"9-20-1990\",\r\n    \"password\": \"brownies96\",\r\n    \"phone\": \"987654321\",\r\n     \"active\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/employee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+                "employee",
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+        {
+          "name": "delete employee",
+					"request": {
+						"method": "DELETE",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:3000/employee/",
@@ -54,7 +109,46 @@
 			"name": "Projects",
 			"item": [
 				{
-					"name": "POST-Projects",
+					"name": "Get by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/projects/id/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"projects",
+								"id",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/projects/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"projects",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Projects",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -83,7 +177,7 @@
 					"response": []
 				},
 				{
-					"name": "DELETE- Projects",
+					"name": "DELETE Projects",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -106,11 +200,102 @@
 		},
 		{
 			"name": "Admins",
-			"item": []
+			"item": [
+				{
+					"name": "GET all Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/admins",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET by ID Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/admins/6282dd923cddb6f5aeb3908y",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admins",
+								"6282dd923cddb6f5aeb3908y"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Super-admin",
-			"item": []
+			"item": [
+				{
+					"name": "POST Super Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Jake\",\r\n    \"lastName\": \"Bugg\",\r\n    \"email\": \"jakeb@yahoo.com\",\r\n    \"password\": \"893asd456\",\r\n    \"active\": \"false\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/super-admins",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"super-admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Super Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3000/super-admins/6282a38610827d437b9e685e",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"super-admins",
+								"6282a38610827d437b9e685e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Time-sheets",
