@@ -1,15 +1,15 @@
 import Joi from 'joi';
 
-const TimesheetValidation = (req, res, next) => {
+const TimesheetValidationUp = (req, res, next) => {
   const TsObJ = Joi.object({
-    employeeId: Joi.string().required(),
+    employeeId: Joi.string(),
     description: Joi.string().min(3),
-    project: Joi.string().min(3).required(),
-    date: Joi.date().required(),
-    hours: Joi.number().min(1).required(),
-    task: Joi.string().min(3).required(),
-    approved: Joi.bool().required(),
-    role: Joi.string().valid('DEV', 'QA', 'PM', 'TL').required(),
+    project: Joi.string().min(3),
+    date: Joi.date(),
+    hours: Joi.number().min(1),
+    task: Joi.string().min(3),
+    approved: Joi.bool(),
+    role: Joi.string().valid('DEV', 'QA', 'PM', 'TL'),
   });
   const valid = TsObJ.validate(req.body);
   if (valid.error) {
@@ -22,5 +22,5 @@ const TimesheetValidation = (req, res, next) => {
 };
 
 export default {
-  TimesheetValidation,
+  TimesheetValidationUp,
 };
