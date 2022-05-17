@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a1916fb8-ffae-4367-85fe-6bf3ed3e31ef",
+		"_postman_id": "6af01d39-1d60-4db1-a1f9-788296f8294a",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -161,6 +161,45 @@
 		{
 			"name": "Admins",
 			"item": [
+				{
+					"name": "GET all Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/admins",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET by ID Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/admins/6282dd923cddb6f5aeb3908c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admins",
+								"6282dd923cddb6f5aeb3908c"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "POST-Admins",
 					"request": {
@@ -456,6 +495,35 @@
 							"path": [
 								"tasks",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT tasks",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"parentProject\": \"752577123\",\r\n    \"taskCreatorId\": \"661268479\",\r\n    \"taskName\": \"In.mp3\",\r\n    \"taskDescription\": \"Other injury due to other accident to sailboat\",\r\n    \"assignedEmployee\": [\r\n        {\r\n            \"employeeId\": \"399128593\",\r\n            \"employeeRole\": \"PM\",\r\n            \"employeeName\": \"Petronia Duddan\"\r\n        }\r\n    ],\r\n    \"startDate\": \"4/24/2022\",\r\n    \"status\": \"Ready to deliver\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/tasks/6282cfe9758ac117b80bbc26",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks",
+								"6282cfe9758ac117b80bbc26"
 							]
 						}
 					},
