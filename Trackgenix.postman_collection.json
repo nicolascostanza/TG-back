@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d6c5bb78-cdb3-4091-8282-0b22296bebf2",
+		"_postman_id": "9f083637-1647-4774-9383-4ef0846d383e",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -312,13 +312,13 @@
 			"name": "Super-admin",
 			"item": [
 				{
-					"name": "POST Super Admin",
+					"name": "PUT Super Admin",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Jake\",\r\n    \"lastName\": \"Bugg\",\r\n    \"email\": \"jakeb@yahoo.com\",\r\n    \"password\": \"893asd456\",\r\n    \"active\": \"false\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"John\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -326,13 +326,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/super-admins",
+							"raw": "localhost:3000/super-admins/6283b9ed3237406f270f9b38",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"super-admins"
+								"super-admins",
+								"6283b9ed3237406f270f9b38"
 							]
 						}
 					},
@@ -386,7 +387,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/super-admins/6283b76b3237406f270f9b34",
+							"raw": "http://localhost:3000/super-admins/6283b9ed3237406f270f9b38",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -394,7 +395,36 @@
 							"port": "3000",
 							"path": [
 								"super-admins",
-								"6283b76b3237406f270f9b34"
+								"6283b9ed3237406f270f9b38"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Super Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Luke\",\r\n    \"lastName\": \"Skywalker\",\r\n    \"email\": \"lukesky@yandex.com\",\r\n    \"password\": \"123asd456\",\r\n    \"active\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/super-admins/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"super-admins",
+								""
 							]
 						}
 					},
