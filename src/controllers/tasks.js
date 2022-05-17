@@ -18,7 +18,7 @@ const createTask = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(400).json({
+    return res.status(500).json({
       message: error,
       data: undefined,
       error: true,
@@ -28,13 +28,6 @@ const createTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        message: 'Missing id parameter',
-        data: undefined,
-        error: true,
-      });
-    }
     const result = await Task.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
@@ -49,7 +42,35 @@ const deleteTask = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(400).json({
+    return res.status(500).json({
+      message: error,
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
+const updateTask = async (req, res) => {
+  try {
+    const result = await Task.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
+    );
+    if (!result) {
+      return res.status(404).json({
+        message: `The task with ID: ${req.params.id} hasn't been found`,
+        data: undefined,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Task has been updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
       message: error,
       data: undefined,
       error: true,
@@ -60,4 +81,5 @@ const deleteTask = async (req, res) => {
 export default {
   createTask,
   deleteTask,
+  updateTask,
 };
