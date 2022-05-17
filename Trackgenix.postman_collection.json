@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "dac0ad78-5301-477b-a1a2-252a9f00a953",
+		"_postman_id": "0ffb7689-1825-42cb-a428-8b2f591f448d",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -259,7 +259,36 @@
 		},
 		{
 			"name": "Time-sheets",
-			"item": []
+			"item": [
+				{
+					"name": "POST Timesheet",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Timesheet",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/628332503b43ee606c167147",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								"628332503b43ee606c167147"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Tasks",

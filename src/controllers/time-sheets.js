@@ -1,6 +1,6 @@
 import Tsheet from '../models/Time-sheets';
 
-const createTimeSheet  = async (req, res) => {
+const createTimeSheet = async (req, res) => {
   try {
     const timeSheet = new Tsheet({
       employeeId: req.body.employeeId,
