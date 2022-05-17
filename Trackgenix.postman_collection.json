@@ -79,7 +79,8 @@
 							],
 							"port": "3000",
 							"path": [
-								"admins"
+								"admins",
+                ""
 							]
 						}
 					},
@@ -98,7 +99,9 @@
 							],
 							"port": "3000",
 							"path": [
-								"admins"
+								"admins",
+                "id",
+                ""
 							]
 						}
 					},

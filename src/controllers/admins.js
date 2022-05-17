@@ -1,16 +1,16 @@
-import model from '../models/Admins';
+import Admin from '../models/Admins';
 
 const getAllAdmins = async (req, res) => {
+  const allAdmins = await Admin.find({});
   try {
-    const allAdmins = await model.find({});
-    res.status(200).json({
+    return res.status(200).json({
       msg: 'All admins are:',
       data: allAdmins,
       error: false,
     });
   } catch (error) {
-    res.status(500).json({
-      msg: 'There was an error',
+    return res.status(500).json({
+      msg: error,
       error: true,
     });
   }
@@ -18,9 +18,9 @@ const getAllAdmins = async (req, res) => {
 
 const getAdminById = async (req, res) => {
   try {
-    if (req.params.id) {
-      const admin = await model.findById(req.params.id);
-      res.status(200).json({
+    const admin = await Admin.findById(req.params.id);
+    if (admin) {
+      return res.status(200).json({
         msg: `The admin with id ${req.params.id} is:`,
         data: admin,
         error: false,
@@ -33,7 +33,7 @@ const getAdminById = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      msg: 'There was an error',
+      msg: error,
       error: true,
     });
   }
