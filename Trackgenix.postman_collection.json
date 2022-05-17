@@ -1,10 +1,6 @@
 {
 	"info": {
-<<<<<<< HEAD
-		"_postman_id": "35e9ed46-b99e-4052-8810-0ca87922d162",
-=======
 		"_postman_id": "054cd26d-c591-4dca-9696-3fa515459a76",
->>>>>>> 0d236872c7a297be4c8331a97021c0a14364bea6
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -71,9 +67,6 @@
 		},
 		{
 			"name": "Projects",
-<<<<<<< HEAD
-			"item": []
-=======
 			"item": [
 				{
 					"name": "Get by ID",
@@ -164,7 +157,6 @@
 					"response": []
 				}
 			]
->>>>>>> 0d236872c7a297be4c8331a97021c0a14364bea6
 		},
 		{
 			"name": "Admins",
@@ -278,9 +270,6 @@
 			"name": "Time-sheets",
 			"item": [
 				{
-<<<<<<< HEAD
-					"name": "GetAll time-sheet",
-=======
 					"name": "POST Timesheet",
 					"request": {
 						"method": "GET",
@@ -313,7 +302,6 @@
 				},
 				{
 					"name": "GET All Timesheet",
->>>>>>> 0d236872c7a297be4c8331a97021c0a14364bea6
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -333,20 +321,12 @@
 					"response": []
 				},
 				{
-<<<<<<< HEAD
-					"name": "GetById time-sheet",
-=======
 					"name": "GET ByID",
->>>>>>> 0d236872c7a297be4c8331a97021c0a14364bea6
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-<<<<<<< HEAD
-							"raw": "http://localhost:3000/time-sheets/62832da494417525e9b7b0c2",
-=======
 							"raw": "http://localhost:3000/time-sheets/6282e2ee3baf4dcc03dbd4cd",
->>>>>>> 0d236872c7a297be4c8331a97021c0a14364bea6
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -354,21 +334,20 @@
 							"port": "3000",
 							"path": [
 								"time-sheets",
-<<<<<<< HEAD
-								"62832da494417525e9b7b0c2"
+								"6282e2ee3baf4dcc03dbd4cd"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "PUT Timesheet",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "        {\r\n            \"employeeId\": \"4321\",\r\n            \"description\": \"some description\",\r\n            \"project\": \"sample\",\r\n            \"date\": \"2022-04-24T03:00:00.000Z\",\r\n            \"hours\": 12,\r\n            \"task\": \"Task\",\r\n            \"approved\": true,\r\n            \"role\": \"PM\"\r\n        }",
+							"raw": "        {\r\n            \"employeeId\": \"6321\",\r\n            \"description\": \"some description\",\r\n            \"project\": \"sample\",\r\n            \"date\": \"2022-04-24T03:00:00.000Z\",\r\n            \"hours\": 12,\r\n            \"task\": \"Task\",\r\n            \"approved\": true,\r\n            \"role\": \"PM\"\r\n        }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -376,7 +355,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/time-sheets/62832da494417525e9b7b0c2",
+							"raw": "http://localhost:3000/time-sheets/6282e2ee3baf4dcc03dbd4cd",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -384,10 +363,7 @@
 							"port": "3000",
 							"path": [
 								"time-sheets",
-								"62832da494417525e9b7b0c2"
-=======
 								"6282e2ee3baf4dcc03dbd4cd"
->>>>>>> 0d236872c7a297be4c8331a97021c0a14364bea6
 							]
 						}
 					},
