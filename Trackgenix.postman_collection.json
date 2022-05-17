@@ -1,13 +1,54 @@
 {
 	"info": {
-		"_postman_id": "a377f468-90f5-4427-ab0e-85b573d40c49",
+		"_postman_id": "e5116e55-ed9c-47d4-a2c2-8962133503cb",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Employees",
-			"item": []
+			"item": [
+				{
+					"name": "GET employee by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/employee/6281bc1345af8e621810ea07",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employee",
+								"6281bc1345af8e621810ea07"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET all employees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/employee/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employee",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Projects",
