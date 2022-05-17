@@ -4,13 +4,13 @@ const getAllAdmins = async (req, res) => {
   const allAdmins = await Admin.find({});
   try {
     return res.status(200).json({
-      msg: 'All admins are:',
+      message: 'All admins are:',
       data: allAdmins,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      msg: error,
+      message: error,
       error: true,
     });
   }
@@ -21,19 +21,19 @@ const getAdminById = async (req, res) => {
     const admin = await Admin.findById(req.params.id);
     if (admin) {
       return res.status(200).json({
-        msg: `The admin with id ${req.params.id} is:`,
+        message: 'The admin is:',
         data: admin,
         error: false,
       });
     }
     return res.status(400).json({
-      msg: `No admin with id ${req.params.id}`,
+      message: 'Missing id parameter',
       data: undefined,
       error: true,
     });
   } catch (error) {
     return res.status(500).json({
-      msg: error,
+      message: error,
       error: true,
     });
   }
@@ -68,7 +68,6 @@ const updateAdmin = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: error,
-      data: undefined,
       error: true,
     });
   }
