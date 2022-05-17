@@ -1,19 +1,114 @@
 {
 	"info": {
-		"_postman_id": "a377f468-90f5-4427-ab0e-85b573d40c49",
+		"_postman_id": "a1916fb8-ffae-4367-85fe-6bf3ed3e31ef",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Employees",
-			"item": []
+			"item": [
+				{
+					"name": "Add Employee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Bert\",\r\n    \"surname\": \"Sonson\",\r\n    \"email\": \"bso@trackgenix.com\",\r\n    \"gender\": \"Other\",\r\n    \"adress\": \"Potpurri 87\",\r\n    \"dob\": \"9-20-1990\",\r\n    \"password\": \"brownies96\",\r\n    \"phone\": \"987654321\",\r\n     \"active\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/employee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employee"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete employee",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/employee/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employee",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Projects",
 			"item": [
 				{
-					"name": "POST-Projects",
+					"name": "Get by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/projects/id/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"projects",
+								"id",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/projects/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"projects",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Projects",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -42,7 +137,7 @@
 					"response": []
 				},
 				{
-					"name": "DELETE- Projects",
+					"name": "DELETE Projects",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -65,15 +160,255 @@
 		},
 		{
 			"name": "Admins",
-			"item": []
+			"item": [
+				{
+					"name": "POST-Admins",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"firstName\": \"Luke\",\r\n        \"lastName\": \"Vader\",\r\n        \"email\": \"bstokes0@army.mil\",\r\n        \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/admins",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE - Admins",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/admins/628302639beaacf3cc154339",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admins",
+								"628302639beaacf3cc154339"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Super-admin",
-			"item": []
+			"item": [
+				{
+					"name": "POST Super Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Jake\",\r\n    \"lastName\": \"Bugg\",\r\n    \"email\": \"jakeb@yahoo.com\",\r\n    \"password\": \"893asd456\",\r\n    \"active\": \"false\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/super-admins",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"super-admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Super Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3000/super-admins/6282a38610827d437b9e685e",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"super-admins",
+								"6282a38610827d437b9e685e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET all Super Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/super-admins",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"super-admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET by ID Super Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/super-admins/6283b76b3237406f270f9b34",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"super-admins",
+								"6283b76b3237406f270f9b34"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Time-sheets",
-			"item": []
+			"item": [
+				{
+					"name": "POST Timesheet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Timesheet",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/628332503b43ee606c167147",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								"628332503b43ee606c167147"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All Timesheet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/6282e2ee3baf4dcc03dbd4cd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								"6282e2ee3baf4dcc03dbd4cd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Timesheet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "        {\r\n            \"employeeId\": \"6321\",\r\n            \"description\": \"some description\",\r\n            \"project\": \"sample\",\r\n            \"date\": \"2022-04-24T03:00:00.000Z\",\r\n            \"hours\": 12,\r\n            \"task\": \"Task\",\r\n            \"approved\": true,\r\n            \"role\": \"PM\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/6282e2ee3baf4dcc03dbd4cd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								"6282e2ee3baf4dcc03dbd4cd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Tasks",
