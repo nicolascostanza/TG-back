@@ -340,6 +340,46 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GET All tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Tasks by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks/6281eaf7f5d34d8fc61e3034",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks",
+								"6281eaf7f5d34d8fc61e3034"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
