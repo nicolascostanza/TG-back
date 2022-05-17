@@ -7,7 +7,7 @@ const router = express.Router();
 router
   .post('/', projectValidations.validateCreation, projectControllers.createProject)
   .delete('/:id', projectControllers.deleteProject)
-  .put('/:id', projectControllers.updateProject)
+  .put('/:id', projectValidations.validateModification, projectControllers.updateProject)
   .get('/:id', projectControllers.getProjectById)
   .get('/', projectControllers.getAllProjects);
 
