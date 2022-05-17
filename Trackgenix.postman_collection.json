@@ -199,6 +199,35 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "PUT Admins",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/admins/6282dd923cddb6f5aeb3908c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admins",
+								"6282dd923cddb6f5aeb3908c"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

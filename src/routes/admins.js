@@ -5,6 +5,7 @@ const router = express.Router();
 
 router
   .get('/', adminsControllers.getAllAdmins)
-  .get('/:id', adminsControllers.getAdminById);
+  .get('/:id', adminsControllers.getAdminById)
+  .put('/:id', adminsControllers.updateAdmin);
 
 export default router;
