@@ -1,19 +1,114 @@
 {
 	"info": {
-		"_postman_id": "ffc81c74-d8fb-4ac2-a7d9-fcbd56d1712d",
+		"_postman_id": "0ffb7689-1825-42cb-a428-8b2f591f448d",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Employees",
-			"item": []
+			"item": [
+				{
+					"name": "Add Employee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Bert\",\r\n    \"surname\": \"Sonson\",\r\n    \"email\": \"bso@trackgenix.com\",\r\n    \"gender\": \"Other\",\r\n    \"adress\": \"Potpurri 87\",\r\n    \"dob\": \"9-20-1990\",\r\n    \"password\": \"brownies96\",\r\n    \"phone\": \"987654321\",\r\n     \"active\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/employee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employee"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete employee",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/employee/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employee",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Projects",
 			"item": [
 				{
-					"name": "POST-Projects",
+					"name": "Get by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/projects/id/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"projects",
+								"id",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/projects/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"projects",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Projects",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -42,7 +137,7 @@
 					"response": []
 				},
 				{
-					"name": "DELETE- Projects",
+					"name": "DELETE Projects",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -65,42 +160,121 @@
 		},
 		{
 			"name": "Admins",
-			"item": []
-		},
-		{
-			"name": "Super-admin",
-			"item": []
-		},
-		{
-			"name": "Time-sheets",
 			"item": [
 				{
-					"name": "GetAll time-sheet",
+					"name": "GET all Admins",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/time-sheets/",
+							"raw": "http://localhost:3000/admins",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"time-sheets",
-								""
+								"admins"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "GetById time-sheet",
+					"name": "GET by ID Admins",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/time-sheets/1",
+							"raw": "http://localhost:3000/admins/6282dd923cddb6f5aeb3908y",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admins",
+								"6282dd923cddb6f5aeb3908y"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Super-admin",
+			"item": [
+				{
+					"name": "POST Super Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Jake\",\r\n    \"lastName\": \"Bugg\",\r\n    \"email\": \"jakeb@yahoo.com\",\r\n    \"password\": \"893asd456\",\r\n    \"active\": \"false\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/super-admins",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"super-admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Super Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3000/super-admins/6282a38610827d437b9e685e",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"super-admins",
+								"6282a38610827d437b9e685e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Time-sheets",
+			"item": [
+				{
+					"name": "POST Timesheet",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Timesheet",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/628332503b43ee606c167147",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -108,7 +282,7 @@
 							"port": "3000",
 							"path": [
 								"time-sheets",
-								"1"
+								"628332503b43ee606c167147"
 							]
 						}
 					},
@@ -118,7 +292,56 @@
 		},
 		{
 			"name": "Tasks",
-			"item": []
+			"item": [
+				{
+					"name": "POST tasks",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"parentProject\": \"752577979\",\r\n    \"taskCreatorId\": \"661268479\",\r\n    \"taskName\": \"In.mp3\",\r\n    \"taskDescription\": \"Other injury due to other accident to sailboat\",\r\n    \"assignedEmployee\": [\r\n        {\r\n            \"employeeId\": \"399128593\",\r\n            \"employeeRole\": \"PM\",\r\n            \"employeeName\": \"Petronia Duddan\"\r\n        }\r\n    ],\r\n    \"startDate\": \"4/24/2022\",\r\n    \"status\": \"Ready to deliver\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE tasks",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

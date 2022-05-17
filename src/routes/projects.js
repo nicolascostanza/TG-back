@@ -6,6 +6,8 @@ const router = express.Router();
 
 router
   .post('/', projectValidations.validateCreation, projectControllers.createProject)
-  .delete('/:id', projectControllers.deleteProject);
+  .delete('/:id', projectControllers.deleteProject)
+  .get('/:id', projectControllers.getProjectById)
+  .get('/', projectControllers.getAllProjects);
 
 export default router;
