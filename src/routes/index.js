@@ -1,7 +1,7 @@
 import express from 'express';
-import projects from './projects';
+import Timesheet from './time-sheets';
 
 const router = express.Router();
-router.use('/projects', projects);
+router.use('/time-sheets', Timesheet);
 
 export default router;

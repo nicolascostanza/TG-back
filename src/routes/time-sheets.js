@@ -1,12 +1,12 @@
 import express from 'express';
 import timesheetControllers from '../controllers/time-sheets';
-import TimesheetValidation from '../validations/time-sheets';
+import TimesheetValid from '../validations/time-sheets';
 
 const router = express.Router();
 
 router
   .get('/', timesheetControllers.getAllTs)
   .get('/:id', timesheetControllers.getTsById)
-  .put('/:id', timesheetControllers.updateTimesheet, TimesheetValidation);
+  .put('/:id', TimesheetValid.TimesheetValidation, timesheetControllers.updateTimesheet);
 
 export default router;
