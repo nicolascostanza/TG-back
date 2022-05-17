@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b3c0b092-bbc4-40cd-929f-49800dc0a01d",
+		"_postman_id": "b8152a86-d110-48f4-84c3-7f11ff811d2b",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,56 @@
 		},
 		{
 			"name": "Admins",
-			"item": []
+			"item": [
+				{
+					"name": "POST-Admins",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"firstName\": \"Luke\",\r\n        \"lastName\": \"Vader\",\r\n        \"email\": \"bstokes0@army.mil\",\r\n        \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/admins",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE - Admins",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/admins/628302639beaacf3cc154339",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admins",
+								"628302639beaacf3cc154339"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Super-admin",
