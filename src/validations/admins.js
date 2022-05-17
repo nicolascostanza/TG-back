@@ -1,24 +1,23 @@
-import joi from 'joi';
+import Joi from 'joi';
 
-const validateAdmin = (req, res, next) => {
-  const Schema = joi.object({
-    firstName: joi.string().min(3).required,
-    lastName: joi.string().min(3).required,
-    email: joi.string().email().min().required,
-    password: joi.string().valid(joi.ref('password')).min(8).required(),
-    active: joi.boolean().required,
+const validateCreation = (req, res, next) => {
+  const adminSchema = Joi.object({
+    firstName: Joi.string().min(3).required(),
+    lastName: Joi.string().min(3).required(),
+    email: Joi.string().email().min(7).required(),
+    password: Joi.string().min(6).required(),
+    active: Joi.boolean().required(),
   });
-  try {
-    const validation = Schema.validateAsync(req.body).save();
-    return next(validation);
-  } catch (error) {
+  const validation = adminSchema.validate(req.body);
+  if (validation.error) {
     return res.status(400).json({
       message: 'There has been an error in the validation',
-      error: true,
+      error: validation.error.details[0].message,
     });
   }
+  return next();
 };
 
 export default {
-  validateAdmin,
+  validateCreation,
 };

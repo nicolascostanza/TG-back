@@ -4,7 +4,7 @@ import adminValidation from '../validations/admins';
 
 const router = express.Router();
 
-router.post('/', adminValidation.validateAdmin, adminController.createAdmin);
+router.post('/', adminValidation.validateCreation, adminController.createAdmin);
 router.delete('/:id', adminController.deleteAdmin);
 
 export default router;
