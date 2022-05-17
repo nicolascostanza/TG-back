@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.post('/', superAdminValidation.validateCreation, superAdminControllers.createSuperAdmin);
 router.delete('/:id', superAdminControllers.deleteSuperAdmin);
-router.put('/:id', superAdminValidation.validateCreation, superAdminControllers.updateSuperAdmin);
+router.put('/:id', superAdminValidation.validateUpdate, superAdminControllers.updateSuperAdmin);
 
 export default router;
