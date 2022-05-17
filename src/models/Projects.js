@@ -42,7 +42,7 @@ const projectSchema = new Schema(
       {
         id: { type: String, required: true },
         name: { type: String, required: true },
-        descrption: { type: String, required: true },
+        description: { type: String, required: true },
       },
     ],
     adminId: {
