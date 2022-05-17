@@ -22,14 +22,14 @@
 							"port": "3000",
 							"path": [
 								"employees",
-								"6281bc1345af8e621810ea07"
+								"6282a75e66d07064049e4577"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-          "name": "GET all employees",
+					"name": "GET all employees",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -43,6 +43,35 @@
 							"path": [
 								"employees",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT employee by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/employees/6282a75e66d07064049e4577",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employees",
+								"6282a75e66d07064049e4577"
 							]
 						}
 					},

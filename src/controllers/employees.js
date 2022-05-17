@@ -88,9 +88,46 @@ const deleteEmployee = async (req, res) => {
   }
 };
 
+const updateEmployee = async (req, res) => {
+  try {
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing id parameter',
+        data: undefined,
+        error: true,
+      });
+    }
+    const result = await Employee.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
+    );
+
+    if (!result) {
+      return res.status(404).json({
+        message: 'Employee not found',
+        data: undefined,
+        error: true,
+      });
+    }
+    return res.status(202).json({
+      message: 'Employee succesfully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
 export default {
   getAllEmployees,
   getEmployeeById,
   createEmployee,
   deleteEmployee,
+  updateEmployee,
 };
