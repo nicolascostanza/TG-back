@@ -1,6 +1,6 @@
 import express from 'express';
-import employeeControllers from '../controllers/employees';
-import employeeValidations from '../validations/employees';
+import employeeControllers from '../controllers/employee';
+import employeeValidations from '../validations/employee';
 
 const router = express.Router();
 
@@ -9,6 +9,6 @@ router
   .get('/:id', employeeControllers.getEmployeeById)
   .post('/', employeeValidations.creationValidation, employeeControllers.createEmployee)
   .delete('/:id', employeeControllers.deleteEmployee)
-  .put('/:id', employeeControllers.updateEmployee);
+  .put('/:id', employeeValidations.updateValidation, employeeControllers.updateEmployee);
 
 export default router;
