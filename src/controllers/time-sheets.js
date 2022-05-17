@@ -55,6 +55,32 @@ const getTsById = async (req, res) => {
   }
 };
 
+const updateTimesheet = async (req, res) => {
+  try {
+    const result = await Tsheet.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
+    );
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        msg: 'The Timesheet has not been found',
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      msg: 'There was an error',
+      error: `the error is: ${error}`,
+    });
+  }
+};
+
 const createTimeSheet = async (req, res) => {
   try {
     const timeSheet = new Tsheet({
@@ -75,7 +101,8 @@ const createTimeSheet = async (req, res) => {
     });
   } catch (error) {
     return res.status(400).json({
-      msg: 'There has been an error',
+      success: false,
+      msg: 'There was an error',
       error: `the error is: ${error}`,
     });
   }
@@ -115,6 +142,7 @@ const deleteTimesheet = async (req, res) => {
 export default {
   getAllTs,
   getTsById,
+  updateTimesheet,
   createTimeSheet,
   deleteTimesheet,
 };
