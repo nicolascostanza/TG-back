@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const superAdminsSchema = new Schema(
+const SuperAdminsSchema = new Schema(
   {
     firstName: {
       type: String,
@@ -30,4 +30,4 @@ const superAdminsSchema = new Schema(
   { timestamps: true },
 );
 
-export default mongoose.model('Super-admin', superAdminsSchema);
+export default mongoose.model('SuperAdmin', SuperAdminsSchema);
