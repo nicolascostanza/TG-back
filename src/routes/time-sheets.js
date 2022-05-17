@@ -5,6 +5,8 @@ import TimesheetValid from '../validations/time-sheets';
 const router = express.Router();
 
 router
+  .get('/', timesheetControllers.getAllTs)
+  .get('/:id', timesheetControllers.getTsById)
   .post('/', TimesheetValid.TimesheetValidation, timesheetControllers.createTimeSheet)
   .delete('/:id', timesheetControllers.deleteTimesheet);
 

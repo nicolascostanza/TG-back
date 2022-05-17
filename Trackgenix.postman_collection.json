@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0ef887d9-c36b-4110-a4ec-2640a2e09a13",
+		"_postman_id": "054cd26d-c591-4dca-9696-3fa515459a76",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -323,6 +323,46 @@
 							"path": [
 								"time-sheets",
 								"628332503b43ee606c167147"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All Timesheet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/6282e2ee3baf4dcc03dbd4cd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								"6282e2ee3baf4dcc03dbd4cd"
 							]
 						}
 					},
