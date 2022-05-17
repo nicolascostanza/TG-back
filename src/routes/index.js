@@ -3,7 +3,7 @@ import admins from './admins';
 import projects from './projects';
 import tasks from './tasks';
 import superAdmins from './super-admins';
-import employees from './employee';
+import employees from './employees';
 import timeSheets from './time-sheets';
 
 const router = express.Router();
