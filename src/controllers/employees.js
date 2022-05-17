@@ -1,4 +1,4 @@
-import Employee from '../models/employee';
+import Employee from '../models/Employees';
 
 const getAllEmployees = async (req, res) => {
   const allEmployees = await Employee.find({});

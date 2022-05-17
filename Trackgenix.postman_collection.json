@@ -14,14 +14,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/employee/6281bc1345af8e621810ea07",
+							"raw": "http://localhost:3000/employees/6281bc1345af8e621810ea07",
               "protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"employee",
+								"employees",
 								"6281bc1345af8e621810ea07"
 							]
 						}
@@ -34,14 +34,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/employee/",
+							"raw": "http://localhost:3000/employees/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"employee",
+								"employees",
 								""
 							]
 						}
