@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0ffb7689-1825-42cb-a428-8b2f591f448d",
+		"_postman_id": "054cd26d-c591-4dca-9696-3fa515459a76",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -273,7 +273,10 @@
 					"name": "POST Timesheet",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
 					},
 					"response": []
 				},
@@ -292,6 +295,75 @@
 							"path": [
 								"time-sheets",
 								"628332503b43ee606c167147"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All Timesheet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/6282e2ee3baf4dcc03dbd4cd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								"6282e2ee3baf4dcc03dbd4cd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Timesheet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "        {\r\n            \"employeeId\": \"6321\",\r\n            \"description\": \"some description\",\r\n            \"project\": \"sample\",\r\n            \"date\": \"2022-04-24T03:00:00.000Z\",\r\n            \"hours\": 12,\r\n            \"task\": \"Task\",\r\n            \"approved\": true,\r\n            \"role\": \"PM\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/6282e2ee3baf4dcc03dbd4cd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								"6282e2ee3baf4dcc03dbd4cd"
 							]
 						}
 					},
