@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "054cd26d-c591-4dca-9696-3fa515459a76",
+		"_postman_id": "a1916fb8-ffae-4367-85fe-6bf3ed3e31ef",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -259,6 +259,45 @@
 							"path": [
 								"super-admins",
 								"6282a38610827d437b9e685e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET all Super Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/super-admins",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"super-admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET by ID Super Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/super-admins/6283b76b3237406f270f9b34",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"super-admins",
+								"6283b76b3237406f270f9b34"
 							]
 						}
 					},
