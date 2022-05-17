@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-const validateCreation = (req, res, next) => {
+const validateAdmin = (req, res, next) => {
   const adminSchema = Joi.object({
     firstName: Joi.string().min(3).required(),
     lastName: Joi.string().min(3).required(),
@@ -19,5 +19,5 @@ const validateCreation = (req, res, next) => {
 };
 
 export default {
-  validateCreation,
+  validateAdmin,
 };
