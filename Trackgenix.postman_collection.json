@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c41cc8d4-fca4-4bb5-a1bd-8552cf9450cc",
+		"_postman_id": "d6c5bb78-cdb3-4091-8282-0b22296bebf2",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -292,7 +292,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/admins/6282dd923cddb6f5aeb3908c",
+							"raw": "http://localhost:3000/admins/",
 							"protocol": "http",
 							"host": [
 								"localhost"
