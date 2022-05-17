@@ -39,6 +39,46 @@ const validateCreation = (req, res, next) => {
   return next();
 };
 
+const validateModification = (req, res, next) => {
+  const teamSchema = Joi.object({
+    id: Joi.string().min(1).max(10),
+    name: Joi.string().min(3).max(30),
+    role: Joi.string().valid('QA', 'DEV', 'PM', 'TL'),
+    hours: Joi.number().min(1),
+    rate: Joi.number().min(1).max(1000),
+  });
+
+  const taskSchema = Joi.object({
+    id: Joi.string().min(1).max(10),
+    name: Joi.string().min(3).max(30),
+    description: Joi.string().min(3).max(200),
+  });
+
+  const projectValidation = Joi.object({
+    name: Joi.string().min(3).max(30),
+    description: Joi.string().min(3).max(200),
+    clientName: Joi.string().min(3).max(30),
+    startDate: Joi.date(),
+    endDate: Joi.date(),
+    projectManager: Joi.string().min(3).max(30),
+    team: Joi.array().items(teamSchema),
+    tasks: Joi.array().items(taskSchema),
+    adminId: Joi.string().min(1).max(10),
+  });
+
+  const validation = projectValidation.validate(req.body);
+
+  if (validation.error) {
+    return res.status(400).json({
+      message: (validation.error.details[0].message),
+      data: undefined,
+      error: true,
+    });
+  }
+  return next();
+};
+
 export default {
   validateCreation,
+  validateModification,
 };
