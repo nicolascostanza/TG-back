@@ -7,6 +7,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(router);
 
 app.get('/', async (req, res) => {
   res.send('Hello World!');
@@ -28,5 +29,3 @@ mongoose.connect(
     }
   },
 );
-
-app.use(router);
