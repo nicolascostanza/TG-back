@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "dac0ad78-5301-477b-a1a2-252a9f00a953",
+		"_postman_id": "054cd26d-c591-4dca-9696-3fa515459a76",
 		"name": "Trackgenix",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -162,10 +162,19 @@
 			"name": "Admins",
 			"item": [
 				{
-					"name": "GET all Admins",
+					"name": "POST-Admins",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"firstName\": \"Luke\",\r\n        \"lastName\": \"Vader\",\r\n        \"email\": \"bstokes0@army.mil\",\r\n        \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:3000/admins",
 							"protocol": "http",
@@ -181,12 +190,12 @@
 					"response": []
 				},
 				{
-					"name": "GET by ID Admins",
+					"name": "DELETE - Admins",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/admins/6282dd923cddb6f5aeb3908y",
+							"raw": "http://localhost:3000/admins/628302639beaacf3cc154339",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -194,7 +203,7 @@
 							"port": "3000",
 							"path": [
 								"admins",
-								"6282dd923cddb6f5aeb3908y"
+								"628302639beaacf3cc154339"
 							]
 						}
 					},
@@ -223,7 +232,7 @@
 							"port": "3000",
 							"path": [
 								"admins",
-								"6282dd923cddb6f5aeb3908c"
+								""
 							]
 						}
 					},
@@ -288,7 +297,108 @@
 		},
 		{
 			"name": "Time-sheets",
-			"item": []
+			"item": [
+				{
+					"name": "POST Timesheet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Timesheet",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/628332503b43ee606c167147",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								"628332503b43ee606c167147"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All Timesheet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/6282e2ee3baf4dcc03dbd4cd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								"6282e2ee3baf4dcc03dbd4cd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Timesheet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "        {\r\n            \"employeeId\": \"6321\",\r\n            \"description\": \"some description\",\r\n            \"project\": \"sample\",\r\n            \"date\": \"2022-04-24T03:00:00.000Z\",\r\n            \"hours\": 12,\r\n            \"task\": \"Task\",\r\n            \"approved\": true,\r\n            \"role\": \"PM\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/6282e2ee3baf4dcc03dbd4cd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								"6282e2ee3baf4dcc03dbd4cd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Tasks",
