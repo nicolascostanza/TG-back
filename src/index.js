@@ -1,8 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import router from './routes';
 
-const URL = 'mongodb+srv://AlfonsoDalix:RadiumRocket@basp-tg.amp3e.mongodb.net/BaSP-TG?retryWrites=true&w=majority';
+dotenv.config();
+const URL = process.env.DATABASE_URL;
 const app = express();
 const port = process.env.PORT || 3000;
 

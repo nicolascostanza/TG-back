@@ -4,13 +4,13 @@ const getAllProjects = async (req, res) => {
   try {
     const allProjects = await Project.find({});
     return res.status(200).json({
-      message: ' Data for all projects sended',
+      message: ' Data for all projects has been sent',
       data: allProjects,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: error,
+      message: error.message,
       data: undefined,
       error: true,
     });
@@ -23,7 +23,7 @@ const getProjectById = async (req, res) => {
     const project = await Project.findOne({ _id: projectId });
     if (project) {
       res.status(200).json({
-        message: `The data fot the project whit id ${req.params.id} has been sent`,
+        message: `Data for project with id ${req.params.id} has been sent`,
         data: project,
         error: false,
       });
@@ -36,7 +36,7 @@ const getProjectById = async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({
-      message: error,
+      message: error.message,
       data: undefined,
       error: true,
     });
@@ -89,7 +89,7 @@ const deleteProject = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: error,
+      message: error.message,
       data: undefined,
       error: true,
     });
@@ -125,7 +125,7 @@ const updateProject = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: error,
+      message: error.message,
       data: undefined,
       error: true,
     });
