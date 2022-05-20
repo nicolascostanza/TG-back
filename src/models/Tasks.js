@@ -5,8 +5,8 @@ const { Schema } = mongoose;
 const taskSchema = new Schema(
   {
     parentProject: {
-      type: String,
-      required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Project',
     },
     taskCreatorId: {
       type: String,
@@ -22,19 +22,8 @@ const taskSchema = new Schema(
     },
     assignedEmployee: [
       {
-        employeeId: {
-          type: String,
-          required: true,
-        },
-        employeeRole: {
-          type: String,
-          required: true,
-          enum: ['DEV', 'QA', 'PM', 'TL'],
-        },
-        employeeName: {
-          type: String,
-          required: true,
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Employees',
       },
     ],
     startDate: {
