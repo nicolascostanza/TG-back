@@ -6,6 +6,7 @@ export default [{
   description: 'a single project',
   clientName: 'Radium Rocket',
   startDate: '20/05/2022',
+  endDate: '24/05/2022',
   projectManager: 'Alfonso Dalix',
   team: [{
     id: '60a4a32f24ae066e9495ce12',

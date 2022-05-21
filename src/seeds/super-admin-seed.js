@@ -6,5 +6,5 @@ export default [{
   lastName: 'Admin',
   email: 'super@admin.com',
   password: '123456789',
-  active: true,
+  active: 'true',
 }];

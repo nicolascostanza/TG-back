@@ -8,6 +8,6 @@ export default [{
   date: '20/05/2022',
   hours: '45',
   task: 'a task',
-  approved: true,
+  approved: 'true',
   role: 'DEV',
 }];
