@@ -45,10 +45,6 @@ const projectSchema = new Schema(
         description: { type: String, required: true },
       },
     ],
-    adminId: {
-      type: String,
-      required: true,
-    },
   },
   { timestamps: true },
 );

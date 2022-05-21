@@ -54,7 +54,6 @@ const createProject = async (req, res) => {
       projectManager: req.body.projectManager,
       team: req.body.team,
       tasks: req.body.tasks,
-      adminId: req.body.adminId,
     });
 
     const result = await project.save();
