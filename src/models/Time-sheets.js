@@ -4,8 +4,6 @@ const { Schema } = mongoose;
 
 const timeSheetsSchema = new Schema({
   employeeId: {
-    // type: String,
-    // required: true,
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Employees',
   },
