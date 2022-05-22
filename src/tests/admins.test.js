@@ -13,13 +13,13 @@ describe('GET /admins', () => {
     expect(response.status).toBe(200);
   });
 
-  test('response should return a 500 status', async () => {
+  test('response should return a 404 status because route does not exist', async () => {
     const response = await request(app).get('/dasdsa').send();
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(404);
   });
 
   test('response should return at least one admin', async () => {
     const response = await request(app).get('/admins').send();
-    expect(response.body.data.length).toBeGreatherThan(0);
+    expect(response.body.data.length).toBeGreaterThan(0);
   });
 });
