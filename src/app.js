@@ -12,6 +12,6 @@ app.get('/', async (req, res) => {
 
 app
   .post('/admins/post', adminValidation.validateAdmin, adminsControllers.createAdmin)
-  .put('/:admins/put/:id', adminValidation.validateAdmin, adminsControllers.updateAdmin);
+  .put('/admins/put/:id', adminValidation.validateAdmin, adminsControllers.updateAdmin);
 
 export default app;
