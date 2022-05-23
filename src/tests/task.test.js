@@ -1,10 +1,18 @@
 import request from 'supertest';
 import app from '../app';
-import Tasks from '../models/Tasks';
+
 import tasksSeed from '../seeds/tasks';
+import employeesSeed from '../seeds/employees';
+import projectsSeed from '../seeds/projects';
+
+import Tasks from '../models/Tasks';
+import Employees from '../models/Employees';
+import Proyects from '../models/Projects';
 
 beforeAll(async () => {
   await Tasks.collection.insertMany(tasksSeed);
+  await Employees.collection.insertMany(employeesSeed);
+  await Proyects.collection.insertMany(projectsSeed);
 });
 
 describe('GET /tasks', () => {

@@ -27,7 +27,7 @@ const getTasksById = async (req, res) => {
         error: false,
       });
     }
-    return res.status(400).json({
+    return res.status(404).json({
       message: `There are not task whit id ${req.params.id}`,
       data: undefined,
       error: true,
