@@ -99,7 +99,7 @@ const deleteSuperAdmin = async (req, res) => {
 const updateSuperAdmin = async (req, res) => {
   try {
     if (!req.params) {
-      return res.status(400).json({
+      return res.status(404).json({
         message: 'Missing id parameter',
         data: undefined,
         error: true,
