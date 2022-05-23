@@ -128,7 +128,7 @@ describe('PUT /super-admins', () => {
     expect(response.body.error).toBe(false);
   });
 
-  test('it should update the super-admin', async () => {
+  test('it should NOT update the super-admin, stopped on validation, missing a param', async () => {
     const response = await request(app).put(`/super-admins/${superAdminId}`).send({
       firstName: 'Alex',
       email: 'a.liases@radiumrocket.com',
