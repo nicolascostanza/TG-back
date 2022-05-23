@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import router from './routes';
 
 dotenv.config();
+
 const URL = process.env.DATABASE_URL;
 const app = express();
 const port = process.env.PORT || 3000;
