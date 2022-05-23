@@ -1,7 +1,7 @@
 import request from 'supertest';
 import app from '../app';
 import Tasks from '../models/Tasks';
-import tasksSeed from '../seed/tasks';
+import tasksSeed from '../seeds/tasks';
 
 beforeAll(async () => {
   await Tasks.collection.insertMany(tasksSeed);
