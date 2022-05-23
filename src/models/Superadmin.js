@@ -30,4 +30,4 @@ const SuperAdminsSchema = new Schema(
   { timestamps: true },
 );
 
-export default mongoose.model('Superadmin', SuperAdminsSchema);
+export default mongoose.model('Super-admin', SuperAdminsSchema);
