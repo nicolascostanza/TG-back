@@ -2,7 +2,7 @@ import Project from '../models/Projects';
 
 const getAllProjects = async (req, res) => {
   try {
-    const allProjects = await Project.find({});
+    const allProjects = await Project.find({}).populate('team', { firstName: 1, surname: 1 }).populate('tasks', { taskName: 1, taskDescription: 1 });
     return res.status(200).json({
       message: ' Data for all projects has been sent',
       data: allProjects,
@@ -20,7 +20,7 @@ const getAllProjects = async (req, res) => {
 const getProjectById = async (req, res) => {
   try {
     const projectId = req.params.id;
-    const project = await Project.findOne({ _id: projectId });
+    const project = await Project.findOne({ _id: projectId }).populate('team', { firstName: 1, surname: 1 }).populate('tasks', { taskName: 1 });
     if (project) {
       res.status(200).json({
         message: `Data for project with id ${req.params.id} has been sent`,
@@ -54,7 +54,6 @@ const createProject = async (req, res) => {
       projectManager: req.body.projectManager,
       team: req.body.team,
       tasks: req.body.tasks,
-      adminId: req.body.adminId,
     });
 
     const result = await project.save();
