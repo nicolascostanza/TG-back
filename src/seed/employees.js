@@ -5,7 +5,7 @@ export default [{
   firstName: 'Personal',
   surname: 'test',
   email: 'personaltest@gmail.com',
-  gender: 'male',
+  gender: 'Male',
   adress: 'calle sin nombre 123',
   dob: '10/10/1998',
   password: '123456789',
