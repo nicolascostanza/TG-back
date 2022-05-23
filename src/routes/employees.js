@@ -9,6 +9,6 @@ router
   .get('/:id', employeeControllers.getEmployeeById)
   .post('/', employeeValidations.creationValidation, employeeControllers.createEmployee)
   .delete('/:id', employeeControllers.deleteEmployee)
-  .put('/:id', employeeValidations.updateValidation, employeeControllers.updateEmployee);
+  .put('/:id', employeeValidations.creationValidation, employeeControllers.updateEmployee);
 
 export default router;
