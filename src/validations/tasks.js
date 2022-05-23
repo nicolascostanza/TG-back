@@ -1,17 +1,11 @@
 import Joi from 'joi';
 
 const validateCreation = (req, res, next) => {
-  const employeePropSchema = Joi.object({
-    employeeId: Joi.string().alphanum().required(),
-    employeeRole: Joi.string().valid('PM', 'TL', 'DEV', 'QA').required(),
-    employeeName: Joi.string().min(3).max(50).required(),
-  });
   const taskValidation = Joi.object({
     parentProject: Joi.string().alphanum().required(),
-    taskCreatorId: Joi.string().alphanum().required(),
     taskName: Joi.string().min(1).max(50).required(),
     taskDescription: Joi.string().min(1).max(250).optional(),
-    assignedEmployee: Joi.array().items(employeePropSchema),
+    assignedEmployee: Joi.array(),
     startDate: Joi.date().required(),
     status: Joi.string()
       .valid('Ready to deliver', 'Paused', 'Unassigned', 'Completed', 'In progress', 'Cancelled')
@@ -29,17 +23,11 @@ const validateCreation = (req, res, next) => {
 };
 
 const validateUpdate = (req, res, next) => {
-  const employeePropSchema = Joi.object({
-    employeeId: Joi.string().alphanum(),
-    employeeRole: Joi.string().valid('PM', 'TL', 'DEV', 'QA'),
-    employeeName: Joi.string().min(3).max(50),
-  });
   const taskValidation = Joi.object({
     parentProject: Joi.string().alphanum(),
-    taskCreatorId: Joi.string().alphanum(),
     taskName: Joi.string().min(1).max(50),
     taskDescription: Joi.string().min(1).max(250),
-    assignedEmployee: Joi.array().items(employeePropSchema),
+    assignedEmployee: Joi.array(),
     startDate: Joi.date(),
     status: Joi.string()
       .valid('Ready to deliver', 'Paused', 'Unassigned', 'Completed', 'In progress', 'Cancelled'),

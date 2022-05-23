@@ -2,7 +2,7 @@ import Task from '../models/Tasks';
 
 const getAllTasks = async (req, res) => {
   try {
-    const allTasks = await Task.find({});
+    const allTasks = await Task.find({}).populate('assignedEmployee', { firstName: 1, surname: 1 }).populate('parentProject', { name: 1 });
     return res.status(200).json({
       message: 'Tasks data sended',
       data: allTasks,
@@ -20,7 +20,7 @@ const getAllTasks = async (req, res) => {
 const getTasksById = async (req, res) => {
   try {
     if (req.params.id) {
-      const task = await Task.findById(req.params.id);
+      const task = await Task.findById(req.params.id).populate('assignedEmployee', { firstName: 1, surname: 1 }).populate('parentProject', { name: 1 });
       return res.status(200).json({
         message: 'Filtered tasks by id has been sent',
         data: task,

@@ -1,7 +1,7 @@
 import request from 'supertest';
 import app from '../app';
 import SuperAdmins from '../models/Superadmin';
-import superAdminsSeed from '../seeds/super-admin-seed';
+import superAdminsSeed from '../seeds/super-admin';
 
 beforeAll(async () => {
   await SuperAdmins.collection.insertMany(superAdminsSeed);

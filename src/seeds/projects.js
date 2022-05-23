@@ -8,16 +8,6 @@ export default [{
   startDate: '20/05/2022',
   endDate: '24/05/2022',
   projectManager: 'Alfonso Dalix',
-  team: [{
-    id: '60a4a32f24ae066e9495ce12',
-    name: 'A',
-    role: 'DEV',
-    hours: '40',
-    rate: '12',
-  }],
-  task: [{
-    id: '60a4d32f24ae066e9495ce12',
-    name: 'Task',
-    description: 'a simple task',
-  }],
+  team: ['60a4a32f24ae066e9495ce12'],
+  task: ['60a4a32f247e066e9495ce12'],
 }];
