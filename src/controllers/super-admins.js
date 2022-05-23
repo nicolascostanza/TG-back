@@ -9,7 +9,7 @@ const getAllSuperA = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(400).json({
+    return res.status(500).json({
       msg: error,
       data: undefined,
       error: true,
@@ -58,7 +58,7 @@ const getSuperAById = async (req, res) => {
       error: true,
     });
   } catch (error) {
-    return res.status().json({
+    return res.status(500).json({
       msg: error,
       data: undefined,
       error: true,
