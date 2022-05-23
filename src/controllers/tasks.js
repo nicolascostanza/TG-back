@@ -69,7 +69,6 @@ const createTask = async (req, res) => {
   try {
     const task = new Task({
       parentProject: req.body.parentProject,
-      taskCreatorId: req.body.taskCreatorId,
       taskName: req.body.taskName,
       taskDescription: req.body.taskDescription,
       assignedEmployee: req.body.assignedEmployee,
