@@ -53,15 +53,11 @@ describe('GET /super-admin', () => {
     expect(response.body.data).not.toBeNull();
   });
 
-  test('response should not be an empty super admin', async () => {
-    const response = await request(app).get('/super-admin').send();
-    expect(response.body.data).not.toBeUndefined();
-  });
-
   test('response should be return error', async () => {
     const response = await request(app).get('/super-admin').send();
     expect(response.error).toBe(false);
   });
+
   test('response should be return error', async () => {
     const response = await request(app).get('/super-admin').send();
     expect(response.msg).toEqual('error');
