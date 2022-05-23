@@ -1,7 +1,7 @@
 import request from 'supertest';
 import app from '../app';
 import Employees from '../models/Employees';
-import employeesSeeds from '../seeds/employees-seed';
+import employeesSeeds from '../seeds/employees';
 
 beforeAll(async () => {
   await Employees.collection.insertMany(employeesSeeds);
