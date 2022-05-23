@@ -9,7 +9,6 @@ app.get('/', async (req, res) => {
   res.send('Hello World!');
 });
 
-app
-  .get('/super-admin', superAdmins.getAllSuperA)
-  .delete('/super-admins/:id', superAdmins.deleteSuperAdmin);
+app.get('/super-admin', superAdmins.getAllSuperA);
+
 export default app;
