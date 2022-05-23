@@ -32,13 +32,13 @@ const projectSchema = new Schema(
     team: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Employees',
+        ref: 'Employee',
       },
     ],
     tasks: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Tasks',
+        ref: 'Task',
       },
     ],
   },

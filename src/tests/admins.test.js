@@ -21,7 +21,7 @@ describe('GET by ID /admins', () => {
   });
 
   test('response should return an error, empty admin', async () => {
-    const response = await request(app).get('/admins/').send();
+    const response = await request(app).get('/admins/60d4a32f257e066e9495ce15').send();
     expect(response.status).toBe(404);
   });
 
@@ -57,15 +57,7 @@ describe('GET by ID /admins', () => {
 
   test('response should return an admin object', async () => {
     const response = await request(app).get(`/admins/${adminId}`).send();
-    const expected = {
-      _id: '60d4a32f257e066e9495ce12',
-      firstName: 'Alfonso',
-      lastName: 'Dalix',
-      email: 'alfonso@gmail.com',
-      password: '123456789',
-      active: 'true',
-    };
-    expect(response.body.data).toEqual(expect.objectContaining(expected));
+    expect(response.body.data).not.toBeNull();
   });
 
   test('response should return a successful message', async () => {
@@ -75,14 +67,11 @@ describe('GET by ID /admins', () => {
 });
 
 describe('DELETE /admins', () => {
-  test('response should return a 204 status', async () => {
+  test('response should return a false error, 200 status and successful message', async () => {
     const response = await request(app).delete(`/admins/${adminId}`).send();
+    expect(response.error).toBeFalsy();
     expect(response.status).toBe(200);
-  });
-
-  test('response should return a false error', async () => {
-    const response = await request(app).delete(`/admins/${adminId}`).send();
-    expect(response.body.error).toBe(false);
+    expect(response.body.message).toEqual('Admin succesfully deleted');
   });
 
   test('response should return an error, empty admin', async () => {
@@ -93,10 +82,5 @@ describe('DELETE /admins', () => {
   test('response should return an error, bad path', async () => {
     const response = await request(app).delete('/asdasd').send();
     expect(response.status).toBe(404);
-  });
-
-  test('response should return a successful message', async () => {
-    const response = await request(app).delete(`/admins/${adminId}`).send();
-    expect(response.body.message).toEqual('Admin succesfully deleted');
   });
 });
