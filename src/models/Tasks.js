@@ -8,10 +8,6 @@ const taskSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Project',
     },
-    taskCreatorId: {
-      type: String,
-      required: true,
-    },
     taskName: {
       type: String,
       required: true,
@@ -23,7 +19,7 @@ const taskSchema = new Schema(
     assignedEmployee: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Employees',
+        ref: 'Employee',
       },
     ],
     startDate: {
