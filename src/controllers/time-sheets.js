@@ -2,16 +2,16 @@ import Tsheet from '../models/Time-sheets';
 
 const getAllTs = async (req, res) => {
   try {
-    const getAllT = await Tsheet.find({});
+    const getAllT = await Tsheet.find({}).populate('employeeId', { firstName: 1, surname: 1 }).populate('task', { taskName: 1, taskDescription: 1 });
     if (getAllT.length <= 0) {
       return res.status(400).json({
-        message: ' No Time-sheets found',
+        message: 'No Time-sheets found',
         data: null,
         error: true,
       });
     }
     return res.status(200).json({
-      message: ' Data for all Time-sheets sended',
+      message: ' Data for all Time-sheets sent',
       data: getAllT,
       error: false,
     });
@@ -33,16 +33,16 @@ const getTsById = async (req, res) => {
         error: false,
       });
     }
-    const empId = await Tsheet.findById(req.params.id);
+    const empId = await Tsheet.findById(req.params.id).populate('employeeId', { firstName: 1, surname: 1 }).populate('task', { taskName: 1, taskDescription: 1 });
     if (empId) {
       return res.status(200).json({
-        message: `The data fot the employee whit id ${req.params.id} has been sent`,
+        message: `The data for the employee with id ${req.params.id} has been sent`,
         data: empId,
         error: false,
       });
     }
     return res.status(400).json({
-      message: `There are not employee whit id ${req.params.id}`,
+      message: `There are not employee with id ${req.params.id}`,
       data: undefined,
       error: true,
     });
