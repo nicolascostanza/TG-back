@@ -18,6 +18,6 @@ describe('GET /tasks', () => {
   });
   test('response should return at least one task', async () => {
     const response = await request(app).get('/tasks').send();
-    expect(response.body.data.lenght).toBeGreaterThan(0);
+    expect(response.body.data.length).toBeGreaterThan(0);
   });
 });

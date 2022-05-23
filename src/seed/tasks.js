@@ -1,16 +1,16 @@
 import mongoose from 'mongoose';
 
 export default [{
-  _id: mongoose.Types.ObjectId('6281f3e9c46e43281c20d604'),
-  parentProject: '910864632',
-  taskCreatorId: '837409814',
-  taskName: 'SagittisNam.mov',
-  taskDescription: 'Adverse effect of antirheumatics, NEC, subs',
+  _id: mongoose.Types.ObjectId('60a4a32f247e066e9495ce12'),
+  parentProject: 'project seed',
+  taskCreatorId: '60a4a32s247e066e9495ce12',
+  taskName: 'Taks',
+  taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
   assignedEmployee: [{
-    employeeId: '765370710', employeeRole: 'QA', employeeName: 'Mateo Moisey', _id: { $oid: '6281f3e9c46e43281c20d605' },
+    employeeId: '60a4a32f24ae066e9495ce12',
+    employeeRole: 'QA',
+    employeeName: 'Employee',
   }],
-  startDate: { $date: { $numberLong: '1630897200000' } },
-  status: 'Paused',
-  createdAt: { $date: { $numberLong: '1652683753341' } },
-  updateAt: { $date: { $numberLong: '1652683753341' } },
+  startDate: '20/05/2022',
+  status: 'Ready to deliver',
 }];
