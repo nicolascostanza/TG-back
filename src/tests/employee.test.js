@@ -20,19 +20,19 @@ describe('GetById /employees', () => {
 
   test('response should return error', async () => {
     const response = await request(app).get('/employees/60d4a32f257e066e84951234').send();
-    expect(response.error).toBe(true);
+    expect(response.status).toBe(400);
   });
 
   test('response should return error', async () => {
     const response = await request(app).get('/employees/60d4a32f257e066e8495ce12').send();
-    expect(response.body.data.length).toBeGraterThan(0);
+    expect(response.body.data).not.toBeNull();
   });
 });
 
-/* describe('Delete /employees', () => {
-  test('It should delete a employee', async () => {
-    const response = await request(app).delete('/employees/60d4a32f257e066e8495ce12');
-    expect(response.status).toBe(200);
+describe('Delete /employees', () => {
+  test('Delete should return error', async () => {
+    const response = await request(app).get('/employees/60d4a32f257e066e8495fa15').send();
+    expect(response.error).toBe(true);
   });
 
   test('Delete should return error', async () => {
@@ -40,8 +40,8 @@ describe('GetById /employees', () => {
     expect(response.error).toBe(false);
   });
 
-  test('Delete should return error', async () => {
-    const response = await request(app).get('/employees/60d4a32f257e066e84951234').send();
-    expect(response.error).toBe(true);
+  test('It should delete a employee', async () => {
+    const response = await request(app).delete('/employees/60d4a32f257e066e8495ce12');
+    expect(response.status).toBe(200);
   });
-}); */
+});
