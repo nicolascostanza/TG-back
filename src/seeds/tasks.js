@@ -6,6 +6,6 @@ export default [{
   taskName: 'Taks',
   taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
   assignedEmployee: ['60d4a32f257e066e8495ce12'],
-  startDate: '20/05/2022',
+  startDate: '05/20/2022',
   status: 'Ready to deliver',
 }];
