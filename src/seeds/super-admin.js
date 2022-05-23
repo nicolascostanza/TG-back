@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 
 export default [{
-  _id: mongoose.Types.ObjectId('60c4a34f268e066e9495ce11'),
-  first_name: 'Alex',
-  last_name: 'Lias',
-  email: 'alex.lias@radiumrocket.com',
-  password: 'test123',
-  active: true,
+  _id: mongoose.Types.ObjectId('60d4a32f247e066e9495ce12'),
+  firstName: 'Super',
+  lastName: 'Admin',
+  email: 'super@admin.com',
+  password: '123456789',
+  active: 'true',
 }];
