@@ -1,503 +1,371 @@
 import request from 'supertest';
 import app from '../app';
-
-import tasksSeed from '../seeds/tasks';
-import employeesSeed from '../seeds/employees';
-import projectsSeed from '../seeds/projects';
-
-import Tasks from '../models/Tasks';
-import Employees from '../models/Employees';
-import Proyects from '../models/Projects';
+import Admins from '../models/Admins';
+import adminSeed from '../seeds/admins';
 
 beforeAll(async () => {
-  await Tasks.collection.insertMany(tasksSeed);
-  await Employees.collection.insertMany(employeesSeed);
-  await Proyects.collection.insertMany(projectsSeed);
+  await Admins.collection.insertMany(adminSeed);
 });
 
-describe('GET /tasks', () => {
-  test('response should return a 200 status', async () => {
-    const response = await request(app).get('/tasks').send();
+let adminId = '60d4a32f257e066e9495ce12';
+
+describe('GET /admins', () => {
+  test('Response status has to be 200', async () => {
+    const response = await request(app).get('/admins').send();
     expect(response.status).toBe(200);
   });
-  test('response should return error', async () => {
-    const response = await request(app).get('/tasks').send();
-    expect(response.error).toBe(false);
+
+  test('Error has to be false', async () => {
+    const response = await request(app).get('/admins').send();
+    expect(response.clientError).toBeFalsy();
   });
-  test('response should return at least one task', async () => {
-    const response = await request(app).get('/tasks').send();
+
+  test('response status has to be 404 because route does not exist', async () => {
+    const response = await request(app).get('/dasdsa').send();
+    expect(response.status).toBe(404);
+  });
+
+  test('Error has to be true because route does not exist', async () => {
+    const response = await request(app).get('/dasdsa').send();
+    expect(response.clientError).toBeTruthy();
+  });
+
+  test('response should return at least one admin', async () => {
+    const response = await request(app).get('/admins').send();
     expect(response.body.data.length).toBeGreaterThan(0);
   });
 });
 
-describe('POST /tasks Success', () => {
-  test('Test created, status has to be 201', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
+describe('POST /Admins', () => {
+  test('It should create a new admin, all fields filled and validated', async () => {
+    const response = await request(app).post('/admins').send({
+      firstName: 'Charles',
+      lastName: 'Xavier',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'true',
     });
     expect(response.status).toBe(201);
+    expect(response.body.error).toBe(false);
+    // eslint-disable-next-line no-underscore-dangle
+    adminId = response.body.data._id;
   });
 
-  test('Error has to be false', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
+  test('It should show an admin created message', async () => {
+    const response = await request(app).post('/admins').send({
+      firstName: 'Charles',
+      lastName: 'Xavier',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'true',
     });
-    expect(response.body.error).toBeFalsy();
+    expect(response.body.message).toEqual('Admin has been created');
+    // eslint-disable-next-line no-underscore-dangle
+    adminId = response.body.data._id;
   });
 
-  test('Message for created test', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
+  test('It should create a new admin, FIRST NAME lenght passed validation', async () => {
+    const response = await request(app).post('/admins').send({
+      firstName: 'Charles',
+      lastName: 'Xavier',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'true',
     });
-    expect(response.body.message).toEqual('Task has been created');
+    expect(response.body.data.firstName.length).toBeGreaterThanOrEqual(3);
+    expect(response.statusCode).toBe(201);
+  });
+
+  test('It should NOT create a new admin, FIRST NAME lenght did not pass validation', async () => {
+    const response = await request(app).post('/admins').send({
+      firstName: 'Ch',
+      lastName: 'Xavier',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'true',
+    });
+    expect(response.statusCode).toBe(400);
+  });
+
+  test('It should create a new admin, LAST NAME lenght passed validation', async () => {
+    const response = await request(app).post('/admins').send({
+      firstName: 'Charles',
+      lastName: 'Xavier',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'true',
+    });
+    expect(response.body.data.lastName.length).toBeGreaterThanOrEqual(3);
+    expect(response.statusCode).toBe(201);
+  });
+
+  test('It should NOT create a new admin, LAST NAME lenght did not pass validation', async () => {
+    const response = await request(app).post('/admins').send({
+      firstName: 'Charles',
+      lastName: 'Vi',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'true',
+    });
+    expect(response.statusCode).toBe(400);
+  });
+
+  test('It should NOT create a new admin, EMAIL format did not pass validation', async () => {
+    const response = await request(app).post('/admins').send({
+      firstName: 'Charles',
+      lastName: 'Xavier',
+      email: 'professorxgmail.com',
+      password: '123456789',
+      active: 'true',
+    });
+    expect(response.statusCode).toBe(400);
+  });
+
+  test('It should NOT create a new admin, PASSWORD lenght did not pass validation', async () => {
+    const response = await request(app).post('/admins').send({
+      firstName: 'Charles',
+      lastName: 'Xavier',
+      email: 'professorx@gmail.com',
+      password: '123',
+      active: 'true',
+    });
+    expect(response.statusCode).toBe(400);
+  });
+
+  test('It should create a new admin, STATUS boolean passed validation', async () => {
+    const response = await request(app).post('/admins').send({
+      firstName: 'Charles',
+      lastName: 'Xavier',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'false',
+    });
+    expect(response.statusCode).toBe(201);
+  });
+
+  test('It should NOT create a new admin, STATUS did not pass validation', async () => {
+    const response = await request(app).post('/admins').send({
+      firstName: 'Charles',
+      lastName: 'Xavier',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'anyword',
+    });
+    expect(response.statusCode).toBe(400);
+  });
+
+  test('It should NOT create a new admin due to a missing field', async () => {
+    const response = await request(app).post('/admins').send({
+      firstName: 'Charles',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'false',
+    });
+    expect(response.statusCode).toBe(400);
   });
 });
 
-describe('POST /tasks Missing required field', () => {
-  test('Missing parentProject, cannot create the task, status has to be 400', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: '',
-      taskName: 'Task',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
-    });
-    expect(response.status).toBe(400);
-  });
-
-  test('Missing parentProject, cannot create the task, clientError has to be true', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: '',
-      taskName: 'Task',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
-    });
-    expect(response.clientError).toBeTruthy();
-  });
-
-  test('Missing taskName, cannot create the task, status has to be 400', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: '',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
-    });
-    expect(response.status).toBe(400);
-  });
-
-  test('Missing taskName, cannot create the task, clientError has to be true', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: '',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
-    });
-    expect(response.clientError).toBeTruthy();
-  });
-
-  test('Missing startDate, cannot create the task, status has to be 400', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Task',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '',
-      status: 'Ready to deliver',
-    });
-    expect(response.status).toBe(400);
-  });
-
-  test('Missing startDate, cannot create the task, clientError has to be true', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Task',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '',
-      status: 'Ready to deliver',
-    });
-    expect(response.clientError).toBeTruthy();
-  });
-
-  test('Missing status, cannot create the task, status has to be 400', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Task',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: '',
-    });
-    expect(response.status).toBe(400);
-  });
-
-  test('Missing status, cannot create the task, clientError has to be true', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Task',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: '',
-    });
-    expect(response.clientError).toBeTruthy();
-  });
-});
-
-describe('POST /tasks wrong route', () => {
-  test('Route not exist, status has to be 404', async () => {
-    const response = await request(app).post('/wrongRoute').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Task',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
-    });
-    expect(response.status).toBe(404);
-  });
-
-  test('Route not exist, clientError has to be true', async () => {
-    const response = await request(app).post('/wrongRoute').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Task',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
-    });
-    expect(response.clientError).toBeTruthy();
-  });
-});
-
-describe('POST /tasks invalid field', () => {
-  test('TaskName is too long, cannot create the task, status has to be 400', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: 'project seed',
-      taskName: 'Task Task Task Task Task Task Taks Taks Taks Taks Taks Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
-    });
-    expect(response.status).toBe(400);
-  });
-
-  test('TaskName is too long, cannot create the task, clientError has to be true', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: 'project seed',
-      taskName: 'Taks Taks Taks Taks Taks Taks Taks Taks Taks Taks Taks Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
-    });
-    expect(response.clientError).toBeTruthy();
-  });
-
-  test('TaskDescription is too long, cannot create the task, status has to be 400', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: 'project seed',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description, Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description, Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description, Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
-    });
-    expect(response.status).toBe(400);
-  });
-
-  test('TaskDescription is too long, cannot create the task, clientError has to be true', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: 'project seed',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description, Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description, Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description, Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
-    });
-    expect(response.clientError).toBeTruthy();
-  });
-
-  test('DD/MM/AAAA is a invalid date format, cannot create the task, status has to be 400', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: 'project seed',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '20/05/2022',
-      status: 'Ready to deliver',
-    });
-    expect(response.status).toBe(400);
-  });
-
-  test('DD/MM/AAAA is a invalid date format cannot create the task, clientError has to be true', async () => {
-    const response = await request(app).post('/tasks').send({
-      parentProject: 'project seed',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '20/05/2022',
-      status: 'Ready to deliver',
-    });
-    expect(response.clientError).toBeTruthy();
-  });
-});
-
-describe('PUT /tasks Success', () => {
-  test('Test updated, status has to be 200', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
+describe('PUT /Admins', () => {
+  test('It should update the admin', async () => {
+    const response = await request(app).put(`/admins/${adminId}`).send({
+      firstName: 'Charles',
+      lastName: 'Xavier',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'true',
     });
     expect(response.status).toBe(200);
+    expect(response.body.error).toBe(false);
+    // eslint-disable-next-line no-underscore-dangle
+    adminId = response.body.data._id;
   });
 
-  test('Error has to be false', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
+  test('It should show an admin updated message', async () => {
+    const response = await request(app).put(`/admins/${adminId}`).send({
+      firstName: 'Charles',
+      lastName: 'Xavier',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'true',
     });
-    expect(response.body.error).toBeFalsy();
+    expect(response.body.message).toEqual('Admin successfully updated');
+    // eslint-disable-next-line no-underscore-dangle
+    adminId = response.body.data._id;
   });
 
-  test('Message for updated test', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
+  test('It should update the admin, FIRST NAME lenght passed validation', async () => {
+    const response = await request(app).put(`/admins/${adminId}`).send({
+      firstName: 'Charles',
+      lastName: 'Xavier',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'true',
     });
-    expect(response.body.message).toEqual('Task has been updated');
-  });
-});
-
-describe('PUT /tasks Missing required field', () => {
-  test('Missing parentProject, cannot update the task, status has to be 400', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: '',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
-    });
-    expect(response.status).toBe(400);
+    expect(response.body.data.firstName.length).toBeGreaterThanOrEqual(3);
+    expect(response.statusCode).toBe(200);
   });
 
-  test('Missing parentProject, cannot update the task, clientError has to be true', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: '',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
+  test('It should NOT update the admin, FIRST NAME lenght did not validation', async () => {
+    const response = await request(app).put(`/admins/${adminId}`).send({
+      firstName: 'Ch',
+      lastName: 'Xavier',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'true',
     });
-    expect(response.clientError).toBeTruthy();
+    expect(response.statusCode).toBe(400);
   });
 
-  test('Missing taskName, cannot update the task, status has to be 400', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: '',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
+  test('It should update the admin, LAST NAME lenght passed validation', async () => {
+    const response = await request(app).put(`/admins/${adminId}`).send({
+      firstName: 'Charles',
+      lastName: 'Xavier',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'true',
     });
-    expect(response.status).toBe(400);
+    expect(response.body.data.lastName.length).toBeGreaterThanOrEqual(3);
+    expect(response.statusCode).toBe(200);
   });
 
-  test('Missing taskName, cannot update the task, clientError has to be true', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: '',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
+  test('It should NOT update the admin, LAST NAME lenght did not pass validation', async () => {
+    const response = await request(app).put(`/admins/${adminId}`).send({
+      firstName: 'Charles',
+      lastName: 'Vi',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'true',
     });
-    expect(response.clientError).toBeTruthy();
+    expect(response.statusCode).toBe(400);
   });
 
-  test('Missing startDate, cannot update the task, status has to be 400', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '',
-      status: 'Ready to deliver',
+  test('It should NOT update the admin, EMAIL format did not pass validation', async () => {
+    const response = await request(app).put(`/admins/${adminId}`).send({
+      firstName: 'Charles',
+      lastName: 'Xavier',
+      email: 'professorxgmail.com',
+      password: '123456789',
+      active: 'true',
     });
-    expect(response.status).toBe(400);
+    expect(response.statusCode).toBe(400);
   });
 
-  test('Missing startDate, cannot update the task, clientError has to be true', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '',
-      status: 'Ready to deliver',
+  test('It should NOT update the admin, PASSWORD lenght did not pass validation', async () => {
+    const response = await request(app).put(`/admins/${adminId}`).send({
+      firstName: 'Charles',
+      lastName: 'Xavier',
+      email: 'professorx@gmail.com',
+      password: '123',
+      active: 'true',
     });
-    expect(response.clientError).toBeTruthy();
+    expect(response.statusCode).toBe(400);
   });
 
-  test('Missing status, cannot create the task, status has to be 400', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: '',
+  test('It should update the admin, STATUS field passed validation', async () => {
+    const response = await request(app).put(`/admins/${adminId}`).send({
+      firstName: 'Charles',
+      lastName: 'Xavier',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'false',
     });
-    expect(response.status).toBe(400);
+    expect(response.statusCode).toBe(200);
   });
 
-  test('Missing status, cannot create the task, clientError has to be true', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: '',
+  test('It should NOT update the admin, STATUS field did not passvalidation', async () => {
+    const response = await request(app).put(`/admins/${adminId}`).send({
+      firstName: 'Charles',
+      lastName: 'Xavier',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'anyword',
     });
-    expect(response.clientError).toBeTruthy();
-  });
-});
-
-describe('PUT /tasks wrong route', () => {
-  test('Route not exist, status has to be 404', async () => {
-    const response = await request(app).put('/wrongRoute').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
-    });
-    expect(response.status).toBe(404);
+    expect(response.statusCode).toBe(400);
   });
 
-  test('Route not exist, clientError has to be true', async () => {
-    const response = await request(app).put('/wrongRoute').send({
-      parentProject: '68a4a32f247e066e9495ce12',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
+  test('It should NOT update the admin due to a missing field', async () => {
+    const response = await request(app).put(`/admins/${adminId}`).send({
+      firstName: 'Charles',
+      email: 'professorx@gmail.com',
+      password: '123456789',
+      active: 'false',
     });
-    expect(response.clientError).toBeTruthy();
-  });
-});
-
-describe('PUT /tasks invalid field', () => {
-  test('TaskName is too long, cannot update the task, status has to be 400', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: 'project seed',
-      taskName: 'Taks Taks Taks Taks Taks Taks Taks Taks Taks Taks Taks Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
-    });
-    expect(response.status).toBe(400);
+    expect(response.statusCode).toBe(400);
   });
 
-  test('TaskName is too long, cannot update the task, clientError has to be true', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: 'project seed',
-      taskName: 'Taks Taks Taks Taks Taks Taks Taks Taks Taks Taks Taks Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
+  describe('GET by ID /admins', () => {
+    test('response should return a 200 status', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.status).toBe(200);
     });
-    expect(response.clientError).toBeTruthy();
+
+    test('response should return a false error', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.error).toBe(false);
+    });
+
+    test('response should return an error, empty admin', async () => {
+      const response = await request(app).get('/admins/60d4a32f257e066e9495ce15').send();
+      expect(response.status).toBe(404);
+    });
+
+    test('response should return an error, bad path', async () => {
+      const response = await request(app).get('/asdasd').send();
+      expect(response.status).toBe(404);
+    });
+
+    test('response should return an admin with first name', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.body.data).toHaveProperty('firstName');
+    });
+
+    test('response should return an admin with last name', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.body.data).toHaveProperty('lastName');
+    });
+
+    test('response should return an admin with email', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.body.data).toHaveProperty('email');
+    });
+
+    test('response should return an admin with password', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.body.data).toHaveProperty('password');
+    });
+
+    test('response should return an admin with active', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.body.data).toHaveProperty('active');
+    });
+
+    test('response should return an admin object', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.body.data).not.toBeNull();
+    });
+
+    test('response should return a successful message', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.body.message).toEqual('The admin is:');
+    });
   });
 
-  test('TaskDescription is too cannot update the task, long, status has to be 400', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: 'project seed',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description, Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description, Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description, Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
+  describe('DELETE /admins', () => {
+    test('response should return a false error, 200 status and successful message', async () => {
+      const response = await request(app).delete(`/admins/${adminId}`).send();
+      expect(response.error).toBeFalsy();
+      expect(response.status).toBe(200);
+      expect(response.body.message).toEqual('Admin successfully deleted');
     });
-    expect(response.status).toBe(400);
-  });
 
-  test('TaskDescription is too cannot update the task, long, clientError has to be true', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: 'project seed',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description, Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description, Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description, Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '05/20/2022',
-      status: 'Ready to deliver',
+    test('response should return an error, empty admin', async () => {
+      const response = await request(app).delete('/admins/').send();
+      expect(response.status).toBe(404);
     });
-    expect(response.clientError).toBeTruthy();
-  });
 
-  test('DD/MM/AAAA is a invalid date format, cannot update the task, status has to be 400', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: 'project seed',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '20/05/2022',
-      status: 'Ready to deliver',
+    test('response should return an error, bad path', async () => {
+      const response = await request(app).delete('/asdasd').send();
+      expect(response.status).toBe(404);
     });
-    expect(response.status).toBe(400);
-  });
-
-  test('DD/MM/AAAA is a invalid date format, cannot update the task, clientError has to be true', async () => {
-    const response = await request(app).put('/tasks/60a4a32f247e066e9495ce12').send({
-      parentProject: 'project seed',
-      taskName: 'Taks',
-      taskDescription: 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description',
-      assignedEmployee: ['60d4a32f257e066e8495ce12'],
-      startDate: '20/05/2022',
-      status: 'Ready to deliver',
-    });
-    expect(response.clientError).toBeTruthy();
   });
 });
