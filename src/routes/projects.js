@@ -5,9 +5,9 @@ import projectValidations from '../validations/projects';
 const router = express.Router();
 
 router
-  .post('/', projectValidations.validateCreation, projectControllers.createProject)
+  .post('/create', projectValidations.validateCreation, projectControllers.createProject)
   .delete('/:id', projectControllers.deleteProject)
-  .put('/:id', projectValidations.validateCreation, projectControllers.updateProject)
+  .put('/edit/:id', projectValidations.validateModification, projectControllers.updateProject)
   .get('/:id', projectControllers.getProjectById)
   .get('/', projectControllers.getAllProjects);
 
