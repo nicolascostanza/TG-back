@@ -586,4 +586,12 @@ describe('DELETE /tasks', () => {
     const response = await request(app).delete('/tasks/60a4a32f247e066e9495ce12/').send();
     expect(response.error).toBeFalsy();
   });
+
+  test('response should return a 200 status', async () => {
+    const response = await request(app).delete('/tasks/60a4a32f247e066e9495ce12/').send();
+    expect(response.body.message).toEqual('Project succesfully deleted');
+    expect(response.body.data).not.toBeUndefined();
+    expect(response.error).toBeFalsy();
+    expect(response.status).toBe(200);
+  });
 });
