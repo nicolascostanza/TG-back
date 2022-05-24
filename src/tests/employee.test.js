@@ -49,6 +49,5 @@ describe('Delete /employees', () => {
     const response = await request(app).delete('/employees/60d4a32f257e066e8495ce12');
     expect(response.status).toBe(200);
     expect(response.body.msg).toEqual('The employee with former id of 60d4a32f257e066e8495ce12 has been succesfully deleted');
-    console.log(response.body.msg);
   });
 });
