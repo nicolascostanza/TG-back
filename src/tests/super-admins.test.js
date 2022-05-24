@@ -90,20 +90,6 @@ describe('POST /super-admins', () => {
   });
 });
 
-describe('getById /super-admins', () => {
-  test('It should successfully return a super admin', async () => {
-    const response = await request(app).get(`/super-admins/${superAdminId}`).send();
-
-    expect(response.statusCode).toEqual(200);
-  });
-
-  test('It should NOT return a super-admin, _id param does not match existing', async () => {
-    const response = await request(app).get('/super-admins/60c5a34f267e066e9495de14').send();
-
-    expect(response.statusCode).toEqual(404);
-  });
-});
-
 describe('PUT /super-admins', () => {
   test('it should NOT update the super-admin, stopped on send, non existent resource', async () => {
     const response = await request(app).put('/non-existentRoute').send({
@@ -204,6 +190,20 @@ describe('PUT /super-admins', () => {
 
     expect(response.statusCode).toEqual(404);
     expect(response.body.error).toBe(true);
+  });
+});
+
+describe('getById /super-admins', () => {
+  test('It should successfully return a super admin', async () => {
+    const response = await request(app).get(`/super-admins/${superAdminId}`).send();
+
+    expect(response.statusCode).toEqual(200);
+  });
+
+  test('It should NOT return a super-admin, _id param does not match existing', async () => {
+    const response = await request(app).get('/super-admins/60c5a34f267e066e9495de14').send();
+
+    expect(response.statusCode).toEqual(404);
   });
 });
 
