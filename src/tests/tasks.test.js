@@ -30,6 +30,18 @@ describe('GET /tasks', () => {
   });
 });
 
+describe('getById /tasks', () => {
+  test('must successfully return a task', async () => {
+    const response = await request(app).get('/tasks/60a4a32f247e066e9495ce12').send();
+    expect(response.status).toEqual(200);
+  });
+
+  test('should not return a task, id not found', async () => {
+    const response = await request(app).get('/tasks/60a4a32f247e066e9495ce14').send();
+    expect(response.status).toEqual(404);
+  });
+});
+
 describe('POST /tasks Success', () => {
   test('Test created, status has to be 201', async () => {
     const response = await request(app).post('/tasks').send({
@@ -499,5 +511,22 @@ describe('PUT /tasks invalid field', () => {
       status: 'Ready to deliver',
     });
     expect(response.clientError).toBeTruthy();
+  });
+
+  describe('DELETE /tasks', () => {
+    test('response should return error, task not found', async () => {
+      const response = await request(app).delete('/tasks/').send();
+      expect(response.status).toBe(404);
+    });
+
+    test('response should return an error, wrong direction', async () => {
+      const response = await request(app).delete('/testingUrl').send();
+      expect(response.status).toBe(404);
+    });
+
+    test('response should return a false error', async () => {
+      const response = await request(app).delete('/tasks/60a4a32f247e066e9495ce12/').send();
+      expect(response.error).toBeFalsy();
+    });
   });
 });
