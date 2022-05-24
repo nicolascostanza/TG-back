@@ -9,7 +9,7 @@ const getAllAdmins = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
       message: error,
       data: undefined,
       error: true,
@@ -27,13 +27,13 @@ const getAdminById = async (req, res) => {
         error: false,
       });
     }
-    return res.status(400).json({
-      message: 'Missing id parameter',
+    return res.status(404).json({
+      message: `The Admin with id ${req.params.id} has not been found`,
       data: undefined,
       error: true,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
       message: error,
       error: true,
     });
@@ -56,7 +56,7 @@ const createAdmin = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
       message: error,
       data: undefined,
       error: true,
@@ -81,12 +81,12 @@ const deleteAdmin = async (req, res) => {
         error: true,
       });
     } return res.status(200).json({
-      message: 'Admin succesfully deleted',
+      message: 'Admin successfully deleted',
       data: result,
       error: false,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
       message: 'Internal server Error',
       data: undefined,
       error: true,
@@ -116,12 +116,12 @@ const updateAdmin = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: 'Admin succesfully updated',
+      message: 'Admin successfully updated',
       data: result,
       error: false,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
       message: error,
       error: true,
     });
