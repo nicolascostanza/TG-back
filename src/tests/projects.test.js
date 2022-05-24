@@ -32,10 +32,42 @@ describe('GET projects/id ', () => {
     const response = await request(app).get(`/projects/${projectId}`).send();
     expect(response.body.message).toEqual(`Data for project with id ${projectId} has been sent`);
   });
-  test('response should not return an empty project', async () => {
+  test('response should not return without a name', async () => {
     const response = await request(app).get(`/projects/${projectId}`).send();
-    expect(response.body.data).not.toBeNull();
+    expect(response.body.data).toHaveProperty('name');
   });
+  test('response should not return without a description', async () => {
+    const response = await request(app).get(`/projects/${projectId}`).send();
+    expect(response.body.data).toHaveProperty('description');
+  });
+  test('response should not return without a client name', async () => {
+    const response = await request(app).get(`/projects/${projectId}`).send();
+    expect(response.body.data).toHaveProperty('clientName');
+  });
+  test('response should not return without a start date', async () => {
+    const response = await request(app).get(`/projects/${projectId}`).send();
+    expect(response.body.data).toHaveProperty('startDate');
+  });
+  test('response should not return without a end date', async () => {
+    const response = await request(app).get(`/projects/${projectId}`).send();
+    expect(response.body.data).toHaveProperty('endDate');
+  });
+  test('response should not return without a project manager', async () => {
+    const response = await request(app).get(`/projects/${projectId}`).send();
+    expect(response.body.data).toHaveProperty('projectManager');
+  });
+  test('response should not return without a team', async () => {
+    const response = await request(app).get(`/projects/${projectId}`).send();
+    expect(response.body.data).toHaveProperty('team');
+  });
+  test('response should not return without a task sheet', async () => {
+    const response = await request(app).get(`/projects/${projectId}`).send();
+    expect(response.body.data).toHaveProperty('task');
+  });
+  // test('', async () => {
+  //   const response = await request(app).get(`/projects/${projectId}`).send();
+  //   expect(response.body.data).not.toBeNull();
+  // });
 });
 
 // describe('DELETE projects/id', () => {
