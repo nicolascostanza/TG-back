@@ -24,7 +24,7 @@ const TimesheetValidationUp = (req, res, next) => {
 const TimesheetValidation = (req, res, next) => {
   const TsObJ = Joi.object({
     employeeId: Joi.string().required(),
-    description: Joi.string().min(3),
+    description: Joi.string().min(3).max(80),
     project: Joi.string().min(3).required(),
     date: Joi.date().required(),
     hours: Joi.number().min(1).required(),
