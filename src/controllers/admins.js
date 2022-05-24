@@ -81,7 +81,7 @@ const deleteAdmin = async (req, res) => {
         error: true,
       });
     } return res.status(200).json({
-      message: 'Admin succesfully deleted',
+      message: 'Admin successfully deleted',
       data: result,
       error: false,
     });
@@ -116,7 +116,7 @@ const updateAdmin = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: 'Admin succesfully updated',
+      message: 'Admin successfully updated',
       data: result,
       error: false,
     });

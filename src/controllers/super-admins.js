@@ -9,7 +9,7 @@ const getAllSuperA = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(400).json({
+    return res.status(500).json({
       msg: error,
       data: undefined,
       error: true,
@@ -34,7 +34,7 @@ const createSuperAdmin = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
       message: error,
       data: undefined,
       error: true,
@@ -58,7 +58,7 @@ const getSuperAById = async (req, res) => {
       error: true,
     });
   } catch (error) {
-    return res.status().json({
+    return res.status(500).json({
       msg: error,
       data: undefined,
       error: true,
@@ -99,7 +99,7 @@ const deleteSuperAdmin = async (req, res) => {
 const updateSuperAdmin = async (req, res) => {
   try {
     if (!req.params) {
-      return res.status(400).json({
+      return res.status(404).json({
         message: 'Missing id parameter',
         data: undefined,
         error: true,
@@ -124,7 +124,7 @@ const updateSuperAdmin = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
       message: error,
       data: undefined,
       error: true,

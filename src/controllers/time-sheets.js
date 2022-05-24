@@ -36,13 +36,13 @@ const getTsById = async (req, res) => {
     const empId = await Tsheet.findById(req.params.id).populate('employeeId', { firstName: 1, surname: 1 }).populate('task', { taskName: 1, taskDescription: 1 });
     if (empId) {
       return res.status(200).json({
-        message: `The data for the employee with id ${req.params.id} has been sent`,
+        message: `The data for the timesheet with id ${req.params.id} has been sent`,
         data: empId,
         error: false,
       });
     }
     return res.status(400).json({
-      message: `There are not employee with id ${req.params.id}`,
+      message: `There is no timesheet with id ${req.params.id}`,
       data: undefined,
       error: true,
     });
