@@ -1,17 +1,13 @@
 import express from 'express';
-import adminsControllers from './controllers/admins';
-import adminValidation from './validations/admins';
+import router from './routes';
 
 const app = express();
 
 app.use(express.json());
+app.use(router);
 
-app.get('/', async (req, res) => {
+app.get('/', (req, res) => {
   res.send('Hello World!');
 });
-
-app
-  .post('/admins/post', adminValidation.validateAdmin, adminsControllers.createAdmin)
-  .put('/admins/put/:id', adminValidation.validateAdmin, adminsControllers.updateAdmin);
 
 export default app;

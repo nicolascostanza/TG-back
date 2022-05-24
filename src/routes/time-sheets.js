@@ -7,7 +7,7 @@ const router = express.Router();
 router
   .get('/', timesheetControllers.getAllTs)
   .get('/:id', timesheetControllers.getTsById)
-  .put('/:id', TimesheetValid.TimesheetValidationUp, timesheetControllers.updateTimesheet)
+  .put('/:id', TimesheetValid.TimesheetValidation, timesheetControllers.updateTimesheet)
   .post('/', TimesheetValid.TimesheetValidation, timesheetControllers.createTimeSheet)
   .delete('/:id', timesheetControllers.deleteTimesheet);
 

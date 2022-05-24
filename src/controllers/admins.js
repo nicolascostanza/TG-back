@@ -27,8 +27,8 @@ const getAdminById = async (req, res) => {
         error: false,
       });
     }
-    return res.status(400).json({
-      message: 'Missing id parameter',
+    return res.status(404).json({
+      message: `The Admin with id ${req.params.id} has not been found`,
       data: undefined,
       error: true,
     });

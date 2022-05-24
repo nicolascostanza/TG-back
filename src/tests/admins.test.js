@@ -7,11 +7,11 @@ beforeAll(async () => {
   await Admins.collection.insertMany(adminSeed);
 });
 
-let adminId;
+let adminId = '60d4a32f257e066e9495ce12';
 
 describe('POST /Admins', () => {
   test('It should create a new admin, all fields filled and validated', async () => {
-    const response = await request(app).post('/admins/post').send({
+    const response = await request(app).post('/admins').send({
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
@@ -25,7 +25,7 @@ describe('POST /Admins', () => {
   });
 
   test('It should show an admin created message', async () => {
-    const response = await request(app).post('/admins/post').send({
+    const response = await request(app).post('/admins').send({
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
@@ -38,7 +38,7 @@ describe('POST /Admins', () => {
   });
 
   test('It should create a new admin, FIRST NAME lenght passed validation', async () => {
-    const response = await request(app).post('/admins/post').send({
+    const response = await request(app).post('/admins').send({
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
@@ -50,7 +50,7 @@ describe('POST /Admins', () => {
   });
 
   test('It should NOT create a new admin, FIRST NAME lenght did not pass validation', async () => {
-    const response = await request(app).post('/admins/post').send({
+    const response = await request(app).post('/admins').send({
       firstName: 'Ch',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
@@ -61,7 +61,7 @@ describe('POST /Admins', () => {
   });
 
   test('It should create a new admin, LAST NAME lenght passed validation', async () => {
-    const response = await request(app).post('/admins/post').send({
+    const response = await request(app).post('/admins').send({
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
@@ -73,7 +73,7 @@ describe('POST /Admins', () => {
   });
 
   test('It should NOT create a new admin, LAST NAME lenght did not pass validation', async () => {
-    const response = await request(app).post('/admins/post').send({
+    const response = await request(app).post('/admins').send({
       firstName: 'Charles',
       lastName: 'Vi',
       email: 'professorx@gmail.com',
@@ -84,7 +84,7 @@ describe('POST /Admins', () => {
   });
 
   test('It should NOT create a new admin, EMAIL format did not pass validation', async () => {
-    const response = await request(app).post('/admins/post').send({
+    const response = await request(app).post('/admins').send({
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorxgmail.com',
@@ -95,7 +95,7 @@ describe('POST /Admins', () => {
   });
 
   test('It should NOT create a new admin, PASSWORD lenght did not pass validation', async () => {
-    const response = await request(app).post('/admins/post').send({
+    const response = await request(app).post('/admins').send({
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
@@ -106,7 +106,7 @@ describe('POST /Admins', () => {
   });
 
   test('It should create a new admin, STATUS boolean passed validation', async () => {
-    const response = await request(app).post('/admins/post').send({
+    const response = await request(app).post('/admins').send({
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
@@ -117,7 +117,7 @@ describe('POST /Admins', () => {
   });
 
   test('It should NOT create a new admin, STATUS did not pass validation', async () => {
-    const response = await request(app).post('/admins/post').send({
+    const response = await request(app).post('/admins').send({
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
@@ -128,7 +128,7 @@ describe('POST /Admins', () => {
   });
 
   test('It should NOT create a new admin due to a missing field', async () => {
-    const response = await request(app).post('/admins/post').send({
+    const response = await request(app).post('/admins').send({
       firstName: 'Charles',
       email: 'professorx@gmail.com',
       password: '123456789',
@@ -140,7 +140,7 @@ describe('POST /Admins', () => {
 
 describe('PUT /Admins', () => {
   test('It should update the admin', async () => {
-    const response = await request(app).put(`/admins/put/${adminId}`).send({
+    const response = await request(app).put(`/admins/${adminId}`).send({
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
@@ -154,7 +154,7 @@ describe('PUT /Admins', () => {
   });
 
   test('It should show an admin updated message', async () => {
-    const response = await request(app).put(`/admins/put/${adminId}`).send({
+    const response = await request(app).put(`/admins/${adminId}`).send({
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
@@ -167,7 +167,7 @@ describe('PUT /Admins', () => {
   });
 
   test('It should update the admin, FIRST NAME lenght passed validation', async () => {
-    const response = await request(app).put(`/admins/put/${adminId}`).send({
+    const response = await request(app).put(`/admins/${adminId}`).send({
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
@@ -179,7 +179,7 @@ describe('PUT /Admins', () => {
   });
 
   test('It should NOT update the admin, FIRST NAME lenght did not validation', async () => {
-    const response = await request(app).put(`/admins/put/${adminId}`).send({
+    const response = await request(app).put(`/admins/${adminId}`).send({
       firstName: 'Ch',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
@@ -190,7 +190,7 @@ describe('PUT /Admins', () => {
   });
 
   test('It should update the admin, LAST NAME lenght passed validation', async () => {
-    const response = await request(app).put(`/admins/put/${adminId}`).send({
+    const response = await request(app).put(`/admins/${adminId}`).send({
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
@@ -202,7 +202,7 @@ describe('PUT /Admins', () => {
   });
 
   test('It should NOT update the admin, LAST NAME lenght did not pass validation', async () => {
-    const response = await request(app).put(`/admins/put/${adminId}`).send({
+    const response = await request(app).put(`/admins/${adminId}`).send({
       firstName: 'Charles',
       lastName: 'Vi',
       email: 'professorx@gmail.com',
@@ -213,7 +213,7 @@ describe('PUT /Admins', () => {
   });
 
   test('It should NOT update the admin, EMAIL format did not pass validation', async () => {
-    const response = await request(app).put(`/admins/put/${adminId}`).send({
+    const response = await request(app).put(`/admins/${adminId}`).send({
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorxgmail.com',
@@ -224,7 +224,7 @@ describe('PUT /Admins', () => {
   });
 
   test('It should NOT update the admin, PASSWORD lenght did not pass validation', async () => {
-    const response = await request(app).put(`/admins/put/${adminId}`).send({
+    const response = await request(app).put(`/admins/${adminId}`).send({
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
@@ -235,7 +235,7 @@ describe('PUT /Admins', () => {
   });
 
   test('It should update the admin, STATUS field passed validation', async () => {
-    const response = await request(app).put(`/admins/put/${adminId}`).send({
+    const response = await request(app).put(`/admins/${adminId}`).send({
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
@@ -246,7 +246,7 @@ describe('PUT /Admins', () => {
   });
 
   test('It should NOT update the admin, STATUS field did not passvalidation', async () => {
-    const response = await request(app).put(`/admins/put/${adminId}`).send({
+    const response = await request(app).put(`/admins/${adminId}`).send({
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
@@ -257,12 +257,88 @@ describe('PUT /Admins', () => {
   });
 
   test('It should NOT update the admin due to a missing field', async () => {
-    const response = await request(app).put(`/admins/put/${adminId}`).send({
+    const response = await request(app).put(`/admins/${adminId}`).send({
       firstName: 'Charles',
       email: 'professorx@gmail.com',
       password: '123456789',
       active: 'false',
     });
     expect(response.statusCode).toBe(400);
+  });
+
+  describe('GET by ID /admins', () => {
+    test('response should return a 200 status', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.status).toBe(200);
+    });
+
+    test('response should return a false error', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.error).toBe(false);
+    });
+
+    test('response should return an error, empty admin', async () => {
+      const response = await request(app).get('/admins/60d4a32f257e066e9495ce15').send();
+      expect(response.status).toBe(404);
+    });
+
+    test('response should return an error, bad path', async () => {
+      const response = await request(app).get('/asdasd').send();
+      expect(response.status).toBe(404);
+    });
+
+    test('response should return an admin with first name', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.body.data).toHaveProperty('firstName');
+    });
+
+    test('response should return an admin with last name', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.body.data).toHaveProperty('lastName');
+    });
+
+    test('response should return an admin with email', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.body.data).toHaveProperty('email');
+    });
+
+    test('response should return an admin with password', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.body.data).toHaveProperty('password');
+    });
+
+    test('response should return an admin with active', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.body.data).toHaveProperty('active');
+    });
+
+    test('response should return an admin object', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.body.data).not.toBeNull();
+    });
+
+    test('response should return a successful message', async () => {
+      const response = await request(app).get(`/admins/${adminId}`).send();
+      expect(response.body.message).toEqual('The admin is:');
+    });
+  });
+
+  describe('DELETE /admins', () => {
+    test('response should return a false error, 200 status and successful message', async () => {
+      const response = await request(app).delete(`/admins/${adminId}`).send();
+      expect(response.error).toBeFalsy();
+      expect(response.status).toBe(200);
+      expect(response.body.message).toEqual('Admin successfully deleted');
+    });
+
+    test('response should return an error, empty admin', async () => {
+      const response = await request(app).delete('/admins/').send();
+      expect(response.status).toBe(404);
+    });
+
+    test('response should return an error, bad path', async () => {
+      const response = await request(app).delete('/asdasd').send();
+      expect(response.status).toBe(404);
+    });
   });
 });
