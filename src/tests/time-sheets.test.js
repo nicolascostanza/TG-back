@@ -15,6 +15,33 @@ beforeAll(async () => {
   await Tasks.collection.insertMany(taskSeed);
 });
 
+describe('GET /time-sheets', () => {
+  test('response should return a 200 status', async () => {
+    const response = await request(app).get('/time-sheets').send();
+    expect(response.status).toBe(200);
+  });
+
+  test('response should return a false error', async () => {
+    const response = await request(app).get('/time-sheets').send();
+    expect(response.error).toBe(false);
+  });
+
+  test('response should return an error, bad path', async () => {
+    const response = await request(app).get('/asdasd').send();
+    expect(response.status).toBe(404);
+  });
+
+  test('response should return at least one Time-sheet', async () => {
+    const response = await request(app).get('/time-sheets').send();
+    expect(response.body.data.length).toBeGreaterThan(0);
+  });
+
+  test('response should return a successful message', async () => {
+    const response = await request(app).get('/time-sheets').send();
+    expect(response.body.message).toEqual('Data for all Time-sheets sent');
+  });
+});
+
 describe('Succesful GET by Id /time-sheets', () => {
   test('should return status 200', async () => {
     const response = await request(app).get('/time-sheets/62832da494417525e9b7b0c2').send();
