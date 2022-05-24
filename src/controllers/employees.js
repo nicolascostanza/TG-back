@@ -59,11 +59,13 @@ const createEmployee = async (req, res) => {
     return res.status(201).json({
       msg: 'Employee has been successfuly created',
       data: result,
+      error: false,
     });
   } catch (error) {
     return res.status(400).json({
-      msg: 'There has been an error',
-      error: `the error is: ${error}`,
+      msg: `the error is: ${error}`,
+      data: undefined,
+      error: true,
     });
   }
 };
@@ -75,15 +77,20 @@ const deleteEmployee = async (req, res) => {
     if (!result) {
       return res.status(404).json({
         msg: `The employee with an id of ${req.params.id} has not been found or does not exist`,
+        data: undefined,
+        error: true,
       });
     }
     return res.status(200).json({
       msg: `The employee with former id of ${req.params.id} has been succesfully deleted`,
+      data: result,
+      error: false,
     });
   } catch (error) {
     return res.json({
-      msg: 'There has been an error',
-      error: `the error is: ${error}`,
+      msg: `the error is: ${error}`,
+      data: undefined,
+      error: true,
     });
   }
 };
