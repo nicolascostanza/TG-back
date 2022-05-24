@@ -26,13 +26,6 @@ describe('GET /time-sheets', () => {
     expect(response.error).toBe(false);
   });
 
-  // como puedo hacer para probar que funcione el error 400?
-
-  /*   test('response should return a 400 status', async () => {
-    const response = await request(app).get('/time-sheets/').send();
-    expect(response.status).toBe(400);
-  }); */
-
   test('response should return an error, bad path', async () => {
     const response = await request(app).get('/asdasd').send();
     expect(response.status).toBe(404);
