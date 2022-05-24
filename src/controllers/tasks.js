@@ -19,16 +19,23 @@ const getAllTasks = async (req, res) => {
 
 const getTasksById = async (req, res) => {
   try {
-    if (req.params.id) {
-      const task = await Task.findById(req.params.id).populate('assignedEmployee', { firstName: 1, surname: 1 }).populate('parentProject', { name: 1 });
+    if (!req.params.id) {
+      return res.status(400).json({
+        message: 'Missing id parameters',
+        data: null,
+        error: false,
+      });
+    }
+    const task = await Task.findById(req.params.id).populate('assignedEmployee', { firstName: 1, surname: 1 }).populate('parentProject', { name: 1 });
+    if (task) {
       return res.status(200).json({
-        message: 'Filtered tasks by id has been sent',
+        message: `The data for the employee with id ${req.params.id} has been sent`,
         data: task,
         error: false,
       });
     }
-    return res.status(400).json({
-      message: `There are not task whit id ${req.params.id}`,
+    return res.status(404).json({
+      message: `There are not employee with id ${req.params.id}`,
       data: undefined,
       error: true,
     });
@@ -69,7 +76,6 @@ const createTask = async (req, res) => {
   try {
     const task = new Task({
       parentProject: req.body.parentProject,
-      taskCreatorId: req.body.taskCreatorId,
       taskName: req.body.taskName,
       taskDescription: req.body.taskDescription,
       assignedEmployee: req.body.assignedEmployee,
