@@ -1,7 +1,7 @@
 import request from 'supertest';
-import adminSeed from '../seeds/admins';
-import Admins from '../models/Admins';
 import app from '../app';
+import Admins from '../models/Admins';
+import adminSeed from '../seeds/admins';
 
 beforeAll(async () => {
   await Admins.collection.insertMany(adminSeed);
@@ -265,80 +265,107 @@ describe('PUT /Admins', () => {
     });
     expect(response.statusCode).toBe(400);
   });
+});
 
-  describe('GET by ID /admins', () => {
-    test('response should return a 200 status', async () => {
-      const response = await request(app).get(`/admins/${adminId}`).send();
-      expect(response.status).toBe(200);
-    });
-
-    test('response should return a false error', async () => {
-      const response = await request(app).get(`/admins/${adminId}`).send();
-      expect(response.error).toBe(false);
-    });
-
-    test('response should return an error, empty admin', async () => {
-      const response = await request(app).get('/admins/60d4a32f257e066e9495ce15').send();
-      expect(response.status).toBe(404);
-    });
-
-    test('response should return an error, bad path', async () => {
-      const response = await request(app).get('/asdasd').send();
-      expect(response.status).toBe(404);
-    });
-
-    test('response should return an admin with first name', async () => {
-      const response = await request(app).get(`/admins/${adminId}`).send();
-      expect(response.body.data).toHaveProperty('firstName');
-    });
-
-    test('response should return an admin with last name', async () => {
-      const response = await request(app).get(`/admins/${adminId}`).send();
-      expect(response.body.data).toHaveProperty('lastName');
-    });
-
-    test('response should return an admin with email', async () => {
-      const response = await request(app).get(`/admins/${adminId}`).send();
-      expect(response.body.data).toHaveProperty('email');
-    });
-
-    test('response should return an admin with password', async () => {
-      const response = await request(app).get(`/admins/${adminId}`).send();
-      expect(response.body.data).toHaveProperty('password');
-    });
-
-    test('response should return an admin with active', async () => {
-      const response = await request(app).get(`/admins/${adminId}`).send();
-      expect(response.body.data).toHaveProperty('active');
-    });
-
-    test('response should return an admin object', async () => {
-      const response = await request(app).get(`/admins/${adminId}`).send();
-      expect(response.body.data).not.toBeNull();
-    });
-
-    test('response should return a successful message', async () => {
-      const response = await request(app).get(`/admins/${adminId}`).send();
-      expect(response.body.message).toEqual('The admin is:');
-    });
+describe('GET /admins', () => {
+  test('Response status has to be 200', async () => {
+    const response = await request(app).get('/admins').send();
+    expect(response.status).toBe(200);
   });
 
-  describe('DELETE /admins', () => {
-    test('response should return a false error, 200 status and successful message', async () => {
-      const response = await request(app).delete(`/admins/${adminId}`).send();
-      expect(response.error).toBeFalsy();
-      expect(response.status).toBe(200);
-      expect(response.body.message).toEqual('Admin successfully deleted');
-    });
+  test('Error has to be false', async () => {
+    const response = await request(app).get('/admins').send();
+    expect(response.clientError).toBeFalsy();
+  });
 
-    test('response should return an error, empty admin', async () => {
-      const response = await request(app).delete('/admins/').send();
-      expect(response.status).toBe(404);
-    });
+  test('response status has to be 404 because route does not exist', async () => {
+    const response = await request(app).get('/dasdsa').send();
+    expect(response.status).toBe(404);
+  });
 
-    test('response should return an error, bad path', async () => {
-      const response = await request(app).delete('/asdasd').send();
-      expect(response.status).toBe(404);
-    });
+  test('Error has to be true because route does not exist', async () => {
+    const response = await request(app).get('/dasdsa').send();
+    expect(response.clientError).toBeTruthy();
+  });
+
+  test('response should return at least one admin', async () => {
+    const response = await request(app).get('/admins').send();
+    expect(response.body.data.length).toBeGreaterThan(0);
+  });
+});
+
+describe('GET by ID /admins', () => {
+  test('response should return a 200 status', async () => {
+    const response = await request(app).get(`/admins/${adminId}`).send();
+    expect(response.status).toBe(200);
+  });
+
+  test('response should return a false error', async () => {
+    const response = await request(app).get(`/admins/${adminId}`).send();
+    expect(response.error).toBe(false);
+  });
+
+  test('response should return an error, empty admin', async () => {
+    const response = await request(app).get('/admins/60d4a32f257e066e9495ce15').send();
+    expect(response.status).toBe(404);
+  });
+
+  test('response should return an error, bad path', async () => {
+    const response = await request(app).get('/asdasd').send();
+    expect(response.status).toBe(404);
+  });
+
+  test('response should return an admin with first name', async () => {
+    const response = await request(app).get(`/admins/${adminId}`).send();
+    expect(response.body.data).toHaveProperty('firstName');
+  });
+
+  test('response should return an admin with last name', async () => {
+    const response = await request(app).get(`/admins/${adminId}`).send();
+    expect(response.body.data).toHaveProperty('lastName');
+  });
+
+  test('response should return an admin with email', async () => {
+    const response = await request(app).get(`/admins/${adminId}`).send();
+    expect(response.body.data).toHaveProperty('email');
+  });
+
+  test('response should return an admin with password', async () => {
+    const response = await request(app).get(`/admins/${adminId}`).send();
+    expect(response.body.data).toHaveProperty('password');
+  });
+
+  test('response should return an admin with active', async () => {
+    const response = await request(app).get(`/admins/${adminId}`).send();
+    expect(response.body.data).toHaveProperty('active');
+  });
+
+  test('response should return an admin object', async () => {
+    const response = await request(app).get(`/admins/${adminId}`).send();
+    expect(response.body.data).not.toBeNull();
+  });
+
+  test('response should return a successful message', async () => {
+    const response = await request(app).get(`/admins/${adminId}`).send();
+    expect(response.body.message).toEqual('The admin is:');
+  });
+});
+
+describe('DELETE /admins', () => {
+  test('response should return a false error, 200 status and successful message', async () => {
+    const response = await request(app).delete(`/admins/${adminId}`).send();
+    expect(response.error).toBeFalsy();
+    expect(response.status).toBe(200);
+    expect(response.body.message).toEqual('Admin successfully deleted');
+  });
+
+  test('response should return an error, empty admin', async () => {
+    const response = await request(app).delete('/admins/').send();
+    expect(response.status).toBe(404);
+  });
+
+  test('response should return an error, bad path', async () => {
+    const response = await request(app).delete('/asdasd').send();
+    expect(response.status).toBe(404);
   });
 });
