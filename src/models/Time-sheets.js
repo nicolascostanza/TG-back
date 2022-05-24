@@ -4,8 +4,8 @@ const { Schema } = mongoose;
 
 const timeSheetsSchema = new Schema({
   employeeId: {
-    type: String,
-    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Employee',
   },
   description: {
     type: String,
@@ -24,8 +24,8 @@ const timeSheetsSchema = new Schema({
     required: true,
   },
   task: {
-    type: String,
-    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Task',
   },
   approved: {
     type: Boolean,

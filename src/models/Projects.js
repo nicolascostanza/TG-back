@@ -31,18 +31,14 @@ const projectSchema = new Schema(
     },
     team: [
       {
-        id: { type: String, required: true },
-        name: { type: String, required: true },
-        role: { type: String, enum: ['DEV', 'QA', 'PM', 'TL'], required: true },
-        hours: { type: Number, required: true },
-        rate: { type: Number, required: true },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Employee',
       },
     ],
     tasks: [
       {
-        id: { type: String, required: true },
-        name: { type: String, required: true },
-        description: { type: String, required: true },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Task',
       },
     ],
   },

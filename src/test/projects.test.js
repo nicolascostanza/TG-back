@@ -1,10 +1,17 @@
 import request from 'supertest';
 import app from '../app';
+import tasksSeed from '../seeds/tasks';
+import employeesSeed from '../seeds/employees';
 import projectsSeed from '../seeds/projects';
-import Projects from '../models/Projects';
+
+import Tasks from '../models/Tasks';
+import Employees from '../models/Employees';
+import Proyects from '../models/Projects';
 
 beforeAll(async () => {
-  await Projects.collection.insertMany(projectsSeed);
+  await Tasks.collection.insertMany(tasksSeed);
+  await Employees.collection.insertMany(employeesSeed);
+  await Proyects.collection.insertMany(projectsSeed);
 });
 
 let projectId;
@@ -18,22 +25,10 @@ describe('Test Projects routes', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.statusCode).toBe(201);
     // eslint-disable-next-line no-underscore-dangle
@@ -47,22 +42,10 @@ describe('Test Projects routes', () => {
       startDate: '04/18/2021',
       endDate: '09/02/2021',
       projectManager: 'Gaylor Edited',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Edited',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.statusCode).toBe(202);
   });
@@ -77,22 +60,10 @@ describe('Test mesagges of project Routes', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Taylor Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Taylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.body.message).toEqual('Project has been created');
   });
@@ -104,22 +75,10 @@ describe('Test mesagges of project Routes', () => {
       startDate: '04/18/2021',
       endDate: '09/02/2021',
       projectManager: 'Gaylor Edited',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Edited',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.body.message).toEqual('Project succesfully updated');
   });
@@ -134,22 +93,10 @@ describe('Test errors for response', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Green Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.body.error).not.toBeTruthy();
   });
@@ -161,22 +108,10 @@ describe('Test errors for response', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Blue Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.body.error).not.toBeTruthy();
   });
@@ -188,22 +123,10 @@ describe('Test errors for response', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Green Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.body.error).toBeTruthy();
   });
@@ -215,22 +138,10 @@ describe('Test errors for response', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Green Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.body.error).toBeTruthy();
   });
@@ -245,22 +156,10 @@ describe('Test lengths', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.body.data.name.length).toBeGreaterThanOrEqual(3);
     expect(response.body.data.name.length).toBeLessThanOrEqual(30);
@@ -273,22 +172,10 @@ describe('Test lengths', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.body.data.description.length).toBeGreaterThanOrEqual(3);
     expect(response.body.data.description.length).toBeLessThanOrEqual(300);
@@ -301,22 +188,10 @@ describe('Test lengths', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.body.data.clientName.length).toBeGreaterThanOrEqual(3);
     expect(response.body.data.clientName.length).toBeLessThanOrEqual(30);
@@ -329,123 +204,13 @@ describe('Test lengths', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.body.data.projectManager.length).toBeGreaterThanOrEqual(3);
     expect(response.body.data.projectManager.length).toBeLessThanOrEqual(30);
-  });
-  test('This POST test thes give us the validations of the team array lengths, equal than joi', async () => {
-    const response = await request(app).post('/projects/create').send({
-      name: 'Taylor',
-      description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
-      clientName: 'Gaylor Geikie',
-      startDate: '03/18/2021',
-      endDate: '05/02/2021',
-      projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
-    });
-    expect(response.body.data.team[0].id.length).toBeGreaterThanOrEqual(1);
-    expect(response.body.data.team[0].id.length).toBeLessThanOrEqual(11);
-    expect(response.body.data.team[0].name.length).toBeGreaterThanOrEqual(3);
-    expect(response.body.data.team[0].name.length).toBeLessThanOrEqual(31);
-    expect(response.body.data.team[0].hours.toString().length).toBeGreaterThanOrEqual(1);
-    expect(response.body.data.team[0].rate.toString().length).toBeGreaterThanOrEqual(1);
-    expect(response.body.data.team[0].rate.toString().length).toBeLessThanOrEqual(1000);
-  });
-  test('This POST test thes give us the validations of the team array lengths, equal than joi', async () => {
-    const response = await request(app).post('/projects/create').send({
-      name: 'Taylor',
-      description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
-      clientName: 'Gaylor Geikie',
-      startDate: '03/18/2021',
-      endDate: '05/02/2021',
-      projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
-    });
-    expect(response.body.data.team[0].id.length).toBeGreaterThanOrEqual(1);
-    expect(response.body.data.team[0].id.length).toBeLessThanOrEqual(11);
-    expect(response.body.data.team[0].name.length).toBeGreaterThanOrEqual(3);
-    expect(response.body.data.team[0].name.length).toBeLessThanOrEqual(31);
-    expect(response.body.data.team[0].hours.toString().length).toBeGreaterThanOrEqual(1);
-    expect(response.body.data.team[0].rate.toString().length).toBeGreaterThanOrEqual(1);
-    expect(response.body.data.team[0].rate.toString().length).toBeLessThanOrEqual(1000);
-  });
-  test('This POST test thes give us the validations of the tasks array lengths, equal than joi', async () => {
-    const response = await request(app).post('/projects/create').send({
-      name: 'Taylor',
-      description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
-      clientName: 'Gaylor Geikie',
-      startDate: '03/18/2021',
-      endDate: '05/02/2021',
-      projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
-    });
-    expect(response.body.data.tasks[0].id.length).toBeGreaterThanOrEqual(1);
-    expect(response.body.data.tasks[0].id.length).toBeLessThanOrEqual(10);
-    expect(response.body.data.tasks[0].name.length).toBeGreaterThanOrEqual(1);
-    expect(response.body.data.tasks[0].name.length).toBeLessThanOrEqual(30);
-    expect(response.body.data.tasks[0].description.length).toBeGreaterThanOrEqual(1);
-    expect(response.body.data.tasks[0].description.length).toBeLessThanOrEqual(200);
   });
   test('This PUT test thes give us the validations of the name lengths, equal than joi', async () => {
     const response = await request(app).put(`/projects/edit/${projectId}`).send({
@@ -455,22 +220,10 @@ describe('Test lengths', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '88',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.body.data.name.length).toBeGreaterThanOrEqual(3);
     expect(response.body.data.name.length).toBeLessThanOrEqual(30);
@@ -483,22 +236,10 @@ describe('Test lengths', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '88',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.body.data.description.length).toBeGreaterThanOrEqual(3);
     expect(response.body.data.description.length).toBeLessThanOrEqual(300);
@@ -511,22 +252,10 @@ describe('Test lengths', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '88',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.body.data.clientName.length).toBeGreaterThanOrEqual(3);
     expect(response.body.data.clientName.length).toBeLessThanOrEqual(30);
@@ -539,90 +268,13 @@ describe('Test lengths', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '88',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.body.data.projectManager.length).toBeGreaterThanOrEqual(3);
     expect(response.body.data.projectManager.length).toBeLessThanOrEqual(300);
-  });
-  test('This PUT test thes give us the validations of the team array lengths, equal than joi', async () => {
-    const response = await request(app).put(`/projects/edit/${projectId}`).send({
-      name: 'Taylor',
-      description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
-      clientName: 'Gaylor Geikie',
-      startDate: '03/18/2021',
-      endDate: '05/02/2021',
-      projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '88',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
-    });
-    expect(response.body.data.team[0].id.length).toBeGreaterThanOrEqual(1);
-    expect(response.body.data.team[0].id.length).toBeLessThanOrEqual(11);
-    expect(response.body.data.team[0].name.length).toBeGreaterThanOrEqual(3);
-    expect(response.body.data.team[0].name.length).toBeLessThanOrEqual(31);
-    expect(response.body.data.team[0].hours.toString().length).toBeGreaterThanOrEqual(1);
-    expect(response.body.data.team[0].rate.toString().length).toBeGreaterThanOrEqual(1);
-    expect(response.body.data.team[0].rate.toString().length).toBeLessThanOrEqual(1000);
-  });
-  test('This PUT test thes give us the validations of the team array lengths, equal than joi', async () => {
-    const response = await request(app).put(`/projects/edit/${projectId}`).send({
-      name: 'Taylor',
-      description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
-      clientName: 'Gaylor Geikie',
-      startDate: '03/18/2021',
-      endDate: '05/02/2021',
-      projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '88',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
-    });
-    expect(response.body.data.tasks[0].id.length).toBeGreaterThanOrEqual(1);
-    expect(response.body.data.tasks[0].id.length).toBeLessThanOrEqual(10);
-    expect(response.body.data.tasks[0].name.length).toBeGreaterThanOrEqual(1);
-    expect(response.body.data.tasks[0].name.length).toBeLessThanOrEqual(30);
-    expect(response.body.data.tasks[0].description.length).toBeGreaterThanOrEqual(1);
-    expect(response.body.data.tasks[0].description.length).toBeLessThanOrEqual(200);
   });
 });
 describe('Test missing parameters', () => {
@@ -633,22 +285,10 @@ describe('Test missing parameters', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.statusCode).toBe(400);
   });
@@ -659,22 +299,10 @@ describe('Test missing parameters', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.statusCode).toBe(400);
   });
@@ -685,22 +313,10 @@ describe('Test missing parameters', () => {
       startDate: '03/18/2021',
       endDate: '05/02/2021',
       projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.statusCode).toBe(400);
   });
@@ -711,22 +327,10 @@ describe('Test missing parameters', () => {
       clientName: 'Gaylor Geikie',
       endDate: '05/02/2021',
       projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.statusCode).toBe(400);
   });
@@ -737,22 +341,10 @@ describe('Test missing parameters', () => {
       clientName: 'Gaylor Geikie',
       startDate: '20/04/2021',
       endDate: '05/02/2021',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.statusCode).toBe(400);
   });
@@ -764,13 +356,8 @@ describe('Test missing parameters', () => {
       startDate: '20/04/2021',
       endDate: '05/02/2021',
       projectManager: 'Gaylor Renbold',
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.statusCode).toBe(400);
   });
@@ -782,15 +369,8 @@ describe('Test missing parameters', () => {
       startDate: '20/04/2021',
       endDate: '05/02/2021',
       projectManager: 'Garrison Drake',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
     });
     expect(response.statusCode).toBe(400);
   });
@@ -801,22 +381,10 @@ describe('Test missing parameters', () => {
       clientName: 'Gaylor Geikie',
       startDate: '03/18/2021',
       projectManager: 'Gaylor Renbold',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Renbold',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.statusCode).toBe(201);
   });
@@ -828,49 +396,11 @@ describe('Test missing parameters', () => {
       startDate: '04/18/2021',
       endDate: '09/02/2021',
       projectManager: 'Gaylor Edited',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Edited',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
+      team:
+      ['60a4a32f24ae066e9495ce12'],
+      tasks:
+      ['60a4a32f247e066e9495ce12'],
     });
     expect(response.statusCode).toBe(500);
-  });
-  test('This PUT should not throw an error because id is not necessary', async () => {
-    const response = await request(app).put(`/projects/edit/${projectId}`).send({
-      name: 'Gaylor',
-      description: 'dis new montes edit ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
-      clientName: 'Gaylor edit',
-      startDate: '04/18/2021',
-      projectManager: 'Gaylor Edited',
-      team: [
-        {
-          id: '60',
-          name: 'Gaylor Edited',
-          role: 'PM',
-          hours: 34,
-          rate: 49,
-        },
-      ],
-      tasks: [
-        {
-          id: '091',
-          name: 'InterdumMaurisNon.tiff',
-          description: 'Other specified rickettsioses',
-        },
-      ],
-    });
-    expect(response.statusCode).toBe(202);
   });
 });

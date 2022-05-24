@@ -5,13 +5,10 @@ const { Schema } = mongoose;
 const taskSchema = new Schema(
   {
     parentProject: {
-      type: String,
-      required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Project',
     },
-    taskCreatorId: {
-      type: String,
-      required: true,
-    },
+
     taskName: {
       type: String,
       required: true,
@@ -22,19 +19,8 @@ const taskSchema = new Schema(
     },
     assignedEmployee: [
       {
-        employeeId: {
-          type: String,
-          required: true,
-        },
-        employeeRole: {
-          type: String,
-          required: true,
-          enum: ['DEV', 'QA', 'PM', 'TL'],
-        },
-        employeeName: {
-          type: String,
-          required: true,
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Employee',
       },
     ],
     startDate: {
