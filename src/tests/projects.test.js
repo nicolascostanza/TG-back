@@ -1,20 +1,91 @@
 import request from 'supertest';
 import app from '../app';
-import taskSeed from '../seeds/tasks';
-import employeeSeed from '../seeds/employees';
-import projectSeed from '../seeds/projects';
-
-import Tasks from '../models/Tasks';
+import Projects from '../models/Projects';
 import Employees from '../models/Employees';
-import Proyects from '../models/Projects';
+import Task from '../models/Tasks';
+import projectsSeed from '../seeds/projects';
+import employeeSeed from '../seeds/employees';
+import taskSeed from '../seeds/tasks';
 
 beforeAll(async () => {
-  await Tasks.collection.insertMany(taskSeed);
+  await Projects.collection.insertMany(projectsSeed);
   await Employees.collection.insertMany(employeeSeed);
-  await Proyects.collection.insertMany(projectSeed);
+  await Task.collection.insertMany(taskSeed);
 });
 
+const projectID = '68a4a32f247e066e9495ce12';
 let projectId;
+
+describe('GET projects/id ', () => {
+  test('response should return a 200 status', async () => {
+    const response = await request(app).get(`/projects/${projectID}`).send();
+    expect(response.status).toBe(200);
+  });
+  test('response should return a false error', async () => {
+    const response = await request(app).get(`/projects/${projectID}`).send();
+    expect(response.error).toBeFalsy();
+  });
+  test('response should return a 404 status', async () => {
+    const response = await request(app).get(`/patata/${projectID}`).send();
+    expect(response.status).toBe(404);
+  });
+  test('response should return a undefined body', async () => {
+    const response = await request(app).get(`/patata/${projectID}`).send();
+    expect(response.body.data).toBeUndefined();
+  });
+  test('response should return a true error', async () => {
+    const response = await request(app).get(`/patata/${projectID}`).send();
+    expect(response.error).toBeTruthy();
+  });
+  test('response should not return a 500 status', async () => {
+    const response = await request(app).get('/projects/15946').send();
+    expect(response.status).toBe(500);
+  });
+  test('response should not return a undefined body', async () => {
+    const response = await request(app).get('/projects/15946').send();
+    expect(response.body.data).toBeUndefined();
+  });
+  test('response should not return a true error', async () => {
+    const response = await request(app).get('/projects/15946').send();
+    expect(response.error).toBeTruthy();
+  });
+  test('response should return a message', async () => {
+    const response = await request(app).get(`/projects/${projectID}`).send();
+    expect(response.body.message).toEqual(`Data for project with id ${projectID} has been sent`);
+  });
+  test('response should not return without a name', async () => {
+    const response = await request(app).get(`/projects/${projectID}`).send();
+    expect(response.body.data).toHaveProperty('name');
+  });
+  test('response should not return without a description', async () => {
+    const response = await request(app).get(`/projects/${projectID}`).send();
+    expect(response.body.data).toHaveProperty('description');
+  });
+  test('response should not return without a client name', async () => {
+    const response = await request(app).get(`/projects/${projectID}`).send();
+    expect(response.body.data).toHaveProperty('clientName');
+  });
+  test('response should not return without a start date', async () => {
+    const response = await request(app).get(`/projects/${projectID}`).send();
+    expect(response.body.data).toHaveProperty('startDate');
+  });
+  test('response should not return without a end date', async () => {
+    const response = await request(app).get(`/projects/${projectID}`).send();
+    expect(response.body.data).toHaveProperty('endDate');
+  });
+  test('response should not return without a project manager', async () => {
+    const response = await request(app).get(`/projects/${projectID}`).send();
+    expect(response.body.data).toHaveProperty('projectManager');
+  });
+  test('response should not return without a team', async () => {
+    const response = await request(app).get(`/projects/${projectID}`).send();
+    expect(response.body.data).toHaveProperty('team');
+  });
+  test('response should not return without a task sheet', async () => {
+    const response = await request(app).get(`/projects/${projectID}`).send();
+    expect(response.body.data).toHaveProperty('task');
+  });
+});
 
 describe('Test Projects routes', () => {
   test('It should create a new project', async () => {
@@ -424,5 +495,39 @@ describe('GET ALL/Projects', () => {
   test('It should NOT return any project, due to wrong path', async () => {
     const response = await request(app).get('/notproject').send();
     expect(response.statusCode).toBe(404);
+  });
+});
+
+describe('DELETE projects/id', () => {
+  test('response should not return a 404 status', async () => {
+    const response = await request(app).delete(`/patata/${projectID}`).send();
+    expect(response.status).toBe(404);
+  });
+  test('response should not return undefined data', async () => {
+    const response = await request(app).delete(`/patata/${projectID}`).send();
+    expect(response.body.data).toBeUndefined();
+  });
+  test('response should not return a true error', async () => {
+    const response = await request(app).delete(`/patata/${projectID}`).send();
+    expect(response.error).toBeTruthy();
+  });
+  test('response should not return a 500 status', async () => {
+    const response = await request(app).delete('/projects/1594').send();
+    expect(response.error).toBeTruthy();
+  });
+  test('response should not return a undefined data', async () => {
+    const response = await request(app).delete('/projects/1594').send();
+    expect(response.body.data).toBeUndefined();
+  });
+  test('response should not return a true error', async () => {
+    const response = await request(app).delete('/projects/1594').send();
+    expect(response.error).toBeTruthy();
+  });
+  test('response should return a 200 status', async () => {
+    const response = await request(app).delete(`/projects/${projectID}`).send();
+    expect(response.body.message).toEqual('Project succesfully deleted');
+    expect(response.body.data).not.toBeUndefined();
+    expect(response.error).toBeFalsy();
+    expect(response.status).toBe(200);
   });
 });
