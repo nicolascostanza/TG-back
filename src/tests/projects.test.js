@@ -277,7 +277,6 @@ describe('Test lengths', () => {
     expect(response.body.data.projectManager.length).toBeLessThanOrEqual(300);
   });
 });
-
 describe('Test missing parameters', () => {
   test('This POST should throw an error 400 because name is missing', async () => {
     const response = await request(app).post('/projects/create').send({

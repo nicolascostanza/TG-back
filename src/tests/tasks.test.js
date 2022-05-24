@@ -508,3 +508,82 @@ describe('GET /tasks', () => {
     expect(response.body.data).not.toBeNull();
   });
 });
+
+describe('getById /tasks', () => {
+  test('must successfully return a task', async () => {
+    const response = await request(app).get('/tasks/60a4a32f247e066e9495ce12').send();
+    expect(response.status).toEqual(200);
+  });
+
+  test('should not return a task, id not found', async () => {
+    const response = await request(app).get('/tasks/70a4a32f247e066e9495ce12').send();
+    expect(response.status).toEqual(404);
+  });
+
+  test('should return a false error in expect', async () => {
+    const response = await request(app).get('/tasks/60a4a32f247e066e9495ce12').send();
+    expect(response.error).toBeFalsy();
+  });
+
+  test('returns if the task name field exist', async () => {
+    const response = await request(app).get('/tasks/60a4a32f247e066e9495ce12').send();
+    expect(response.body.data).toHaveProperty('taskName');
+  });
+
+  test('returns if the task description field exist', async () => {
+    const response = await request(app).get('/tasks/60a4a32f247e066e9495ce12').send();
+    expect(response.body.data).toHaveProperty('taskDescription');
+  });
+
+  test('returns if the task date field exist', async () => {
+    const response = await request(app).get('/tasks/60a4a32f247e066e9495ce12').send();
+    expect(response.body.data).toHaveProperty('startDate');
+  });
+
+  test('returns if the task status field exist', async () => {
+    const response = await request(app).get('/tasks/60a4a32f247e066e9495ce12').send();
+    expect(response.body.data).toHaveProperty('status');
+  });
+
+  test('returns if the task name field have a correct name for thar id', async () => {
+    const response = await request(app).get('/tasks/60a4a32f247e066e9495ce12').send();
+    expect(response.body.data).toHaveProperty('taskName', 'Taks');
+  });
+
+  test('returns if the task name field not have a correct name for thar id', async () => {
+    const response = await request(app).get('/tasks/60a4a32f247e066e9495ce12').send();
+    expect(response.body.data).not.toHaveProperty('taskName', 'AguanteElRojo');
+  });
+
+  test('returns if the task description field have a correct item for thar id', async () => {
+    const response = await request(app).get('/tasks/60a4a32f247e066e9495ce12').send();
+    expect(response.body.data).toHaveProperty('taskDescription', 'Lorem impsum tuki tuki lorem ipsum tuki tuki this is a description');
+  });
+
+  test('returns if the task status field have a correct item for thar id', async () => {
+    const response = await request(app).get('/tasks/60a4a32f247e066e9495ce12').send();
+    expect(response.body.data).toHaveProperty('status', 'Ready to deliver');
+  });
+
+  test('returns the information seached in the id', async () => {
+    const response = await request(app).get('/tasks/60d4a32f257e066e8495ce12').send();
+    expect(response.body.data).not.toBeNull();
+  });
+});
+
+describe('DELETE /tasks', () => {
+  test('response should return error, task not found', async () => {
+    const response = await request(app).delete('/tasks/').send();
+    expect(response.status).toBe(404);
+  });
+
+  test('response should return an error, wrong direction', async () => {
+    const response = await request(app).delete('/testingUrl').send();
+    expect(response.status).toBe(404);
+  });
+
+  test('response should return a false error', async () => {
+    const response = await request(app).delete('/tasks/60a4a32f247e066e9495ce12/').send();
+    expect(response.error).toBeFalsy();
+  });
+});
