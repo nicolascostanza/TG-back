@@ -81,12 +81,26 @@ describe('POST /super-admins', () => {
       firstName: 'Alex',
       lastName: 'Lias',
       email: 'alex.liasradiumrocket.com',
-      password: 'testeandoPorAy',
+      password: 'test1234',
       active: true,
     });
 
     expect(response.statusCode).toEqual(400);
     expect(response.body.error).toBe(true);
+  });
+});
+
+describe('getById /super-admins', () => {
+  test('It should successfully return a super admin', async () => {
+    const response = await request(app).get(`/super-admins/${superAdminId}`).send();
+
+    expect(response.statusCode).toEqual(200);
+  });
+
+  test('It should NOT return a super-admin, _id param does not match existing', async () => {
+    const response = await request(app).get('/super-admins/60c5a34f267e066e9495de14').send();
+
+    expect(response.statusCode).toEqual(404);
   });
 });
 
@@ -237,5 +251,41 @@ describe('GET /super-admin', () => {
   test('response should not be an empty super admin', async () => {
     const response = await request(app).get('/super-admins').send();
     expect(response.body.data).not.toBeNull();
+  });
+});
+
+describe('DELETE /super-admins', () => {
+  test('it should NOT delete a super admin, stopped on send, non existent resource', async () => {
+    const response = await request(app).delete('/super-admins').send();
+
+    expect(response.statusCode).toEqual(404);
+  });
+
+  test('it should successfully delete a super admin', async () => {
+    const response = await request(app).delete(`/super-admins/${superAdminId}`).send();
+
+    expect(response.statusCode).toEqual(200);
+  });
+
+  test('it should successfully delete a super admin', async () => {
+    const ress = await request(app).post('/super-admins').send({
+      firstName: 'Alex',
+      lastName: 'Lias',
+      email: 'alex.lias@radiumrocket.com',
+      password: 'test1234',
+      active: true,
+    });
+    // eslint-disable-next-line no-underscore-dangle
+    superAdminId = ress.body.data._id;
+
+    const response = await request(app).delete(`/super-admins/${superAdminId}`).send();
+
+    expect(response.body.message).toEqual('The Super Admin has been successfully deleted');
+  });
+
+  test('It should NOT delete a super-admin, _id param does not match existing', async () => {
+    const response = await request(app).delete('/super-admins/60c5a34f267e066e9495de14').send();
+
+    expect(response.statusCode).toEqual(404);
   });
 });

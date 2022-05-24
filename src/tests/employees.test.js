@@ -1,10 +1,10 @@
 import request from 'supertest';
 import app from '../app';
 import Employees from '../models/Employees';
-import employeesSeed from '../seeds/employees';
+import employeeSeed from '../seeds/employees';
 
 beforeAll(async () => {
-  await Employees.collection.insertMany(employeesSeed);
+  await Employees.collection.insertMany(employeeSeed);
 });
 
 let employeeId;
@@ -705,5 +705,46 @@ describe('Unsuccesful PUT /employees - Nonexistent ID', () => {
       active: true,
     });
     expect(response.status).toBe(404);
+  });
+});
+
+describe('GetById /employees', () => {
+  test('response should return a 200 status', async () => {
+    const response = await request(app).get(`/employees/${employeeId}`).send();
+    expect(response.status).toBe(200);
+  });
+
+  test('response should not return error', async () => {
+    const response = await request(app).get(`/employees/${employeeId}`).send();
+    expect(response.error).toBe(false);
+  });
+
+  test('the employee with id X much was not found', async () => {
+    const response = await request(app).get('/employees/60d4a32f257e066e84951234').send();
+    expect(response.status).toBe(400);
+  });
+
+  test('returns the required information', async () => {
+    const response = await request(app).get(`/employees/${employeeId}`).send();
+    expect(response.body.data).not.toBeNull();
+  });
+
+  test('response should return an employee email', async () => {
+    const response = await request(app).get(`/employees/${employeeId}`).send();
+    expect(response.body.data).toHaveProperty('email');
+  });
+});
+
+describe('Delete /employees', () => {
+  test('Delete should return error', async () => {
+    const response = await request(app).delete('/employees/60d4a32f257e066e8495fa15').send();
+    expect(response.body.error).toBe(true);
+  });
+
+  test('It should delete a employee', async () => {
+    const response = await request(app).delete(`/employees/${employeeId}`);
+    expect(response.status).toBe(200);
+    expect(response.body.msg).toEqual(`The employee with former id of ${employeeId} has been succesfully deleted`);
+    expect(response.error).toBe(false);
   });
 });
