@@ -25,8 +25,28 @@ describe('GET projects/id ', () => {
     expect(response.error).toBeFalsy();
   });
   test('response should return a 404 status', async () => {
-    const response = await request(app).get(`/merequetengue/${projectId}`).send();
+    const response = await request(app).get(`/patata/${projectId}`).send();
     expect(response.status).toBe(404);
+  });
+  test('response should return a undefined body', async () => {
+    const response = await request(app).get(`/patata/${projectId}`).send();
+    expect(response.body.data).toBeUndefined();
+  });
+  test('response should return a true error', async () => {
+    const response = await request(app).get(`/patata/${projectId}`).send();
+    expect(response.error).toBeTruthy();
+  });
+  test('response should not return a 500 status', async () => {
+    const response = await request(app).get('/projects/15946').send();
+    expect(response.status).toBe(500);
+  });
+  test('response should not return a undefined body', async () => {
+    const response = await request(app).get('/projects/15946').send();
+    expect(response.body.data).toBeUndefined();
+  });
+  test('response should not return a true error', async () => {
+    const response = await request(app).get('/projects/15946').send();
+    expect(response.error).toBeTruthy();
   });
   test('response should return a message', async () => {
     const response = await request(app).get(`/projects/${projectId}`).send();
@@ -64,15 +84,38 @@ describe('GET projects/id ', () => {
     const response = await request(app).get(`/projects/${projectId}`).send();
     expect(response.body.data).toHaveProperty('task');
   });
-  // test('', async () => {
-  //   const response = await request(app).get(`/projects/${projectId}`).send();
-  //   expect(response.body.data).not.toBeNull();
-  // });
 });
 
-// describe('DELETE projects/id', () => {
-//   test('response should return a 200 status', async () => {
-//     const response = await request(app).delete(`/projects/${projectId}`).send();
-//     expect(response.status).toBe(200);
-//   });
-// });
+describe('DELETE projects/id', () => {
+  test('response should not return a 404 status', async () => {
+    const response = await request(app).delete(`/patata/${projectId}`).send();
+    expect(response.status).toBe(404);
+  });
+  test('response should not return undefined data', async () => {
+    const response = await request(app).delete(`/patata/${projectId}`).send();
+    expect(response.body.data).toBeUndefined();
+  });
+  test('response should not return a true error', async () => {
+    const response = await request(app).delete(`/patata/${projectId}`).send();
+    expect(response.error).toBeTruthy();
+  });
+  test('response should not return a 500 status', async () => {
+    const response = await request(app).delete('/projects/1594').send();
+    expect(response.error).toBeTruthy();
+  });
+  test('response should not return a undefined data', async () => {
+    const response = await request(app).delete('/projects/1594').send();
+    expect(response.body.data).toBeUndefined();
+  });
+  test('response should not return a true error', async () => {
+    const response = await request(app).delete('/projects/1594').send();
+    expect(response.error).toBeTruthy();
+  });
+  test('response should return a 200 status', async () => {
+    const response = await request(app).delete(`/projects/${projectId}`).send();
+    expect(response.body.message).toEqual('Project succesfully deleted');
+    expect(response.body.data).not.toBeUndefined();
+    expect(response.error).toBeFalsy();
+    expect(response.status).toBe(200);
+  });
+});
