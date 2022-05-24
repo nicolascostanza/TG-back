@@ -30,7 +30,7 @@ describe('POST /super-admins', () => {
 describe('getById /super-admins', () => {
   test('It should successfully return a super admin', async () => {
     const response = await request(app).get(`/super-admins/${superAdminId}`).send();
-    
+
     expect(response.status).toEqual(200);
   });
 
@@ -42,15 +42,15 @@ describe('getById /super-admins', () => {
 });
 
 describe('DELETE /super-admins', () => {
-  test('it should successfully delete a super admin', async() => {
+  test('it should successfully delete a super admin', async () => {
     const response = await request(app).get(`/super-admins/${superAdminId}`).send();
 
     expect(response).toEqual(200);
   });
 
-  test('it should successfully delete a super admin', async() => {
+  test('it should successfully delete a super admin', async () => {
     const response = await request(app).get(`/super-admins/${superAdminId}`).send();
 
     expect(response.body.message).toEqual(200);
   });
-})
+});
