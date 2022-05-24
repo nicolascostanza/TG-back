@@ -10,7 +10,6 @@ const validateCreation = (req, res, next) => {
     projectManager: Joi.string().min(3).max(30).required(),
     team: Joi.array(),
     tasks: Joi.array(),
-    adminId: Joi.string().min(1).max(10).required(),
   });
 
   const validation = projectValidation.validate(req.body);
@@ -35,7 +34,6 @@ const validateModification = (req, res, next) => {
     projectManager: Joi.string().min(3).max(30),
     team: Joi.array(),
     tasks: Joi.array(),
-    adminId: Joi.string().min(1).max(10),
   });
 
   const validation = projectValidation.validate(req.body);

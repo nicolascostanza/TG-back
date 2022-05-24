@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import app from './app';
 
 dotenv.config();
+
 const URL = process.env.DATABASE_URL;
 const port = process.env.PORT || 3000;
 
