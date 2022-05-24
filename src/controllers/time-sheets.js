@@ -11,7 +11,7 @@ const getAllTs = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: ' Data for all Time-sheets sent',
+      message: 'Data for all Time-sheets sent',
       data: getAllT,
       error: false,
     });
