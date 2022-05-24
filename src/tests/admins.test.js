@@ -8,14 +8,24 @@ beforeAll(async () => {
 });
 
 describe('GET /admins', () => {
-  test('response should return a 200 status', async () => {
+  test('Response status has to be 200', async () => {
     const response = await request(app).get('/admins').send();
     expect(response.status).toBe(200);
   });
 
-  test('response should return a 404 status because route does not exist', async () => {
+  test('Error has to be false', async () => {
+    const response = await request(app).get('/admins').send();
+    expect(response.clientError).toBeFalsy();
+  });
+
+  test('response status has to be 404 because route does not exist', async () => {
     const response = await request(app).get('/dasdsa').send();
     expect(response.status).toBe(404);
+  });
+
+  test('Error has to be true because route does not exist', async () => {
+    const response = await request(app).get('/dasdsa').send();
+    expect(response.clientError).toBeTruthy();
   });
 
   test('response should return at least one admin', async () => {
