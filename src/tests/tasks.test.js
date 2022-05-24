@@ -572,6 +572,14 @@ describe('getById /tasks', () => {
 });
 
 describe('DELETE /tasks', () => {
+  test('response should return a 200 status', async () => {
+    const response = await request(app).delete('/tasks/60a4a32f247e066e9495ce12').send();
+    expect(response.body.message).toEqual('The task has been successfully deleted');
+    expect(response.body.data).not.toBeUndefined();
+    expect(response.error).toBeFalsy();
+    expect(response.status).toBe(200);
+  });
+
   test('response should return error, task not found', async () => {
     const response = await request(app).delete('/tasks/').send();
     expect(response.status).toBe(404);
@@ -582,16 +590,8 @@ describe('DELETE /tasks', () => {
     expect(response.status).toBe(404);
   });
 
-  test('response should return a false error', async () => {
-    const response = await request(app).delete('/tasks/60a4a32f247e066e9495ce12/').send();
-    expect(response.error).toBeFalsy();
-  });
-
-  test('response should return a 200 status', async () => {
-    const response = await request(app).delete('/tasks/60a4a32f247e066e9495ce12/').send();
-    expect(response.body.message).toEqual('Project succesfully deleted');
-    expect(response.body.data).not.toBeUndefined();
-    expect(response.error).toBeFalsy();
-    expect(response.status).toBe(200);
+  test('response should return an error', async () => {
+    const response = await request(app).delete('/tasks/60a4a32f247e066e9495ce12').send();
+    expect(response.error).not.toBeFalsy();
   });
 });
