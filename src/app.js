@@ -1,15 +1,13 @@
 import express from 'express';
-import projects from './controllers/super-admins';
+import router from './routes';
 
 const app = express();
 
 app.use(express.json());
+app.use(router);
 
-app.get('/', async (req, res) => {
+app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app
-  .get('/super-admin/:id', projects.getProjectById)
-  .delete('/super-admins/:id', projects.deleteProject);
 export default app;

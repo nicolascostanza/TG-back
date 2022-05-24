@@ -1,19 +1,11 @@
-import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import router from './routes';
+import app from './app';
 
 dotenv.config();
+
 const URL = process.env.DATABASE_URL;
-const app = express();
 const port = process.env.PORT || 3000;
-
-app.use(express.json());
-app.use(router);
-
-app.get('/', async (req, res) => {
-  res.send('Hello World!');
-});
 
 mongoose.connect(
   URL,
