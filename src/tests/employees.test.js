@@ -735,6 +735,43 @@ describe('GetById /employees', () => {
   });
 });
 
+describe('GET /employees', () => {
+  test('It should return a 200 status', async () => {
+    const response = await request(app).get('/employees').send();
+    expect(response.status).toBe(200);
+  });
+
+  test('It should return a correct message', async () => {
+    const response = await request(app).get('/employees').send();
+    expect(response.body.msg).toEqual('All employees are:');
+  });
+
+  test('It should return at least one employee', async () => {
+    const response = await request(app).get('/employees').send();
+    expect(response.body.data.length).toBeGreaterThan(0);
+  });
+
+  test('It should not return an empty employee', async () => {
+    const response = await request(app).get('/employees').send();
+    expect(response.body.data).not.toBeNull();
+  });
+
+  test('It should return a 404 status', async () => {
+    const response = await request(app).get('/nkjnkn').send();
+    expect(response.status).toBe(404);
+  });
+
+  test('It should return a 404 status', async () => {
+    const response = await request(app).get('/employee').send();
+    expect(response.status).toBe(404);
+  });
+
+  test('It should be return false error', async () => {
+    const response = await request(app).get('/employees').send();
+    expect(response.error).toBe(false);
+  });
+});
+
 describe('Delete /employees', () => {
   test('Delete should return error', async () => {
     const response = await request(app).delete('/employees/60d4a32f257e066e8495fa15').send();

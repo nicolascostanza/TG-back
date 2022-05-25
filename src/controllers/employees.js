@@ -9,7 +9,7 @@ const getAllEmployees = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
       message: error,
       data: undefined,
       error: true,
@@ -33,8 +33,8 @@ const getEmployeeById = async (req, res) => {
       error: true,
     });
   } catch (error) {
-    return res.status(500).json({
-      message: error,
+    return res.status(400).json({
+      message: 'error',
       data: undefined,
       error: true,
     });
@@ -123,7 +123,7 @@ const updateEmployee = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
       message: error,
       data: undefined,
       error: true,
