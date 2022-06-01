@@ -7,7 +7,7 @@ const TimesheetValidationUp = (req, res, next) => {
     project: Joi.string().min(3),
     date: Joi.date(),
     hours: Joi.number().min(1),
-    task: Joi.string().min(3),
+    task: Joi.array(),
     approved: Joi.bool(),
     role: Joi.string().valid('DEV', 'QA', 'PM', 'TL'),
   });
@@ -28,7 +28,7 @@ const TimesheetValidation = (req, res, next) => {
     project: Joi.string().min(3).required(),
     date: Joi.date().required(),
     hours: Joi.number().min(1).required(),
-    task: Joi.string().min(3).required(),
+    task: Joi.array(),
     approved: Joi.bool().required(),
     role: Joi.string().valid('DEV', 'QA', 'PM', 'TL').required(),
   });

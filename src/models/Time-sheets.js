@@ -23,10 +23,12 @@ const timeSheetsSchema = new Schema({
     type: Number,
     required: true,
   },
-  task: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Task',
-  },
+  task: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Task',
+    },
+  ],
   approved: {
     type: Boolean,
     required: true,
