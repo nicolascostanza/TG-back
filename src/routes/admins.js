@@ -9,6 +9,6 @@ router
   .delete('/:id', adminsControllers.deleteAdmin)
   .get('/', adminsControllers.getAllAdmins)
   .get('/:id', adminsControllers.getAdminById)
-  .put('/:id', adminValidation.validateAdmin, adminsControllers.updateAdmin);
+  .put('/:id', adminValidation.validateAdminUpd, adminsControllers.updateAdmin);
 
 export default router;
