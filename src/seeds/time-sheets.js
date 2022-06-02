@@ -7,7 +7,7 @@ export default [{
   project: 'project a ',
   date: '05/20/2022',
   hours: '45',
-  task: '60a4a32f247e066e9495ce12',
+  task: ['60a4a32f247e066e9495ce12'],
   approved: 'true',
   role: 'DEV',
 }];
