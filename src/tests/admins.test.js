@@ -255,16 +255,6 @@ describe('PUT /Admins', () => {
     });
     expect(response.statusCode).toBe(400);
   });
-
-  test('It should NOT update the admin due to a missing field', async () => {
-    const response = await request(app).put(`/admins/${adminId}`).send({
-      firstName: 'Charles',
-      email: 'professorx@gmail.com',
-      password: '123456789',
-      active: 'false',
-    });
-    expect(response.statusCode).toBe(400);
-  });
 });
 
 describe('GET /admins', () => {
