@@ -4,13 +4,13 @@ const getAllSuperA = async (req, res) => {
   try {
     const allSuperA = await SuperAdmin.find({});
     return res.status(200).json({
-      msg: 'The list has been found',
+      message: 'The list has been found',
       data: allSuperA,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      msg: error,
+      message: error,
       data: undefined,
       error: true,
     });
@@ -47,19 +47,19 @@ const getSuperAById = async (req, res) => {
     const superAdmin = await SuperAdmin.findById(req.params.id);
     if (superAdmin) {
       return res.status(200).json({
-        msg: 'This ID has been found',
+        message: 'This ID has been found',
         data: superAdmin,
         error: false,
       });
     }
     return res.status(404).json({
-      msg: 'this ID has not been found',
+      message: 'this ID has not been found',
       data: undefined,
       error: true,
     });
   } catch (error) {
     return res.status(500).json({
-      msg: error,
+      message: error,
       data: undefined,
       error: true,
     });

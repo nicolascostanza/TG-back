@@ -136,8 +136,8 @@ describe('PUT /super-admins', () => {
       active: true,
     });
 
-    expect(response.statusCode).toEqual(400);
-    expect(response.body.error).toBe(true);
+    expect(response.status).toEqual(200);
+    expect(response.body.error).toBe(false);
   });
 
   test('it should NOT update the super-admin, stopped on verification, name too short', async () => {
