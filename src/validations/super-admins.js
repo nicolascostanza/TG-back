@@ -6,7 +6,7 @@ const validateCreation = (req, res, next) => {
     lastName: Joi.string().min(3).max(50).required(),
     email: Joi.string().email().lowercase().required(),
     password: Joi.string().regex(/(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,25})$/).required(),
-    active: Joi.boolean().required(),
+    active: Joi.boolean(),
   });
 
   const validation = superAdminValidation.validate(req.body);
