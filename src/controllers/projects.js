@@ -73,7 +73,9 @@ const createProject = async (req, res) => {
 
 const deleteProject = async (req, res) => {
   try {
-    const result = await Project.findByIdAndDelete(req.params.id);
+    const result = await Project.findByIdAndDelete(req.params.id)
+      .populate('team', { firstName: 1, surname: 1 })
+      .populate('tasks', { taskName: 1 });
     if (!result) {
       return res.status(404).json({
         message: 'Project not found',
@@ -81,11 +83,11 @@ const deleteProject = async (req, res) => {
         error: true,
       });
     }
-    return res.status(200).json({
+    return res.json({
       message: 'Project succesfully deleted',
       data: result,
       error: false,
-    });
+    }).status(204);
   } catch (error) {
     return res.status(500).json({
       message: error.message,
@@ -108,7 +110,7 @@ const updateProject = async (req, res) => {
       req.params.id,
       req.body,
       { new: true },
-    );
+    ).populate('team', { firstName: 1, surname: 1 }).populate('tasks', { taskName: 1 });
 
     if (!result) {
       return res.status(404).json({
