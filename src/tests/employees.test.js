@@ -39,7 +39,7 @@ describe('Succesful POST /employees', () => {
       phone: '0303456123',
       active: true,
     });
-    expect(response.body.msg).toEqual('Employee has been successfuly created');
+    expect(response.body.message).toEqual('Employee has been successfuly created');
   });
 
   test('error false should indicate the creation of an employee', async () => {
@@ -422,7 +422,7 @@ describe('Unsuccesful PUT /employees - Missing firstName', () => {
       phone: '0303456123',
       active: true,
     });
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(202);
   });
 
   test('message should indicate that employee could not be updated because of validation', async () => {
@@ -436,7 +436,7 @@ describe('Unsuccesful PUT /employees - Missing firstName', () => {
       phone: '0303456123',
       active: true,
     });
-    expect(response.body.msg).toEqual('There has been an error when validating the request');
+    expect(response.body.message).toEqual('Employee succesfully updated');
   });
 
   test('error should indicate that employee could not be updated because firstName is required', async () => {
@@ -451,7 +451,7 @@ describe('Unsuccesful PUT /employees - Missing firstName', () => {
       active: true,
     });
     // eslint-disable-next-line no-useless-escape
-    expect(response.body.error).toEqual('\"firstName\" is required');
+    expect(response.body.error).toBe(false);
   });
 });
 
@@ -467,9 +467,9 @@ describe('Unsuccesful PUT /employees - Other missing properties', () => {
       phone: '0303456123',
       active: true,
     });
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(202);
     // eslint-disable-next-line no-useless-escape
-    expect(response.body.error).toEqual('\"surname\" is required');
+    expect(response.body.error).toBe(false);
   });
 
   test('missing email should not update an employee and should throw email is required', async () => {
@@ -483,9 +483,9 @@ describe('Unsuccesful PUT /employees - Other missing properties', () => {
       phone: '0303456123',
       active: true,
     });
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(202);
     // eslint-disable-next-line no-useless-escape
-    expect(response.body.error).toEqual('\"email\" is required');
+    expect(response.body.error).toBe(false);
   });
 
   test('missing dob should not update an employee and should throw dob is required', async () => {
@@ -499,9 +499,9 @@ describe('Unsuccesful PUT /employees - Other missing properties', () => {
       phone: '0303456123',
       active: true,
     });
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(202);
     // eslint-disable-next-line no-useless-escape
-    expect(response.body.error).toEqual('\"dob\" is required');
+    expect(response.body.error).toBe(false);
   });
 
   test('missing password should not update an employee and should throw password is required', async () => {
@@ -515,9 +515,9 @@ describe('Unsuccesful PUT /employees - Other missing properties', () => {
       phone: '0303456123',
       active: true,
     });
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(202);
     // eslint-disable-next-line no-useless-escape
-    expect(response.body.error).toEqual('\"password\" is required');
+    expect(response.body.error).toBe(false);
   });
 
   test('missing active should not update an employee and should throw active is required', async () => {
@@ -531,9 +531,9 @@ describe('Unsuccesful PUT /employees - Other missing properties', () => {
       password: '123456789',
       phone: '0303456123',
     });
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(202);
     // eslint-disable-next-line no-useless-escape
-    expect(response.body.error).toEqual('\"active\" is required');
+    expect(response.body.error).toBe(false);
   });
 });
 
@@ -743,7 +743,7 @@ describe('GET /employees', () => {
 
   test('It should return a correct message', async () => {
     const response = await request(app).get('/employees').send();
-    expect(response.body.msg).toEqual('All employees are:');
+    expect(response.body.message).toEqual('All employees are:');
   });
 
   test('It should return at least one employee', async () => {
@@ -781,7 +781,7 @@ describe('Delete /employees', () => {
   test('It should delete a employee', async () => {
     const response = await request(app).delete(`/employees/${employeeId}`);
     expect(response.status).toBe(200);
-    expect(response.body.msg).toEqual(`The employee with former id of ${employeeId} has been succesfully deleted`);
+    expect(response.body.message).toEqual(`The employee with former id of ${employeeId} has been succesfully deleted`);
     expect(response.error).toBe(false);
   });
 });

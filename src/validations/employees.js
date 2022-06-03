@@ -41,7 +41,7 @@ const updateValidation = (req, res, next) => {
 
   if (validation.error) {
     return res.status(400).json({
-      msg: 'There has been an error when validating the request',
+      message: 'There has been an error when validating the request',
       error: validation.error.details[0].message,
     });
   }
