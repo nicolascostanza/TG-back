@@ -5,7 +5,7 @@ const validateCreation = (req, res, next) => {
     firstName: Joi.string().min(3).max(50).required(),
     lastName: Joi.string().min(3).max(50).required(),
     email: Joi.string().email().lowercase().required(),
-    password: Joi.alphanum().min(8),
+    password: Joi.string().regex(/(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,25})$/).required(),
     active: Joi.boolean(),
   });
 
@@ -25,7 +25,7 @@ const validateUpdate = (req, res, next) => {
     firstName: Joi.string().min(3).max(50),
     lastName: Joi.string().min(3).max(50),
     email: Joi.string().email().lowercase(),
-    password: Joi.alphanum().min(8),
+    password: Joi.string().regex(/(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,25})$/),
     active: Joi.boolean(),
   });
 

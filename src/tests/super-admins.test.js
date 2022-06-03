@@ -7,7 +7,7 @@ beforeAll(async () => {
   await Superadmin.collection.insertMany(superAdminSeed);
 });
 
-let superAdminId;
+const superAdminId = '60d4a32f247e066e9495ce12';
 
 describe('POST /super-admins', () => {
   test('it should NOT create a new super-admin, stopped on send, non existent resource', async () => {
@@ -19,7 +19,7 @@ describe('POST /super-admins', () => {
       active: true,
     });
 
-    expect(response.statusCode).toEqual(404);
+    expect(response.status).toEqual(404);
   });
 
   test('it should create a new super-admin', async () => {
@@ -30,11 +30,8 @@ describe('POST /super-admins', () => {
       password: 'test1234',
       active: true,
     });
-
     // eslint-disable-next-line no-underscore-dangle
-    superAdminId = response.body.data._id;
-
-    expect(response.statusCode).toEqual(201);
+    expect(response.status).toEqual(201);
     expect(response.body.error).toBe(false);
   });
 
@@ -47,7 +44,7 @@ describe('POST /super-admins', () => {
       active: true,
     });
 
-    expect(response.statusCode).toEqual(400);
+    expect(response.status).toEqual(400);
     expect(response.body.error).toBe(true);
   });
 
@@ -56,11 +53,11 @@ describe('POST /super-admins', () => {
       firstName: 'Alex',
       lastName: 'Lias',
       email: 'alex.lias@radiumrocket.com',
-      password: '123456789',
+      password: '@@@',
       active: true,
     });
 
-    expect(response.statusCode).toEqual(400);
+    expect(response.status).toEqual(400);
     expect(response.body.error).toBe(true);
   });
 
@@ -72,7 +69,7 @@ describe('POST /super-admins', () => {
       active: true,
     });
 
-    expect(response.statusCode).toEqual(400);
+    expect(response.status).toEqual(400);
     expect(response.body.error).toBe(true);
   });
 
@@ -85,7 +82,7 @@ describe('POST /super-admins', () => {
       active: true,
     });
 
-    expect(response.statusCode).toEqual(400);
+    expect(response.status).toEqual(400);
     expect(response.body.error).toBe(true);
   });
 });
@@ -100,7 +97,7 @@ describe('PUT /super-admins', () => {
       active: true,
     });
 
-    expect(response.statusCode).toEqual(404);
+    expect(response.status).toEqual(404);
   });
 
   test('It should NOT update the super-admin, stopped on send, no _id param', async () => {
@@ -112,7 +109,7 @@ describe('PUT /super-admins', () => {
       active: true,
     });
 
-    expect(response.statusCode).toEqual(404);
+    expect(response.status).toEqual(404);
   });
 
   test('It should update the super-admin', async () => {
@@ -124,7 +121,7 @@ describe('PUT /super-admins', () => {
       active: true,
     });
 
-    expect(response.statusCode).toEqual(200);
+    expect(response.status).toEqual(200);
     expect(response.body.error).toBe(false);
   });
 
@@ -149,7 +146,7 @@ describe('PUT /super-admins', () => {
       active: true,
     });
 
-    expect(response.statusCode).toEqual(400);
+    expect(response.status).toEqual(400);
     expect(response.body.error).toBe(true);
   });
 
@@ -158,11 +155,11 @@ describe('PUT /super-admins', () => {
       firstName: 'Alex',
       lastName: 'Liases',
       email: 'a.liases@radiumrocket.com',
-      password: 'testeandoPorAy',
+      password: '@@@',
       active: true,
     });
 
-    expect(response.statusCode).toEqual(400);
+    expect(response.status).toEqual(400);
     expect(response.body.error).toBe(true);
   });
 
@@ -175,7 +172,7 @@ describe('PUT /super-admins', () => {
       active: true,
     });
 
-    expect(response.statusCode).toEqual(400);
+    expect(response.status).toEqual(400);
     expect(response.body.error).toBe(true);
   });
 
@@ -188,7 +185,7 @@ describe('PUT /super-admins', () => {
       active: true,
     });
 
-    expect(response.statusCode).toEqual(404);
+    expect(response.status).toEqual(404);
     expect(response.body.error).toBe(true);
   });
 });
@@ -197,13 +194,13 @@ describe('getById /super-admins', () => {
   test('It should successfully return a super admin', async () => {
     const response = await request(app).get(`/super-admins/${superAdminId}`).send();
 
-    expect(response.statusCode).toEqual(200);
+    expect(response.status).toEqual(200);
   });
 
   test('It should NOT return a super-admin, _id param does not match existing', async () => {
     const response = await request(app).get('/super-admins/60c5a34f267e066e9495de14').send();
 
-    expect(response.statusCode).toEqual(404);
+    expect(response.status).toEqual(404);
   });
 });
 
@@ -235,7 +232,7 @@ describe('GET /super-admin', () => {
 
   test('response should return a correct message', async () => {
     const response = await request(app).get('/super-admins').send();
-    expect(response.body.msg).toEqual('The list has been found');
+    expect(response.body.message).toEqual('The list has been found');
   });
 
   test('response should return at least one super admin', async () => {
@@ -258,34 +255,18 @@ describe('DELETE /super-admins', () => {
   test('it should NOT delete a super admin, stopped on send, non existent resource', async () => {
     const response = await request(app).delete('/super-admins').send();
 
-    expect(response.statusCode).toEqual(404);
+    expect(response.status).toEqual(404);
   });
 
   test('it should successfully delete a super admin', async () => {
     const response = await request(app).delete(`/super-admins/${superAdminId}`).send();
 
-    expect(response.statusCode).toEqual(200);
-  });
-
-  test('it should successfully delete a super admin', async () => {
-    const ress = await request(app).post('/super-admins').send({
-      firstName: 'Alex',
-      lastName: 'Lias',
-      email: 'alex.lias@radiumrocket.com',
-      password: 'test1234',
-      active: true,
-    });
-    // eslint-disable-next-line no-underscore-dangle
-    superAdminId = ress.body.data._id;
-
-    const response = await request(app).delete(`/super-admins/${superAdminId}`).send();
-
-    expect(response.body.message).toEqual('The Super Admin has been successfully deleted');
+    expect(response.status).toEqual(200);
   });
 
   test('It should NOT delete a super-admin, _id param does not match existing', async () => {
     const response = await request(app).delete('/super-admins/60c5a34f267e066e9495de14').send();
 
-    expect(response.statusCode).toEqual(404);
+    expect(response.status).toEqual(404);
   });
 });
