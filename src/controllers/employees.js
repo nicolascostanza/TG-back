@@ -4,7 +4,7 @@ const getAllEmployees = async (req, res) => {
   const allEmployees = await Employee.find({});
   try {
     return res.status(200).json({
-      msg: 'All employees are:',
+      message: 'All employees are:',
       data: allEmployees,
       error: false,
     });
@@ -22,13 +22,13 @@ const getEmployeeById = async (req, res) => {
     const employee = await Employee.findById(req.params.id);
     if (employee) {
       return res.status(200).json({
-        msg: `The employee with id ${req.params.id} is:`,
+        message: `The employee with id ${req.params.id} is:`,
         data: employee,
         error: false,
       });
     }
     return res.status(400).json({
-      msg: `No employee with id ${req.params.id} has been found`,
+      message: `No employee with id ${req.params.id} has been found`,
       data: undefined,
       error: true,
     });
@@ -57,13 +57,13 @@ const createEmployee = async (req, res) => {
 
     const result = await employee.save();
     return res.status(201).json({
-      msg: 'Employee has been successfuly created',
+      message: 'Employee has been successfuly created',
       data: result,
       error: false,
     });
   } catch (error) {
     return res.status(400).json({
-      msg: `the error is: ${error}`,
+      message: `the error is: ${error}`,
       data: undefined,
       error: true,
     });
@@ -76,19 +76,19 @@ const deleteEmployee = async (req, res) => {
 
     if (!result) {
       return res.status(404).json({
-        msg: `The employee with an id of ${req.params.id} has not been found or does not exist`,
+        message: `The employee with an id of ${req.params.id} has not been found or does not exist`,
         data: undefined,
         error: true,
       });
     }
     return res.status(200).json({
-      msg: `The employee with former id of ${req.params.id} has been succesfully deleted`,
+      message: `The employee with former id of ${req.params.id} has been succesfully deleted`,
       data: result,
       error: false,
     });
   } catch (error) {
     return res.json({
-      msg: `the error is: ${error}`,
+      message: `the error is: ${error}`,
       data: undefined,
       error: true,
     });
