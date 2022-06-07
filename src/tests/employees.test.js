@@ -39,7 +39,7 @@ describe('Succesful POST /employees', () => {
       phone: '0303456123',
       active: true,
     });
-    expect(response.body.message).toEqual('Employee has been successfuly created');
+    expect(response.body.message).toEqual('Employee has been created');
   });
 
   test('error false should indicate the creation of an employee', async () => {
@@ -96,7 +96,7 @@ describe('Unsuccesful POST /employees - Missing firstName', () => {
       phone: '0303456123',
       active: true,
     });
-    expect(response.body.msg).toEqual('There has been an error when validating the request');
+    expect(response.body.message).toEqual('There has been an error when validating the request');
   });
 
   test('error should indicate that employee could not be created because firstName is required', async () => {
@@ -364,7 +364,7 @@ describe('Succesful PUT /employees', () => {
       phone: '0303456123',
       active: true,
     });
-    expect(response.status).toBe(202);
+    expect(response.status).toBe(200);
   });
 
   test('message should indicate the update of an employee', async () => {
@@ -406,7 +406,7 @@ describe('Succesful PUT /employees', () => {
       password: '123456789',
       active: true,
     });
-    expect(response.status).toBe(202);
+    expect(response.status).toBe(200);
   });
 });
 
@@ -422,7 +422,7 @@ describe('Unsuccesful PUT /employees - Missing firstName', () => {
       phone: '0303456123',
       active: true,
     });
-    expect(response.status).toBe(202);
+    expect(response.status).toBe(200);
   });
 
   test('message should indicate that employee could not be updated because of validation', async () => {
@@ -467,7 +467,7 @@ describe('Unsuccesful PUT /employees - Other missing properties', () => {
       phone: '0303456123',
       active: true,
     });
-    expect(response.status).toBe(202);
+    expect(response.status).toBe(200);
     // eslint-disable-next-line no-useless-escape
     expect(response.body.error).toBe(false);
   });
@@ -483,7 +483,7 @@ describe('Unsuccesful PUT /employees - Other missing properties', () => {
       phone: '0303456123',
       active: true,
     });
-    expect(response.status).toBe(202);
+    expect(response.status).toBe(200);
     // eslint-disable-next-line no-useless-escape
     expect(response.body.error).toBe(false);
   });
@@ -499,7 +499,7 @@ describe('Unsuccesful PUT /employees - Other missing properties', () => {
       phone: '0303456123',
       active: true,
     });
-    expect(response.status).toBe(202);
+    expect(response.status).toBe(200);
     // eslint-disable-next-line no-useless-escape
     expect(response.body.error).toBe(false);
   });
@@ -515,7 +515,7 @@ describe('Unsuccesful PUT /employees - Other missing properties', () => {
       phone: '0303456123',
       active: true,
     });
-    expect(response.status).toBe(202);
+    expect(response.status).toBe(200);
     // eslint-disable-next-line no-useless-escape
     expect(response.body.error).toBe(false);
   });
@@ -531,7 +531,7 @@ describe('Unsuccesful PUT /employees - Other missing properties', () => {
       password: '123456789',
       phone: '0303456123',
     });
-    expect(response.status).toBe(202);
+    expect(response.status).toBe(200);
     // eslint-disable-next-line no-useless-escape
     expect(response.body.error).toBe(false);
   });
@@ -721,7 +721,7 @@ describe('GetById /employees', () => {
 
   test('the employee with id X much was not found', async () => {
     const response = await request(app).get('/employees/60d4a32f257e066e84951234').send();
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(404);
   });
 
   test('returns the required information', async () => {
@@ -781,7 +781,7 @@ describe('Delete /employees', () => {
   test('It should delete a employee', async () => {
     const response = await request(app).delete(`/employees/${employeeId}`);
     expect(response.status).toBe(200);
-    expect(response.body.message).toEqual(`The employee with former id of ${employeeId} has been succesfully deleted`);
+    expect(response.body.message).toEqual('Employee successfully deleted');
     expect(response.error).toBe(false);
   });
 });

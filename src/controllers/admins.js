@@ -10,8 +10,8 @@ const getAllAdmins = async (req, res) => {
     });
   } catch (error) {
     return res.status(400).json({
-      message: error,
-      data: undefined,
+      message: error.message,
+      data: {},
       error: true,
     });
   }
@@ -22,19 +22,20 @@ const getAdminById = async (req, res) => {
     const admin = await Admins.findById(req.params.id);
     if (admin) {
       return res.status(200).json({
-        message: 'The admin is:',
+        message: `Admin with ID:${req.params.id} sent:`,
         data: admin,
         error: false,
       });
     }
     return res.status(404).json({
-      message: `The Admin with id ${req.params.id} has not been found`,
-      data: undefined,
+      message: `Admin with ID:${req.params.id} not found`,
+      data: {},
       error: true,
     });
   } catch (error) {
     return res.status(400).json({
-      message: error,
+      message: error.message,
+      data: {},
       error: true,
     });
   }
@@ -57,38 +58,8 @@ const createAdmin = async (req, res) => {
     });
   } catch (error) {
     return res.status(400).json({
-      message: error,
-      data: undefined,
-      error: true,
-    });
-  }
-};
-
-const deleteAdmin = async (req, res) => {
-  try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        message: 'Missing Id parameter',
-        data: undefined,
-        error: true,
-      });
-    }
-    const result = await Admins.findByIdAndDelete(req.params.id);
-    if (!result) {
-      return res.status(404).json({
-        message: `The Admin with id ${req.params.id} has not been found`,
-        data: undefined,
-        error: true,
-      });
-    } return res.status(200).json({
-      message: 'Admin successfully deleted',
-      data: result,
-      error: false,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      message: 'Internal server Error',
-      data: undefined,
+      message: error.message,
+      data: {},
       error: true,
     });
   }
@@ -99,7 +70,7 @@ const updateAdmin = async (req, res) => {
     if (!req.params) {
       return res.status(400).json({
         message: 'Missing id parameter',
-        data: undefined,
+        data: {},
         error: true,
       });
     }
@@ -110,8 +81,8 @@ const updateAdmin = async (req, res) => {
     );
     if (!result) {
       return res.status(404).json({
-        message: `The Admin with id ${req.params.id} has not been found`,
-        data: undefined,
+        message: `Admin with ID:${req.params.id} not found`,
+        data: {},
         error: true,
       });
     }
@@ -122,7 +93,38 @@ const updateAdmin = async (req, res) => {
     });
   } catch (error) {
     return res.status(400).json({
-      message: error,
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
+const deleteAdmin = async (req, res) => {
+  try {
+    if (!req.params.id) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+    const result = await Admins.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({
+        message: `Admin with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    } return res.json({
+      message: 'Admin successfully deleted',
+      data: result,
+      error: false,
+    }).status(204);
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
       error: true,
     });
   }
@@ -132,6 +134,6 @@ export default {
   getAllAdmins,
   getAdminById,
   createAdmin,
-  deleteAdmin,
   updateAdmin,
+  deleteAdmin,
 };

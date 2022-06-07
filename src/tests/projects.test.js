@@ -18,7 +18,7 @@ let projectId;
 
 describe('Test Projects routes', () => {
   test('It should create a new project', async () => {
-    const response = await request(app).post('/projects/create').send({
+    const response = await request(app).post('/projects').send({
       name: 'Gaylor',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor Geikie',
@@ -35,7 +35,7 @@ describe('Test Projects routes', () => {
     projectId = response.body.data._id;
   });
   test('This PUT should edit a project', async () => {
-    const response = await request(app).put(`/projects/edit/${projectId}`).send({
+    const response = await request(app).put(`/projects/${projectId}`).send({
       name: 'Gaylor',
       description: 'dis new montes edit ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor edit',
@@ -47,13 +47,13 @@ describe('Test Projects routes', () => {
       tasks:
       ['60a4a32f247e066e9495ce12'],
     });
-    expect(response.statusCode).toBe(202);
+    expect(response.statusCode).toBe(200);
   });
 });
 
 describe('Test mesagges of project Routes', () => {
   test('This POST should give a seccess mesagge', async () => {
-    const response = await request(app).post('/projects/create').send({
+    const response = await request(app).post('/projects').send({
       name: 'Taylor',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Taylor Geikie',
@@ -68,7 +68,7 @@ describe('Test mesagges of project Routes', () => {
     expect(response.body.message).toEqual('Project has been created');
   });
   test('This PUT should give a seccess mesagge', async () => {
-    const response = await request(app).put(`/projects/edit/${projectId}`).send({
+    const response = await request(app).put(`/projects/${projectId}`).send({
       name: 'Gaylor',
       description: 'dis new montes edit ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor edit',
@@ -86,7 +86,7 @@ describe('Test mesagges of project Routes', () => {
 
 describe('Test errors for response', () => {
   test('This POST should give us a false error', async () => {
-    const response = await request(app).post('/projects/create').send({
+    const response = await request(app).post('/projects').send({
       name: 'Green',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Green Geikie',
@@ -101,7 +101,7 @@ describe('Test errors for response', () => {
     expect(response.body.error).not.toBeTruthy();
   });
   test('This PUT should give us a false error', async () => {
-    const response = await request(app).put(`/projects/edit/${projectId}`).send({
+    const response = await request(app).put(`/projects/${projectId}`).send({
       name: 'Blue',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Blue Geikie',
@@ -116,7 +116,7 @@ describe('Test errors for response', () => {
     expect(response.body.error).not.toBeTruthy();
   });
   test('This POST should give us a true error', async () => {
-    const response = await request(app).post('/projects/create').send({
+    const response = await request(app).post('/projects').send({
       name: 'A',
       description: 'b',
       clientName: 'Green Geikie',
@@ -131,7 +131,7 @@ describe('Test errors for response', () => {
     expect(response.body.error).toBeTruthy();
   });
   test('This PUT should give us a true error', async () => {
-    const response = await request(app).put(`/projects/edit/${projectId}`).send({
+    const response = await request(app).put(`/projects/${projectId}`).send({
       name: 'c',
       description: 'd',
       clientName: 'Green Geikie',
@@ -149,7 +149,7 @@ describe('Test errors for response', () => {
 
 describe('Test lengths', () => {
   test('This POST test thes give us the validations of the name lengths, equal than joi', async () => {
-    const response = await request(app).post('/projects/create').send({
+    const response = await request(app).post('/projects').send({
       name: 'Taylor',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor Geikie',
@@ -165,7 +165,7 @@ describe('Test lengths', () => {
     expect(response.body.data.name.length).toBeLessThanOrEqual(30);
   });
   test('This POST test thes give us the validations of the description lengths, equal than joi', async () => {
-    const response = await request(app).post('/projects/create').send({
+    const response = await request(app).post('/projects').send({
       name: 'Taylor',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor Geikie',
@@ -181,7 +181,7 @@ describe('Test lengths', () => {
     expect(response.body.data.description.length).toBeLessThanOrEqual(300);
   });
   test('This POST test thes give us the validations of the client name lengths, equal than joi', async () => {
-    const response = await request(app).post('/projects/create').send({
+    const response = await request(app).post('/projects').send({
       name: 'Taylor',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor Geikie',
@@ -197,7 +197,7 @@ describe('Test lengths', () => {
     expect(response.body.data.clientName.length).toBeLessThanOrEqual(30);
   });
   test('This POST test thes give us the validations of the project manager lengths, equal than joi', async () => {
-    const response = await request(app).post('/projects/create').send({
+    const response = await request(app).post('/projects').send({
       name: 'Taylor',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor Geikie',
@@ -213,7 +213,7 @@ describe('Test lengths', () => {
     expect(response.body.data.projectManager.length).toBeLessThanOrEqual(30);
   });
   test('This PUT test thes give us the validations of the name lengths, equal than joi', async () => {
-    const response = await request(app).put(`/projects/edit/${projectId}`).send({
+    const response = await request(app).put(`/projects/${projectId}`).send({
       name: 'Taylor',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor Geikie',
@@ -229,7 +229,7 @@ describe('Test lengths', () => {
     expect(response.body.data.name.length).toBeLessThanOrEqual(30);
   });
   test('This PUT test thes give us the validations of the description lengths, equal than joi', async () => {
-    const response = await request(app).put(`/projects/edit/${projectId}`).send({
+    const response = await request(app).put(`/projects/${projectId}`).send({
       name: 'Taylor',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor Geikie',
@@ -245,7 +245,7 @@ describe('Test lengths', () => {
     expect(response.body.data.description.length).toBeLessThanOrEqual(300);
   });
   test('This PUT test thes give us the validations of the client name lengths, equal than joi', async () => {
-    const response = await request(app).put(`/projects/edit/${projectId}`).send({
+    const response = await request(app).put(`/projects/${projectId}`).send({
       name: 'Taylor',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor Geikie',
@@ -261,7 +261,7 @@ describe('Test lengths', () => {
     expect(response.body.data.clientName.length).toBeLessThanOrEqual(30);
   });
   test('This PUT test thes give us the validations of the project manager lengths, equal than joi', async () => {
-    const response = await request(app).put(`/projects/edit/${projectId}`).send({
+    const response = await request(app).put(`/projects/${projectId}`).send({
       name: 'Taylor',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor Geikie',
@@ -279,7 +279,7 @@ describe('Test lengths', () => {
 });
 describe('Test missing parameters', () => {
   test('This POST should throw an error 400 because name is missing', async () => {
-    const response = await request(app).post('/projects/create').send({
+    const response = await request(app).post('/projects').send({
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor Geikie',
       startDate: '03/18/2021',
@@ -293,7 +293,7 @@ describe('Test missing parameters', () => {
     expect(response.statusCode).toBe(400);
   });
   test('This POST should throw an error 400 because description is missing', async () => {
-    const response = await request(app).post('/projects/create').send({
+    const response = await request(app).post('/projects').send({
       name: 'Gaylor',
       clientName: 'Gaylor Geikie',
       startDate: '03/18/2021',
@@ -307,7 +307,7 @@ describe('Test missing parameters', () => {
     expect(response.statusCode).toBe(400);
   });
   test('This POST should throw an error 400 because client name is missing', async () => {
-    const response = await request(app).post('/projects/create').send({
+    const response = await request(app).post('/projects').send({
       name: 'Gaylor',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       startDate: '03/18/2021',
@@ -321,7 +321,7 @@ describe('Test missing parameters', () => {
     expect(response.statusCode).toBe(400);
   });
   test('This POST should throw an error 400 because start date is missing', async () => {
-    const response = await request(app).post('/projects/create').send({
+    const response = await request(app).post('/projects').send({
       name: 'Gaylor',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor Geikie',
@@ -335,7 +335,7 @@ describe('Test missing parameters', () => {
     expect(response.statusCode).toBe(400);
   });
   test('This POST should throw an error 400 because project manager is missing', async () => {
-    const response = await request(app).post('/projects/create').send({
+    const response = await request(app).post('/projects').send({
       name: 'Gaylor',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor Geikie',
@@ -349,7 +349,7 @@ describe('Test missing parameters', () => {
     expect(response.statusCode).toBe(400);
   });
   test('This POST should throw an error 400 because team is missing', async () => {
-    const response = await request(app).post('/projects/create').send({
+    const response = await request(app).post('/projects').send({
       name: 'Gaylor',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor Geikie',
@@ -362,7 +362,7 @@ describe('Test missing parameters', () => {
     expect(response.statusCode).toBe(400);
   });
   test('This POST should throw an error 400 because tasks is missing', async () => {
-    const response = await request(app).post('/projects/create').send({
+    const response = await request(app).post('/projects').send({
       name: 'Gaylor',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor Geikie',
@@ -375,7 +375,7 @@ describe('Test missing parameters', () => {
     expect(response.statusCode).toBe(400);
   });
   test('This POST should not throw an error because end date is not necessary', async () => {
-    const response = await request(app).post('/projects/create').send({
+    const response = await request(app).post('/projects').send({
       name: 'Gaylor',
       description: 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor Geikie',
@@ -389,7 +389,7 @@ describe('Test missing parameters', () => {
     expect(response.statusCode).toBe(201);
   });
   test('This PUT should throw an error 500 because id is not correct', async () => {
-    const response = await request(app).put('/projects/edit/0303456').send({
+    const response = await request(app).put('/projects/0303456').send({
       name: 'Gaylor',
       description: 'dis new montes edit ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis',
       clientName: 'Gaylor edit',
@@ -413,7 +413,7 @@ describe('GET ALL/Projects', () => {
 
   test('It should return a successful message', async () => {
     const response = await request(app).get('/projects').send();
-    expect(response.body.message).toEqual(' Data for all projects has been sent');
+    expect(response.body.message).toEqual('All Projects are:');
   });
 
   test('It should return at least one project', async () => {
@@ -448,13 +448,13 @@ describe('GET projects/id ', () => {
     const response = await request(app).get(`/patata/${projectID}`).send();
     expect(response.error).toBeTruthy();
   });
-  test('response should not return a 500 status', async () => {
+  test('response should not return a 400 status', async () => {
     const response = await request(app).get('/projects/15946').send();
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(400);
   });
-  test('response should not return a undefined body', async () => {
+  test('response should not return an empty object', async () => {
     const response = await request(app).get('/projects/15946').send();
-    expect(response.body.data).toBeUndefined();
+    expect(response.body.data.length).toBeUndefined();
   });
   test('response should not return a true error', async () => {
     const response = await request(app).get('/projects/15946').send();
@@ -462,7 +462,7 @@ describe('GET projects/id ', () => {
   });
   test('response should return a message', async () => {
     const response = await request(app).get(`/projects/${projectID}`).send();
-    expect(response.body.message).toEqual(`Data for project with id ${projectID} has been sent`);
+    expect(response.body.message).toEqual(`Project with ID:${projectID} sent:`);
   });
   test('response should not return without a name', async () => {
     const response = await request(app).get(`/projects/${projectID}`).send();
@@ -517,7 +517,7 @@ describe('DELETE projects/id', () => {
   });
   test('response should not return a undefined data', async () => {
     const response = await request(app).delete('/projects/1594').send();
-    expect(response.body.data).toBeUndefined();
+    expect(response.body.data.length).toBeUndefined();
   });
   test('response should not return a true error', async () => {
     const response = await request(app).delete('/projects/1594').send();
@@ -525,7 +525,7 @@ describe('DELETE projects/id', () => {
   });
   test('response should return a 200 status', async () => {
     const response = await request(app).delete(`/projects/${projectID}`).send();
-    expect(response.body.message).toEqual('Project succesfully deleted');
+    expect(response.body.message).toEqual('Project successfully deleted');
     expect(response.body.data).not.toBeUndefined();
     expect(response.error).toBeFalsy();
     expect(response.status).toBe(200);

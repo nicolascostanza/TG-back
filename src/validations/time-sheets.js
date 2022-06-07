@@ -14,7 +14,7 @@ const TimesheetValidationUp = (req, res, next) => {
   const valid = TsObJe.validate(req.body);
   if (valid.error) {
     return res.status(400).json({
-      msg: 'There was an error',
+      message: 'There was an error',
       success: valid.error.details[0].message,
     });
   }
@@ -35,7 +35,7 @@ const TimesheetValidation = (req, res, next) => {
   const valid = TsObJ.validate(req.body);
   if (valid.error) {
     return res.status(400).json({
-      msg: 'There was an error',
+      message: 'There was an error',
       success: valid.error.details[0].message,
     });
   }
