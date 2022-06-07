@@ -3,7 +3,7 @@ import Task from '../models/Tasks';
 const getAllTasks = async (req, res) => {
   try {
     const allTasks = await Task.find({})
-      .populate('assignedEmployee', { firstName: 1, surname: 1 })
+      .populate('assignedEmployee', { firstName: 1, lastName: 1 })
       .populate('parentProject', { name: 1 });
     return res.status(200).json({
       message: 'All tasks are:',
@@ -23,13 +23,13 @@ const getTasksById = async (req, res) => {
   try {
     if (!req.params.id) {
       return res.status(400).json({
-        message: 'Missing id parameters',
+        message: 'Missing ID parameters',
         data: { },
         error: false,
       });
     }
     const task = await Task.findById(req.params.id)
-      .populate('assignedEmployee', { firstName: 1, surname: 1 })
+      .populate('assignedEmployee', { firstName: 1, lastName: 1 })
       .populate('parentProject', { name: 1 });
     if (task) {
       return res.status(200).json({
@@ -81,7 +81,7 @@ const updateTask = async (req, res) => {
   try {
     if (!req.params) {
       return res.status(400).json({
-        message: 'Missing id parameter',
+        message: 'Missing ID parameter',
         data: {},
         error: true,
       });

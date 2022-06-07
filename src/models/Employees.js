@@ -9,7 +9,7 @@ const employeeSchema = new Schema(
       required: true,
       minlength: 3,
     },
-    surname: {
+    lastName: {
       type: String,
       required: true,
       minlength: 3,
@@ -23,7 +23,7 @@ const employeeSchema = new Schema(
       required: false,
       enum: ['Male', 'Female', 'Other'],
     },
-    adress: {
+    address: {
       type: String,
       required: false,
     },

@@ -70,7 +70,7 @@ const updateSuperAdmin = async (req, res) => {
   try {
     if (!req.params) {
       return res.status(400).json({
-        message: 'Missing id parameter',
+        message: 'Missing ID parameter',
         data: {},
         error: true,
       });

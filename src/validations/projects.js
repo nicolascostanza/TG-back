@@ -16,8 +16,8 @@ const validateCreation = (req, res, next) => {
 
   if (validation.error) {
     return res.status(400).json({
-      message: (validation.error.details[0].message),
-      data: undefined,
+      message: 'There has been an error in the validation',
+      data: validation.error.details[0].message,
       error: true,
     });
   }
@@ -40,8 +40,8 @@ const validateModification = (req, res, next) => {
 
   if (validation.error) {
     return res.status(400).json({
-      message: (validation.error.details[0].message),
-      data: undefined,
+      message: 'There has been an error in the validation',
+      data: validation.error.details[0].message,
       error: true,
     });
   }

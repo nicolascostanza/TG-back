@@ -3,7 +3,7 @@ import Tsheet from '../models/Time-sheets';
 const getAllTs = async (req, res) => {
   try {
     const getAllT = await Tsheet.find({})
-      .populate('employeeId', { firstName: 1, surname: 1 })
+      .populate('employeeId', { firstName: 1, lastName: 1 })
       .populate('task', { taskName: 1, taskDescription: 1 });
     return res.status(200).json({
       message: 'All Time-sheets are:',
@@ -23,13 +23,13 @@ const getTsById = async (req, res) => {
   try {
     if (!req.params.id) {
       return res.status(400).json({
-        message: 'Missing id parameters',
+        message: 'Missing ID parameters',
         data: {},
         error: false,
       });
     }
     const empId = await Tsheet.findById(req.params.id)
-      .populate('employeeId', { firstName: 1, surname: 1 })
+      .populate('employeeId', { firstName: 1, lastName: 1 })
       .populate('task', { taskName: 1, taskDescription: 1 });
     if (empId) {
       return res.status(200).json({
@@ -83,7 +83,7 @@ const updateTimesheet = async (req, res) => {
   try {
     if (!req.params) {
       return res.status(400).json({
-        message: 'Missing id parameter',
+        message: 'Missing ID parameter',
         data: {},
         error: true,
       });

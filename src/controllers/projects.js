@@ -3,7 +3,7 @@ import Project from '../models/Projects';
 const getAllProjects = async (req, res) => {
   try {
     const allProjects = await Project.find({})
-      .populate('team', { firstName: 1, surname: 1 })
+      .populate('team', { firstName: 1, lastName: 1 })
       .populate('tasks', { taskName: 1, taskDescription: 1 });
     return res.status(200).json({
       message: 'All Projects are:',
@@ -23,7 +23,7 @@ const getProjectById = async (req, res) => {
   try {
     const projectId = req.params.id;
     const project = await Project.findOne({ _id: projectId })
-      .populate('team', { firstName: 1, surname: 1 })
+      .populate('team', { firstName: 1, lastName: 1 })
       .populate('tasks', { taskName: 1 });
     if (project) {
       res.status(200).json({
@@ -79,7 +79,7 @@ const updateProject = async (req, res) => {
   try {
     if (!req.params) {
       return res.status(400).json({
-        message: 'Missing id parameter',
+        message: 'Missing ID parameter',
         data: {},
         error: true,
       });
@@ -88,7 +88,7 @@ const updateProject = async (req, res) => {
       req.params.id,
       req.body,
       { new: true },
-    ).populate('team', { firstName: 1, surname: 1 }).populate('tasks', { taskName: 1 });
+    ).populate('team', { firstName: 1, lastName: 1 }).populate('tasks', { taskName: 1 });
 
     if (!result) {
       return res.status(404).json({
@@ -121,7 +121,7 @@ const deleteProject = async (req, res) => {
       });
     }
     const result = await Project.findByIdAndDelete(req.params.id)
-      .populate('team', { firstName: 1, surname: 1 })
+      .populate('team', { firstName: 1, lastName: 1 })
       .populate('tasks', { taskName: 1 });
     if (!result) {
       return res.status(404).json({

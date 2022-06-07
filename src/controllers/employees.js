@@ -45,10 +45,10 @@ const createEmployee = async (req, res) => {
   try {
     const employee = new Employee({
       firstName: req.body.firstName,
-      surname: req.body.surname,
+      lastName: req.body.lastName,
       email: req.body.email,
       gender: req.body.gender,
-      adress: req.body.adress,
+      address: req.body.address,
       dob: req.body.dob,
       password: req.body.password,
       phone: req.body.phone,
@@ -74,7 +74,7 @@ const updateEmployee = async (req, res) => {
   try {
     if (!req.params) {
       return res.status(400).json({
-        message: 'Missing id parameter',
+        message: 'Missing ID parameter',
         data: {},
         error: true,
       });

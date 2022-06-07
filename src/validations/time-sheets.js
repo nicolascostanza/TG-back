@@ -11,11 +11,12 @@ const TimesheetValidationUp = (req, res, next) => {
     approved: Joi.bool(),
     role: Joi.string().valid('DEV', 'QA', 'PM', 'TL'),
   });
-  const valid = TsObJe.validate(req.body);
-  if (valid.error) {
+  const validation = TsObJe.validate(req.body);
+  if (validation.error) {
     return res.status(400).json({
-      message: 'There was an error',
-      success: valid.error.details[0].message,
+      message: 'There has been an error in the validation',
+      data: validation.error.details[0].message,
+      error: true,
     });
   }
   return next();
@@ -32,11 +33,12 @@ const TimesheetValidation = (req, res, next) => {
     approved: Joi.bool().required(),
     role: Joi.string().valid('DEV', 'QA', 'PM', 'TL').required(),
   });
-  const valid = TsObJ.validate(req.body);
-  if (valid.error) {
+  const validation = TsObJ.validate(req.body);
+  if (validation.error) {
     return res.status(400).json({
-      message: 'There was an error',
-      success: valid.error.details[0].message,
+      message: 'There has been an error in the validation',
+      data: validation.error.details[0].message,
+      error: true,
     });
   }
   return next();

@@ -37,7 +37,6 @@ describe('POST /time-sheets', () => {
       project: 'project a ',
       date: '05/24/2022',
       hours: '50',
-      tasks: ['60a4a32f247e066e9495ce12'],
       approved: 'true',
       role: 'DEV',
     });
@@ -361,7 +360,7 @@ describe('PUT /time-sheets', () => {
       project: 'project a ',
       date: '05/24/2022',
       hours: '50',
-      task: '60a4a32f247e066e9495ce12',
+      task: ['60a4a32f247e066e9495ce12'],
       approved: 'true',
       role: 'DEV',
     });
