@@ -2,14 +2,26 @@ import joi from 'joi';
 
 const creationValidation = (req, res, next) => {
   const Schema = joi.object({
-    firstName: joi.string().min(3).required(),
-    surname: joi.string().min(3).required(),
-    email: joi.string().email().min(7).required(),
+    firstName: joi
+      .string()
+      .min(3)
+      .required()
+      .regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
+    surname: joi
+      .string()
+      .min(3)
+      .required()
+      .regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
+    email: joi.string().email(),
     gender: joi.string().valid('Male', 'Female', 'Other'),
-    adress: joi.string(),
+    adress: joi.string().regex(/^[a-zA-Z0-9\s,'-]*$/),
     dob: joi.date().required(),
-    password: joi.string().min(8).required(),
-    phone: joi.string().min(9).max(10),
+    password: joi
+      .string()
+      .min(8)
+      .required()
+      .regex(/(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,25})$/),
+    phone: joi.string().regex(/^[0-9\-+]{9,10}$/),
     active: joi.boolean().required(),
   });
 
@@ -26,14 +38,23 @@ const creationValidation = (req, res, next) => {
 
 const updateValidation = (req, res, next) => {
   const Schema = joi.object({
-    firstName: joi.string().min(3),
-    surname: joi.string().min(3),
+    firstName: joi
+      .string()
+      .min(3)
+      .regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
+    surname: joi
+      .string()
+      .min(3)
+      .regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
     email: joi.string().email().min(7),
     gender: joi.string().valid('Male', 'Female', 'Other'),
-    adress: joi.string(),
+    adress: joi.string().regex(/^[a-zA-Z0-9\s,'-]*$/),
     dob: joi.date(),
-    password: joi.string().min(8),
-    phone: joi.string().min(9).max(10),
+    password: joi
+      .string()
+      .min(8)
+      .regex(/(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,25})$/),
+    phone: joi.string().regex(/^[0-9\-+]{9,10}$/),
     active: joi.boolean(),
   });
 
