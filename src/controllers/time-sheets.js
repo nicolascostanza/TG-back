@@ -2,22 +2,25 @@ import Tsheet from '../models/Time-sheets';
 
 const getAllTs = async (req, res) => {
   try {
-    const getAllT = await Tsheet.find({}).populate('employeeId', { firstName: 1, surname: 1 }).populate('task', { taskName: 1, taskDescription: 1 });
-    if (getAllT.length <= 0) {
-      return res.status(400).json({
-        message: 'No Time-sheets found',
-        data: null,
+    const data = await Tsheet.find(req.query)
+      .populate('task')
+      .populate('employeeId')
+      .populate('project');
+    if (data.length < 1) {
+      return res.status(404).json({
+        message: 'Timesheets has not been found',
+        data: undefined,
         error: true,
       });
     }
     return res.status(200).json({
       message: 'Data for all Time-sheets sent',
-      data: getAllT,
+      data,
       error: false,
     });
   } catch (error) {
-    return res.status(500).json({
-      message: error,
+    return res.status(400).json({
+      message: error.message,
       data: undefined,
       error: true,
     });

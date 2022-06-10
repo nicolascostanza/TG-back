@@ -2,7 +2,14 @@ import SuperAdmin from '../models/Superadmin';
 
 const getAllSuperA = async (req, res) => {
   try {
-    const allSuperA = await SuperAdmin.find({});
+    const allSuperA = await SuperAdmin.find(req.query);
+    if (allSuperA.length < 1) {
+      return res.status(404).json({
+        message: 'Admins has not been found',
+        data: undefined,
+        error: true,
+      });
+    }
     return res.status(200).json({
       message: 'The list has been found',
       data: allSuperA,
