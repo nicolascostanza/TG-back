@@ -2,8 +2,16 @@ import joi from 'joi';
 
 const creationValidation = (req, res, next) => {
   const Schema = joi.object({
-    firstName: joi.string().min(3).required().regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
-    surname: joi.string().min(3).required().regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
+    firstName: joi
+      .string()
+      .min(3)
+      .required()
+      .regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
+    surname: joi
+      .string()
+      .min(3)
+      .required()
+      .regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
     email: joi.string().email().min(7).required(),
     gender: joi.string().valid('Male', 'Female', 'Other'),
     adress: joi.string().regex(/^[a-zA-Z0-9\s,'-]*$/),
@@ -13,7 +21,7 @@ const creationValidation = (req, res, next) => {
       .min(8)
       .required()
       .regex(/(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,25})$/),
-    phone: joi.string().min(9).max(10),
+    phone: joi.string().regex(/^[0-9\-+]{9,10}$/),
     active: joi.boolean().required(),
   });
 
@@ -46,7 +54,7 @@ const updateValidation = (req, res, next) => {
       .string()
       .min(8)
       .regex(/(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,25})$/),
-    phone: joi.string().min(9).max(10),
+    phone: joi.string().regex(/^[0-9\-+]{9,10}$/),
     active: joi.boolean(),
   });
 

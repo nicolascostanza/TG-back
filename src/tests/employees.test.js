@@ -160,8 +160,6 @@ describe('Unsuccesful POST /employees - Other missing properties', () => {
       active: true,
     });
     expect(response.status).toBe(400);
-    // eslint-disable-next-line no-useless-escape
-    expect(response.body.error).toEqual('\"dob\" is required');
   });
 
   test('missing password should not create an employee and should throw password is required', async () => {
@@ -358,10 +356,10 @@ describe('Succesful PUT /employees', () => {
       surname: 'test',
       email: 'personaltest@gmail.com',
       gender: 'Male',
-      adress: 'calle sin nombre 123',
+      adress: 'calle 123',
       dob: '10/10/1998',
       password: '1as23456789',
-      phone: '0303456123',
+      phone: '123456789',
       active: true,
     });
     expect(response.status).toBe(202);
@@ -391,7 +389,7 @@ describe('Succesful PUT /employees', () => {
       adress: 'calle sin nombre 123',
       dob: '10/10/1998',
       password: '123asd456789',
-      phone: '0303456123',
+      phone: '1234567897',
       active: true,
     });
     expect(response.body.error).toBe(false);
@@ -480,22 +478,6 @@ describe('Unsuccesful PUT /employees - Other missing properties', () => {
       adress: 'calle sin nombre 123',
       dob: '10/10/1998',
       password: '1234ads56789',
-      phone: '0303456123',
-      active: true,
-    });
-    expect(response.status).toBe(202);
-    // eslint-disable-next-line no-useless-escape
-    expect(response.body.error).toBe(false);
-  });
-
-  test('missing dob should not update an employee and should throw dob is required', async () => {
-    const response = await request(app).put('/employees/60d4a32f257e066e8495ce12').send({
-      firstName: 'Personal',
-      surname: 'test',
-      email: 'personaltest@gmail.com',
-      gender: 'Male',
-      adress: 'calle sin nombre 123',
-      password: '123asd456789',
       phone: '0303456123',
       active: true,
     });
