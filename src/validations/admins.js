@@ -5,7 +5,7 @@ const validateAdmin = (req, res, next) => {
     firstName: Joi.string().min(3).required().regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
     lastName: Joi.string().min(3).required().regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
     email: Joi.string().email().min(7).required(),
-    password: Joi.string().min(6).required().regex(/(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,25})$/),
+    password: Joi.string().min(8).required().regex(/(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,25})$/),
     active: Joi.boolean().required(),
   });
   const validation = adminSchema.validate(req.body);
