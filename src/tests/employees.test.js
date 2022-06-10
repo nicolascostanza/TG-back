@@ -139,13 +139,13 @@ describe('Unsuccesful POST /employees - Other missing properties', () => {
       gender: 'Male',
       adress: 'calle sin nombre 123',
       dob: '10/10/1998',
-      password: '123456789',
+      password: '123asd456789',
       phone: '0303456123',
       active: true,
     });
     expect(response.status).toBe(400);
     // eslint-disable-next-line no-useless-escape
-    expect(response.body.error).toEqual('\"email\" is required');
+    expect(response.body.error).toEqual(true);
   });
 
   test('missing dob should not create an employee and should throw dob is required', async () => {
