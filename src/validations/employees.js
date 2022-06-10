@@ -2,8 +2,8 @@ import joi from 'joi';
 
 const creationValidation = (req, res, next) => {
   const Schema = joi.object({
-    firstName: joi.string().min(3).required().regex(/^(?:[A-Za-z]+|\d+)$/),
-    surname: joi.string().min(3).required().regex(/^(?:[A-Za-z]+|\d+)$/),
+    firstName: joi.string().min(3).required().regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
+    surname: joi.string().min(3).required().regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
     email: joi.string().email().min(7).required(),
     gender: joi.string().valid('Male', 'Female', 'Other'),
     adress: joi.string().regex(/^[a-zA-Z0-9\s,'-]*$/),
@@ -33,11 +33,11 @@ const updateValidation = (req, res, next) => {
     firstName: joi
       .string()
       .min(3)
-      .regex(/^(?:[A-Za-z]+|\d+)$/),
+      .regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
     surname: joi
       .string()
       .min(3)
-      .regex(/^(?:[A-Za-z]+|\d+)$/),
+      .regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
     email: joi.string().email().min(7),
     gender: joi.string().valid('Male', 'Female', 'Other'),
     adress: joi.string().regex(/^[a-zA-Z0-9\s,'-]*$/),
