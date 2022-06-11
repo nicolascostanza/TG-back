@@ -1,8 +1,16 @@
 import SuperAdmin from '../models/Superadmin';
 
 const getAllSuperA = async (req, res) => {
+  const {
+    firstName, lastName, email, active,
+  } = req.query;
   try {
-    const allSuperA = await SuperAdmin.find(req.query);
+    const allSuperA = await SuperAdmin.find({
+      firstName: { $regex: new RegExp(firstName || '', 'i') },
+      lastName: { $regex: new RegExp(lastName || '', 'i') },
+      email: { $regex: new RegExp(email || '', 'i') },
+      active: active ?? { $in: [false, true] },
+    });
     if (allSuperA.length < 1) {
       return res.status(404).json({
         message: 'Admins has not been found',

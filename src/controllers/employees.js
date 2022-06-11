@@ -1,8 +1,20 @@
 import Employee from '../models/Employees';
 
 const getAllEmployees = async (req, res) => {
-  const allEmployees = await Employee.find({});
+  // PENDING: IMPLEMENT A DOB FILTER
+  const {
+    firstName, surname, email, gender, adress, phone, active,
+  } = req.query;
   try {
+    const allEmployees = await Employee.find({
+      firstName: { $regex: new RegExp(firstName || '', 'i') },
+      surname: { $regex: new RegExp(surname || '', 'i') },
+      email: { $regex: new RegExp(email || '', 'i') },
+      gender: gender ?? { $in: ['Male', 'Female', 'Other'] },
+      adress: { $regex: new RegExp(adress || '', 'i') },
+      phone: { $regex: new RegExp(phone || '', 'i') },
+      active: active ?? { $in: [false, true] },
+    });
     return res.status(200).json({
       message: 'All employees are:',
       data: allEmployees,

@@ -1,11 +1,19 @@
 import Tsheet from '../models/Time-sheets';
 
 const getAllTs = async (req, res) => {
+  const {
+    description, project, approved, role,
+  } = req.query;
   try {
-    const data = await Tsheet.find(req.query)
-      .populate('task')
-      .populate('employeeId')
-      .populate('project');
+    const data = await Tsheet
+      .find({
+        description: { $regex: new RegExp(description || '', 'i') },
+        project: { $regex: new RegExp(project || '', 'i') },
+        approved: approved ?? { $in: [false, true] },
+        role: role ?? { $in: ['DEV', 'QA', 'PM', 'TL'] },
+      })
+      .populate('employeeId', { firstName: 1, lastName: 1 })
+      .populate('task', { taskName: 1, taskDescription: 1 });
     if (data.length < 1) {
       return res.status(404).json({
         message: 'Timesheets has not been found',
@@ -36,7 +44,9 @@ const getTsById = async (req, res) => {
         error: false,
       });
     }
-    const empId = await Tsheet.findById(req.params.id).populate('employeeId', { firstName: 1, surname: 1 }).populate('task', { taskName: 1, taskDescription: 1 });
+    const empId = await Tsheet.findById(req.params.id)
+      .populate('employeeId', { firstName: 1, lastName: 1 })
+      .populate('task', { taskName: 1, taskDescription: 1 });
     if (empId) {
       return res.status(200).json({
         message: `The data for the timesheet with id ${req.params.id} has been sent`,

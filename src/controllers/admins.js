@@ -2,7 +2,15 @@ import Admins from '../models/Admins';
 
 const getAllAdmins = async (req, res) => {
   try {
-    const admins = await Admins.find(req.query);
+    const {
+      firstName, lastName, email, active,
+    } = req.query;
+    const admins = await Admins.find({
+      firstName: { $regex: new RegExp(firstName || '', 'i') },
+      lastName: { $regex: new RegExp(lastName || '', 'i') },
+      email: { $regex: new RegExp(email || '', 'i') },
+      active: active ?? { $in: [false, true] },
+    });
     if (admins.length < 1) {
       return res.status(404).json({
         message: 'Admins has not been found',
