@@ -15,7 +15,7 @@ describe('POST /Admins', () => {
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
-      password: '123456789',
+      password: '1234asd56789',
       active: 'true',
     });
     expect(response.status).toBe(201);
@@ -28,7 +28,7 @@ describe('POST /Admins', () => {
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
-      password: '123456789',
+      password: '12asd3456789',
       active: 'true',
     });
     expect(response.body.message).toEqual('Admin has been created');
@@ -40,7 +40,7 @@ describe('POST /Admins', () => {
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
-      password: '123456789',
+      password: '12345asd6789',
       active: 'true',
     });
     expect(response.body.data.firstName.length).toBeGreaterThanOrEqual(3);
@@ -52,7 +52,7 @@ describe('POST /Admins', () => {
       firstName: 'Ch',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
-      password: '123456789',
+      password: '12345sad6789',
       active: 'true',
     });
     expect(response.statusCode).toBe(400);
@@ -63,7 +63,7 @@ describe('POST /Admins', () => {
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
-      password: '123456789',
+      password: '1234asd56789',
       active: 'true',
     });
     expect(response.body.data.lastName.length).toBeGreaterThanOrEqual(3);
@@ -108,7 +108,7 @@ describe('POST /Admins', () => {
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
-      password: '123456789',
+      password: '1234asd56789',
       active: 'false',
     });
     expect(response.statusCode).toBe(201);
@@ -142,7 +142,7 @@ describe('PUT /Admins', () => {
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
-      password: '123456789',
+      password: '1234asd56789',
       active: 'true',
     });
     expect(response.status).toBe(200);
@@ -156,7 +156,7 @@ describe('PUT /Admins', () => {
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
-      password: '123456789',
+      password: '12asd3456789',
       active: 'true',
     });
     expect(response.body.message).toEqual('Admin successfully updated');
@@ -169,7 +169,7 @@ describe('PUT /Admins', () => {
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
-      password: '123456789',
+      password: '123asd456789',
       active: 'true',
     });
     expect(response.body.data.firstName.length).toBeGreaterThanOrEqual(3);
@@ -192,7 +192,7 @@ describe('PUT /Admins', () => {
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
-      password: '123456789',
+      password: '1234asd56789',
       active: 'true',
     });
     expect(response.body.data.lastName.length).toBeGreaterThanOrEqual(3);
@@ -237,7 +237,7 @@ describe('PUT /Admins', () => {
       firstName: 'Charles',
       lastName: 'Xavier',
       email: 'professorx@gmail.com',
-      password: '123456789',
+      password: '1234asd56789',
       active: 'false',
     });
     expect(response.statusCode).toBe(200);

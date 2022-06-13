@@ -2,10 +2,10 @@ import Joi from 'joi';
 
 const validateAdmin = (req, res, next) => {
   const adminSchema = Joi.object({
-    firstName: Joi.string().min(3).required(),
-    lastName: Joi.string().min(3).required(),
+    firstName: Joi.string().min(3).required().regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
+    lastName: Joi.string().min(3).required().regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
     email: Joi.string().email().min(7).required(),
-    password: Joi.string().min(6).required(),
+    password: Joi.string().min(8).required().regex(/(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,25})$/),
     active: Joi.boolean().required(),
   });
   const validation = adminSchema.validate(req.body);
@@ -21,10 +21,10 @@ const validateAdmin = (req, res, next) => {
 
 const validateAdminUpd = (req, res, next) => {
   const adminSchema = Joi.object({
-    firstName: Joi.string().min(3),
-    lastName: Joi.string().min(3),
+    firstName: Joi.string().min(3).regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
+    lastName: Joi.string().min(3).regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
     email: Joi.string().email().min(7),
-    password: Joi.string().min(6),
+    password: Joi.string().min(6).regex(/(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,25})$/),
     active: Joi.boolean(),
   });
   const validation = adminSchema.validate(req.body);

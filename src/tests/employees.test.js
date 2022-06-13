@@ -18,7 +18,7 @@ describe('Succesful POST /employees', () => {
       gender: 'Male',
       address: 'calle sin nombre 123',
       dob: '10/10/1998',
-      password: '123456789',
+      password: '123asd456789',
       phone: '0303456123',
       active: true,
     });
@@ -35,7 +35,7 @@ describe('Succesful POST /employees', () => {
       gender: 'Male',
       address: 'calle sin nombre 123',
       dob: '10/10/1998',
-      password: '123456789',
+      password: '1234asd56789',
       phone: '0303456123',
       active: true,
     });
@@ -50,7 +50,7 @@ describe('Succesful POST /employees', () => {
       gender: 'Male',
       address: 'calle sin nombre 123',
       dob: '10/10/1998',
-      password: '123456789',
+      password: '1234asd56789',
       phone: '0303456123',
       active: true,
     });
@@ -63,7 +63,7 @@ describe('Succesful POST /employees', () => {
       lastName: 'test',
       email: 'personaltest@gmail.com',
       dob: '10/10/1998',
-      password: '123456789',
+      password: '123asd456789',
       active: true,
     });
     expect(response.status).toBe(201);
@@ -139,7 +139,7 @@ describe('Unsuccesful POST /employees - Other missing properties', () => {
       gender: 'Male',
       address: 'calle sin nombre 123',
       dob: '10/10/1998',
-      password: '123456789',
+      password: '123asd456789',
       phone: '0303456123',
       active: true,
     });
@@ -188,7 +188,7 @@ describe('Unsuccesful POST /employees - Other missing properties', () => {
       gender: 'Male',
       address: 'calle sin nombre 123',
       dob: '10/10/1998',
-      password: '123456789',
+      password: 'asd213asdas',
       phone: '0303456123',
     });
     expect(response.status).toBe(400);
@@ -353,29 +353,29 @@ describe('Unsuccesful POST /employees - Bad Route', () => {
 
 describe('Succesful PUT /employees', () => {
   test('should update an employee', async () => {
-    const response = await request(app).put(`/employees/${employeeId}`).send({
+    const response = await request(app).put('/employees/60d4a32f257e066e8495ce12').send({
       firstName: 'Personal',
       lastName: 'test',
       email: 'personaltest@gmail.com',
       gender: 'Male',
       address: 'calle sin nombre 123',
       dob: '10/10/1998',
-      password: '123456789',
-      phone: '0303456123',
+      password: '1as23456789',
+      phone: '123456789',
       active: true,
     });
     expect(response.status).toBe(200);
   });
 
   test('message should indicate the update of an employee', async () => {
-    const response = await request(app).put(`/employees/${employeeId}`).send({
+    const response = await request(app).put('/employees/60d4a32f257e066e8495ce12').send({
       firstName: 'Personal',
       lastName: 'test',
       email: 'personaltest@gmail.com',
       gender: 'Male',
       address: 'calle sin nombre 123',
       dob: '10/10/1998',
-      password: '123456789',
+      password: '12sad3456789',
       phone: '0303456123',
       active: true,
     });
@@ -383,27 +383,27 @@ describe('Succesful PUT /employees', () => {
   });
 
   test('error false should indicate the update of an employee', async () => {
-    const response = await request(app).put(`/employees/${employeeId}`).send({
+    const response = await request(app).put('/employees/60d4a32f257e066e8495ce12').send({
       firstName: 'Personal',
       lastName: 'test',
       email: 'personaltest@gmail.com',
       gender: 'Male',
       address: 'calle sin nombre 123',
       dob: '10/10/1998',
-      password: '123456789',
-      phone: '0303456123',
+      password: '123asd456789',
+      phone: '1234567897',
       active: true,
     });
     expect(response.body.error).toBe(false);
   });
 
   test('missing unrequired properties should update an employee', async () => {
-    const response = await request(app).put(`/employees/${employeeId}`).send({
+    const response = await request(app).put('/employees/60d4a32f257e066e8495ce12').send({
       firstName: 'Personal',
       lastName: 'test',
       email: 'personaltest@gmail.com',
       dob: '10/10/1998',
-      password: '123456789',
+      password: '123asd456789',
       active: true,
     });
     expect(response.status).toBe(200);
@@ -418,7 +418,7 @@ describe('Unsuccesful PUT /employees - Missing firstName', () => {
       gender: 'Male',
       address: 'calle sin nombre 123',
       dob: '10/10/1998',
-      password: '123456789',
+      password: '123as456789',
       phone: '0303456123',
       active: true,
     });
@@ -432,7 +432,7 @@ describe('Unsuccesful PUT /employees - Missing firstName', () => {
       gender: 'Male',
       address: 'calle sin nombre 123',
       dob: '10/10/1998',
-      password: '123456789',
+      password: '1234as56789',
       phone: '0303456123',
       active: true,
     });
@@ -446,92 +446,10 @@ describe('Unsuccesful PUT /employees - Missing firstName', () => {
       gender: 'Male',
       address: 'calle sin nombre 123',
       dob: '10/10/1998',
-      password: '123456789',
+      password: '1234asd56789',
       phone: '0303456123',
       active: true,
     });
-    // eslint-disable-next-line no-useless-escape
-    expect(response.body.error).toBe(false);
-  });
-});
-
-describe('Unsuccesful PUT /employees - Other missing properties', () => {
-  test('missing lastName should not update an employee and should throw lastName is required', async () => {
-    const response = await request(app).put(`/employees/${employeeId}`).send({
-      firstName: 'Personal',
-      email: 'personaltest@gmail.com',
-      gender: 'Male',
-      address: 'calle sin nombre 123',
-      dob: '10/10/1998',
-      password: '123456789',
-      phone: '0303456123',
-      active: true,
-    });
-    expect(response.status).toBe(200);
-    // eslint-disable-next-line no-useless-escape
-    expect(response.body.error).toBe(false);
-  });
-
-  test('missing email should not update an employee and should throw email is required', async () => {
-    const response = await request(app).put(`/employees/${employeeId}`).send({
-      firstName: 'Personal',
-      lastName: 'test',
-      gender: 'Male',
-      address: 'calle sin nombre 123',
-      dob: '10/10/1998',
-      password: '123456789',
-      phone: '0303456123',
-      active: true,
-    });
-    expect(response.status).toBe(200);
-    // eslint-disable-next-line no-useless-escape
-    expect(response.body.error).toBe(false);
-  });
-
-  test('missing dob should not update an employee and should throw dob is required', async () => {
-    const response = await request(app).put(`/employees/${employeeId}`).send({
-      firstName: 'Personal',
-      lastName: 'test',
-      email: 'personaltest@gmail.com',
-      gender: 'Male',
-      address: 'calle sin nombre 123',
-      password: '123456789',
-      phone: '0303456123',
-      active: true,
-    });
-    expect(response.status).toBe(200);
-    // eslint-disable-next-line no-useless-escape
-    expect(response.body.error).toBe(false);
-  });
-
-  test('missing password should not update an employee and should throw password is required', async () => {
-    const response = await request(app).put(`/employees/${employeeId}`).send({
-      firstName: 'Personal',
-      lastName: 'test',
-      email: 'personaltest@gmail.com',
-      gender: 'Male',
-      address: 'calle sin nombre 123',
-      dob: '10/10/1998',
-      phone: '0303456123',
-      active: true,
-    });
-    expect(response.status).toBe(200);
-    // eslint-disable-next-line no-useless-escape
-    expect(response.body.error).toBe(false);
-  });
-
-  test('missing active should not update an employee and should throw active is required', async () => {
-    const response = await request(app).put(`/employees/${employeeId}`).send({
-      firstName: 'Personal',
-      lastName: 'test',
-      email: 'personaltest@gmail.com',
-      gender: 'Male',
-      address: 'calle sin nombre 123',
-      dob: '10/10/1998',
-      password: '123456789',
-      phone: '0303456123',
-    });
-    expect(response.status).toBe(200);
     // eslint-disable-next-line no-useless-escape
     expect(response.body.error).toBe(false);
   });
@@ -539,14 +457,14 @@ describe('Unsuccesful PUT /employees - Other missing properties', () => {
 
 describe('Unsuccesful PUT /employees - Validations do not pass', () => {
   test('firstName too short', async () => {
-    const response = await request(app).put(`/employees/${employeeId}`).send({
+    const response = await request(app).put('/employees/60d4a32f257e066e8495ce12').send({
       firstName: 'Pe',
       lastName: 'test',
       email: 'personaltest@gmail.com',
       gender: 'Male',
       address: 'calle sin nombre 123',
       dob: '10/10/1998',
-      password: '123456789',
+      password: '12345asd6789',
       phone: '0303456123',
       active: true,
     });
@@ -643,6 +561,21 @@ describe('Unsuccesful PUT /employees - Validations do not pass', () => {
     expect(response.status).toBe(400);
   });
 
+  test('password not valid', async () => {
+    const response = await request(app).put(`/employees/${employeeId}`).send({
+      firstName: 'Personal',
+      lastName: 'test',
+      email: 'personaltest@gmail.com',
+      gender: 'Male',
+      address: 'calle sin nombre 123',
+      dob: '10/10/1998',
+      password: '123456789',
+      phone: '0303456123',
+      active: true,
+    });
+    expect(response.status).toBe(400);
+  });
+
   test('phone not between 9 and 10 characters', async () => {
     const response = await request(app).put(`/employees/${employeeId}`).send({
       firstName: 'Personal',
@@ -692,7 +625,7 @@ describe('Unsuccesful PUT /employees - Bad Route', () => {
 });
 
 describe('Unsuccesful PUT /employees - Nonexistent ID', () => {
-  test('should not update an employee because onject was not found', async () => {
+  test('should not update an employee because object was not found', async () => {
     const response = await request(app).put('/employees/60d4a32f257e066e8495ce13').send({
       firstName: 'Personal',
       lastName: 'test',
@@ -700,10 +633,15 @@ describe('Unsuccesful PUT /employees - Nonexistent ID', () => {
       gender: 'Male',
       address: 'calle sin nombre 123',
       dob: '10/10/1998',
-      password: '123456789',
+      password: '1234asd56789',
       phone: '0303456123',
       active: true,
     });
+    expect(response.status).toBe(404);
+  });
+
+  test('the employee with id X much was not found', async () => {
+    const response = await request(app).get('/employees/60d4a32f257e066e84951234').send();
     expect(response.status).toBe(404);
   });
 });
@@ -717,11 +655,6 @@ describe('GetById /employees', () => {
   test('response should not return error', async () => {
     const response = await request(app).get(`/employees/${employeeId}`).send();
     expect(response.error).toBe(false);
-  });
-
-  test('the employee with id X much was not found', async () => {
-    const response = await request(app).get('/employees/60d4a32f257e066e84951234').send();
-    expect(response.status).toBe(404);
   });
 
   test('returns the required information', async () => {

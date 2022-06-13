@@ -2,7 +2,8 @@ import Joi from 'joi';
 
 const validateCreation = (req, res, next) => {
   const projectValidation = Joi.object({
-    name: Joi.string().min(3).max(30).required(),
+    name: Joi.string().min(3).max(30).required()
+      .regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
     description: Joi.string().min(3).max(200).required(),
     clientName: Joi.string().min(3).max(30).required(),
     startDate: Joi.date().required(),
@@ -26,7 +27,7 @@ const validateCreation = (req, res, next) => {
 
 const validateModification = (req, res, next) => {
   const projectValidation = Joi.object({
-    name: Joi.string().min(3).max(30),
+    name: Joi.string().min(3).max(30).regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
     description: Joi.string().min(3).max(200),
     clientName: Joi.string().min(3).max(30),
     startDate: Joi.date(),
