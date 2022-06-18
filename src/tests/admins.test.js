@@ -21,7 +21,6 @@ describe('POST /Admins', () => {
     expect(response.status).toBe(201);
     expect(response.body.error).toBe(false);
     // eslint-disable-next-line no-underscore-dangle
-    adminId = response.body.data._id;
   });
 
   test('It should show an admin created message', async () => {
@@ -34,7 +33,6 @@ describe('POST /Admins', () => {
     });
     expect(response.body.message).toEqual('Admin has been created');
     // eslint-disable-next-line no-underscore-dangle
-    adminId = response.body.data._id;
   });
 
   test('It should create a new admin, FIRST NAME lenght passed validation', async () => {
@@ -337,7 +335,7 @@ describe('GET by ID /admins', () => {
 
   test('response should return a successful message', async () => {
     const response = await request(app).get(`/admins/${adminId}`).send();
-    expect(response.body.message).toEqual('The admin is:');
+    expect(response.body.message).toEqual('Admin with ID:60d4a32f257e066e9495ce12 sent:');
   });
 });
 

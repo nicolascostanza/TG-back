@@ -285,7 +285,7 @@ describe('PUT /tasks Success', () => {
       startDate: '05/20/2022',
       status: 'Ready to deliver',
     });
-    expect(response.body.message).toEqual('Task has been updated');
+    expect(response.body.message).toEqual('Task successfully updated');
   });
 });
 
@@ -574,7 +574,7 @@ describe('getById /tasks', () => {
 describe('DELETE /tasks', () => {
   test('response should return a 200 status', async () => {
     const response = await request(app).delete('/tasks/60a4a32f247e066e9495ce12').send();
-    expect(response.body.message).toEqual('The task has been successfully deleted');
+    expect(response.body.message).toEqual('Task successfully deleted');
     expect(response.body.data).not.toBeUndefined();
     expect(response.error).toBeFalsy();
     expect(response.status).toBe(200);

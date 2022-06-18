@@ -12,7 +12,8 @@ const validateAdmin = (req, res, next) => {
   if (validation.error) {
     return res.status(400).json({
       message: 'There has been an error in the validation',
-      error: validation.error.details[0].message,
+      data: validation.error.details[0].message,
+      error: true,
     });
   }
   return next();
@@ -30,7 +31,8 @@ const validateAdminUpd = (req, res, next) => {
   if (validation.error) {
     return res.status(400).json({
       message: 'There has been an error in the validation',
-      error: validation.error.details[0].message,
+      data: validation.error.details[0].message,
+      error: true,
     });
   }
   return next();
