@@ -2,23 +2,18 @@ import Tsheet from '../models/Time-sheets';
 
 const getAllTs = async (req, res) => {
   try {
-    const getAllT = await Tsheet.find({}).populate('employeeId', { firstName: 1, surname: 1 }).populate('task', { taskName: 1, taskDescription: 1 });
-    if (getAllT.length <= 0) {
-      return res.status(400).json({
-        message: 'No Time-sheets found',
-        data: null,
-        error: true,
-      });
-    }
+    const getAllT = await Tsheet.find({})
+      .populate('employeeId', { firstName: 1, lastName: 1 })
+      .populate('task', { taskName: 1, taskDescription: 1 });
     return res.status(200).json({
-      message: 'Data for all Time-sheets sent',
+      message: 'All Time-sheets are:',
       data: getAllT,
       error: false,
     });
   } catch (error) {
-    return res.status(500).json({
-      message: error,
-      data: undefined,
+    return res.status(400).json({
+      message: error.message,
+      data: {},
       error: true,
     });
   }
@@ -28,55 +23,31 @@ const getTsById = async (req, res) => {
   try {
     if (!req.params.id) {
       return res.status(400).json({
-        message: 'Missing id parameters',
-        data: null,
+        message: 'Missing ID parameters',
+        data: {},
         error: false,
       });
     }
-    const empId = await Tsheet.findById(req.params.id).populate('employeeId', { firstName: 1, surname: 1 }).populate('task', { taskName: 1, taskDescription: 1 });
+    const empId = await Tsheet.findById(req.params.id)
+      .populate('employeeId', { firstName: 1, lastName: 1 })
+      .populate('task', { taskName: 1, taskDescription: 1 });
     if (empId) {
       return res.status(200).json({
-        message: `The data for the timesheet with id ${req.params.id} has been sent`,
+        message: `Time-sheet with ID:${req.params.id} sent:`,
         data: empId,
         error: false,
       });
     }
-    return res.status(400).json({
-      message: `There is no timesheet with id ${req.params.id}`,
-      data: undefined,
+    return res.status(404).json({
+      message: `Time-sheet with ID:${req.params.id} not found`,
+      data: {},
       error: true,
     });
   } catch (error) {
-    return res.status(500).json({
-      message: error,
-      data: undefined,
-      error: true,
-    });
-  }
-};
-
-const updateTimesheet = async (req, res) => {
-  try {
-    const result = await Tsheet.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true },
-    );
-    if (!result) {
-      return res.status(404).json({
-        success: false,
-        msg: 'The Timesheet has not been found',
-      });
-    }
-    return res.status(200).json({
-      success: true,
-      data: result,
-    });
-  } catch (error) {
     return res.status(400).json({
-      success: false,
-      msg: 'There was an error',
-      error: `the error is: ${error}`,
+      message: error.message,
+      data: {},
+      error: true,
     });
   }
 };
@@ -95,14 +66,50 @@ const createTimeSheet = async (req, res) => {
     });
     const result = await timeSheet.save();
     return res.status(201).json({
-      msg: 'Timesheet has been successfuly created',
+      message: 'Time-sheet has been created',
       data: result,
+      error: false,
     });
   } catch (error) {
     return res.status(400).json({
-      success: false,
-      msg: 'There was an error',
-      error: `the error is: ${error}`,
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
+const updateTimesheet = async (req, res) => {
+  try {
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+    const result = await Tsheet.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
+    );
+    if (!result) {
+      return res.status(404).json({
+        message: `Time-sheet with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Time-sheet successfully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
     });
   }
 };
@@ -111,28 +118,28 @@ const deleteTimesheet = async (req, res) => {
   try {
     if (!req.params.id) {
       return res.status(400).json({
-        message: 'Missing id parameter',
-        data: undefined,
+        message: 'Missing ID parameter',
+        data: {},
         error: true,
       });
     }
     const result = await Tsheet.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
-        message: `The Timesheet with ID: ${req.params.id} hasn't been found`,
-        data: undefined,
+        message: `Time-sheet with ID:${req.params.id} not found`,
+        data: {},
         error: true,
       });
     }
-    return res.status(200).json({
-      message: 'The Timesheet has been successfully deleted',
+    return res.json({
+      message: 'Time-sheet successfully deleted',
       data: result,
       error: false,
-    });
+    }).status(204);
   } catch (error) {
     return res.status(400).json({
-      message: error,
-      data: undefined,
+      message: error.message,
+      data: {},
       error: true,
     });
   }
@@ -141,7 +148,7 @@ const deleteTimesheet = async (req, res) => {
 export default {
   getAllTs,
   getTsById,
-  updateTimesheet,
   createTimeSheet,
+  updateTimesheet,
   deleteTimesheet,
 };

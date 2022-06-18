@@ -85,7 +85,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Bert\",\r\n    \"surname\": \"Sonson\",\r\n    \"email\": \"bso@trackgenix.com\",\r\n    \"gender\": \"Other\",\r\n    \"adress\": \"Potpurri 87\",\r\n    \"dob\": \"9-20-1990\",\r\n    \"password\": \"brownies96\",\r\n    \"phone\": \"987654321\",\r\n     \"active\": false\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Bert\",\r\n    \"lastName\": \"Sonson\",\r\n    \"email\": \"bso@trackgenix.com\",\r\n    \"gender\": \"Other\",\r\n    \"address\": \"Potpurri 87\",\r\n    \"dob\": \"9-20-1990\",\r\n    \"password\": \"brownies96\",\r\n    \"phone\": \"987654321\",\r\n     \"active\": false\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

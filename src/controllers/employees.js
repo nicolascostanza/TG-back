@@ -10,8 +10,8 @@ const getAllEmployees = async (req, res) => {
     });
   } catch (error) {
     return res.status(400).json({
-      message: error,
-      data: undefined,
+      message: error.message,
+      data: {},
       error: true,
     });
   }
@@ -22,20 +22,20 @@ const getEmployeeById = async (req, res) => {
     const employee = await Employee.findById(req.params.id);
     if (employee) {
       return res.status(200).json({
-        message: `The employee with id ${req.params.id} is:`,
+        message: `Employee with ID:${req.params.id} sent:`,
         data: employee,
         error: false,
       });
     }
-    return res.status(400).json({
-      message: `No employee with id ${req.params.id} has been found`,
-      data: undefined,
+    return res.status(404).json({
+      message: `Employee with ID:${req.params.id} not found`,
+      data: {},
       error: true,
     });
   } catch (error) {
     return res.status(400).json({
-      message: 'error',
-      data: undefined,
+      message: error.message,
+      data: {},
       error: true,
     });
   }
@@ -45,10 +45,10 @@ const createEmployee = async (req, res) => {
   try {
     const employee = new Employee({
       firstName: req.body.firstName,
-      surname: req.body.surname,
+      lastName: req.body.lastName,
       email: req.body.email,
       gender: req.body.gender,
-      adress: req.body.adress,
+      address: req.body.address,
       dob: req.body.dob,
       password: req.body.password,
       phone: req.body.phone,
@@ -57,39 +57,14 @@ const createEmployee = async (req, res) => {
 
     const result = await employee.save();
     return res.status(201).json({
-      message: 'Employee has been successfuly created',
+      message: 'Employee has been created',
       data: result,
       error: false,
     });
   } catch (error) {
     return res.status(400).json({
-      message: `the error is: ${error}`,
-      data: undefined,
-      error: true,
-    });
-  }
-};
-
-const deleteEmployee = async (req, res) => {
-  try {
-    const result = await Employee.findByIdAndDelete(req.params.id);
-
-    if (!result) {
-      return res.status(404).json({
-        message: `The employee with an id of ${req.params.id} has not been found or does not exist`,
-        data: undefined,
-        error: true,
-      });
-    }
-    return res.status(200).json({
-      message: `The employee with former id of ${req.params.id} has been succesfully deleted`,
-      data: result,
-      error: false,
-    });
-  } catch (error) {
-    return res.json({
-      message: `the error is: ${error}`,
-      data: undefined,
+      message: error.message,
+      data: {},
       error: true,
     });
   }
@@ -99,8 +74,8 @@ const updateEmployee = async (req, res) => {
   try {
     if (!req.params) {
       return res.status(400).json({
-        message: 'Missing id parameter',
-        data: undefined,
+        message: 'Missing ID parameter',
+        data: {},
         error: true,
       });
     }
@@ -112,20 +87,52 @@ const updateEmployee = async (req, res) => {
 
     if (!result) {
       return res.status(404).json({
-        message: 'Employee not found',
-        data: undefined,
+        message: `Employee with ID:${req.params.id} not found`,
+        data: {},
         error: true,
       });
     }
-    return res.status(202).json({
+    return res.status(200).json({
       message: 'Employee succesfully updated',
       data: result,
       error: false,
     });
   } catch (error) {
     return res.status(400).json({
-      message: error,
-      data: undefined,
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
+const deleteEmployee = async (req, res) => {
+  try {
+    if (!req.params.id) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+    const result = await Employee.findByIdAndDelete(req.params.id);
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Employee with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
+    return res.json({
+      message: 'Employee successfully deleted',
+      data: result,
+      error: false,
+    }).status(204);
+  } catch (error) {
+    return res.json({
+      message: error.message,
+      data: {},
       error: true,
     });
   }
@@ -135,6 +142,6 @@ export default {
   getAllEmployees,
   getEmployeeById,
   createEmployee,
-  deleteEmployee,
   updateEmployee,
+  deleteEmployee,
 };

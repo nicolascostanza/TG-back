@@ -37,7 +37,6 @@ describe('POST /time-sheets', () => {
       project: 'project a ',
       date: '05/24/2022',
       hours: '50',
-      task: ['60a4a32f247e066e9495ce12'],
       approved: 'true',
       role: 'DEV',
     });
@@ -55,7 +54,7 @@ describe('POST /time-sheets', () => {
       approved: 'true',
       role: 'DEV',
     });
-    expect(response.body.msg).toEqual('Timesheet has been successfuly created');
+    expect(response.body.message).toEqual('Time-sheet has been created');
   });
 
   test('It cannot create a timesheet: the request is missing required field. The status should be 400', async () => {
@@ -361,7 +360,7 @@ describe('PUT /time-sheets', () => {
       project: 'project a ',
       date: '05/24/2022',
       hours: '50',
-      task: '60a4a32f247e066e9495ce12',
+      task: ['60a4a32f247e066e9495ce12'],
       approved: 'true',
       role: 'DEV',
     });
@@ -672,7 +671,7 @@ describe('GET /time-sheets', () => {
 
   test('response should return a successful message', async () => {
     const response = await request(app).get('/time-sheets').send();
-    expect(response.body.message).toEqual('Data for all Time-sheets sent');
+    expect(response.body.message).toEqual('All Time-sheets are:');
   });
 });
 
@@ -694,7 +693,7 @@ describe('Succesful GET by Id /time-sheets', () => {
 
   test('should return message', async () => {
     const response = await request(app).get('/time-sheets/62832da494417525e9b7b0c2').send();
-    expect(response.body.message).toEqual('The data for the timesheet with id 62832da494417525e9b7b0c2 has been sent');
+    expect(response.body.message).toEqual('Time-sheet with ID:62832da494417525e9b7b0c2 sent:');
   });
 
   test('should return _id property', async () => {
@@ -739,9 +738,9 @@ describe('Succesful GET by Id /time-sheets', () => {
 });
 
 describe('Unsuccesful GET by Id /time-sheets - Wrong Id', () => {
-  test('should return status 400', async () => {
+  test('should return status 404 not found', async () => {
     const response = await request(app).get('/time-sheets/62832da494417525e9b7b0c1').send();
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(404);
   });
 
   test('should return error true', async () => {
@@ -751,12 +750,12 @@ describe('Unsuccesful GET by Id /time-sheets - Wrong Id', () => {
 
   test('should return data undefined', async () => {
     const response = await request(app).get('/time-sheets/62832da494417525e9b7b0c1').send();
-    expect(response.body.data).toBeUndefined();
+    expect(response.body.data.length).toBeUndefined();
   });
 
   test('should return message', async () => {
     const response = await request(app).get('/time-sheets/62832da494417525e9b7b0c1').send();
-    expect(response.body.message).toEqual('There is no timesheet with id 62832da494417525e9b7b0c1');
+    expect(response.body.message).toEqual('Time-sheet with ID:62832da494417525e9b7b0c1 not found');
   });
 });
 
@@ -766,7 +765,7 @@ describe('Succesful DELETE /time-sheets', () => {
     expect(response.status).toBe(200);
     expect(response.body.error).toBe(false);
     expect(response.body.data).toBeDefined();
-    expect(response.body.message).toEqual('The Timesheet has been successfully deleted');
+    expect(response.body.message).toEqual('Time-sheet successfully deleted');
   });
 });
 
@@ -776,9 +775,9 @@ describe('Unsuccesful DELETE /time-sheets - timesheet not found', () => {
     expect(response.status).toBe(404);
   });
 
-  test('should return data undefined', async () => {
+  test('should return data empty object', async () => {
     const response = await request(app).delete('/time-sheets/62832da494417525e9b7b0c2').send();
-    expect(response.body.data).toBeUndefined();
+    expect(response.body.data.length).toBeUndefined();
   });
 
   test('should return error true', async () => {

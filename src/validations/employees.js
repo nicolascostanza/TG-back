@@ -7,14 +7,14 @@ const creationValidation = (req, res, next) => {
       .min(3)
       .required()
       .regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
-    surname: joi
+    lastName: joi
       .string()
       .min(3)
       .required()
       .regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
-    email: joi.string().email(),
+    email: joi.string().email().min(7).required(),
     gender: joi.string().valid('Male', 'Female', 'Other'),
-    adress: joi.string().regex(/^[a-zA-Z0-9\s,'-]*$/),
+    address: joi.string().regex(/^[a-zA-Z0-9\s,'-]*$/),
     dob: joi.date().required(),
     password: joi
       .string()
@@ -29,8 +29,9 @@ const creationValidation = (req, res, next) => {
 
   if (validation.error) {
     return res.status(400).json({
-      msg: 'There has been an error when validating the request',
-      error: validation.error.details[0].message,
+      message: 'There has been an error in the validation',
+      data: validation.error.details[0].message,
+      error: true,
     });
   }
   return next();
@@ -42,13 +43,13 @@ const updateValidation = (req, res, next) => {
       .string()
       .min(3)
       .regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
-    surname: joi
+    lastName: joi
       .string()
       .min(3)
       .regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
     email: joi.string().email().min(7),
     gender: joi.string().valid('Male', 'Female', 'Other'),
-    adress: joi.string().regex(/^[a-zA-Z0-9\s,'-]*$/),
+    address: joi.string().regex(/^[a-zA-Z0-9\s,'-]*$/),
     dob: joi.date(),
     password: joi
       .string()
@@ -62,8 +63,9 @@ const updateValidation = (req, res, next) => {
 
   if (validation.error) {
     return res.status(400).json({
-      message: 'There has been an error when validating the request',
-      error: validation.error.details[0].message,
+      message: 'There has been an error in the validation',
+      data: validation.error.details[0].message,
+      error: true,
     });
   }
   return next();

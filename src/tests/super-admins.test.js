@@ -232,7 +232,7 @@ describe('GET /super-admin', () => {
 
   test('response should return a correct message', async () => {
     const response = await request(app).get('/super-admins').send();
-    expect(response.body.message).toEqual('The list has been found');
+    expect(response.body.message).toEqual('All Superadmins are:');
   });
 
   test('response should return at least one super admin', async () => {

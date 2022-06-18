@@ -5,10 +5,10 @@ import projectValidations from '../validations/projects';
 const router = express.Router();
 
 router
-  .post('/create', projectValidations.validateCreation, projectControllers.createProject)
+  .post('/', projectValidations.validateCreation, projectControllers.createProject)
   .delete('/:id', projectControllers.deleteProject)
-  .put('/edit/:id', projectValidations.validateModification, projectControllers.updateProject)
-  .get('/:id', projectControllers.getProjectById)
-  .get('/', projectControllers.getAllProjects);
+  .put('/:id', projectValidations.validateModification, projectControllers.updateProject)
+  .get('/', projectControllers.getAllProjects)
+  .get('/:id', projectControllers.getProjectById);
 
 export default router;
