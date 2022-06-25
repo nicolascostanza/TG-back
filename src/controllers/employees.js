@@ -1,5 +1,7 @@
 import Employee from '../models/Employees';
 
+const Firebase = require('../helper/firebase');
+
 const getAllEmployees = async (req, res) => {
   const allEmployees = await Employee.find({});
   try {
@@ -42,7 +44,14 @@ const getEmployeeById = async (req, res) => {
 };
 
 const createEmployee = async (req, res) => {
+  let firebaseUid;
   try {
+    const newFirebaseUser = await Firebase.auth().createUser({
+      email: req.body.email,
+      password: req.body.password,
+    });
+    firebaseUid = newFirebaseUser.uid;
+    await Firebase.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'EMPLOYEE' });
     const employee = new Employee({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -59,9 +68,13 @@ const createEmployee = async (req, res) => {
     return res.status(201).json({
       message: 'Employee has been created',
       data: result,
+      fire: firebaseUid,
       error: false,
     });
   } catch (error) {
+    if (firebaseUid) {
+      await Firebase.auth().deleteUser(firebaseUid);
+    }
     return res.status(400).json({
       message: error.message,
       data: {},

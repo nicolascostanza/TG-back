@@ -1,5 +1,7 @@
 import Admins from '../models/Admins';
 
+const Firebase = require('../helper/firebase');
+
 const getAllAdmins = async (req, res) => {
   const allAdmins = await Admins.find({});
   try {
@@ -42,7 +44,14 @@ const getAdminById = async (req, res) => {
 };
 
 const createAdmin = async (req, res) => {
+  let firebaseUid;
   try {
+    const newFirebaseUser = await Firebase.auth().createUser({
+      email: req.body.email,
+      password: req.body.password,
+    });
+    firebaseUid = newFirebaseUser.uid;
+    await Firebase.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'ADMIN' });
     const admin = new Admins({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -57,6 +66,9 @@ const createAdmin = async (req, res) => {
       error: false,
     });
   } catch (error) {
+    if (firebaseUid) {
+      await Firebase.auth().deleteUser(firebaseUid);
+    }
     return res.status(400).json({
       message: error.message,
       data: {},
