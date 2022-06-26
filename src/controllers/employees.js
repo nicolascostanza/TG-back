@@ -46,13 +46,14 @@ const getEmployeeById = async (req, res) => {
 const createEmployee = async (req, res) => {
   let firebaseUid;
   try {
-    const newFirebaseUser = await Firebase.auth().createUser({
+    const newFirebaseUser = await Firebase.default.auth().createUser({
       email: req.body.email,
       password: req.body.password,
     });
     firebaseUid = newFirebaseUser.uid;
-    await Firebase.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'EMPLOYEE' });
+    await Firebase.default.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'EMPLOYEE' });
     const employee = new Employee({
+      firebaseUid,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
@@ -73,7 +74,7 @@ const createEmployee = async (req, res) => {
     });
   } catch (error) {
     if (firebaseUid) {
-      await Firebase.auth().deleteUser(firebaseUid);
+      await Firebase.default.auth().deleteUser(firebaseUid);
     }
     return res.status(400).json({
       message: error.message,
