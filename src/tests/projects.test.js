@@ -440,7 +440,7 @@ describe('GET projects/id ', () => {
     const response = await request(app).get(`/patata/${projectID}`).send();
     expect(response.status).toBe(404);
   });
-  test('response should return a undefined body', async () => {
+  test('response should return an empty body', async () => {
     const response = await request(app).get(`/patata/${projectID}`).send();
     expect(response.body.data).toBeUndefined();
   });

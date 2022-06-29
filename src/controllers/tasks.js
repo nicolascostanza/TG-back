@@ -1,8 +1,17 @@
 import Task from '../models/Tasks';
 
 const getAllTasks = async (req, res) => {
+  const { taskName, taskDescription, status } = req.query;
+  const statusTypes = [
+    'Ready to deliver', 'Paused', 'Unassigned', 'Completed', 'In progress', 'Cancelled',
+  ];
   try {
-    const allTasks = await Task.find({})
+    const allTasks = await Task
+      .find({
+        taskName: { $regex: new RegExp(taskName || '', 'i') },
+        taskDescription: { $regex: new RegExp(taskDescription || '', 'i') },
+        status: status ?? { $in: statusTypes },
+      })
       .populate('assignedEmployee', { firstName: 1, lastName: 1 })
       .populate('parentProject', { name: 1 });
     return res.status(200).json({

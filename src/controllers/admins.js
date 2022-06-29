@@ -3,11 +3,26 @@ import Admins from '../models/Admins';
 const Firebase = require('../helper/firebase');
 
 const getAllAdmins = async (req, res) => {
-  const allAdmins = await Admins.find({});
   try {
+    const {
+      firstName, lastName, email, active,
+    } = req.query;
+    const admins = await Admins.find({
+      firstName: { $regex: new RegExp(firstName || '', 'i') },
+      lastName: { $regex: new RegExp(lastName || '', 'i') },
+      email: { $regex: new RegExp(email || '', 'i') },
+      active: active ?? { $in: [false, true] },
+    });
+    if (admins.length < 1) {
+      return res.status(404).json({
+        message: 'Admins has not been found',
+        data: {},
+        error: true,
+      });
+    }
     return res.status(200).json({
       message: 'All admins are:',
-      data: allAdmins,
+      data: admins,
       error: false,
     });
   } catch (error) {

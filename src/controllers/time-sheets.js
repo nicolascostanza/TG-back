@@ -1,13 +1,29 @@
 import Tsheet from '../models/Time-sheets';
 
 const getAllTs = async (req, res) => {
+  const {
+    description, project, approved, role,
+  } = req.query;
   try {
-    const getAllT = await Tsheet.find({})
+    const data = await Tsheet
+      .find({
+        description: { $regex: new RegExp(description || '', 'i') },
+        project: { $regex: new RegExp(project || '', 'i') },
+        approved: approved ?? { $in: [false, true] },
+        role: role ?? { $in: ['DEV', 'QA', 'PM', 'TL'] },
+      })
       .populate('employeeId', { firstName: 1, lastName: 1 })
       .populate('task', { taskName: 1, taskDescription: 1 });
+    if (data.length < 1) {
+      return res.status(404).json({
+        message: 'All Time-sheets are:',
+        data: {},
+        error: true,
+      });
+    }
     return res.status(200).json({
       message: 'All Time-sheets are:',
-      data: getAllT,
+      data,
       error: false,
     });
   } catch (error) {

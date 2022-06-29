@@ -3,8 +3,20 @@ import Employee from '../models/Employees';
 const Firebase = require('../helper/firebase');
 
 const getAllEmployees = async (req, res) => {
-  const allEmployees = await Employee.find({});
+  // PENDING: IMPLEMENT A DOB FILTER
+  const {
+    firstName, lastName, email, gender, address, phone, active,
+  } = req.query;
   try {
+    const allEmployees = await Employee.find({
+      firstName: { $regex: new RegExp(firstName || '', 'i') },
+      lastName: { $regex: new RegExp(lastName || '', 'i') },
+      email: { $regex: new RegExp(email || '', 'i') },
+      gender: gender ?? { $in: ['Male', 'Female', 'Other'] },
+      address: { $regex: new RegExp(address || '', 'i') },
+      phone: { $regex: new RegExp(phone || '', 'i') },
+      active: active ?? { $in: [false, true] },
+    });
     return res.status(200).json({
       message: 'All employees are:',
       data: allEmployees,

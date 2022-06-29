@@ -1,8 +1,24 @@
 import Project from '../models/Projects';
 
 const getAllProjects = async (req, res) => {
+  const {
+    name,
+    description,
+    clientName,
+    startDate = new Date('1900-01-01'),
+    endDate = new Date('2100-12-31'),
+    projectManager,
+  } = req.query;
   try {
-    const allProjects = await Project.find({})
+    const allProjects = await Project
+      .find({
+        name: { $regex: new RegExp(name || '', 'i') },
+        description: { $regex: new RegExp(description || '', 'i') },
+        clientName: { $regex: new RegExp(clientName || '', 'i') },
+        startDate: { $gte: new Date(startDate) },
+        endDate: { $lte: new Date(endDate) },
+        projectManager: { $regex: new RegExp(projectManager || '', 'i') },
+      })
       .populate('team', { firstName: 1, lastName: 1 })
       .populate('tasks', { taskName: 1, taskDescription: 1 });
     return res.status(200).json({
