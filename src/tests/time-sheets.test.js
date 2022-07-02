@@ -759,9 +759,9 @@ describe('Unsuccesful GET by Id /time-sheets - Wrong Id', () => {
   });
 });
 
-describe('Succesful DELETE /time-sheets', () => {
+describe('Succesful PATCH /time-sheets', () => {
   test('should return status 200, error true, data defined, and message', async () => {
-    const response = await request(app).delete('/time-sheets/62832da494417525e9b7b0c2').send();
+    const response = await request(app).patch('/time-sheets/62832da494417525e9b7b0c2').send();
     expect(response.status).toBe(200);
     expect(response.body.error).toBe(false);
     expect(response.body.data).toBeDefined();
@@ -771,17 +771,17 @@ describe('Succesful DELETE /time-sheets', () => {
 
 describe('Unsuccesful DELETE /time-sheets - timesheet not found', () => {
   test('should return status 404', async () => {
-    const response = await request(app).delete('/time-sheets/62832da494417525e9b7b0c2').send();
+    const response = await request(app).patch('/time-sheets/62832da494417525e9b7b0c7').send();
     expect(response.status).toBe(404);
   });
 
   test('should return data empty object', async () => {
-    const response = await request(app).delete('/time-sheets/62832da494417525e9b7b0c2').send();
+    const response = await request(app).patch('/time-sheets/62832da494417525e9b7b0c7').send();
     expect(response.body.data.length).toBeUndefined();
   });
 
   test('should return error true', async () => {
-    const response = await request(app).delete('/time-sheets/62832da494417525e9b7b0c2').send();
+    const response = await request(app).patch('/time-sheets/62832da494417525e9b7b0c7').send();
     expect(response.body.error).toBe(true);
   });
 });

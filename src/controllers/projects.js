@@ -136,7 +136,8 @@ const deleteProject = async (req, res) => {
         error: true,
       });
     }
-    const result = await Project.findByIdAndDelete(req.params.id)
+    const result = await Project
+      .findByIdAndUpdate(req.params.id, { isDeleted: true }, { new: true })
       .populate('team', { firstName: 1, lastName: 1 })
       .populate('tasks', { taskName: 1 });
     if (!result) {
@@ -146,11 +147,11 @@ const deleteProject = async (req, res) => {
         error: true,
       });
     }
-    return res.json({
+    return res.status(200).json({
       message: 'Project successfully deleted',
       data: result,
       error: false,
-    }).status(204);
+    });
   } catch (error) {
     return res.status(400).json({
       message: error.message,

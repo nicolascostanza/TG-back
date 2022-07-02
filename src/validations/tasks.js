@@ -10,6 +10,7 @@ const validateCreation = (req, res, next) => {
     status: Joi.string()
       .valid('Ready to deliver', 'Paused', 'Unassigned', 'Completed', 'In progress', 'Cancelled')
       .required(),
+    isDeleted: Joi.boolean().optional(),
   });
   const validation = taskValidation.validate(req.body);
   if (validation.error) {
@@ -31,6 +32,7 @@ const validateUpdate = (req, res, next) => {
     startDate: Joi.date(),
     status: Joi.string()
       .valid('Ready to deliver', 'Paused', 'Unassigned', 'Completed', 'In progress', 'Cancelled'),
+    isDeleted: Joi.boolean().optional(),
   });
   const validation = taskValidation.validate(req.body);
   if (validation.error) {

@@ -38,6 +38,10 @@ const timeSheetsSchema = new Schema({
     enum: ['DEV', 'QA', 'PM', 'TL'],
     required: true,
   },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export default mongoose.model('Time-sheet', timeSheetsSchema);

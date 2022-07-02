@@ -500,31 +500,23 @@ describe('GET projects/id ', () => {
 
 describe('DELETE projects/id', () => {
   test('response should not return a 404 status', async () => {
-    const response = await request(app).delete(`/patata/${projectID}`).send();
+    const response = await request(app).patch(`/patata/${projectID}`).send();
     expect(response.status).toBe(404);
   });
   test('response should not return undefined data', async () => {
-    const response = await request(app).delete(`/patata/${projectID}`).send();
+    const response = await request(app).patch(`/patata/${projectID}`).send();
     expect(response.body.data).toBeUndefined();
   });
   test('response should not return a true error', async () => {
-    const response = await request(app).delete(`/patata/${projectID}`).send();
+    const response = await request(app).patch(`/patata/${projectID}`).send();
     expect(response.error).toBeTruthy();
   });
   test('response should not return a 500 status', async () => {
-    const response = await request(app).delete('/projects/1594').send();
-    expect(response.error).toBeTruthy();
-  });
-  test('response should not return a undefined data', async () => {
-    const response = await request(app).delete('/projects/1594').send();
-    expect(response.body.data.length).toBeUndefined();
-  });
-  test('response should not return a true error', async () => {
-    const response = await request(app).delete('/projects/1594').send();
+    const response = await request(app).patch('/projects/1594').send();
     expect(response.error).toBeTruthy();
   });
   test('response should return a 200 status', async () => {
-    const response = await request(app).delete(`/projects/${projectID}`).send();
+    const response = await request(app).patch(`/projects/${projectID}`).send();
     expect(response.body.message).toEqual('Project successfully deleted');
     expect(response.body.data).not.toBeUndefined();
     expect(response.error).toBeFalsy();
