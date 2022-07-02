@@ -11,6 +11,7 @@ const getAllTs = async (req, res) => {
         project: { $regex: new RegExp(project || '', 'i') },
         approved: approved ?? { $in: [false, true] },
         role: role ?? { $in: ['DEV', 'QA', 'PM', 'TL'] },
+        isDeleted: { $ne: true },
       })
       .populate('employeeId', { firstName: 1, lastName: 1 })
       .populate('task', { taskName: 1, taskDescription: 1 });

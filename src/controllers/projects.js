@@ -18,6 +18,7 @@ const getAllProjects = async (req, res) => {
         startDate: { $gte: new Date(startDate) },
         endDate: { $lte: new Date(endDate) },
         projectManager: { $regex: new RegExp(projectManager || '', 'i') },
+        isDeleted: { $ne: true },
       })
       .populate('team', { firstName: 1, lastName: 1 })
       .populate('tasks', { taskName: 1, taskDescription: 1 });

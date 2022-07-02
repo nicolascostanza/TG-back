@@ -12,6 +12,7 @@ const getAllAdmins = async (req, res) => {
       lastName: { $regex: new RegExp(lastName || '', 'i') },
       email: { $regex: new RegExp(email || '', 'i') },
       active: active ?? { $in: [false, true] },
+      isDeleted: { $ne: true },
     });
     if (admins.length < 1) {
       return res.status(404).json({

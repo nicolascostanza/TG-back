@@ -11,6 +11,7 @@ const getAllTasks = async (req, res) => {
         taskName: { $regex: new RegExp(taskName || '', 'i') },
         taskDescription: { $regex: new RegExp(taskDescription || '', 'i') },
         status: status ?? { $in: statusTypes },
+        isDeleted: { $ne: true },
       })
       .populate('assignedEmployee', { firstName: 1, lastName: 1 })
       .populate('parentProject', { name: 1 });

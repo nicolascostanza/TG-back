@@ -16,6 +16,7 @@ const getAllEmployees = async (req, res) => {
       address: { $regex: new RegExp(address || '', 'i') },
       phone: { $regex: new RegExp(phone || '', 'i') },
       active: active ?? { $in: [false, true] },
+      isDeleted: { $ne: true },
     });
     return res.status(200).json({
       message: 'All employees are:',
