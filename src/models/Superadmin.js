@@ -5,14 +5,6 @@ const { Schema } = mongoose;
 const SuperAdminsSchema = new Schema(
   {
     firebaseUid: { type: String, required: true },
-    firstName: {
-      type: String,
-      required: true,
-    },
-    lastName: {
-      type: String,
-      required: true,
-    },
     email: {
       type: String,
       required: true,
@@ -22,10 +14,6 @@ const SuperAdminsSchema = new Schema(
       type: String,
       required: true,
       min: 8,
-    },
-    active: {
-      type: Boolean,
-      required: true,
     },
     isDeleted: {
       type: Boolean,

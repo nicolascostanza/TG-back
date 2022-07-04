@@ -30,7 +30,7 @@ const employeeSchema = new Schema(
     },
     dob: {
       type: Date,
-      required: true,
+      required: false,
     },
     password: {
       type: String,
@@ -44,8 +44,16 @@ const employeeSchema = new Schema(
     },
     active: {
       type: Boolean,
-      required: true,
+      default: true,
     },
+    associatedProjects: [
+      {
+        projectId: { type: mongoose.Schema.Types.ObjectId, ref: 'Project' },
+        role: { enum: ['QA', 'DEV', 'TL'] },
+        rate: { type: Number },
+        isPM: { type: Boolean, default: false },
+      },
+    ],
     isDeleted: {
       type: Boolean,
       default: false,

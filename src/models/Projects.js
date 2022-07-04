@@ -25,14 +25,12 @@ const projectSchema = new Schema(
       type: Date,
       required: false,
     },
-    projectManager: {
-      type: String,
-      required: true,
-    },
     team: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Employee',
+        employeeId: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee' },
+        role: { enum: ['QA', 'DEV', 'TL'] },
+        rate: { type: Number },
+        isPM: { type: Boolean, default: false },
       },
     ],
     tasks: [

@@ -8,8 +8,12 @@ const validateCreation = (req, res, next) => {
     clientName: Joi.string().min(3).max(30).required(),
     startDate: Joi.date().required(),
     endDate: Joi.date().optional(),
-    projectManager: Joi.string().min(3).max(30).required(),
-    team: Joi.array(),
+    team: [{
+      employeeId: Joi.string().alphanum().length(24),
+      role: Joi.string().valid('QA', 'DEV', 'TL'),
+      rate: Joi.number().precision(2),
+      isPM: Joi.boolean().optional(),
+    }],
     tasks: Joi.array(),
     isDeleted: Joi.boolean().optional(),
   });
@@ -33,8 +37,12 @@ const validateModification = (req, res, next) => {
     clientName: Joi.string().min(3).max(30),
     startDate: Joi.date(),
     endDate: Joi.date(),
-    projectManager: Joi.string().min(3).max(30),
-    team: Joi.array(),
+    team: [{
+      employeeId: Joi.string().alphanum().length(24),
+      role: Joi.string().valid('QA', 'DEV', 'TL'),
+      rate: Joi.number().precision(2),
+      isPM: Joi.boolean().optional(),
+    }],
     tasks: Joi.array(),
     isDeleted: Joi.boolean().optional(),
   });

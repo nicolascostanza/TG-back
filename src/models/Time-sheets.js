@@ -7,13 +7,9 @@ const timeSheetsSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Employee',
   },
-  description: {
-    type: String,
-    required: false,
-  },
-  project: {
-    type: String,
-    required: true,
+  projectId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Project',
   },
   date: {
     type: Date,
@@ -23,25 +19,18 @@ const timeSheetsSchema = new Schema({
     type: Number,
     required: true,
   },
-  task: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Task',
-    },
-  ],
+  taskId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Task',
+  },
   approved: {
     type: Boolean,
-    required: true,
-  },
-  role: {
-    type: String,
-    enum: ['DEV', 'QA', 'PM', 'TL'],
-    required: true,
+    required: false,
   },
   isDeleted: {
     type: Boolean,
     default: false,
   },
-});
+}, { timestamps: true });
 
 export default mongoose.model('Time-sheet', timeSheetsSchema);
