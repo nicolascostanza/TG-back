@@ -27,8 +27,9 @@ const projectSchema = new Schema(
     },
     team: [
       {
+        _id: false,
         employeeId: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee' },
-        role: { enum: ['QA', 'DEV', 'TL'] },
+        role: { type: String, enum: ['QA', 'DEV', 'TL'] },
         rate: { type: Number },
         isPM: { type: Boolean, default: false },
       },

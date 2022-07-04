@@ -24,12 +24,15 @@ const creationValidation = (req, res, next) => {
       .regex(/(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,25})$/),
     phone: Joi.string().regex(/^[0-9\-+]{9,10}$/).optional(),
     active: Joi.boolean().optional(),
-    associatedProjects: [{
-      projectId: Joi.string().alphanum().length(24).required(),
-      role: Joi.string().valid('QA', 'DEV', 'TL').required(),
-      rate: Joi.number().precision(2).required(),
-      isPM: Joi.boolean().optional(),
-    }],
+    associatedProjects: Joi.array().items(
+      {
+        _id: false,
+        projectId: Joi.string().alphanum().length(24).required(),
+        role: Joi.string().valid('QA', 'DEV', 'TL', 'PM').required(),
+        rate: Joi.number().precision(2).required(),
+        isPM: Joi.boolean().optional().required(),
+      },
+    ),
     isDeleted: Joi.boolean().optional(),
   });
 
@@ -69,7 +72,7 @@ const updateValidation = (req, res, next) => {
       {
         _id: false,
         projectId: Joi.string().alphanum().length(24),
-        role: Joi.string().valid('QA', 'DEV', 'TL'),
+        role: Joi.string().valid('QA', 'DEV', 'TL', 'PM'),
         rate: Joi.number().precision(2),
         isPM: Joi.boolean().optional(),
       },
