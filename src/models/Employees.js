@@ -49,9 +49,10 @@ const employeeSchema = new Schema(
     associatedProjects: [
       {
         projectId: { type: mongoose.Schema.Types.ObjectId, ref: 'Project' },
-        role: { enum: ['QA', 'DEV', 'TL'] },
+        role: { type: String, enum: ['QA', 'DEV', 'TL'] },
         rate: { type: Number },
         isPM: { type: Boolean, default: false },
+        _id: false,
       },
     ],
     isDeleted: {

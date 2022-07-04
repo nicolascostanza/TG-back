@@ -7,7 +7,6 @@ const getAllProjects = async (req, res) => {
     clientName,
     startDate = new Date('1900-01-01'),
     endDate = new Date('2100-12-31'),
-    projectManager,
   } = req.query;
   try {
     const allProjects = await Project
@@ -17,10 +16,9 @@ const getAllProjects = async (req, res) => {
         clientName: { $regex: new RegExp(clientName || '', 'i') },
         startDate: { $gte: new Date(startDate) },
         endDate: { $lte: new Date(endDate) },
-        projectManager: { $regex: new RegExp(projectManager || '', 'i') },
         isDeleted: { $ne: true },
       })
-      .populate('team', { firstName: 1, lastName: 1 })
+      .populate('team.employeeId', { firstName: 1, lastName: 1 })
       .populate('tasks', { taskName: 1, taskDescription: 1 });
     return res.status(200).json({
       message: 'All Projects are:',
@@ -40,11 +38,11 @@ const getProjectById = async (req, res) => {
   try {
     const projectId = req.params.id;
     const project = await Project.findOne({ _id: projectId })
-      .populate('team', { firstName: 1, lastName: 1 })
+      .populate('team.employeeId', { firstName: 1, lastName: 1 })
       .populate('tasks', { taskName: 1 });
     if (project) {
       res.status(200).json({
-        message: `Project with ID:${req.params.id} sent:`,
+        message: `Project with ID:${req.params.id} sent.`,
         data: project,
         error: false,
       });
@@ -72,7 +70,6 @@ const createProject = async (req, res) => {
       clientName: req.body.clientName,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
-      projectManager: req.body.projectManager,
       team: req.body.team,
       tasks: req.body.tasks,
     });
@@ -105,7 +102,7 @@ const updateProject = async (req, res) => {
       req.params.id,
       req.body,
       { new: true },
-    ).populate('team', { firstName: 1, lastName: 1 }).populate('tasks', { taskName: 1 });
+    ).populate('team.employeeId', { firstName: 1, lastName: 1 }).populate('tasks', { taskName: 1 });
 
     if (!result) {
       return res.status(404).json({
@@ -139,7 +136,7 @@ const deleteProject = async (req, res) => {
     }
     const result = await Project
       .findByIdAndUpdate(req.params.id, { isDeleted: true }, { new: true })
-      .populate('team', { firstName: 1, lastName: 1 })
+      .populate('team.employeeId', { firstName: 1, lastName: 1 })
       .populate('tasks', { taskName: 1 });
     if (!result) {
       return res.status(404).json({

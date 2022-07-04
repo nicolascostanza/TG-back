@@ -2,19 +2,19 @@ import Tsheet from '../models/Time-sheets';
 
 const getAllTs = async (req, res) => {
   const {
-    description, project, approved, role,
+    projectId, approved, employeeId,
   } = req.query;
   try {
     const data = await Tsheet
       .find({
-        description: { $regex: new RegExp(description || '', 'i') },
-        project: { $regex: new RegExp(project || '', 'i') },
+        employeeId: { $regex: new RegExp(employeeId || '', 'i') },
+        projectId: { $regex: new RegExp(projectId || '', 'i') },
         approved: approved ?? { $in: [false, true] },
-        role: role ?? { $in: ['DEV', 'QA', 'PM', 'TL'] },
         isDeleted: { $ne: true },
       })
       .populate('employeeId', { firstName: 1, lastName: 1 })
-      .populate('task', { taskName: 1, taskDescription: 1 });
+      .populate('projectId', { name: 1, team: 1 })
+      .populate('taskId', { taskName: 1, taskDescription: 1 });
     if (data.length < 1) {
       return res.status(404).json({
         message: 'All Time-sheets are:',
@@ -47,7 +47,8 @@ const getTsById = async (req, res) => {
     }
     const empId = await Tsheet.findById(req.params.id)
       .populate('employeeId', { firstName: 1, lastName: 1 })
-      .populate('task', { taskName: 1, taskDescription: 1 });
+      .populate('projectId', { name: 1, team: 1 })
+      .populate('taskId', { taskName: 1, taskDescription: 1 });
     if (empId) {
       return res.status(200).json({
         message: `Time-sheet with ID:${req.params.id} sent:`,
@@ -73,13 +74,11 @@ const createTimeSheet = async (req, res) => {
   try {
     const timeSheet = new Tsheet({
       employeeId: req.body.employeeId,
-      description: req.body.description,
-      project: req.body.project,
+      projectId: req.body.project,
       date: req.body.date,
       hours: req.body.hours,
-      task: req.body.task,
+      taskId: req.body.task,
       approved: req.body.approved,
-      role: req.body.role,
     });
     const result = await timeSheet.save();
     return res.status(201).json({
