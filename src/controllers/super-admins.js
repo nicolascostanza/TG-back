@@ -10,6 +10,7 @@ const getAllSuperA = async (req, res) => {
       lastName: { $regex: new RegExp(lastName || '', 'i') },
       email: { $regex: new RegExp(email || '', 'i') },
       active: active ?? { $in: [false, true] },
+      isDeleted: { $ne: true },
     });
     if (allSuperA.length < 1) {
       return res.status(404).json({
@@ -126,18 +127,19 @@ const deleteSuperAdmin = async (req, res) => {
         error: true,
       });
     }
-    const result = await SuperAdmin.findByIdAndDelete(req.params.id);
+    const result = await SuperAdmin
+      .findByIdAndUpdate(req.params.id, { isDeleted: true }, { new: true });
     if (!result) {
       return res.status(404).json({
         message: `Superadmin with ID:${req.params.id} not found`,
         data: {},
         error: true,
       });
-    } return res.json({
+    } return res.status(200).json({
       message: 'Superadmin successfully deleted',
       data: result,
       error: false,
-    }).status(204);
+    });
   } catch (error) {
     return res.status(400).json({
       message: error.message,

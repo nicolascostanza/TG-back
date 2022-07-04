@@ -12,6 +12,7 @@ const getAllAdmins = async (req, res) => {
       lastName: { $regex: new RegExp(lastName || '', 'i') },
       email: { $regex: new RegExp(email || '', 'i') },
       active: active ?? { $in: [false, true] },
+      isDeleted: { $ne: true },
     });
     if (admins.length < 1) {
       return res.status(404).json({
@@ -137,18 +138,19 @@ const deleteAdmin = async (req, res) => {
         error: true,
       });
     }
-    const result = await Admins.findByIdAndDelete(req.params.id);
+    const result = await Admins
+      .findByIdAndUpdate(req.params.id, { isDeleted: true }, { new: true });
     if (!result) {
       return res.status(404).json({
         message: `Admin with ID:${req.params.id} not found`,
         data: {},
         error: true,
       });
-    } return res.json({
+    } return res.status(200).json({
       message: 'Admin successfully deleted',
       data: result,
       error: false,
-    }).status(204);
+    });
   } catch (error) {
     return res.status(400).json({
       message: error.message,

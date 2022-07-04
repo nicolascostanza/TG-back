@@ -24,6 +24,10 @@ const adminSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export default mongoose.model('Admin', adminSchema);

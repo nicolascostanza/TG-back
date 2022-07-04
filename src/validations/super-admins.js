@@ -9,6 +9,7 @@ const validateCreation = (req, res, next) => {
     email: Joi.string().email().lowercase().required(),
     password: Joi.string().regex(/(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,25})$/).required(),
     active: Joi.boolean(),
+    isDeleted: Joi.boolean().optional(),
   });
 
   const validation = superAdminValidation.validate(req.body);
@@ -29,6 +30,7 @@ const validateUpdate = (req, res, next) => {
     email: Joi.string().email().lowercase(),
     password: Joi.string().regex(/(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,25})$/),
     active: Joi.boolean(),
+    isDeleted: Joi.boolean().optional(),
   });
 
   const validation = superAdminValidation.validate(req.body);

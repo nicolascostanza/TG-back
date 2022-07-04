@@ -573,7 +573,7 @@ describe('getById /tasks', () => {
 
 describe('DELETE /tasks', () => {
   test('response should return a 200 status', async () => {
-    const response = await request(app).delete('/tasks/60a4a32f247e066e9495ce12').send();
+    const response = await request(app).patch('/tasks/60a4a32f247e066e9495ce12').send();
     expect(response.body.message).toEqual('Task successfully deleted');
     expect(response.body.data).not.toBeUndefined();
     expect(response.error).toBeFalsy();
@@ -581,17 +581,17 @@ describe('DELETE /tasks', () => {
   });
 
   test('response should return error, task not found', async () => {
-    const response = await request(app).delete('/tasks/').send();
+    const response = await request(app).patch('/tasks/').send();
     expect(response.status).toBe(404);
   });
 
   test('response should return an error, wrong direction', async () => {
-    const response = await request(app).delete('/testingUrl').send();
+    const response = await request(app).patch('/testingUrl').send();
     expect(response.status).toBe(404);
   });
 
   test('response should return an error', async () => {
-    const response = await request(app).delete('/tasks/60a4a32f247e066e9495ce12').send();
+    const response = await request(app).patch('/tasks/60a4a32f247e066e9495ce17').send();
     expect(response.error).not.toBeFalsy();
   });
 });

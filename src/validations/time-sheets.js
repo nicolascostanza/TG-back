@@ -10,6 +10,7 @@ const TimesheetValidationUp = (req, res, next) => {
     task: Joi.array(),
     approved: Joi.bool(),
     role: Joi.string().valid('DEV', 'QA', 'PM', 'TL'),
+    isDeleted: Joi.boolean().optional(),
   });
   const validation = TsObJe.validate(req.body);
   if (validation.error) {
@@ -32,6 +33,7 @@ const TimesheetValidation = (req, res, next) => {
     task: Joi.array(),
     approved: Joi.bool().required(),
     role: Joi.string().valid('DEV', 'QA', 'PM', 'TL').required(),
+    isDeleted: Joi.boolean().optional(),
   });
   const validation = TsObJ.validate(req.body);
   if (validation.error) {

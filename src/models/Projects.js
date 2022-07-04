@@ -41,6 +41,10 @@ const projectSchema = new Schema(
         ref: 'Task',
       },
     ],
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true },
 );

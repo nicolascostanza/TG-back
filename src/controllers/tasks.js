@@ -11,6 +11,7 @@ const getAllTasks = async (req, res) => {
         taskName: { $regex: new RegExp(taskName || '', 'i') },
         taskDescription: { $regex: new RegExp(taskDescription || '', 'i') },
         status: status ?? { $in: statusTypes },
+        isDeleted: { $ne: true },
       })
       .populate('assignedEmployee', { firstName: 1, lastName: 1 })
       .populate('parentProject', { name: 1 });
@@ -130,7 +131,8 @@ const deleteTask = async (req, res) => {
         error: true,
       });
     }
-    const result = await Task.findByIdAndDelete(req.params.id);
+    const result = await Task
+      .findByIdAndUpdate(req.params.id, { isDeleted: true }, { new: true });
     if (!result) {
       return res.status(404).json({
         message: `Task with ID:${req.params.id} not found`,
@@ -138,11 +140,11 @@ const deleteTask = async (req, res) => {
         error: true,
       });
     }
-    return res.json({
+    return res.status(200).json({
       message: 'Task successfully deleted',
       data: result,
       error: false,
-    }).status(204);
+    });
   } catch (error) {
     return res.status(400).json({
       message: error.message,

@@ -16,6 +16,7 @@ const getAllEmployees = async (req, res) => {
       address: { $regex: new RegExp(address || '', 'i') },
       phone: { $regex: new RegExp(phone || '', 'i') },
       active: active ?? { $in: [false, true] },
+      isDeleted: { $ne: true },
     });
     return res.status(200).json({
       message: 'All employees are:',
@@ -141,7 +142,8 @@ const deleteEmployee = async (req, res) => {
         error: true,
       });
     }
-    const result = await Employee.findByIdAndDelete(req.params.id);
+    const result = await Employee
+      .findByIdAndUpdate(req.params.id, { isDeleted: true }, { new: true });
 
     if (!result) {
       return res.status(404).json({
@@ -150,11 +152,11 @@ const deleteEmployee = async (req, res) => {
         error: true,
       });
     }
-    return res.json({
+    return res.status(200).json({
       message: 'Employee successfully deleted',
       data: result,
       error: false,
-    }).status(204);
+    });
   } catch (error) {
     return res.json({
       message: error.message,

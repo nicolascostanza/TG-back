@@ -9,265 +9,266 @@ beforeAll(async () => {
 
 const superAdminId = '60d4a32f247e066e9495ce12';
 
-// describe('POST /super-admins', () => {
+describe('POST /super-admins', () => {
 // eslint-disable-next-line max-len
-//   test('it should NOT create a new super-admin, stopped on send, non existent resource', async () => {
-//     const response = await request(app).post('/non-existentRoute').send({
-//       firstName: 'Alex',
-//       lastName: 'Lias',
-//       email: 'alex.lias@radiumrocket.com',
-//       password: 'test1234',
-//       active: true,
-//     });
+  test('it should NOT create a new super-admin, stopped on send, non existent resource', async () => {
+    const response = await request(app).post('/non-existentRoute').send({
+      firstName: 'Alex',
+      lastName: 'Lias',
+      email: 'alex.lias@radiumrocket.com',
+      password: 'test1234',
+      active: true,
+    });
 
-//     expect(response.status).toEqual(404);
-//   });
+    expect(response.status).toEqual(404);
+  });
 
-//   test('it should create a new super-admin', async () => {
-//     const response = await request(app).post('/super-admins').send({
-//       firstName: 'Alex',
-//       lastName: 'Lias',
-//       email: 'alex.lias@radiumrocket.com',
-//       password: 'test1234',
-//       active: true,
-//     });
-//     // eslint-disable-next-line no-underscore-dangle
-//     expect(response.status).toEqual(201);
-//     expect(response.body.error).toBe(false);
-//   });
-// eslint-disable-next-line max-len
-//   test('it should NOT create a new super-admin, stopped on verification, name too short', async () => {
-//     const response = await request(app).post('/super-admins').send({
-//       firstName: 'Al',
-//       lastName: 'Lias',
-//       email: 'alex.lias@radiumrocket.com',
-//       password: 'test1234',
-//       active: true,
-//     });
+  test('it should NOT create a new super-admin, missing firebaseUid', async () => {
+    const response = await request(app).post('/super-admins').send({
+      firstName: 'Alex',
+      lastName: 'Lias',
+      email: 'alex.lias@radiumrocket.com',
+      password: 'test1234',
+      active: true,
+    });
+    // eslint-disable-next-line no-underscore-dangle
+    expect(response.status).toEqual(400);
+    expect(response.body.error).toBe(true);
+  });
+  // eslint-disable-next-line max-len
+  test('it should NOT create a new super-admin, stopped on verification, name too short', async () => {
+    const response = await request(app).post('/super-admins').send({
+      firstName: 'Al',
+      lastName: 'Lias',
+      email: 'alex.lias@radiumrocket.com',
+      password: 'test1234',
+      active: true,
+    });
 
-//     expect(response.status).toEqual(400);
-//     expect(response.body.error).toBe(true);
-//   });
-// eslint-disable-next-line max-len
-//   test('it should NOT create a new super-admin, stopped on verification, incorrect password format', async () => {
-//     const response = await request(app).post('/super-admins').send({
-//       firstName: 'Alex',
-//       lastName: 'Lias',
-//       email: 'alex.lias@radiumrocket.com',
-//       password: '@@@',
-//       active: true,
-//     });
+    expect(response.status).toEqual(400);
+    expect(response.body.error).toBe(true);
+  });
+  // eslint-disable-next-line max-len
+  test('it should NOT create a new super-admin, stopped on verification, incorrect password format', async () => {
+    const response = await request(app).post('/super-admins').send({
+      firstName: 'Alex',
+      lastName: 'Lias',
+      email: 'alex.lias@radiumrocket.com',
+      password: '@@@',
+      active: true,
+    });
 
-//     expect(response.status).toEqual(400);
-//     expect(response.body.error).toBe(true);
-//   });
-// eslint-disable-next-line max-len
-//   test('it should NOT create a new super-admin, stopped on verification, missing required param', async () => {
-//     const response = await request(app).post('/super-admins').send({
-//       firstName: 'Alex',
-//       email: 'alex.lias@radiumrocket.com',
-//       password: 'test1234',
-//       active: true,
-//     });
+    expect(response.status).toEqual(400);
+    expect(response.body.error).toBe(true);
+  });
+  // eslint-disable-next-line max-len
+  test('it should NOT create a new super-admin, stopped on verification, missing required param', async () => {
+    const response = await request(app).post('/super-admins').send({
+      firstName: 'Alex',
+      email: 'alex.lias@radiumrocket.com',
+      password: 'test1234',
+      active: true,
+    });
 
-//     expect(response.status).toEqual(400);
-//     expect(response.body.error).toBe(true);
-//   });
-// eslint-disable-next-line max-len
-//   test('it should NOT create a new super-admin, stopped on verification, incorrect email format', async () => {
-//     const response = await request(app).post('/super-admins').send({
-//       firstName: 'Alex',
-//       lastName: 'Lias',
-//       email: 'alex.liasradiumrocket.com',
-//       password: 'test1234',
-//       active: true,
-//     });
+    expect(response.status).toEqual(400);
+    expect(response.body.error).toBe(true);
+  });
+  // eslint-disable-next-line max-len
+  test('it should NOT create a new super-admin, stopped on verification, incorrect email format', async () => {
+    const response = await request(app).post('/super-admins').send({
+      firstName: 'Alex',
+      lastName: 'Lias',
+      email: 'alex.liasradiumrocket.com',
+      password: 'test1234',
+      active: true,
+    });
 
-//     expect(response.status).toEqual(400);
-//     expect(response.body.error).toBe(true);
-//   });
-// });
+    expect(response.status).toEqual(400);
+    expect(response.body.error).toBe(true);
+  });
+});
 
-// describe('PUT /super-admins', () => {
-// eslint-disable-next-line max-len
-//   test('it should NOT update the super-admin, stopped on send, non existent resource', async () => {
-//     const response = await request(app).put('/non-existentRoute').send({
-//       firstName: 'Alex',
-//       lastName: 'Liases',
-//       email: 'a.liases@radiumrocket.com',
-//       password: 'testing1234',
-//       active: true,
-//     });
+describe('PUT /super-admins', () => {
+  test(
+    'it should NOT update the super-admin, stopped on send, non existent resource',
+    async () => {
+      const response = await request(app).put('/non-existentRoute').send({
+        firstName: 'Alex',
+        lastName: 'Liases',
+        email: 'a.liases@radiumrocket.com',
+        password: 'testing1234',
+        active: true,
+      });
 
-//     expect(response.status).toEqual(404);
-//   });
+      expect(response.status).toEqual(404);
+    },
+  );
 
-//   test('It should NOT update the super-admin, stopped on send, no _id param', async () => {
-//     const response = await request(app).put('/super-admins/').send({
-//       firstName: 'Alex',
-//       lastName: 'Lias',
-//       email: 'alex.lias@radiumrocket.com',
-//       password: 'testeang1234',
-//       active: true,
-//     });
+  test('It should NOT update the super-admin, stopped on send, no _id param', async () => {
+    const response = await request(app).put('/super-admins/').send({
+      firstName: 'Alex',
+      lastName: 'Lias',
+      email: 'alex.lias@radiumrocket.com',
+      password: 'testeang1234',
+      active: true,
+    });
 
-//     expect(response.status).toEqual(404);
-//   });
+    expect(response.status).toEqual(404);
+  });
 
-//   test('It should update the super-admin', async () => {
-//     const response = await request(app).put(`/super-admins/${superAdminId}`).send({
-//       firstName: 'Alex',
-//       lastName: 'Liases',
-//       email: 'a.liases@radiumrocket.com',
-//       password: 'testing1234',
-//       active: true,
-//     });
+  test('It should update the super-admin', async () => {
+    const response = await request(app).put(`/super-admins/${superAdminId}`).send({
+      firstName: 'Alex',
+      lastName: 'Liases',
+      email: 'a.liases@radiumrocket.com',
+      password: 'testing1234',
+      active: true,
+    });
 
-//     expect(response.status).toEqual(200);
-//     expect(response.body.error).toBe(false);
-//   });
-// eslint-disable-next-line max-len
-//   test('it should NOT update the super-admin, stopped on validation, missing a param', async () => {
-//     const response = await request(app).put(`/super-admins/${superAdminId}`).send({
-//       firstName: 'Alex',
-//       email: 'a.liases@radiumrocket.com',
-//       password: 'testing1234',
-//       active: true,
-//     });
+    expect(response.status).toEqual(200);
+    expect(response.body.error).toBe(false);
+  });
+  // eslint-disable-next-line max-len
+  test('it should NOT update the super-admin, stopped on validation, missing a param', async () => {
+    const response = await request(app).put(`/super-admins/${superAdminId}`).send({
+      firstName: 'Alex',
+      email: 'a.liases@radiumrocket.com',
+      password: 'testing1234',
+      active: true,
+    });
 
-//     expect(response.status).toEqual(200);
-//     expect(response.body.error).toBe(false);
-//   });
-// eslint-disable-next-line max-len
-//   test('it should NOT update the super-admin, stopped on verification, name too short', async () => {
-//     const response = await request(app).put(`/super-admins/${superAdminId}`).send({
-//       firstName: 'Al',
-//       lastName: 'Liases',
-//       email: 'a.liases@radiumrocket.com',
-//       password: 'testing1234',
-//       active: true,
-//     });
+    expect(response.status).toEqual(200);
+    expect(response.body.error).toBe(false);
+  });
+  // eslint-disable-next-line max-len
+  test('it should NOT update the super-admin, stopped on verification, name too short', async () => {
+    const response = await request(app).put(`/super-admins/${superAdminId}`).send({
+      firstName: 'Al',
+      lastName: 'Liases',
+      email: 'a.liases@radiumrocket.com',
+      password: 'testing1234',
+      active: true,
+    });
 
-//     expect(response.status).toEqual(400);
-//     expect(response.body.error).toBe(true);
-//   });
-// eslint-disable-next-line max-len
-//   test('it should NOT update the super-admin, stopped on verification, incorrect password format', async () => {
-//     const response = await request(app).put(`/super-admins/${superAdminId}`).send({
-//       firstName: 'Alex',
-//       lastName: 'Liases',
-//       email: 'a.liases@radiumrocket.com',
-//       password: '@@@',
-//       active: true,
-//     });
+    expect(response.status).toEqual(400);
+    expect(response.body.error).toBe(true);
+  });
+  // eslint-disable-next-line max-len
+  test('it should NOT update the super-admin, stopped on verification, incorrect password format', async () => {
+    const response = await request(app).put(`/super-admins/${superAdminId}`).send({
+      firstName: 'Alex',
+      lastName: 'Liases',
+      email: 'a.liases@radiumrocket.com',
+      password: '@@@',
+      active: true,
+    });
 
-//     expect(response.status).toEqual(400);
-//     expect(response.body.error).toBe(true);
-//   });
-// eslint-disable-next-line max-len
-//   test('it should NOT update the super-admin, stopped on verification, incorrect email format', async () => {
-//     const response = await request(app).put(`/super-admins/${superAdminId}`).send({
-//       firstName: 'Alex',
-//       lastName: 'Lias',
-//       email: 'alex.liasradiumrocket.com',
-//       password: 'testeang1234',
-//       active: true,
-//     });
+    expect(response.status).toEqual(400);
+    expect(response.body.error).toBe(true);
+  });
+  // eslint-disable-next-line max-len
+  test('it should NOT update the super-admin, stopped on verification, incorrect email format', async () => {
+    const response = await request(app).put(`/super-admins/${superAdminId}`).send({
+      firstName: 'Alex',
+      lastName: 'Lias',
+      email: 'alex.liasradiumrocket.com',
+      password: 'testeang1234',
+      active: true,
+    });
 
-//     expect(response.status).toEqual(400);
-//     expect(response.body.error).toBe(true);
-//   });
-// eslint-disable-next-line max-len
-//   test('It should NOT update the super-admin, stopped on controller, _id param does not match existing', async () => {
-//     const response = await request(app).put('/super-admins/60c5a34f267e066e9495de14').send({
-//       firstName: 'Alex',
-//       lastName: 'Lias',
-//       email: 'alex.lias@radiumrocket.com',
-//       password: 'testeang1234',
-//       active: true,
-//     });
+    expect(response.status).toEqual(400);
+    expect(response.body.error).toBe(true);
+  });
+  // eslint-disable-next-line max-len
+  test('It should NOT update the super-admin, stopped on controller, _id param does not match existing', async () => {
+    const response = await request(app).put('/super-admins/60c5a34f267e066e9495de14').send({
+      firstName: 'Alex',
+      lastName: 'Lias',
+      email: 'alex.lias@radiumrocket.com',
+      password: 'testeang1234',
+      active: true,
+    });
 
-//     expect(response.status).toEqual(404);
-//     expect(response.body.error).toBe(true);
-//   });
-// });
+    expect(response.status).toEqual(404);
+    expect(response.body.error).toBe(true);
+  });
+});
 
-// describe('getById /super-admins', () => {
-//   test('It should successfully return a super admin', async () => {
-//     const response = await request(app).get(`/super-admins/${superAdminId}`).send();
+describe('getById /super-admins', () => {
+  test('It should successfully return a super admin', async () => {
+    const response = await request(app).get(`/super-admins/${superAdminId}`).send();
 
-//     expect(response.status).toEqual(200);
-//   });
+    expect(response.status).toEqual(200);
+  });
 
-//   test('It should NOT return a super-admin, _id param does not match existing', async () => {
-//     const response = await request(app).get('/super-admins/60c5a34f267e066e9495de14').send();
+  test('It should NOT return a super-admin, _id param does not match existing', async () => {
+    const response = await request(app).get('/super-admins/60c5a34f267e066e9495de14').send();
 
-//     expect(response.status).toEqual(404);
-//   });
-// });
+    expect(response.status).toEqual(404);
+  });
+});
 
-// describe('GET /super-admin', () => {
-//   test('response should return a 200 status', async () => {
-//     const response = await request(app).get('/super-admins').send();
-//     expect(response.status).toBe(200);
-//   });
+describe('GET /super-admin', () => {
+  test('response should return a 200 status', async () => {
+    const response = await request(app).get('/super-admins').send();
+    expect(response.status).toBe(200);
+  });
 
-//   test('response should return a 404 status', async () => {
-//     const response = await request(app).get('/1a1s2d').send();
-//     expect(response.status).toBe(404);
-//   });
+  test('response should return a 404 status', async () => {
+    const response = await request(app).get('/1a1s2d').send();
+    expect(response.status).toBe(404);
+  });
 
-//   test('response should return a 404 status', async () => {
-//     const response = await request(app).get('/superadmin').send();
-//     expect(response.status).toBe(404);
-//   });
+  test('response should return a 404 status', async () => {
+    const response = await request(app).get('/superadmin').send();
+    expect(response.status).toBe(404);
+  });
 
-//   test('response should return a 404 status', async () => {
-//     const response = await request(app).get('/superadmins').send();
-//     expect(response.status).toBe(404);
-//   });
+  test('response should return a 404 status', async () => {
+    const response = await request(app).get('/superadmins').send();
+    expect(response.status).toBe(404);
+  });
 
-//   test('response should return a 404 status', async () => {
-//     const response = await request(app).get('/zassa').send();
-//     expect(response.status).toBe(404);
-//   });
+  test('response should return a 404 status', async () => {
+    const response = await request(app).get('/zassa').send();
+    expect(response.status).toBe(404);
+  });
 
-//   test('response should return a correct message', async () => {
-//     const response = await request(app).get('/super-admins').send();
-//     expect(response.body.message).toEqual('All Superadmins are:');
-//   });
+  test('response should return a correct message', async () => {
+    const response = await request(app).get('/super-admins').send();
+    expect(response.body.message).toEqual('All Superadmins are:');
+  });
 
-//   test('response should return at least one super admin', async () => {
-//     const response = await request(app).get('/super-admins').send();
-//     expect(response.body.data.length).toBeGreaterThan(0);
-//   });
+  test('response should return at least one super admin', async () => {
+    const response = await request(app).get('/super-admins').send();
+    expect(response.body.data.length).toBeGreaterThan(0);
+  });
 
-//   test('response should not return less than one super admin', async () => {
-//     const response = await request(app).get('/super-admins').send();
-//     expect(response.body.data.length).not.toBeLessThan(0);
-//   });
+  test('response should not return less than one super admin', async () => {
+    const response = await request(app).get('/super-admins').send();
+    expect(response.body.data.length).not.toBeLessThan(0);
+  });
 
-//   test('response should not be an empty super admin', async () => {
-//     const response = await request(app).get('/super-admins').send();
-//     expect(response.body.data).not.toBeNull();
-//   });
-// });
+  test('response should not be an empty super admin', async () => {
+    const response = await request(app).get('/super-admins').send();
+    expect(response.body.data).not.toBeNull();
+  });
+});
 
-describe('DELETE /super-admins', () => {
+describe('PATCH /super-admins', () => {
   test('it should NOT delete a super admin, stopped on send, non existent resource', async () => {
-    const response = await request(app).delete('/super-admins').send();
+    const response = await request(app).patch('/super-admins').send();
 
     expect(response.status).toEqual(404);
   });
 
   test('it should successfully delete a super admin', async () => {
-    const response = await request(app).delete(`/super-admins/${superAdminId}`).send();
-
+    const response = await request(app).patch(`/super-admins/${superAdminId}`).send();
     expect(response.status).toEqual(200);
   });
 
   test('It should NOT delete a super-admin, _id param does not match existing', async () => {
-    const response = await request(app).delete('/super-admins/60c5a34f267e066e9495de14').send();
+    const response = await request(app).patch('/super-admins/60c5a34f267e066e9495de17').send();
 
     expect(response.status).toEqual(404);
   });
