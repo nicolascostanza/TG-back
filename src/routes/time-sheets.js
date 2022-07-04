@@ -6,6 +6,8 @@ const router = express.Router();
 
 router
   .get('/', timesheetControllers.getAllTs)
+  .get('/employee', timesheetControllers.getEmployeeTs)
+  .get('/project', timesheetControllers.getProjectTs)
   .get('/:id', timesheetControllers.getTsById)
   .put('/:id', TimesheetValid.TimesheetValidationUp, timesheetControllers.updateTimesheet)
   .post('/', TimesheetValid.TimesheetValidation, timesheetControllers.createTimeSheet)
