@@ -47,7 +47,7 @@ const getEmployeeTs = async (req, res) => {
         isDeleted: { $ne: true },
       })
       .populate('employeeId', { firstName: 1, lastName: 1 })
-      // .populate('projectId', { name: 1, team: 1 })
+      .populate('projectId', { name: 1, team: 1 })
       .populate('taskId', { taskName: 1, taskDescription: 1 });
     if (data.length < 1) {
       return res.status(404).json({
@@ -119,6 +119,7 @@ const getTsById = async (req, res) => {
       .populate('employeeId', { firstName: 1, lastName: 1 })
       .populate('projectId', { name: 1, team: 1 })
       .populate('taskId', { taskName: 1, taskDescription: 1 });
+
     if (empId) {
       return res.status(200).json({
         message: `Time-sheet with ID:${req.params.id} sent:`,
