@@ -19,7 +19,7 @@ const getAllProjects = async (req, res) => {
         isDeleted: { $ne: true },
       })
       .populate('team.employeeId', { firstName: 1, lastName: 1 })
-      .populate('tasks', { taskName: 1, taskDescription: 1 });
+      .populate('tasks');
     return res.status(200).json({
       message: 'All Projects are:',
       data: allProjects,
@@ -39,7 +39,7 @@ const getProjectById = async (req, res) => {
     const projectId = req.params.id;
     const project = await Project.findOne({ _id: projectId })
       .populate('team.employeeId', { firstName: 1, lastName: 1 })
-      .populate('tasks', { taskName: 1 });
+      .populate('tasks');
     if (project) {
       res.status(200).json({
         message: `Project with ID:${req.params.id} sent.`,
@@ -102,7 +102,7 @@ const updateProject = async (req, res) => {
       req.params.id,
       req.body,
       { new: true },
-    ).populate('team.employeeId', { firstName: 1, lastName: 1 }).populate('tasks', { taskName: 1 });
+    ).populate('team.employeeId', { firstName: 1, lastName: 1 }).populate('tasks');
 
     if (!result) {
       return res.status(404).json({
@@ -137,7 +137,7 @@ const deleteProject = async (req, res) => {
     const result = await Project
       .findByIdAndUpdate(req.params.id, { isDeleted: true }, { new: true })
       .populate('team.employeeId', { firstName: 1, lastName: 1 })
-      .populate('tasks', { taskName: 1 });
+      .populate('tasks');
     if (!result) {
       return res.status(404).json({
         message: `Project with ID:${req.params.id} not found`,
