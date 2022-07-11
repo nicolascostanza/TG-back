@@ -7,8 +7,8 @@ const router = express.Router();
 router
   .post('/', projectValidations.validateCreation, projectControllers.createProject)
   .patch('/:id', projectControllers.deleteProject)
-  .put('/:id/employee', projectControllers.pushEmployee)
-  .put('/:id/task', projectControllers.pushTask)
+  .put('/:id/employee', projectValidations.validateTeamAppend, projectControllers.pushEmployee)
+  .put('/:id/task', projectValidations.validateTaskAppend, projectControllers.pushTask)
   .put('/:id', projectValidations.validateModification, projectControllers.updateProject)
   .get('/', projectControllers.getAllProjects)
   .put('/:id/employee/:empid', projectControllers.pullEmployee)
