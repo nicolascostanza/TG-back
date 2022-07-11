@@ -72,9 +72,7 @@ const createTask = async (req, res) => {
       startDate: req.body.startDate,
       status: req.body.status,
     });
-    const result = await task.save()
-      .populate('assignedEmployee', { firstName: 1, lastName: 1 })
-      .populate('parentProject', { name: 1 });
+    const result = await task.save();
     return res.status(201).json({
       message: 'Task has been created',
       data: result,

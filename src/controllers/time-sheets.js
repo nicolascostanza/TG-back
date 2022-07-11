@@ -151,10 +151,7 @@ const createTimeSheet = async (req, res) => {
       taskId: req.body.taskId,
       approved: req.body.approved,
     });
-    const result = await timeSheet.save()
-      .populate('employeeId', { firstName: 1, lastName: 1 })
-      .populate('projectId', { name: 1, team: 1 })
-      .populate('taskId', { taskName: 1, taskDescription: 1 });
+    const result = await timeSheet.save();
     return res.status(201).json({
       message: 'Time-sheet has been created',
       data: result,

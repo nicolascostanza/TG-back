@@ -74,9 +74,7 @@ const createProject = async (req, res) => {
       tasks: req.body.tasks,
     });
 
-    const result = await project.save()
-      .populate('team.employeeId', { firstName: 1, lastName: 1 })
-      .populate('tasks');
+    const result = await project.save();
     return res.status(201).json({
       message: 'Project has been created',
       data: result,

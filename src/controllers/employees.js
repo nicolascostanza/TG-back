@@ -80,7 +80,7 @@ const createEmployee = async (req, res) => {
       associatedProjects: req.body.associatedProjects,
     });
 
-    const result = await employee.save().populate('associatedProjects.projectId');
+    const result = await employee.save();
     return res.status(201).json({
       message: 'Employee has been created',
       data: result,
