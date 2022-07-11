@@ -62,6 +62,47 @@ const getProjectById = async (req, res) => {
   }
 };
 
+const pushEmployee = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await Project
+      .findByIdAndUpdate(id, { $push: { team: req.body } }, { new: true });
+
+    return res.status(200).json({
+      message: 'Project succesfully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
+const pushTask = async (req, res) => {
+  const { id } = req.params;
+  const taskId = req.body.task;
+  try {
+    const result = await Project
+      .findByIdAndUpdate(id, { $push: { tasks: taskId } }, { new: true });
+
+    return res.status(200).json({
+      message: 'Project succesfully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
 const createProject = async (req, res) => {
   try {
     const project = new Project({
@@ -164,6 +205,8 @@ const deleteProject = async (req, res) => {
 export default {
   getAllProjects,
   getProjectById,
+  pushEmployee,
+  pushTask,
   createProject,
   updateProject,
   deleteProject,
