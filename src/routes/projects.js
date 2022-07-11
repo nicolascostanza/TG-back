@@ -11,6 +11,8 @@ router
   .put('/:id/task', projectControllers.pushTask)
   .put('/:id', projectValidations.validateModification, projectControllers.updateProject)
   .get('/', projectControllers.getAllProjects)
+  .put('/:id/employee/:empid', projectControllers.pullEmployee)
+  .put('/:id/task/:taskid', projectControllers.pullTask)
   .get('/:id', projectControllers.getProjectById);
 
 export default router;

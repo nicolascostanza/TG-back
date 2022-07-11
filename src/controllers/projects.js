@@ -65,8 +65,24 @@ const getProjectById = async (req, res) => {
 const pushEmployee = async (req, res) => {
   const { id } = req.params;
   try {
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+
     const result = await Project
       .findByIdAndUpdate(id, { $push: { team: req.body } }, { new: true });
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Project with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
 
     return res.status(200).json({
       message: 'Project succesfully updated',
@@ -86,8 +102,24 @@ const pushTask = async (req, res) => {
   const { id } = req.params;
   const taskId = req.body.task;
   try {
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+
     const result = await Project
       .findByIdAndUpdate(id, { $push: { tasks: taskId } }, { new: true });
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Project with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
 
     return res.status(200).json({
       message: 'Project succesfully updated',
@@ -168,6 +200,82 @@ const updateProject = async (req, res) => {
   }
 };
 
+const pullEmployee = async (req, res) => {
+  const { id, empid } = req.params;
+  try {
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+
+    const result = await Project
+      .findByIdAndUpdate(id, {
+        $pull: { team: { employeeId: empid } },
+      }, { new: true });
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Project with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Project succesfully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
+const pullTask = async (req, res) => {
+  const { id, taskid } = req.params;
+  try {
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+
+    const result = await Project
+      .findByIdAndUpdate(id, {
+        $pullAll: { tasks: [{ _id: taskid }] },
+      }, { new: true });
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Project with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Project succesfully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
 const deleteProject = async (req, res) => {
   try {
     if (!req.params.id) {
@@ -209,5 +317,7 @@ export default {
   pushTask,
   createProject,
   updateProject,
+  pullEmployee,
+  pullTask,
   deleteProject,
 };
