@@ -15,7 +15,10 @@ const creationValidation = (req, res, next) => {
       .regex(/^([ \u00c0-\u01ffa-zA-Z'-])+$/),
     email: Joi.string().email().min(7).required(),
     gender: Joi.string().valid('Male', 'Female', 'Other'),
-    address: Joi.string().regex(/^[a-zA-Z0-9\s,'-]*$/),
+    address: Joi
+      .string()
+      .min(5)
+      .regex(/[a-zA-Z0-9]+\s[a-zA-Z0-9]/),
     dob: Joi.date().optional(),
     password: Joi
       .string()

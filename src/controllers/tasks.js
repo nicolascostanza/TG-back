@@ -72,7 +72,9 @@ const createTask = async (req, res) => {
       startDate: req.body.startDate,
       status: req.body.status,
     });
-    const result = await task.save();
+    const result = await task.save()
+      .populate('assignedEmployee', { firstName: 1, lastName: 1 })
+      .populate('parentProject', { name: 1 });
     return res.status(201).json({
       message: 'Task has been created',
       data: result,
@@ -100,7 +102,9 @@ const updateTask = async (req, res) => {
       req.params.id,
       req.body,
       { new: true },
-    );
+    )
+      .populate('assignedEmployee', { firstName: 1, lastName: 1 })
+      .populate('parentProject', { name: 1 });
     if (!result) {
       return res.status(404).json({
         message: `Task with ID:${req.params.id} not found`,
