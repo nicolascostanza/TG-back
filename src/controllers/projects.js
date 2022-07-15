@@ -1,14 +1,14 @@
 import Project from '../models/Projects';
 
 const getAllProjects = async (req, res) => {
-  const {
-    name,
-    description,
-    clientName,
-    startDate = new Date('1900-01-01'),
-    endDate = new Date('2100-12-31'),
-  } = req.query;
   try {
+    const {
+      name,
+      description,
+      clientName,
+      startDate = new Date('1900-01-01'),
+      endDate = new Date('2100-12-31'),
+    } = req.query;
     const allProjects = await Project
       .find({
         name: { $regex: new RegExp(name || '', 'i') },
@@ -63,8 +63,8 @@ const getProjectById = async (req, res) => {
 };
 
 const pushEmployee = async (req, res) => {
-  const { id } = req.params;
   try {
+    const { id } = req.params;
     if (!req.params) {
       return res.status(400).json({
         message: 'Missing ID parameter',
@@ -74,7 +74,9 @@ const pushEmployee = async (req, res) => {
     }
 
     const result = await Project
-      .findByIdAndUpdate(id, { $push: { team: req.body } }, { new: true });
+      .findByIdAndUpdate(id, { $push: { team: req.body } }, { new: true })
+      .populate('team.employeeId', { firstName: 1, lastName: 1 })
+      .populate('tasks');
 
     if (!result) {
       return res.status(404).json({
@@ -99,9 +101,9 @@ const pushEmployee = async (req, res) => {
 };
 
 const pushTask = async (req, res) => {
-  const { id } = req.params;
-  const taskId = req.body.task;
   try {
+    const { id } = req.params;
+    const taskId = req.body.task;
     if (!req.params) {
       return res.status(400).json({
         message: 'Missing ID parameter',
@@ -111,7 +113,9 @@ const pushTask = async (req, res) => {
     }
 
     const result = await Project
-      .findByIdAndUpdate(id, { $push: { tasks: taskId } }, { new: true });
+      .findByIdAndUpdate(id, { $push: { tasks: taskId } }, { new: true })
+      .populate('team.employeeId', { firstName: 1, lastName: 1 })
+      .populate('tasks');
 
     if (!result) {
       return res.status(404).json({
@@ -201,8 +205,8 @@ const updateProject = async (req, res) => {
 };
 
 const pullEmployee = async (req, res) => {
-  const { id, empid } = req.params;
   try {
+    const { id, empid } = req.params;
     if (!req.params) {
       return res.status(400).json({
         message: 'Missing ID parameter',
@@ -214,7 +218,9 @@ const pullEmployee = async (req, res) => {
     const result = await Project
       .findByIdAndUpdate(id, {
         $pull: { team: { employeeId: empid } },
-      }, { new: true });
+      }, { new: true })
+      .populate('team.employeeId', { firstName: 1, lastName: 1 })
+      .populate('tasks');
 
     if (!result) {
       return res.status(404).json({
@@ -239,8 +245,8 @@ const pullEmployee = async (req, res) => {
 };
 
 const pullTask = async (req, res) => {
-  const { id, taskid } = req.params;
   try {
+    const { id, taskid } = req.params;
     if (!req.params) {
       return res.status(400).json({
         message: 'Missing ID parameter',
@@ -252,7 +258,9 @@ const pullTask = async (req, res) => {
     const result = await Project
       .findByIdAndUpdate(id, {
         $pullAll: { tasks: [{ _id: taskid }] },
-      }, { new: true });
+      }, { new: true })
+      .populate('team.employeeId', { firstName: 1, lastName: 1 })
+      .populate('tasks');
 
     if (!result) {
       return res.status(404).json({
