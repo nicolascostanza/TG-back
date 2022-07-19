@@ -9,6 +9,7 @@ router
   .patch('/:id', projectControllers.deleteProject)
   .put('/:id/employee', projectValidations.validateTeamAppend, projectControllers.pushEmployee)
   .put('/:id/task', projectValidations.validateTaskAppend, projectControllers.pushTask)
+  .put('/:id/edit/employee', projectValidations.validateTeamAppend, projectControllers.updatePushedemployee)
   .put('/:id', projectValidations.validateModification, projectControllers.updateProject)
   .get('/', projectControllers.getAllProjects)
   .put('/:id/employee/:empid', projectControllers.pullEmployee)
