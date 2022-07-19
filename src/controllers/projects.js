@@ -7,7 +7,6 @@ const getAllProjects = async (req, res) => {
       description,
       clientName,
       startDate = new Date('1900-01-01'),
-      endDate = new Date('2100-12-31'),
     } = req.query;
     const allProjects = await Project
       .find({
@@ -15,7 +14,6 @@ const getAllProjects = async (req, res) => {
         description: { $regex: new RegExp(description || '', 'i') },
         clientName: { $regex: new RegExp(clientName || '', 'i') },
         startDate: { $gte: new Date(startDate) },
-        endDate: { $lte: new Date(endDate) },
         isDeleted: { $ne: true },
       })
       .populate('team.employeeId', { firstName: 1, lastName: 1 })
