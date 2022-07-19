@@ -17,7 +17,7 @@ const getAllEmployees = async (req, res) => {
       phone: { $regex: new RegExp(phone || '', 'i') },
       active: active ?? { $in: [false, true] },
       isDeleted: { $ne: true },
-    });
+    }).populate('associatedProjects.projectId');
     return res.status(200).json({
       message: 'All employees are:',
       data: allEmployees,
@@ -34,7 +34,8 @@ const getAllEmployees = async (req, res) => {
 
 const getEmployeeById = async (req, res) => {
   try {
-    const employee = await Employee.findById(req.params.id);
+    const employee = await Employee.findById(req.params.id)
+      .populate('associatedProjects.projectId');
     if (employee) {
       return res.status(200).json({
         message: `Employee with ID:${req.params.id} sent:`,
@@ -76,6 +77,7 @@ const createEmployee = async (req, res) => {
       password: req.body.password,
       phone: req.body.phone,
       active: req.body.active,
+      associatedProjects: req.body.associatedProjects,
     });
 
     const result = await employee.save();
@@ -110,7 +112,7 @@ const updateEmployee = async (req, res) => {
       req.params.id,
       req.body,
       { new: true },
-    );
+    ).populate('associatedProjects.projectId');
 
     if (!result) {
       return res.status(404).json({

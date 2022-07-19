@@ -2,10 +2,12 @@ import Joi from 'joi';
 
 const validateCreation = (req, res, next) => {
   const taskValidation = Joi.object({
-    parentProject: Joi.string().alphanum().required(),
+    parentProject: Joi.string().alphanum().length(24).required(),
     taskName: Joi.string().min(1).max(50).required(),
     taskDescription: Joi.string().min(1).max(250).optional(),
-    assignedEmployee: Joi.array(),
+    assignedEmployee: Joi.array().items(
+      Joi.string().alphanum().length(24),
+    ),
     startDate: Joi.date().required(),
     status: Joi.string()
       .valid('Ready to deliver', 'Paused', 'Unassigned', 'Completed', 'In progress', 'Cancelled')
@@ -25,10 +27,12 @@ const validateCreation = (req, res, next) => {
 
 const validateUpdate = (req, res, next) => {
   const taskValidation = Joi.object({
-    parentProject: Joi.string().alphanum(),
+    pparentProject: Joi.string().alphanum().length(24),
     taskName: Joi.string().min(1).max(50),
-    taskDescription: Joi.string().min(1).max(250),
-    assignedEmployee: Joi.array(),
+    taskDescription: Joi.string().min(1).max(250).optional(),
+    assignedEmployee: Joi.array().items(
+      Joi.string().alphanum().length(24),
+    ),
     startDate: Joi.date(),
     status: Joi.string()
       .valid('Ready to deliver', 'Paused', 'Unassigned', 'Completed', 'In progress', 'Cancelled'),

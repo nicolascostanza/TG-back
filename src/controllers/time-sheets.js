@@ -2,19 +2,17 @@ import Tsheet from '../models/Time-sheets';
 
 const getAllTs = async (req, res) => {
   const {
-    description, project, approved, role,
+    approved,
   } = req.query;
   try {
     const data = await Tsheet
       .find({
-        description: { $regex: new RegExp(description || '', 'i') },
-        project: { $regex: new RegExp(project || '', 'i') },
         approved: approved ?? { $in: [false, true] },
-        role: role ?? { $in: ['DEV', 'QA', 'PM', 'TL'] },
         isDeleted: { $ne: true },
       })
       .populate('employeeId', { firstName: 1, lastName: 1 })
-      .populate('task', { taskName: 1, taskDescription: 1 });
+      .populate('projectId', { name: 1, team: 1 })
+      .populate('taskId', { taskName: 1, taskDescription: 1 });
     if (data.length < 1) {
       return res.status(404).json({
         message: 'All Time-sheets are:',
@@ -24,6 +22,78 @@ const getAllTs = async (req, res) => {
     }
     return res.status(200).json({
       message: 'All Time-sheets are:',
+      data,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
+const getEmployeeTs = async (req, res) => {
+  const {
+    id,
+    approved,
+  } = req.query;
+  try {
+    const data = await Tsheet
+      .find({
+        employeeId: { $eq: id },
+        approved: approved ?? { $in: [false, true] },
+        isDeleted: { $ne: true },
+      })
+      .populate('employeeId', { firstName: 1, lastName: 1 })
+      .populate('projectId', { name: 1, team: 1 })
+      .populate('taskId', { taskName: 1, taskDescription: 1 });
+    if (data.length < 1) {
+      return res.status(404).json({
+        message: 'All employee\'s Time-sheets are:',
+        data: {},
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'All employee\'s Time-sheets are:',
+      data,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
+const getProjectTs = async (req, res) => {
+  const {
+    id,
+    approved,
+  } = req.query;
+  try {
+    const data = await Tsheet
+      .find({
+        projectId: { $eq: id },
+        approved: approved ?? { $in: [false, true] },
+        isDeleted: { $ne: true },
+      })
+      .populate('employeeId', { firstName: 1, lastName: 1 })
+      .populate('projectId', { name: 1, team: 1 })
+      .populate('taskId', { taskName: 1, taskDescription: 1 });
+    if (data.length < 1) {
+      return res.status(404).json({
+        message: 'All project\'s Time-sheets are:',
+        data: {},
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'All project\'s Time-sheets are:',
       data,
       error: false,
     });
@@ -47,7 +117,9 @@ const getTsById = async (req, res) => {
     }
     const empId = await Tsheet.findById(req.params.id)
       .populate('employeeId', { firstName: 1, lastName: 1 })
-      .populate('task', { taskName: 1, taskDescription: 1 });
+      .populate('projectId', { name: 1, team: 1 })
+      .populate('taskId', { taskName: 1, taskDescription: 1 });
+
     if (empId) {
       return res.status(200).json({
         message: `Time-sheet with ID:${req.params.id} sent:`,
@@ -73,13 +145,11 @@ const createTimeSheet = async (req, res) => {
   try {
     const timeSheet = new Tsheet({
       employeeId: req.body.employeeId,
-      description: req.body.description,
-      project: req.body.project,
+      projectId: req.body.projectId,
       date: req.body.date,
       hours: req.body.hours,
-      task: req.body.task,
+      taskId: req.body.taskId,
       approved: req.body.approved,
-      role: req.body.role,
     });
     const result = await timeSheet.save();
     return res.status(201).json({
@@ -109,7 +179,10 @@ const updateTimesheet = async (req, res) => {
       req.params.id,
       req.body,
       { new: true },
-    );
+    )
+      .populate('employeeId', { firstName: 1, lastName: 1 })
+      .populate('projectId', { name: 1, team: 1 })
+      .populate('taskId', { taskName: 1, taskDescription: 1 });
     if (!result) {
       return res.status(404).json({
         message: `Time-sheet with ID:${req.params.id} not found`,
@@ -165,6 +238,8 @@ const deleteTimesheet = async (req, res) => {
 
 export default {
   getAllTs,
+  getEmployeeTs,
+  getProjectTs,
   getTsById,
   createTimeSheet,
   updateTimesheet,

@@ -5,11 +5,9 @@ const Firebase = require('../helper/firebase');
 const getAllAdmins = async (req, res) => {
   try {
     const {
-      firstName, lastName, email, active,
+      email, active,
     } = req.query;
     const admins = await Admins.find({
-      firstName: { $regex: new RegExp(firstName || '', 'i') },
-      lastName: { $regex: new RegExp(lastName || '', 'i') },
       email: { $regex: new RegExp(email || '', 'i') },
       active: active ?? { $in: [false, true] },
       isDeleted: { $ne: true },
@@ -40,7 +38,7 @@ const getAdminById = async (req, res) => {
     const admin = await Admins.findById(req.params.id);
     if (admin) {
       return res.status(200).json({
-        message: `Admin with ID:${req.params.id} sent:`,
+        message: `Admin with ID:${req.params.id} sent.`,
         data: admin,
         error: false,
       });
@@ -70,8 +68,6 @@ const createAdmin = async (req, res) => {
     await Firebase.default.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'ADMIN' });
     const admin = new Admins({
       firebaseUid,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
       email: req.body.email,
       password: req.body.password,
       active: req.body.active,

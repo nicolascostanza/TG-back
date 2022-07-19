@@ -100,7 +100,9 @@ const updateTask = async (req, res) => {
       req.params.id,
       req.body,
       { new: true },
-    );
+    )
+      .populate('assignedEmployee', { firstName: 1, lastName: 1 })
+      .populate('parentProject', { name: 1 });
     if (!result) {
       return res.status(404).json({
         message: `Task with ID:${req.params.id} not found`,

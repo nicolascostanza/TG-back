@@ -7,8 +7,12 @@ const router = express.Router();
 router
   .post('/', projectValidations.validateCreation, projectControllers.createProject)
   .patch('/:id', projectControllers.deleteProject)
+  .put('/:id/employee', projectValidations.validateTeamAppend, projectControllers.pushEmployee)
+  .put('/:id/task', projectValidations.validateTaskAppend, projectControllers.pushTask)
   .put('/:id', projectValidations.validateModification, projectControllers.updateProject)
   .get('/', projectControllers.getAllProjects)
+  .put('/:id/employee/:empid', projectControllers.pullEmployee)
+  .put('/:id/task/:taskid', projectControllers.pullTask)
   .get('/:id', projectControllers.getProjectById);
 
 export default router;

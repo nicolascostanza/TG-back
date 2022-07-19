@@ -1,15 +1,10 @@
 import SuperAdmin from '../models/Superadmin';
 
 const getAllSuperA = async (req, res) => {
-  const {
-    firstName, lastName, email, active,
-  } = req.query;
+  const { email } = req.query;
   try {
     const allSuperA = await SuperAdmin.find({
-      firstName: { $regex: new RegExp(firstName || '', 'i') },
-      lastName: { $regex: new RegExp(lastName || '', 'i') },
       email: { $regex: new RegExp(email || '', 'i') },
-      active: active ?? { $in: [false, true] },
       isDeleted: { $ne: true },
     });
     if (allSuperA.length < 1) {
@@ -38,7 +33,7 @@ const getSuperAById = async (req, res) => {
     const superAdmin = await SuperAdmin.findById(req.params.id);
     if (superAdmin) {
       return res.status(200).json({
-        message: `Superadmin with ID:${req.params.id} sent:`,
+        message: `Superadmin with ID:${req.params.id} sent.`,
         data: superAdmin,
         error: false,
       });
@@ -60,11 +55,8 @@ const getSuperAById = async (req, res) => {
 const createSuperAdmin = async (req, res) => {
   try {
     const superAdmin = new SuperAdmin({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
       email: req.body.email,
       password: req.body.password,
-      active: req.body.active,
     });
 
     const result = await superAdmin.save();

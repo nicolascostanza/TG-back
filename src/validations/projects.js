@@ -8,8 +8,14 @@ const validateCreation = (req, res, next) => {
     clientName: Joi.string().min(3).max(30).required(),
     startDate: Joi.date().required(),
     endDate: Joi.date().optional(),
-    projectManager: Joi.string().min(3).max(30).required(),
-    team: Joi.array(),
+    team: Joi.array().items(
+      {
+        employeeId: Joi.string().alphanum().length(24).required(),
+        role: Joi.string().valid('QA', 'DEV', 'TL', 'PM').required(),
+        rate: Joi.number().precision(2).required(),
+        isPM: Joi.boolean().optional(),
+      },
+    ),
     tasks: Joi.array(),
     isDeleted: Joi.boolean().optional(),
   });
@@ -33,8 +39,14 @@ const validateModification = (req, res, next) => {
     clientName: Joi.string().min(3).max(30),
     startDate: Joi.date(),
     endDate: Joi.date(),
-    projectManager: Joi.string().min(3).max(30),
-    team: Joi.array(),
+    team: Joi.array().items(
+      {
+        employeeId: Joi.string().alphanum().length(24),
+        role: Joi.string().valid('QA', 'DEV', 'TL', 'PM'),
+        rate: Joi.number().precision(2),
+        isPM: Joi.boolean().optional(),
+      },
+    ),
     tasks: Joi.array(),
     isDeleted: Joi.boolean().optional(),
   });
@@ -51,7 +63,46 @@ const validateModification = (req, res, next) => {
   return next();
 };
 
+const validateTeamAppend = (req, res, next) => {
+  const teamMemberValidation = Joi.object({
+    employeeId: Joi.string().alphanum().length(24).required(),
+    role: Joi.string().valid('QA', 'DEV', 'TL', 'PM').required(),
+    rate: Joi.number().precision(2).required(),
+    isPM: Joi.boolean().optional(),
+  });
+
+  const validation = teamMemberValidation.validate(req.body);
+
+  if (validation.error) {
+    return res.status(400).json({
+      message: 'There has been an error in the validation',
+      data: validation.error.details[0].message,
+      error: true,
+    });
+  }
+  return next();
+};
+
+const validateTaskAppend = (req, res, next) => {
+  const taskValidation = Joi.object({
+    task: Joi.string().alphanum().length(24).required(),
+  });
+
+  const validation = taskValidation.validate(req.body);
+
+  if (validation.error) {
+    return res.status(400).json({
+      message: 'There has been an error in the validation',
+      data: validation.error.details[0].message,
+      error: true,
+    });
+  }
+  return next();
+};
+
 export default {
   validateCreation,
   validateModification,
+  validateTeamAppend,
+  validateTaskAppend,
 };

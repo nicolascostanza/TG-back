@@ -1,15 +1,14 @@
 import Project from '../models/Projects';
 
 const getAllProjects = async (req, res) => {
-  const {
-    name,
-    description,
-    clientName,
-    startDate = new Date('1900-01-01'),
-    endDate = new Date('2100-12-31'),
-    projectManager,
-  } = req.query;
   try {
+    const {
+      name,
+      description,
+      clientName,
+      startDate = new Date('1900-01-01'),
+      endDate = new Date('2100-12-31'),
+    } = req.query;
     const allProjects = await Project
       .find({
         name: { $regex: new RegExp(name || '', 'i') },
@@ -17,11 +16,10 @@ const getAllProjects = async (req, res) => {
         clientName: { $regex: new RegExp(clientName || '', 'i') },
         startDate: { $gte: new Date(startDate) },
         endDate: { $lte: new Date(endDate) },
-        projectManager: { $regex: new RegExp(projectManager || '', 'i') },
         isDeleted: { $ne: true },
       })
-      .populate('team', { firstName: 1, lastName: 1 })
-      .populate('tasks', { taskName: 1, taskDescription: 1 });
+      .populate('team.employeeId', { firstName: 1, lastName: 1 })
+      .populate('tasks');
     return res.status(200).json({
       message: 'All Projects are:',
       data: allProjects,
@@ -40,11 +38,11 @@ const getProjectById = async (req, res) => {
   try {
     const projectId = req.params.id;
     const project = await Project.findOne({ _id: projectId })
-      .populate('team', { firstName: 1, lastName: 1 })
-      .populate('tasks', { taskName: 1 });
+      .populate('team.employeeId', { firstName: 1, lastName: 1 })
+      .populate('tasks');
     if (project) {
       res.status(200).json({
-        message: `Project with ID:${req.params.id} sent:`,
+        message: `Project with ID:${req.params.id} sent.`,
         data: project,
         error: false,
       });
@@ -64,6 +62,83 @@ const getProjectById = async (req, res) => {
   }
 };
 
+const pushEmployee = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+
+    const result = await Project
+      .findByIdAndUpdate(id, { $push: { team: req.body } }, { new: true })
+      .populate('team.employeeId', { firstName: 1, lastName: 1 })
+      .populate('tasks');
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Project with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Project succesfully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
+const pushTask = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const taskId = req.body.task;
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+
+    const result = await Project
+      .findByIdAndUpdate(id, { $push: { tasks: taskId } }, { new: true })
+      .populate('team.employeeId', { firstName: 1, lastName: 1 })
+      .populate('tasks');
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Project with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Project succesfully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
 const createProject = async (req, res) => {
   try {
     const project = new Project({
@@ -72,7 +147,6 @@ const createProject = async (req, res) => {
       clientName: req.body.clientName,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
-      projectManager: req.body.projectManager,
       team: req.body.team,
       tasks: req.body.tasks,
     });
@@ -105,7 +179,9 @@ const updateProject = async (req, res) => {
       req.params.id,
       req.body,
       { new: true },
-    ).populate('team', { firstName: 1, lastName: 1 }).populate('tasks', { taskName: 1 });
+    )
+      .populate('team.employeeId', { firstName: 1, lastName: 1 })
+      .populate('tasks');
 
     if (!result) {
       return res.status(404).json({
@@ -128,6 +204,86 @@ const updateProject = async (req, res) => {
   }
 };
 
+const pullEmployee = async (req, res) => {
+  try {
+    const { id, empid } = req.params;
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+
+    const result = await Project
+      .findByIdAndUpdate(id, {
+        $pull: { team: { employeeId: empid } },
+      }, { new: true })
+      .populate('team.employeeId', { firstName: 1, lastName: 1 })
+      .populate('tasks');
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Project with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Project succesfully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
+const pullTask = async (req, res) => {
+  try {
+    const { id, taskid } = req.params;
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+
+    const result = await Project
+      .findByIdAndUpdate(id, {
+        $pullAll: { tasks: [{ _id: taskid }] },
+      }, { new: true })
+      .populate('team.employeeId', { firstName: 1, lastName: 1 })
+      .populate('tasks');
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Project with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Project succesfully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
 const deleteProject = async (req, res) => {
   try {
     if (!req.params.id) {
@@ -139,8 +295,8 @@ const deleteProject = async (req, res) => {
     }
     const result = await Project
       .findByIdAndUpdate(req.params.id, { isDeleted: true }, { new: true })
-      .populate('team', { firstName: 1, lastName: 1 })
-      .populate('tasks', { taskName: 1 });
+      .populate('team.employeeId', { firstName: 1, lastName: 1 })
+      .populate('tasks');
     if (!result) {
       return res.status(404).json({
         message: `Project with ID:${req.params.id} not found`,
@@ -165,7 +321,11 @@ const deleteProject = async (req, res) => {
 export default {
   getAllProjects,
   getProjectById,
+  pushEmployee,
+  pushTask,
   createProject,
   updateProject,
+  pullEmployee,
+  pullTask,
   deleteProject,
 };
