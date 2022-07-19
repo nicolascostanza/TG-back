@@ -139,6 +139,45 @@ const pushTask = async (req, res) => {
   }
 };
 
+const updatePushedemployee = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+
+    // here goes result
+    const result = await Project
+      .updateOne({ _id: id, 'team.employeeId': req.body.employeeId }, { $set: { 'team.$': req.body } }, { new: true })
+      .populate('team.employeeId', { firstName: 1, lastName: 1 })
+      .populate('tasks');
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Project with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Project successully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
 const createProject = async (req, res) => {
   try {
     const project = new Project({
@@ -323,6 +362,7 @@ export default {
   getProjectById,
   pushEmployee,
   pushTask,
+  updatePushedemployee,
   createProject,
   updateProject,
   pullEmployee,
