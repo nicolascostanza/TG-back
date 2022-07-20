@@ -6,10 +6,10 @@ import authMiddleware from '../validations/auth';
 const router = express.Router();
 
 router
-  .get('/', authMiddleware, superAdminControllers.getAllSuperA)
+  .get('/', superAdminControllers.getAllSuperA)
   .get('/:id', authMiddleware, superAdminControllers.getSuperAById)
-  .post('/', authMiddleware, superAdminValidation.validateCreation, superAdminControllers.createSuperAdmin)
+  .post('/', superAdminValidation.validateCreation, superAdminControllers.createSuperAdmin)
   .patch('/:id', authMiddleware, superAdminControllers.deleteSuperAdmin)
-  .put('/:id', authMiddleware, superAdminValidation.validateUpdate, superAdminControllers.updateSuperAdmin);
+  .put('/:id', superAdminValidation.validateUpdate, superAdminControllers.updateSuperAdmin);
 
 export default router;

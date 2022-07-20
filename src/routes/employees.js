@@ -9,7 +9,7 @@ router
   .get('/', authMiddleware, employeeControllers.getAllEmployees)
   .get('/:id', authMiddleware, employeeControllers.getEmployeeById)
   .post('/', employeeValidations.creationValidation, employeeControllers.createEmployee)
-  .patch('/:id', authMiddleware, employeeControllers.deleteEmployee)
-  .put('/:id', authMiddleware, employeeValidations.updateValidation, employeeControllers.updateEmployee);
+  .patch('/:id', employeeControllers.deleteEmployee)
+  .put('/:id', employeeValidations.updateValidation, employeeControllers.updateEmployee);
 
 export default router;
