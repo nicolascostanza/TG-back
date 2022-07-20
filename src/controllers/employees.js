@@ -4,10 +4,10 @@ const Firebase = require('../helper/firebase');
 
 const getAllEmployees = async (req, res) => {
   // PENDING: IMPLEMENT A DOB FILTER
-  const {
-    firstName = '', lastName = '', email = '',
-  } = req.query;
   try {
+    const {
+      firstName = '', lastName = '', email = '',
+    } = req.query;
     const allEmployees = await Employee.find({
       firstName: { $regex: new RegExp(firstName || '', 'i') },
       lastName: { $regex: new RegExp(lastName || '', 'i') },
