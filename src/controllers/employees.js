@@ -5,17 +5,13 @@ const Firebase = require('../helper/firebase');
 const getAllEmployees = async (req, res) => {
   // PENDING: IMPLEMENT A DOB FILTER
   const {
-    firstName, lastName, email, gender, address, phone, active,
+    firstName = '', lastName = '', email = '',
   } = req.query;
   try {
     const allEmployees = await Employee.find({
       firstName: { $regex: new RegExp(firstName || '', 'i') },
       lastName: { $regex: new RegExp(lastName || '', 'i') },
       email: { $regex: new RegExp(email || '', 'i') },
-      gender: gender ?? { $in: ['Male', 'Female', 'Other'] },
-      address: { $regex: new RegExp(address || '', 'i') },
-      phone: { $regex: new RegExp(phone || '', 'i') },
-      active: active ?? { $in: [false, true] },
       isDeleted: { $ne: true },
     }).populate('associatedProjects.projectId');
     return res.status(200).json({
@@ -71,12 +67,7 @@ const createEmployee = async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      gender: req.body.gender,
-      address: req.body.address,
-      dob: req.body.dob,
       password: req.body.password,
-      phone: req.body.phone,
-      active: req.body.active,
       associatedProjects: req.body.associatedProjects,
     });
 
