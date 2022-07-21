@@ -53,6 +53,117 @@ const getEmployeeById = async (req, res) => {
   }
 };
 
+const pushProject = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+
+    const result = await Employee
+      .findByIdAndUpdate(id, { $push: { associatedProjects: req.bod } }, { new: true })
+      .populate('associatedProjects.projectId');
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Employee with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Employee successfully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
+const pullProject = async (req, res) => {
+  try {
+    const { id, projid } = req.params;
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+
+    const result = await Employee
+      .findByIdAndUpdate(id, { $pull: { associatedProjects: projid } }, { new: true })
+      .populate('associatedProjects.projectId');
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Project with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Employee successfully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
+const updatePushedProject = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+
+    const result = await Employee
+      .updateOne({ _id: id, 'associatedProjects.projectId': req.body.projectId }, { $set: { 'associatedProjects.$': req.body } }, { new: true })
+      .populate('associatedProjects.projectId');
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Project with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Employee successfully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
 const createEmployee = async (req, res) => {
   let firebaseUid;
   try {
@@ -103,7 +214,7 @@ const updateEmployee = async (req, res) => {
       req.params.id,
       req.body,
       { new: true },
-    );
+    ).populate('associatedProjects.projectId');
 
     if (!result) {
       return res.status(404).json({
@@ -113,7 +224,7 @@ const updateEmployee = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: 'Employee succesfully updated',
+      message: 'Employee successfully updated',
       data: result,
       error: false,
     });
@@ -162,6 +273,9 @@ const deleteEmployee = async (req, res) => {
 export default {
   getAllEmployees,
   getEmployeeById,
+  pushProject,
+  pullProject,
+  updatePushedProject,
   createEmployee,
   updateEmployee,
   deleteEmployee,

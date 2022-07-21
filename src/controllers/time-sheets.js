@@ -179,7 +179,10 @@ const updateTimesheet = async (req, res) => {
       req.params.id,
       req.body,
       { new: true },
-    );
+    )
+      .populate('employeeId', { firstName: 1, lastName: 1 })
+      .populate('projectId', { name: 1, team: 1 })
+      .populate('taskId', { taskName: 1, taskDescription: 1 });
     if (!result) {
       return res.status(404).json({
         message: `Time-sheet with ID:${req.params.id} not found`,

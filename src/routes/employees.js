@@ -7,9 +7,12 @@ const router = express.Router();
 
 router
   .get('/', authMiddleware, employeeControllers.getAllEmployees)
-  .get('/:id', authMiddleware, employeeControllers.getEmployeeById)
   .post('/', employeeValidations.creationValidation, employeeControllers.createEmployee)
   .patch('/:id', employeeControllers.deleteEmployee)
-  .put('/:id', employeeValidations.updateValidation, employeeControllers.updateEmployee);
+  .put('/:id/project', employeeValidations.validateProjectAppend, employeeControllers.pushProject)
+  .put('/:id/edit/project', employeeValidations.validateProjectAppend, employeeControllers.updatePushedProject)
+  .put('/:id/project/:projid', employeeControllers.pullProject)
+  .put('/:id', employeeValidations.updateValidation, employeeControllers.updateEmployee)
+  .get('/:id', authMiddleware, employeeControllers.getEmployeeById);
 
 export default router;

@@ -25,6 +25,7 @@ const timeSheetsSchema = new Schema({
   },
   approved: {
     type: Boolean,
+    default: false,
     required: false,
   },
   isDeleted: {
