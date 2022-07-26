@@ -3,19 +3,14 @@ import Employee from '../models/Employees';
 const Firebase = require('../helper/firebase');
 
 const getAllEmployees = async (req, res) => {
-  // PENDING: IMPLEMENT A DOB FILTER
-  const {
-    firstName, lastName, email, gender, address, phone, active,
-  } = req.query;
   try {
+    const {
+      firstName = '', lastName = '', email = '',
+    } = req.query;
     const allEmployees = await Employee.find({
       firstName: { $regex: new RegExp(firstName || '', 'i') },
       lastName: { $regex: new RegExp(lastName || '', 'i') },
       email: { $regex: new RegExp(email || '', 'i') },
-      gender: gender ?? { $in: ['Male', 'Female', 'Other'] },
-      address: { $regex: new RegExp(address || '', 'i') },
-      phone: { $regex: new RegExp(phone || '', 'i') },
-      active: active ?? { $in: [false, true] },
       isDeleted: { $ne: true },
     }).populate('associatedProjects.projectId');
     return res.status(200).json({
@@ -36,17 +31,132 @@ const getEmployeeById = async (req, res) => {
   try {
     const employee = await Employee.findById(req.params.id)
       .populate('associatedProjects.projectId');
-    if (employee) {
-      return res.status(200).json({
-        message: `Employee with ID:${req.params.id} sent:`,
-        data: employee,
-        error: false,
+    if (!employee) {
+      return res.status(404).json({
+        message: `Employee with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
       });
     }
-    return res.status(404).json({
-      message: `Employee with ID:${req.params.id} not found`,
+    return res.status(200).json({
+      message: `Employee with ID:${req.params.id} sent:`,
+      data: employee,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
       data: {},
       error: true,
+    });
+  }
+};
+
+const pushProject = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+
+    const result = await Employee
+      .findByIdAndUpdate(id, { $push: { associatedProjects: req.body } }, { new: true })
+      .populate('associatedProjects.projectId');
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Employee with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Employee successfully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
+const pullProject = async (req, res) => {
+  try {
+    const { id, projid } = req.params;
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+
+    const result = await Employee
+      .findByIdAndUpdate(
+        id,
+        { $pull: { associatedProjects: { projectId: projid } } },
+        { new: true },
+      )
+      .populate('associatedProjects.projectId');
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Project with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Employee successfully updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+      data: {},
+      error: true,
+    });
+  }
+};
+
+const updatePushedProject = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing ID parameter',
+        data: {},
+        error: true,
+      });
+    }
+
+    const result = await Employee
+      .updateOne({ _id: id, 'associatedProjects.projectId': req.body.projectId }, { $set: { 'associatedProjects.$': req.body } }, { new: true })
+      .populate('associatedProjects.projectId');
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Project with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Employee successfully updated',
+      data: result,
+      error: false,
     });
   } catch (error) {
     return res.status(400).json({
@@ -71,12 +181,7 @@ const createEmployee = async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      gender: req.body.gender,
-      address: req.body.address,
-      dob: req.body.dob,
       password: req.body.password,
-      phone: req.body.phone,
-      active: req.body.active,
       associatedProjects: req.body.associatedProjects,
     });
 
@@ -122,7 +227,7 @@ const updateEmployee = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: 'Employee succesfully updated',
+      message: 'Employee successfully updated',
       data: result,
       error: false,
     });
@@ -171,6 +276,9 @@ const deleteEmployee = async (req, res) => {
 export default {
   getAllEmployees,
   getEmployeeById,
+  pushProject,
+  pullProject,
+  updatePushedProject,
   createEmployee,
   updateEmployee,
   deleteEmployee,

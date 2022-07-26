@@ -7,7 +7,7 @@ const getAllSuperA = async (req, res) => {
       email: { $regex: new RegExp(email || '', 'i') },
       isDeleted: { $ne: true },
     });
-    if (allSuperA.length < 1) {
+    if (!allSuperA) {
       return res.status(404).json({
         message: 'Admins has not been found',
         data: {},
@@ -31,17 +31,17 @@ const getAllSuperA = async (req, res) => {
 const getSuperAById = async (req, res) => {
   try {
     const superAdmin = await SuperAdmin.findById(req.params.id);
-    if (superAdmin) {
-      return res.status(200).json({
-        message: `Superadmin with ID:${req.params.id} sent.`,
-        data: superAdmin,
-        error: false,
+    if (!superAdmin) {
+      return res.status(404).json({
+        message: `Superadmin with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
       });
     }
-    return res.status(404).json({
-      message: `Superadmin with ID:${req.params.id} not found`,
-      data: {},
-      error: true,
+    return res.status(200).json({
+      message: `Superadmin with ID:${req.params.id} sent.`,
+      data: superAdmin,
+      error: false,
     });
   } catch (error) {
     return res.status(400).json({
@@ -97,7 +97,7 @@ const updateSuperAdmin = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: 'Superadmin succesfully updated',
+      message: 'Superadmin successfully updated',
       data: result,
       error: false,
     });

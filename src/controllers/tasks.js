@@ -41,17 +41,17 @@ const getTasksById = async (req, res) => {
     const task = await Task.findById(req.params.id)
       .populate('assignedEmployee', { firstName: 1, lastName: 1 })
       .populate('parentProject', { name: 1 });
-    if (task) {
-      return res.status(200).json({
-        message: `Task with ID:${req.params.id} sent:`,
-        data: task,
-        error: false,
+    if (!task) {
+      return res.status(404).json({
+        message: `Task with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
       });
     }
-    return res.status(404).json({
-      message: `Task with ID:${req.params.id} not found`,
-      data: {},
-      error: true,
+    return res.status(200).json({
+      message: `Task with ID:${req.params.id} sent:`,
+      data: task,
+      error: false,
     });
   } catch (error) {
     return res.status(400).json({
