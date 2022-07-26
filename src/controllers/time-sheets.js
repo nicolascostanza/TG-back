@@ -13,9 +13,9 @@ const getAllTs = async (req, res) => {
       .populate('employeeId', { firstName: 1, lastName: 1 })
       .populate('projectId', { name: 1, team: 1 })
       .populate('taskId', { taskName: 1, taskDescription: 1 });
-    if (data.length < 1) {
+    if (!data) {
       return res.status(404).json({
-        message: 'All Time-sheets are:',
+        message: 'No Time-sheets found',
         data: {},
         error: true,
       });
@@ -49,9 +49,9 @@ const getEmployeeTs = async (req, res) => {
       .populate('employeeId', { firstName: 1, lastName: 1 })
       .populate('projectId', { name: 1, team: 1 })
       .populate('taskId', { taskName: 1, taskDescription: 1 });
-    if (data.length < 1) {
+    if (!data) {
       return res.status(404).json({
-        message: 'All employee\'s Time-sheets are:',
+        message: 'No employee\'s Time-sheets found',
         data: {},
         error: true,
       });
@@ -85,9 +85,9 @@ const getProjectTs = async (req, res) => {
       .populate('employeeId', { firstName: 1, lastName: 1 })
       .populate('projectId', { name: 1, team: 1 })
       .populate('taskId', { taskName: 1, taskDescription: 1 });
-    if (data.length < 1) {
+    if (!data) {
       return res.status(404).json({
-        message: 'All project\'s Time-sheets are:',
+        message: 'No project\'s Time-sheets found',
         data: {},
         error: true,
       });
@@ -115,22 +115,22 @@ const getTsById = async (req, res) => {
         error: false,
       });
     }
-    const empId = await Tsheet.findById(req.params.id)
+    const result = await Tsheet.findById(req.params.id)
       .populate('employeeId', { firstName: 1, lastName: 1 })
       .populate('projectId', { name: 1, team: 1 })
       .populate('taskId', { taskName: 1, taskDescription: 1 });
 
-    if (empId) {
-      return res.status(200).json({
-        message: `Time-sheet with ID:${req.params.id} sent:`,
-        data: empId,
-        error: false,
+    if (!result) {
+      return res.status(404).json({
+        message: `Time-sheet with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
       });
     }
-    return res.status(404).json({
-      message: `Time-sheet with ID:${req.params.id} not found`,
-      data: {},
-      error: true,
+    return res.status(200).json({
+      message: `Time-sheet with ID:${req.params.id} sent:`,
+      data: result,
+      error: false,
     });
   } catch (error) {
     return res.status(400).json({

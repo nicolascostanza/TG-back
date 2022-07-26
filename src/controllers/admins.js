@@ -11,7 +11,7 @@ const getAllAdmins = async (req, res) => {
       email: { $regex: new RegExp(email || '', 'i') },
       isDeleted: { $ne: true },
     });
-    if (admins.length < 1) {
+    if (!admins) {
       return res.status(404).json({
         message: 'Admins has not been found',
         data: {},
@@ -35,17 +35,17 @@ const getAllAdmins = async (req, res) => {
 const getAdminById = async (req, res) => {
   try {
     const admin = await Admins.findById(req.params.id);
-    if (admin) {
-      return res.status(200).json({
-        message: `Admin with ID:${req.params.id} sent.`,
-        data: admin,
-        error: false,
+    if (!admin) {
+      return res.status(404).json({
+        message: `Admin with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
       });
     }
-    return res.status(404).json({
-      message: `Admin with ID:${req.params.id} not found`,
-      data: {},
-      error: true,
+    return res.status(200).json({
+      message: `Admin with ID:${req.params.id} sent.`,
+      data: admin,
+      error: false,
     });
   } catch (error) {
     return res.status(400).json({

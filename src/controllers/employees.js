@@ -3,7 +3,6 @@ import Employee from '../models/Employees';
 const Firebase = require('../helper/firebase');
 
 const getAllEmployees = async (req, res) => {
-  // PENDING: IMPLEMENT A DOB FILTER
   try {
     const {
       firstName = '', lastName = '', email = '',
@@ -32,17 +31,17 @@ const getEmployeeById = async (req, res) => {
   try {
     const employee = await Employee.findById(req.params.id)
       .populate('associatedProjects.projectId');
-    if (employee) {
-      return res.status(200).json({
-        message: `Employee with ID:${req.params.id} sent:`,
-        data: employee,
-        error: false,
+    if (!employee) {
+      return res.status(404).json({
+        message: `Employee with ID:${req.params.id} not found`,
+        data: {},
+        error: true,
       });
     }
-    return res.status(404).json({
-      message: `Employee with ID:${req.params.id} not found`,
-      data: {},
-      error: true,
+    return res.status(200).json({
+      message: `Employee with ID:${req.params.id} sent:`,
+      data: employee,
+      error: false,
     });
   } catch (error) {
     return res.status(400).json({
@@ -65,7 +64,7 @@ const pushProject = async (req, res) => {
     }
 
     const result = await Employee
-      .findByIdAndUpdate(id, { $push: { associatedProjects: req.bod } }, { new: true })
+      .findByIdAndUpdate(id, { $push: { associatedProjects: req.body } }, { new: true })
       .populate('associatedProjects.projectId');
 
     if (!result) {
