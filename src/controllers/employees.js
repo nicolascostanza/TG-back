@@ -101,7 +101,11 @@ const pullProject = async (req, res) => {
     }
 
     const result = await Employee
-      .findByIdAndUpdate(id, { $pull: { associatedProjects: projid } }, { new: true })
+      .findByIdAndUpdate(
+        id,
+        { $pull: { associatedProjects: { projectId: projid } } },
+        { new: true },
+      )
       .populate('associatedProjects.projectId');
 
     if (!result) {
