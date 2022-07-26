@@ -98,7 +98,7 @@ const updateValidation = (req, res, next) => {
 const validateProjectAppend = (req, res, next) => {
   const associatedProjectsValidation = Joi.object({
     projectId: Joi.string().alphanum().length(24).required(),
-    role: Joi.string().valid('QA', 'DEV', 'TL', 'PM').required(),
+    role: Joi.string().valid('QA', 'DEV', 'TL', 'PM', '-').required(),
     rate: Joi.number().precision(2).required(),
     isPM: Joi.boolean().optional(),
   });
