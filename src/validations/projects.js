@@ -7,7 +7,7 @@ const validateCreation = (req, res, next) => {
     description: Joi.string().min(3).max(200).required(),
     clientName: Joi.string().min(3).max(30).required(),
     startDate: Joi.date().required(),
-    endDate: Joi.date().optional(),
+    endDate: Joi.date().optional().allow(''),
     team: Joi.array().items(
       {
         employeeId: Joi.string().alphanum().length(24).required(),
@@ -38,7 +38,7 @@ const validateModification = (req, res, next) => {
     description: Joi.string().min(3).max(200),
     clientName: Joi.string().min(3).max(30),
     startDate: Joi.date(),
-    endDate: Joi.date(),
+    endDate: Joi.date().allow(''),
     team: Joi.array().items(
       {
         employeeId: Joi.string().alphanum().length(24),
